@@ -1,3 +1,4 @@
+import { APP_VERSION, BUILD, updateNow, updateStatus } from '../app/serviceWorker.ts'
 import { HelpHeading } from '../help/Help.tsx'
 import { LOOKS, type LookId } from '../settings/looks.ts'
 import { MIRRORS, RENDERINGS, STICKERINGS } from '../settings/rendering.ts'
@@ -173,6 +174,18 @@ export function SettingsPage() {
           />
           Show the ? buttons that explain each part of the app
         </label>
+      </div>
+
+      <div class="card">
+        <HelpHeading topic="version" level="h2">
+          Version
+        </HelpHeading>
+        <p>
+          You're running <b>Galois {APP_VERSION}</b> <span class="muted small">({BUILD})</span>.
+        </p>
+        <button type="button" class="btn" disabled={updateStatus.value !== 'idle'} onClick={updateNow}>
+          {updateStatus.value === 'idle' ? 'Update now' : 'Updating…'}
+        </button>
       </div>
 
       <button type="button" class="btn" onClick={() => (settings.value = { ...DEFAULT_SETTINGS })}>
