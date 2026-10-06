@@ -9,8 +9,10 @@ export default defineConfig({
   plugins: [
     preact(),
     VitePWA({
-      // The app shows its own "new version" message (src/app/UpdateToast.tsx).
-      registerType: 'prompt',
+      // autoUpdate: a new service worker takes over as soon as it is downloaded, and the page reloads
+      // onto the new version (src/app/serviceWorker.ts). A 'prompt' worker would wait for permission
+      // that pages still running an older version can never give.
+      registerType: 'autoUpdate',
       injectRegister: false,
       includeAssets: ['favicon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
@@ -30,6 +32,10 @@ export default defineConfig({
       },
       workbox: {
         // The app shell, the cube renderer and the scramble solver all work offline.
+        // Take over immediately, even from pages running an older version that never asks to update.
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],
         maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         // Fonts are cached on first use, so only the looks you open are stored.
