@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'preact/hooks'
 import { parseSequence } from '../cube/notation.ts'
 import { sequenceText } from '../cube/SequenceBar.tsx'
 import { highlight } from '../cube/state.ts'
+import { award } from '../daily/badges.ts'
+import { istDay } from '../daily/date.ts'
 import { affectedPieces, analyse, highlightMask, type OrbitAnalysis, tracePiece } from '../engine/analysis.ts'
 import { ORBITS, type OrbitName } from '../engine/pieces.ts'
 import { HelpHeading } from '../help/Help.tsx'
@@ -68,6 +70,10 @@ export function AnalysisPanel() {
       kp && parsed.ok && trackedPiece ? tracePiece(kp, parsed.moves, trackedPiece.orbit, trackedPiece.index) : null,
     [kp, text, tracked],
   )
+
+  useEffect(() => {
+    if (analysis?.order === 1260) award('order-1260', istDay())
+  }, [analysis?.order])
 
   // Drive the cube's highlight from focus mode or the tracker; clear it when leaving.
   useEffect(() => {

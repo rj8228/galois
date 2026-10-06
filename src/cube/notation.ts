@@ -29,6 +29,22 @@ export function parseSequence(text: string): Parsed {
   }
 }
 
+/**
+ * Applies one notation-keypad key to some text at the caret: letters start a new move (adding a space
+ * when needed), ⌫ deletes, ␣ adds a space, and 'clear' empties it.
+ */
+export function applyKey(text: string, start: number, end: number, key: string): { text: string; caret: number } {
+  if (key === 'clear') return { text: '', caret: 0 }
+  if (key === '⌫') {
+    const from = start === end ? Math.max(0, start - 1) : start
+    return { text: text.slice(0, from) + text.slice(end), caret: from }
+  }
+  const before = text.slice(0, start)
+  const isMoveLetter = /^[RLUDFBMESxyz]$/.test(key)
+  const piece = key === '␣' ? ' ' : isMoveLetter && before && !/[\s(]$/.test(before) ? ` ${key}` : key
+  return { text: before + piece + text.slice(end), caret: start + piece.length }
+}
+
 /** The inverse of a single move: R → R', R' → R, R2 → R2. */
 export function invertMove(move: string): string {
   if (move.endsWith('2')) return move

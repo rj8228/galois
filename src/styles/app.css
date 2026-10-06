@@ -963,3 +963,163 @@ input[type="range"] {
     order: 2;
   }
 }
+
+/* Solve of the Day */
+.scramble-text {
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+}
+.attempts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.attempts li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  font-variant-numeric: tabular-nums;
+}
+.attempts li.best {
+  border-color: var(--accent);
+}
+#solution {
+  width: 100%;
+  font: 500 1rem / 1.4 var(--mono);
+  border: var(--border) solid var(--line);
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  resize: vertical;
+}
+.confirm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.big-inline {
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.heatmap {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3px;
+  max-width: 360px;
+}
+.heatmap span {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--line);
+  opacity: 0.6;
+}
+.heatmap span.on {
+  background: var(--accent);
+  opacity: 1;
+}
+.heatmap span.frozen {
+  background: repeating-linear-gradient(45deg, var(--accent) 0 2px, transparent 2px 4px);
+  opacity: 1;
+}
+.heatmap span.today {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+}
+.badges li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border: var(--border) dashed var(--line);
+  border-radius: var(--radius);
+}
+.badges li.earned {
+  border-style: solid;
+  border-color: var(--accent);
+}
+.badge-name {
+  font-weight: 600;
+}
+.badges li:not(.earned) .badge-name {
+  color: var(--muted);
+}
+.share {
+  margin: 0;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font: 0.85rem / 1.5 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* The Speed timer, over the cube */
+.solve-timer {
+  position: absolute;
+  /* A strip along the top of the stage, clear of the cube and the ? button. */
+  inset: 6px 44px auto 8px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border: var(--border) solid var(--line);
+}
+.solve-time {
+  font: 700 2.2rem / 1 var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.solve-timer.inspecting .solve-time {
+  color: var(--accent);
+}
+.solve-timer.done .solve-time {
+  color: var(--good);
+}
+.solve-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-basis: 100%;
+  text-align: center;
+  order: 3;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 30;
+  max-width: calc(100% - 32px);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.9rem;
+}
+@media (min-width: 900px) {
+  .toast {
+    bottom: 24px;
+  }
+}
+.stage:has(.solve-timer) .stage-hint {
+  visibility: hidden;
+}

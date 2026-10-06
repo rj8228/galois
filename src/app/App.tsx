@@ -3,6 +3,8 @@ import { CubeStage } from '../cube/CubeStage.tsx'
 import { MovePad } from '../cube/MovePad.tsx'
 import { SequenceBar } from '../cube/SequenceBar.tsx'
 import { installShortcuts } from '../cube/shortcuts.ts'
+import { BadgeToast } from '../daily/BadgeToast.tsx'
+import { Daily } from '../daily/Daily.tsx'
 import { About } from '../pages/About.tsx'
 import { ComingSoon } from '../pages/ComingSoon.tsx'
 import { Home } from '../pages/Home.tsx'
@@ -25,13 +27,7 @@ function Panel() {
     case 'learn':
       return <Learn />
     case 'daily':
-      return (
-        <ComingSoon
-          title="Solve of the Day"
-          phase={4}
-          text="One scramble for everyone each day at midnight IST. Race it (best of 3) or find the fewest moves, and keep your streak going."
-        />
-      )
+      return <Daily />
     case 'decode':
       return (
         <ComingSoon
@@ -86,6 +82,7 @@ export function App() {
           <Panel />
         </section>
       </main>
+      <BadgeToast />
     </div>
   )
 }

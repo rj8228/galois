@@ -14,6 +14,8 @@ export const looping = signal(false)
 export const notice = signal('')
 /** A cubing.js stickering mask that overrides the Settings stickering (focus mode, piece tracker). */
 export const highlight = signal<string | null>(null)
+/** True during a timed Speed solve: sequences, scrambles and resets are blocked so only real turns count. */
+export const locked = signal(false)
 
 let creating: Promise<TwistyPlayer> | null = null
 
@@ -71,6 +73,14 @@ export function undo() {
   sync()
 }
 
+/** Puts the cube in a given position (a scramble) with an empty history. */
+export function loadPosition(alg: string) {
+  scramble.value = alg
+  history.value = []
+  notice.value = ''
+  sync()
+}
+
 export function reset() {
   scramble.value = ''
   history.value = []
@@ -79,7 +89,7 @@ export function reset() {
 }
 
 export async function newScramble() {
-  if (!player.value) return
+  if (!player.value || locked.value) return
   notice.value = 'Making a random-state scramble…'
   const { randomScrambleForEvent } = await import('cubing/scramble')
   const alg = await randomScrambleForEvent('333')
@@ -92,7 +102,7 @@ export async function newScramble() {
 /** Animates a sequence from the current position and adds it to the history. */
 export function playSequence(moves: string[]) {
   const p = player.value
-  if (!p) return
+  if (!p || locked.value) return
   looping.value = false
   p.experimentalSetupAlg = [scramble.value, ...history.value].join(' ')
   p.alg = moves.join(' ')
@@ -112,7 +122,7 @@ export function playFast(moves: string[], tempo: number) {
 /** Repeats a sequence forever as a demonstration; the history is left unchanged. */
 export function loopSequence(moves: string[]) {
   const p = player.value
-  if (!p) return
+  if (!p || locked.value) return
   p.experimentalSetupAlg = [scramble.value, ...history.value].join(' ')
   p.alg = moves.join(' ')
   p.jumpToStart()
@@ -125,13 +135,14 @@ export function stopLoop() {
 }
 
 export function togglePlay() {
+  if (locked.value) return
   player.value?.togglePlay()
 }
 
 /** Steps one move through the timeline on the stage without changing the history. */
 export function step(direction: 1 | -1) {
   const p = player.value
-  if (!p) return
+  if (!p || locked.value) return
   p.pause()
   p.controller.animationController.play({ direction: direction as never, untilBoundary: 'move' as never })
 }
