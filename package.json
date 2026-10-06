@@ -14,9 +14,25 @@
     "e2e": "playwright test"
   },
   "dependencies": {
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/dm-mono": "^5.3.0",
+    "@fontsource/eb-garamond": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/im-fell-english": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/kalam": "^5.3.0",
+    "@fontsource/martel": "^5.3.0",
+    "@fontsource/public-sans": "^5.3.0",
+    "@fontsource/shippori-mincho": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "@fontsource/tiro-devanagari-hindi": "^5.3.0",
+    "@fontsource/vt323": "^5.3.0",
+    "@fontsource/work-sans": "^5.3.0",
+    "@preact/signals": "^2.11.3",
     "cubing": "0.63.8",
     "preact": "^10.29.8"
   },
@@ -27,7 +43,10 @@
     "@types/node": "^24.13.3",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
-    "vitest": "^5.0.3"
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.3",
+    "workbox-build": "^7.4.1",
+    "workbox-window": "^7.4.1"
   },
   "description": "Learn group theory by turning a Rubik's cube",
   "license": "MIT"
