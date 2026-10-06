@@ -1,3 +1,5 @@
+import { APP_VERSION, BUILD } from '../app/serviceWorker.ts'
+
 export function About() {
   return (
     <div class="stack">
@@ -38,6 +40,9 @@ export function About() {
               GitHub
             </a>{' '}
             (MIT licence).
+          </li>
+          <li>
+            Version {APP_VERSION} ({BUILD}).
           </li>
         </ul>
       </div>

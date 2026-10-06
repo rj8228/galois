@@ -33,6 +33,8 @@ export const HELP = {
   streak:
     'A day counts once you finish a Speed solve or submit an Optimal solution. Every 7 days in a row earns a freeze (hold up to 2), which automatically covers one missed day.',
   badges: 'Badges you can earn, named after the maths where possible. Earned ones show the day you got them.',
+  version:
+    'Galois updates itself when a new version is out. If a screen ever looks out of date, Update now loads the latest version. Your settings, progress, streak and results are kept.',
   share: 'Copy a short summary of today to paste anywhere. It shows times and move counts, never the solution.',
 } as const
 

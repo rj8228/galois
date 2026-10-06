@@ -57,3 +57,10 @@ test('a chosen look applies and survives a reload', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-look', 'blueprint')
   await expectNoSidewaysScroll(page)
 })
+
+test('Settings shows the version and can force an update', async ({ page }) => {
+  await openApp(page, '#/settings')
+  await expect(page.getByText(/You're running Galois v\d+\.\d+\.\d+/)).toBeVisible()
+  await page.getByRole('button', { name: 'Update now' }).click()
+  await expect(page.getByText('Drag to rotate the view')).toBeVisible({ timeout: 20_000 })
+})

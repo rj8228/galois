@@ -1,11 +1,28 @@
 /// <reference types="vitest/config" />
+
+import { execSync } from 'node:child_process'
 import preact from '@preact/preset-vite'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import pkg from './package.json' with { type: 'json' }
+
+const buildSha = (() => {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim()
+  } catch {
+    return 'local'
+  }
+})()
 
 // Served from https://rj8228.github.io/galois/ on GitHub Pages.
 export default defineConfig({
   base: '/galois/',
+  // Shown in Settings so you can tell which version a device is running.
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+    __BUILD_SHA__: JSON.stringify(buildSha),
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+  },
   plugins: [
     preact(),
     VitePWA({
