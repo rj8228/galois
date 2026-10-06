@@ -12,6 +12,8 @@ export const history = signal<string[]>([])
 export const playing = signal(false)
 export const looping = signal(false)
 export const notice = signal('')
+/** A cubing.js stickering mask that overrides the Settings stickering (focus mode, piece tracker). */
+export const highlight = signal<string | null>(null)
 
 let creating: Promise<TwistyPlayer> | null = null
 
@@ -37,7 +39,9 @@ effect(() => {
   p.visualization = render.props.visualization
   p.hintFacelets = render.props.hintFacelets
   p.backView = s.mirror
+  // A highlight (focus mode or the piece tracker) wins over the stickering chosen in Settings.
   p.experimentalStickering = s.stickering
+  p.experimentalStickeringMaskOrbits = (highlight.value ?? null) as never
   p.tempoScale = s.speed
 })
 
