@@ -11,9 +11,16 @@ function parse(): Route {
 }
 
 export const route = signal<Route>(parse())
+/** The part after the section, such as the lesson id in #/learn/order. */
+export const routeParam = signal(parseParam())
+
+function parseParam(): string {
+  return location.hash.replace(/^#\/?/, '').split('/')[1] ?? ''
+}
 
 window.addEventListener('hashchange', () => {
   route.value = parse()
+  routeParam.value = parseParam()
 })
 
-export const href = (r: Route) => `#/${r === 'home' ? '' : r}`
+export const href = (r: Route, param?: string) => `#/${r === 'home' ? '' : r}${param ? `/${param}` : ''}`

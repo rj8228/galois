@@ -36,7 +36,7 @@ test('invalid notation shows an error and disables Play', async ({ page }) => {
 test('every section opens from the navigation', async ({ page }) => {
   await openApp(page)
   for (const [name, text] of [
-    ['Learn', 'Arrives in Phase 3'],
+    ['Learn', 'Learn group theory by turning'],
     ['Daily', 'Arrives in Phase 4'],
     ['Decode', 'Arrives in Phase 6'],
     ['Home', 'Turn first, name it later'],

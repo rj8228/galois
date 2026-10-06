@@ -1,5 +1,6 @@
 import { signal } from '@preact/signals'
 import { useRef, useState } from 'preact/hooks'
+import { HelpHeading } from '../help/Help.tsx'
 import { settings, updateSettings } from '../settings/settings.ts'
 import { NotationKeypad } from './NotationKeypad.tsx'
 import { parseSequence } from './notation.ts'
@@ -52,9 +53,9 @@ export function SequenceBar() {
 
   return (
     <form class="seq" onSubmit={play}>
-      <label class="seq-label" for="sequence">
-        Sequence
-      </label>
+      <HelpHeading topic="sequence">
+        <label for="sequence">Sequence</label>
+      </HelpHeading>
       <div class="seq-row">
         <input
           id="sequence"
@@ -89,6 +90,7 @@ export function SequenceBar() {
           }}
         />
       )}
+      <HelpHeading topic="playback">Playback</HelpHeading>
       <div class="transport" role="group" aria-label="Playback">
         <button type="button" class="btn small" onClick={() => step(-1)} disabled={!ready} aria-label="Step back">
           ◀ Step

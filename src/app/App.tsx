@@ -6,10 +6,12 @@ import { installShortcuts } from '../cube/shortcuts.ts'
 import { About } from '../pages/About.tsx'
 import { ComingSoon } from '../pages/ComingSoon.tsx'
 import { Home } from '../pages/Home.tsx'
+import { Learn } from '../pages/Learn.tsx'
 import { Play } from '../pages/Play.tsx'
 import { SettingsPage } from '../pages/Settings.tsx'
 import { Nav } from './Nav.tsx'
-import { href, route } from './router.ts'
+import { href, route, routeParam } from './router.ts'
+import { UpdateToast } from './UpdateToast.tsx'
 
 function Panel() {
   switch (route.value) {
@@ -22,13 +24,7 @@ function Panel() {
     case 'about':
       return <About />
     case 'learn':
-      return (
-        <ComingSoon
-          title="Learn"
-          phase={3}
-          text="Lessons that start with something you do on the cube, then name the idea: identity and inverses, order, and why R U isn't U R."
-        />
-      )
+      return <Learn />
     case 'daily':
       return (
         <ComingSoon
@@ -52,7 +48,7 @@ export function App() {
   useEffect(() => installShortcuts(), [])
   useEffect(() => {
     document.getElementById('panel')?.scrollTo?.({ top: 0 })
-  }, [route.value])
+  }, [route.value, routeParam.value])
 
   return (
     <div class="app" data-route={route.value}>
@@ -91,6 +87,7 @@ export function App() {
           <Panel />
         </section>
       </main>
+      <UpdateToast />
     </div>
   )
 }

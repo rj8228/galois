@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks'
+import { HelpHeading } from '../help/Help.tsx'
 import { EXTRA_MOVES, FACE_MOVES } from './notation.ts'
 import { player, turn } from './state.ts'
 
@@ -7,6 +8,7 @@ export function MovePad() {
   const disabled = player.value === null
   return (
     <div class="pad-wrap">
+      <HelpHeading topic="moves">Moves</HelpHeading>
       <div class="pad" role="group" aria-label="Face moves">
         {FACE_MOVES.map((m) => (
           <button type="button" key={m} onClick={() => turn(m)} disabled={disabled}>

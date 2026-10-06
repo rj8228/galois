@@ -1,3 +1,4 @@
+import { HelpHeading } from '../help/Help.tsx'
 import { LOOKS, type LookId } from '../settings/looks.ts'
 import { MIRRORS, RENDERINGS, STICKERINGS } from '../settings/rendering.ts'
 import { activeLook, DEFAULT_SETTINGS, settings, updateSettings } from '../settings/settings.ts'
@@ -35,7 +36,9 @@ export function SettingsPage() {
   return (
     <div class="stack">
       <div class="card">
-        <h2>Look</h2>
+        <HelpHeading topic="look" level="h2">
+          Look
+        </HelpHeading>
         <div class="look-grid">
           {LOOKS.map((l) => (
             <LookCard
@@ -88,7 +91,9 @@ export function SettingsPage() {
       </div>
 
       <div class="card">
-        <h2>Cube</h2>
+        <HelpHeading topic="rendering" level="h2">
+          Cube
+        </HelpHeading>
         <fieldset class="options">
           <legend>Rendering</legend>
           {RENDERINGS.map((r) => (
@@ -146,7 +151,9 @@ export function SettingsPage() {
       </div>
 
       <div class="card">
-        <h2>Typing moves</h2>
+        <HelpHeading topic="typing" level="h2">
+          Typing moves
+        </HelpHeading>
         <div class="seg" role="group" aria-label="Notation keypad">
           {(['auto', 'on', 'off'] as const).map((k) => (
             <button type="button" key={k} aria-pressed={s.keypad === k} onClick={() => updateSettings({ keypad: k })}>
@@ -154,6 +161,18 @@ export function SettingsPage() {
             </button>
           ))}
         </div>
+      </div>
+
+      <div class="card">
+        <h2>Help</h2>
+        <label class="check">
+          <input
+            type="checkbox"
+            checked={s.showHelp}
+            onChange={(e) => updateSettings({ showHelp: e.currentTarget.checked })}
+          />
+          Show the ? buttons that explain each part of the app
+        </label>
       </div>
 
       <button type="button" class="btn" onClick={() => (settings.value = { ...DEFAULT_SETTINGS })}>

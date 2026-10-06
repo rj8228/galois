@@ -3,7 +3,7 @@ import { sequenceText } from '../cube/SequenceBar.tsx'
 
 const SECTIONS = [
   { to: 'play', name: 'Play', text: 'Turn the cube freely, play sequences, step through them.', status: 'Open' },
-  { to: 'learn', name: 'Learn', text: 'Group theory, one thing you do on the cube at a time.', status: 'Phase 3' },
+  { to: 'learn', name: 'Learn', text: 'Group theory, one thing you do on the cube at a time.', status: 'Open' },
   {
     to: 'daily',
     name: 'Solve of the Day',

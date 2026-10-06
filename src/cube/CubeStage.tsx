@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'preact/hooks'
+import { HelpHeading } from '../help/Help.tsx'
 import { createPlayer, history, newScramble, notice, player, reset, undo } from './state.ts'
 
 /** The stage: the shared cube plus its quick actions. Mounted once, outside the routed panel. */
@@ -16,6 +17,11 @@ export function CubeStage() {
     <section class="stage" aria-label="Cube">
       <div ref={host} class="stage-player" />
       <span class="stage-hint">{ready ? notice.value || 'Drag to rotate the view' : 'Loading cube…'}</span>
+      <div class="stage-help">
+        <HelpHeading topic="stage" placement="overlay" label="the cube">
+          {null}
+        </HelpHeading>
+      </div>
       <div class="stage-actions">
         <button type="button" class="btn small" onClick={undo} disabled={!ready || history.value.length === 0}>
           Undo
