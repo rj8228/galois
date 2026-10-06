@@ -1,0 +1,16 @@
+/* One token set per look. Phase 0 ships Chalkboard; the other looks arrive in Phase 1. */
+:root {
+  --bg: #1e2a25;
+  --surface: #26342e;
+  --ink: #ecebe3;
+  --muted: #a9b3a8;
+  --accent: #f2d16b;
+  --accent-ink: #1e2a25;
+  --line: #3d4d45;
+  --stage: radial-gradient(ellipse at 50% 40%, #2c3b34 0%, #1e2a25 70%);
+  --display: "Kalam", "Comic Sans MS", cursive;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius: 10px;
+  color-scheme: dark;
+}
