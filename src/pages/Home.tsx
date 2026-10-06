@@ -4,7 +4,12 @@ import { sequenceText } from '../cube/SequenceBar.tsx'
 const SECTIONS = [
   { to: 'play', name: 'Play', text: 'Turn the cube freely, play sequences, step through them.', status: 'Open' },
   { to: 'learn', name: 'Learn', text: 'Group theory, one thing you do on the cube at a time.', status: 'Phase 3' },
-  { to: 'daily', name: 'Solve of the Day', text: 'One scramble for everyone. Speed and fewest moves.', status: 'Phase 4' },
+  {
+    to: 'daily',
+    name: 'Solve of the Day',
+    text: 'One scramble for everyone. Speed and fewest moves.',
+    status: 'Phase 4',
+  },
   { to: 'decode', name: 'Decode', text: 'Famous algorithms taken apart, piece by piece.', status: 'Phase 6' },
 ] as const
 

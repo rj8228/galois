@@ -3,7 +3,7 @@ import { useRef, useState } from 'preact/hooks'
 import { settings, updateSettings } from '../settings/settings.ts'
 import { NotationKeypad } from './NotationKeypad.tsx'
 import { parseSequence } from './notation.ts'
-import { loopSequence, looping, player, playSequence, playing, step, stopLoop, togglePlay } from './state.ts'
+import { looping, loopSequence, player, playing, playSequence, step, stopLoop, togglePlay } from './state.ts'
 
 /** The text in the sequence box, shared with the analysis card. */
 export const sequenceText = signal('R U')
@@ -94,7 +94,7 @@ export function SequenceBar() {
           ◀ Step
         </button>
         <button type="button" class="btn small" onClick={togglePlay} disabled={!ready}>
-          {playing.value ? 'Pause' : 'Resume'}
+          {playing.value ? 'Pause' : 'Play ▶'}
         </button>
         <button type="button" class="btn small" onClick={() => step(1)} disabled={!ready} aria-label="Step forward">
           Step ▶

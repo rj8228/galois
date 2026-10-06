@@ -1,9 +1,7 @@
 import { effect, signal } from '@preact/signals'
 import type { TwistyPlayer } from 'cubing/twisty'
-import { settings } from '../settings/settings.ts'
-import { lookById } from '../settings/looks.ts'
 import { RENDERINGS } from '../settings/rendering.ts'
-import { activeLook } from '../settings/settings.ts'
+import { settings } from '../settings/settings.ts'
 
 /** The one cube shown on the stage on every screen. */
 export const player = signal<TwistyPlayer | null>(null)
@@ -19,7 +17,8 @@ let creating: Promise<TwistyPlayer> | null = null
 
 export function createPlayer(): Promise<TwistyPlayer> {
   creating ??= import('cubing/twisty').then(({ TwistyPlayer }) => {
-    const p = new TwistyPlayer({ puzzle: '3x3x3', background: 'none', controlPanel: 'none' })
+    // colorScheme 'light' keeps the player transparent; its 'dark' scheme paints its own grey backdrop.
+    const p = new TwistyPlayer({ puzzle: '3x3x3', background: 'none', controlPanel: 'none', colorScheme: 'light' })
     p.experimentalModel.playingInfo.addFreshListener((info) => {
       playing.value = info.playing
     })
@@ -40,7 +39,6 @@ effect(() => {
   p.backView = s.mirror
   p.experimentalStickering = s.stickering
   p.tempoScale = s.speed
-  p.colorScheme = lookById(activeLook()).dark ? 'dark' : 'light'
 })
 
 /** Shows the scramble plus history, at rest. */

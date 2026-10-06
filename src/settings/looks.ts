@@ -1,4 +1,13 @@
-export type LookId = 'chalk' | 'notebook' | 'blueprint' | 'bauhaus' | 'pothi' | '1832' | 'sumi' | 'terminal' | 'contrast'
+export type LookId =
+  | 'chalk'
+  | 'notebook'
+  | 'blueprint'
+  | 'bauhaus'
+  | 'pothi'
+  | '1832'
+  | 'sumi'
+  | 'terminal'
+  | 'contrast'
 
 export type Look = { id: LookId; name: string; feel: string; dark: boolean }
 

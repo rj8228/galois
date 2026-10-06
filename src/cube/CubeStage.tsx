@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'preact/hooks'
-import { createPlayer, notice, player, reset, newScramble, undo, history } from './state.ts'
+import { createPlayer, history, newScramble, notice, player, reset, undo } from './state.ts'
 
 /** The stage: the shared cube plus its quick actions. Mounted once, outside the routed panel. */
 export function CubeStage() {
@@ -15,7 +15,7 @@ export function CubeStage() {
   return (
     <section class="stage" aria-label="Cube">
       <div ref={host} class="stage-player" />
-      <span class="stage-hint">{ready ? (notice.value || 'Drag to rotate the view') : 'Loading cube…'}</span>
+      <span class="stage-hint">{ready ? notice.value || 'Drag to rotate the view' : 'Loading cube…'}</span>
       <div class="stage-actions">
         <button type="button" class="btn small" onClick={undo} disabled={!ready || history.value.length === 0}>
           Undo

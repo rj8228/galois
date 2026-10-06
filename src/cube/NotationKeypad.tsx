@@ -22,7 +22,12 @@ export function NotationKeypad({ onKey, onDone }: Props) {
           {k}
         </button>
       ))}
-      <button type="button" class="keypad-wide" onPointerDown={(e) => e.preventDefault()} onClick={() => onKey('clear')}>
+      <button
+        type="button"
+        class="keypad-wide"
+        onPointerDown={(e) => e.preventDefault()}
+        onClick={() => onKey('clear')}
+      >
         Clear
       </button>
       <button type="button" class="keypad-wide primary" onClick={onDone}>

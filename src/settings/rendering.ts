@@ -1,9 +1,8 @@
-import type { TwistyPlayer } from 'cubing/twisty'
-
 export type RenderId = '3d' | 'hints' | 'sharp' | 'net' | 'last-layer'
 export type MirrorId = 'none' | 'side-by-side' | 'top-right'
 
-type PlayerProps = Pick<TwistyPlayer, 'visualization' | 'hintFacelets'>
+// cubing.js exposes these as setter-only properties, so their value types are spelled out here.
+type PlayerProps = { visualization: '3D' | 'PG3D' | '2D' | 'experimental-2D-LL'; hintFacelets: 'none' | 'floating' }
 
 export const RENDERINGS: { id: RenderId; name: string; detail: string; props: PlayerProps }[] = [
   { id: '3d', name: '3D', detail: 'Standard 3D cube', props: { visualization: '3D', hintFacelets: 'none' } },
@@ -19,7 +18,12 @@ export const RENDERINGS: { id: RenderId; name: string; detail: string; props: Pl
     detail: 'Crisper stickers, lighter on old phones',
     props: { visualization: 'PG3D', hintFacelets: 'none' },
   },
-  { id: 'net', name: 'Flat net', detail: 'The cube unfolded flat', props: { visualization: '2D', hintFacelets: 'none' } },
+  {
+    id: 'net',
+    name: 'Flat net',
+    detail: 'The cube unfolded flat',
+    props: { visualization: '2D', hintFacelets: 'none' },
+  },
   {
     id: 'last-layer',
     name: 'Last-layer view',

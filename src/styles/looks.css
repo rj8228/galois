@@ -1,7 +1,7 @@
 /* One token set per look, on both :root and [data-look] so a Settings card can preview any look.
    Every look is a complete single-world palette; "Follow device" in Settings pairs a light and a dark look. */
 :root,
-[data-look='chalk'] {
+[data-look="chalk"] {
   --bg: #1e2a25;
   --surface: #26342e;
   --ink: #ecebe3;
@@ -12,9 +12,9 @@
   --danger: #ff8f7a;
   --good: #8fd49a;
   --stage: radial-gradient(ellipse at 50% 40%, #2c3b34 0%, #1e2a25 70%);
-  --display: 'Kalam', 'Comic Sans MS', cursive;
-  --body: 'IBM Plex Sans', system-ui, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --display: "Kalam", "Comic Sans MS", cursive;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 10px;
   --border: 1px;
   --display-weight: 700;
@@ -22,7 +22,7 @@
   --display-scale: 1;
   color-scheme: dark;
 }
-[data-look='notebook'] {
+[data-look="notebook"] {
   --bg: #f6f7f2;
   --surface: #ffffff;
   --ink: #1b2a4a;
@@ -32,18 +32,19 @@
   --line: #d5deea;
   --danger: #b3261e;
   --good: #2f7d4a;
-  --stage: linear-gradient(#e3eaf4 1px, transparent 1px) 0 0 / 22px 22px,
+  --stage:
+    linear-gradient(#e3eaf4 1px, transparent 1px) 0 0 / 22px 22px,
     linear-gradient(90deg, #e3eaf4 1px, transparent 1px) 0 0 / 22px 22px, #f6f7f2;
-  --display: 'Instrument Serif', Georgia, serif;
-  --body: 'Public Sans', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --display: "Instrument Serif", Georgia, serif;
+  --body: "Public Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
   --radius: 4px;
   --display-weight: 400;
   --display-style: italic;
   --display-scale: 1.2;
   color-scheme: light;
 }
-[data-look='blueprint'] {
+[data-look="blueprint"] {
   --bg: #0c2244;
   --surface: #112b54;
   --ink: #e4efff;
@@ -53,18 +54,19 @@
   --line: #2c5390;
   --danger: #ff9a8a;
   --good: #7ff0b0;
-  --stage: linear-gradient(rgba(111, 227, 255, 0.09) 1px, transparent 1px) 0 0 / 28px 28px,
+  --stage:
+    linear-gradient(rgba(111, 227, 255, 0.09) 1px, transparent 1px) 0 0 / 28px 28px,
     linear-gradient(90deg, rgba(111, 227, 255, 0.09) 1px, transparent 1px) 0 0 / 28px 28px, #0c2244;
-  --display: 'Chakra Petch', 'Arial Narrow', sans-serif;
-  --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
-  --mono: 'DM Mono', ui-monospace, monospace;
+  --display: "Chakra Petch", "Arial Narrow", sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, monospace;
   --radius: 2px;
   --display-weight: 700;
   --display-style: normal;
   --display-scale: 0.95;
   color-scheme: dark;
 }
-[data-look='bauhaus'] {
+[data-look="bauhaus"] {
   --bg: #f3f3ef;
   --surface: #ffffff;
   --ink: #111111;
@@ -75,9 +77,9 @@
   --danger: #c4291d;
   --good: #1d8a46;
   --stage: linear-gradient(135deg, transparent 0 62%, #f4c20d 62% 64%, transparent 64%), #f3f3ef;
-  --display: 'Bricolage Grotesque', 'Arial Black', sans-serif;
-  --body: 'Public Sans', system-ui, sans-serif;
-  --mono: 'Space Mono', ui-monospace, monospace;
+  --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+  --body: "Public Sans", system-ui, sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
   --radius: 0px;
   --border: 2px;
   --display-weight: 800;
@@ -85,7 +87,7 @@
   --display-scale: 1;
   color-scheme: light;
 }
-[data-look='pothi'] {
+[data-look="pothi"] {
   --bg: #ead7ad;
   --surface: #f3e5c4;
   --ink: #2b1d12;
@@ -96,9 +98,9 @@
   --danger: #8e2a1d;
   --good: #2f5d3a;
   --stage: radial-gradient(ellipse at 50% 45%, #f1e1bb 0%, #e2cb98 75%);
-  --display: 'Tiro Devanagari Hindi', 'Martel', Georgia, serif;
-  --body: 'Martel', Georgia, serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --display: "Tiro Devanagari Hindi", "Martel", Georgia, serif;
+  --body: "Martel", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 14px;
   --display-weight: 400;
   --display-style: normal;
@@ -106,7 +108,7 @@
   color-scheme: light;
 }
 /* 1832: the year of Galois's last letter. Sepia ink on laid paper. */
-[data-look='1832'] {
+[data-look="1832"] {
   --bg: #efe6d2;
   --surface: #f7f0df;
   --ink: #3a2a1a;
@@ -116,18 +118,19 @@
   --line: #cdbb98;
   --danger: #8a2a17;
   --good: #3d5a2a;
-  --stage: repeating-linear-gradient(90deg, rgba(58, 42, 26, 0.05) 0 1px, transparent 1px 7px),
+  --stage:
+    repeating-linear-gradient(90deg, rgba(58, 42, 26, 0.05) 0 1px, transparent 1px 7px),
     radial-gradient(ellipse at 50% 40%, #f7f0df 0%, #e6d8b9 80%);
-  --display: 'IM Fell English', 'EB Garamond', Georgia, serif;
-  --body: 'EB Garamond', Georgia, serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --display: "IM Fell English", "EB Garamond", Georgia, serif;
+  --body: "EB Garamond", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 3px;
   --display-weight: 400;
   --display-style: italic;
   --display-scale: 1.15;
   color-scheme: light;
 }
-[data-look='sumi'] {
+[data-look="sumi"] {
   --bg: #f4f1ea;
   --surface: #fbf9f4;
   --ink: #1a1a1a;
@@ -138,16 +141,16 @@
   --danger: #c0362c;
   --good: #3b6b4a;
   --stage: radial-gradient(circle at 70% 30%, rgba(26, 26, 26, 0.06) 0 18%, transparent 40%), #f4f1ea;
-  --display: 'Shippori Mincho', 'Times New Roman', serif;
-  --body: 'Work Sans', system-ui, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --display: "Shippori Mincho", "Times New Roman", serif;
+  --body: "Work Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 0px;
   --display-weight: 600;
   --display-style: normal;
   --display-scale: 1.05;
   color-scheme: light;
 }
-[data-look='terminal'] {
+[data-look="terminal"] {
   --bg: #07110b;
   --surface: #0c1a11;
   --ink: #b8f5c8;
@@ -158,16 +161,16 @@
   --danger: #ff7a6b;
   --good: #5cff8f;
   --stage: repeating-linear-gradient(0deg, rgba(92, 255, 143, 0.04) 0 1px, transparent 1px 3px), #07110b;
-  --display: 'VT323', ui-monospace, monospace;
-  --body: 'IBM Plex Mono', ui-monospace, monospace;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --display: "VT323", ui-monospace, monospace;
+  --body: "IBM Plex Mono", ui-monospace, monospace;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 0px;
   --display-weight: 400;
   --display-style: normal;
   --display-scale: 1.35;
   color-scheme: dark;
 }
-[data-look='contrast'] {
+[data-look="contrast"] {
   --bg: #000000;
   --surface: #000000;
   --ink: #ffffff;
@@ -178,9 +181,9 @@
   --danger: #ff9e9e;
   --good: #9effa8;
   --stage: #000000;
-  --display: 'Atkinson Hyperlegible', system-ui, sans-serif;
-  --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
-  --mono: 'Atkinson Hyperlegible', ui-monospace, monospace;
+  --display: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono: "Atkinson Hyperlegible", ui-monospace, monospace;
   --radius: 4px;
   --border: 2px;
   --display-weight: 700;

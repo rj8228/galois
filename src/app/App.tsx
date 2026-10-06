@@ -65,15 +65,17 @@ export function App() {
         </a>
         <span class="tagline">Group theory you can turn</span>
         <span class="spacer" />
-        <a class="icon-btn" href={href('settings')} aria-label="Settings" aria-current={route.value === 'settings' ? 'page' : undefined}>
+        <a class="icon-btn" href={href('settings')} aria-current={route.value === 'settings' ? 'page' : undefined}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3a1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5a1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8a1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
           </svg>
+          <span class="sr-only">Settings</span>
         </a>
-        <a class="icon-btn" href={href('about')} aria-label="About Galois" aria-current={route.value === 'about' ? 'page' : undefined}>
+        <a class="icon-btn" href={href('about')} aria-current={route.value === 'about' ? 'page' : undefined}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 11v6M12 7.5v.5" />
           </svg>
+          <span class="sr-only">About Galois</span>
         </a>
       </header>
 
