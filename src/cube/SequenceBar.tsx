@@ -3,8 +3,8 @@ import { useRef, useState } from 'preact/hooks'
 import { HelpHeading } from '../help/Help.tsx'
 import { settings, updateSettings } from '../settings/settings.ts'
 import { NotationKeypad } from './NotationKeypad.tsx'
-import { parseSequence } from './notation.ts'
-import { looping, loopSequence, player, playing, playSequence, step, stopLoop, togglePlay } from './state.ts'
+import { applyKey, parseSequence } from './notation.ts'
+import { locked, looping, loopSequence, player, playing, playSequence, step, stopLoop, togglePlay } from './state.ts'
 
 /** The text in the sequence box, shared with the analysis card. */
 export const sequenceText = signal('R U')
@@ -15,7 +15,7 @@ export function SequenceBar() {
   const input = useRef<HTMLInputElement>(null)
   const [keypadOpen, setKeypadOpen] = useState(false)
   const parsed = parseSequence(sequenceText.value)
-  const ready = player.value !== null
+  const ready = player.value !== null && !locked.value
   const keypadMode = settings.value.keypad
   const useKeypad = keypadMode === 'on' || (keypadMode === 'auto' && coarse)
 
@@ -23,27 +23,9 @@ export function SequenceBar() {
     const el = input.current
     if (!el) return
     const text = sequenceText.value
-    const start = el.selectionStart ?? text.length
-    const end = el.selectionEnd ?? text.length
-    let next = text
-    let caret = start
-    if (key === 'clear') {
-      next = ''
-      caret = 0
-    } else if (key === '⌫') {
-      const from = start === end ? Math.max(0, start - 1) : start
-      next = text.slice(0, from) + text.slice(end)
-      caret = from
-    } else {
-      // Letters start a new move, so add a space before them when needed.
-      const isMoveLetter = /^[RLUDFBMESxyz]$/.test(key)
-      const before = text.slice(0, start)
-      const piece = key === '␣' ? ' ' : isMoveLetter && before && !/[\s(]$/.test(before) ? ` ${key}` : key
-      next = before + piece + text.slice(end)
-      caret = start + piece.length
-    }
-    sequenceText.value = next
-    requestAnimationFrame(() => el.setSelectionRange(caret, caret))
+    const result = applyKey(text, el.selectionStart ?? text.length, el.selectionEnd ?? text.length, key)
+    sequenceText.value = result.text
+    requestAnimationFrame(() => el.setSelectionRange(result.caret, result.caret))
   }
 
   const play = (e: Event) => {

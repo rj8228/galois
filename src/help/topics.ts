@@ -24,6 +24,16 @@ export const HELP = {
   typing: 'Choose whether the sequence box uses the on-screen notation keypad or your normal keyboard.',
   lesson:
     'Each lesson has five steps: do something on the cube, notice what happened, learn its name, explore it, then prove you have it with a challenge. Next unlocks when a step is done; Skip lets you move on anyway.',
+  daily:
+    'One scrambled cube for everyone, new every day at midnight India time. Compete in Speed (fastest solve) and Optimal (fewest moves). Playing either one keeps your streak going.',
+  speed:
+    'Press Start: you get 15 seconds to look at the cube. The clock starts with your first turn and stops the moment the cube is solved. Your best of 3 attempts counts. While the clock runs, only real turns are allowed (move pad or keyboard).',
+  optimal:
+    "Find a solution with as few moves as you can. Study the cube freely, then write your solution in face turns (R, U' , F2…). Each turn counts as 1. Use my moves copies what you did on the cube. You get one submission a day, and then Galois shows its own solver's solution.",
+  streak:
+    'A day counts once you finish a Speed solve or submit an Optimal solution. Every 7 days in a row earns a freeze (hold up to 2), which automatically covers one missed day.',
+  badges: 'Badges you can earn, named after the maths where possible. Earned ones show the day you got them.',
+  share: 'Copy a short summary of today to paste anywhere. It shows times and move counts, never the solution.',
 } as const
 
 export type HelpTopic = keyof typeof HELP

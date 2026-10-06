@@ -8,7 +8,7 @@ const SECTIONS = [
     to: 'daily',
     name: 'Solve of the Day',
     text: 'One scramble for everyone. Speed and fewest moves.',
-    status: 'Phase 4',
+    status: 'Open',
   },
   { to: 'decode', name: 'Decode', text: 'Famous algorithms taken apart, piece by piece.', status: 'Phase 6' },
 ] as const
