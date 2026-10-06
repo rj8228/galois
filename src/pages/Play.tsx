@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks'
 import { AnalysisPanel } from '../analysis/AnalysisPanel.tsx'
 import { history, scramble } from '../cube/state.ts'
+import { HelpHeading } from '../help/Help.tsx'
 
 export function Play() {
   const [copied, setCopied] = useState(false)
@@ -18,7 +19,7 @@ export function Play() {
     <div class="stack">
       <AnalysisPanel />
       <div class="card">
-        <h3>Your moves ({moves.length})</h3>
+        <HelpHeading topic="history">{`Your moves (${moves.length})`}</HelpHeading>
         {scramble.value && (
           <p class="small">
             <span class="muted">Scramble: </span>

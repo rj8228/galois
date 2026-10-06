@@ -15,6 +15,8 @@ export type Settings = {
   speed: number
   /** On-screen notation keypad for the sequence box: auto shows it on touch screens. */
   keypad: 'auto' | 'on' | 'off'
+  /** Show the ? help buttons next to each component. */
+  showHelp: boolean
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -27,6 +29,7 @@ export const DEFAULT_SETTINGS: Settings = {
   stickering: 'full',
   speed: 1.6,
   keypad: 'auto',
+  showHelp: true,
 }
 
 const KEY = 'galois.settings.v1'

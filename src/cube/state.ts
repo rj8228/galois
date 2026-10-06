@@ -23,6 +23,8 @@ export function createPlayer(): Promise<TwistyPlayer> {
     const p = new TwistyPlayer({ puzzle: '3x3x3', background: 'none', controlPanel: 'none', colorScheme: 'light' })
     p.experimentalModel.playingInfo.addFreshListener((info) => {
       playing.value = info.playing
+      // A fast demo (playFast) only lasts for its own playback.
+      if (!info.playing) p.tempoScale = settings.value.speed
     })
     player.value = p
     return p
@@ -97,6 +99,14 @@ export function playSequence(moves: string[]) {
   p.jumpToStart()
   p.controller.animationController.play({ untilBoundary: 'entire-timeline' as never })
   history.value = [...history.value, ...moves]
+}
+
+/** Like playSequence, but at a given speed (for long demonstrations such as R U × 105). */
+export function playFast(moves: string[], tempo: number) {
+  const p = player.value
+  if (!p) return
+  playSequence(moves)
+  p.tempoScale = tempo
 }
 
 /** Repeats a sequence forever as a demonstration; the history is left unchanged. */

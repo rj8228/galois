@@ -4,6 +4,7 @@ import { sequenceText } from '../cube/SequenceBar.tsx'
 import { highlight } from '../cube/state.ts'
 import { affectedPieces, analyse, highlightMask, type OrbitAnalysis, tracePiece } from '../engine/analysis.ts'
 import { ORBITS, type OrbitName } from '../engine/pieces.ts'
+import { HelpHeading } from '../help/Help.tsx'
 import { kpuzzle, loadKPuzzle } from './kpuzzle.ts'
 
 const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
@@ -106,7 +107,7 @@ export function AnalysisPanel() {
   return (
     <div class="stack" aria-live="polite">
       <div class="card">
-        <h3>Order</h3>
+        <HelpHeading topic="order">Order</HelpHeading>
         <p class="big-number">{analysis.order}</p>
         <p>
           {analysis.order === 1
@@ -143,7 +144,7 @@ export function AnalysisPanel() {
 
       <div class="card">
         <div class="card-head">
-          <h3>Cycles</h3>
+          <HelpHeading topic="cycles">Cycles</HelpHeading>
           <div class="seg small" role="group" aria-label="Cycle view">
             <button type="button" aria-pressed={view === 'pieces'} onClick={() => setView('pieces')}>
               Pieces
@@ -170,7 +171,7 @@ export function AnalysisPanel() {
       </div>
 
       <div class="card">
-        <h3>Invariants</h3>
+        <HelpHeading topic="invariants">Invariants</HelpHeading>
         <ul class="invariants">
           <li>
             <span>
@@ -204,7 +205,7 @@ export function AnalysisPanel() {
       </div>
 
       <div class="card">
-        <h3>Track a piece</h3>
+        <HelpHeading topic="tracker">Track a piece</HelpHeading>
         <label class="field">
           <span>Follow one piece through the sequence, starting from solved</span>
           <select value={tracked} onChange={(e) => setTracked(e.currentTarget.value)}>
