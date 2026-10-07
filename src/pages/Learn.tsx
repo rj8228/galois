@@ -10,7 +10,7 @@ export function Learn() {
   return (
     <div class="stack">
       <div class="card">
-        <span class="eyebrow">Draft lessons</span>
+        <span class="eyebrow">Lessons</span>
         <h2>Learn group theory by turning</h2>
         <p>
           Each lesson starts with something you do on the cube, then names the idea behind it. Open "Go deeper" in any

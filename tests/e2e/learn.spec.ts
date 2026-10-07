@@ -1,5 +1,5 @@
 import { expect, type Page, test } from '@playwright/test'
-import { openApp } from './helpers'
+import { expectNoSidewaysScroll, openApp } from './helpers'
 
 const pad = (page: Page, move: string) =>
   page.getByRole('group', { name: 'Face moves' }).getByRole('button', { name: move, exact: true }).click()
@@ -7,7 +7,7 @@ const next = (page: Page) => page.getByRole('button', { name: 'Next', exact: tru
 
 test('lesson 1 can be completed from start to finish', async ({ page }) => {
   await openApp(page, '#/learn')
-  await expect(page.locator('.lesson-list li')).toHaveCount(4)
+  await expect(page.locator('.lesson-list li')).toHaveCount(8)
   await page.getByRole('link', { name: /Every move can be undone/ }).click()
 
   // Do: R then R'
@@ -48,12 +48,16 @@ test('lesson 1 can be completed from start to finish', async ({ page }) => {
   await expect(page.locator('.lesson-list li').first()).toContainText('Done')
 })
 
-test('prove steps accept correct answers in lessons 2 to 4', async ({ page }, info) => {
+test('prove steps accept correct answers in lessons 2 to 8', async ({ page }, info) => {
   test.skip(info.project.name !== 'laptop', 'Checks the answer logic once')
   for (const [id, answer, success] of [
     ['order', 'R2 U2', 'Order 6.'],
     ['commute', "U D U' D'", 'Yes: U and its partner never share a piece'],
     ['cycles', 'R U', 'A single 5-cycle of corners.'],
+    ['commutators', "R U R' D' R U' R' D", 'Three pieces, and the rest of the cube untouched.'],
+    ['conjugates', "U2 R U R' D R U' R' D' U2", 'Aimed: the same 3-cycle, now working on UBL.'],
+    ['parity', 'R', 'Corners odd, and the edges are odd too.'],
+    ['twists', "R' D' R D R' D' R D U' D' R' D R D' R' D R U", 'Two front corners twisted'],
   ]) {
     await openApp(page, `#/learn/${id}`)
     // Jump to the last step: Skip where a step is unfinished, Next where it needs nothing.
@@ -63,8 +67,23 @@ test('prove steps accept correct answers in lessons 2 to 4', async ({ page }, in
       else await page.getByRole('button', { name: 'Next', exact: true }).click()
     }
     await page.locator('#sequence').fill(answer)
+    const rightAnswer = page.getByRole('button', { name: 'It was taken apart and put back' })
+    if (await rightAnswer.isVisible()) await rightAnswer.click()
     await expect(page.getByText(success)).toBeVisible()
   }
+})
+
+test('formulas in "Go deeper" are typeset', async ({ page }) => {
+  await openApp(page, '#/learn/commutators')
+  for (let i = 0; i < 2; i++) {
+    const skip = page.getByRole('button', { name: 'Skip' })
+    if (await skip.isVisible()) await skip.click()
+    else await page.getByRole('button', { name: 'Next', exact: true }).click()
+  }
+  await expect(page.getByRole('heading', { name: 'Commutators' })).toBeVisible()
+  await page.getByText('Go deeper: the formal version').click()
+  await expect(page.locator('.formal .katex').first()).toBeVisible()
+  await expectNoSidewaysScroll(page)
 })
 
 test('help buttons explain each part', async ({ page }, info) => {

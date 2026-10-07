@@ -9,9 +9,9 @@ The finish line for Galois, gathered from the build plan, the focus plan, the di
 ## 0. Close the review pause
 
 - [ ] Review v0.4.x Solve of the Day on phone, tablet and laptop
-- [ ] Give feedback on the 4 draft lessons (length, flow, the "Go deeper" layer)
-- [ ] Choose the textbook for the lesson order (proposed: Carter's *Visual Group Theory*, with Joyner's *Adventures in Group Theory* for cube examples)
-- [ ] Decide on analytics: GoatCounter (cookie-free) or none (NF-9)
+- [x] Give feedback on the 4 draft lessons (Oct 8: they work; plan more)
+- [x] Textbook: not needed for now; lessons follow the usual path (decided Oct 8)
+- [ ] Analytics: GoatCounter chosen (Oct 8); needs a site code from a goatcounter.com account (NF-9)
 
 ## 1. Hardening (small, do first)
 
@@ -27,13 +27,19 @@ The finish line for Galois, gathered from the build plan, the focus plan, the di
 - [ ] Algorithm breakdowns: Sune, T-perm, Niklas, beginner's corner algorithm, on a colour-coded setup/core/undo timeline (DC-1)
 - [ ] Exit: every breakdown links to the lesson that explains it
 
+## 2b. Lessons 5–8 and the formal layer (v0.5.0)
+
+Phase 5 (competition backend) is deferred, so v0.5.0 carries these lessons.
+
+- [x] Lesson format stays TypeScript data (decided Oct 8)
+- [x] 5 Commutators, 6 Conjugates, 7 Parity, 8 Twists and flips
+- [x] Formal layer with KaTeX, loaded only when "Go deeper" opens (LP-4)
+
 ## 3. Phase 7: full lesson path (v0.7.0, rescoped)
 
 The licence-code unlock is dropped because everything is free.
 
-- [ ] Lessons 4–8 in textbook order: permutations, subgroups, commutators, invariants, big picture (LP-3)
-- [ ] Formal layer with KaTeX (LP-4)
-- [ ] Settle the lesson format (TypeScript data or MDX) before writing lessons 4–8
+- [ ] Lessons 9–12: subgroups, cosets and Lagrange, where 43 quintillion comes from, God's number (LP-3)
 - [ ] Beginner's method walkthrough (DC-2, beginner part only)
 - [ ] Solve of the Day archive: play any past day, unranked (SD-12)
 - [ ] Exit: a non-maths friend finishes lessons 1–3 on a phone without help
