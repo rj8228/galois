@@ -2,7 +2,7 @@
 
 The finish line for Galois, gathered from the build plan, the focus plan, the discovery doc and `learnings/`. Galois is one of three focus projects (with Prayog and the DSA gym), so v1.0 is scoped to be finished, not to cover every idea. Anything not needed for v1.0 is in **Parked** at the bottom.
 
-**Now:** v0.4.1 live (Phases 0–4); v0.4.2, v0.5.0 and v0.6.0 are in pull requests #8–#10. **Next:** lessons 9–12, then Phase 8.
+**Now:** v0.4.1 live (Phases 0–4); v0.4.2, v0.5.0, v0.6.0 and v0.6.1 are in pull requests #8–#11. **Next:** the rest of Phase 7 (beginner's method, Solve of the Day archive), then Phase 8.
 
 **Done means** a stranger can use it, and you can defend every design choice for 45 minutes.
 
@@ -39,7 +39,7 @@ Phase 5 (competition backend) is deferred, so v0.5.0 carries these lessons.
 
 The licence-code unlock is dropped because everything is free.
 
-- [ ] Lessons 9–12: subgroups, cosets and Lagrange, where 43 quintillion comes from, God's number (LP-3)
+- [x] Lessons 9–12: subgroups, cosets and Lagrange, where 43 quintillion comes from, God's number (LP-3) (v0.6.1)
 - [ ] Beginner's method walkthrough (DC-2, beginner part only)
 - [ ] Solve of the Day archive: play any past day, unranked (SD-12)
 - [ ] Exit: a non-maths friend finishes lessons 1–3 on a phone without help

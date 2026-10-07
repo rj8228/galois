@@ -7,7 +7,7 @@ const next = (page: Page) => page.getByRole('button', { name: 'Next', exact: tru
 
 test('lesson 1 can be completed from start to finish', async ({ page }) => {
   await openApp(page, '#/learn')
-  await expect(page.locator('.lesson-list li')).toHaveCount(8)
+  await expect(page.locator('.lesson-list li')).toHaveCount(12)
   await page.getByRole('link', { name: /Every move can be undone/ }).click()
 
   // Do: R then R'
@@ -48,7 +48,7 @@ test('lesson 1 can be completed from start to finish', async ({ page }) => {
   await expect(page.locator('.lesson-list li').first()).toContainText('Done')
 })
 
-test('prove steps accept correct answers in lessons 2 to 8', async ({ page }, info) => {
+test('prove steps accept correct answers in lessons 2 to 10', async ({ page }, info) => {
   test.skip(info.project.name !== 'laptop', 'Checks the answer logic once')
   for (const [id, answer, success] of [
     ['order', 'R2 U2', 'Order 6.'],
@@ -58,6 +58,8 @@ test('prove steps accept correct answers in lessons 2 to 8', async ({ page }, in
     ['conjugates', "U2 R U R' D R U' R' D' U2", 'Aimed: the same 3-cycle, now working on UBL.'],
     ['parity', 'R', 'Corners odd, and the edges are odd too.'],
     ['twists', "R' D' R D R' D' R D U' D' R' D R D' R' D R U", 'Two front corners twisted'],
+    ['subgroups', 'R2 U2 R2', 'Order 2: another reflection of the hexagon.'],
+    ['lagrange', "R L U F'", 'A multiple of 11.'],
   ]) {
     await openApp(page, `#/learn/${id}`)
     // Jump to the last step: Skip where a step is unfinished, Next where it needs nothing.
@@ -67,8 +69,11 @@ test('prove steps accept correct answers in lessons 2 to 8', async ({ page }, in
       else await page.getByRole('button', { name: 'Next', exact: true }).click()
     }
     await page.locator('#sequence').fill(answer)
-    const rightAnswer = page.getByRole('button', { name: 'It was taken apart and put back' })
-    if (await rightAnswer.isVisible()) await rightAnswer.click()
+    // Steps that also ask a question need the right answer too.
+    for (const answer of ['It was taken apart and put back', '13']) {
+      const button = page.getByRole('button', { name: answer, exact: true })
+      if (await button.isVisible()) await button.click()
+    }
     await expect(page.getByText(success)).toBeVisible()
   }
 })
@@ -101,4 +106,11 @@ test('help buttons explain each part', async ({ page }, info) => {
   await page.goto('./#/settings')
   await page.getByLabel(/Show the \? buttons/).uncheck()
   await expect(page.getByRole('button', { name: /How to use/ })).toHaveCount(0)
+})
+
+test("lesson 12 shows each scramble's length", async ({ page }) => {
+  await openApp(page, '#/learn/gods-number')
+  await page.getByRole('button', { name: 'Scramble', exact: true }).click()
+  await expect(page.getByText(/This scramble has \d+ moves/)).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeEnabled()
 })
