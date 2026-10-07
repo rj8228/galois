@@ -12,11 +12,14 @@ const ITEMS: { id: Route; label: string; path: string }[] = [
   { id: 'decode', label: 'Decode', path: 'M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12M15 15l5 5' },
 ]
 
+// Labs live under Learn in the navigation.
+const section = (): Route => (route.value === 'labs' ? 'learn' : route.value)
+
 export function Nav() {
   return (
     <nav class="tabs" aria-label="Sections">
       {ITEMS.map((item) => (
-        <a key={item.id} href={href(item.id)} aria-current={route.value === item.id ? 'page' : undefined}>
+        <a key={item.id} href={href(item.id)} aria-current={section() === item.id ? 'page' : undefined}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d={item.path} />
           </svg>

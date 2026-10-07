@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'preact/hooks'
+import { href } from '../app/router.ts'
 import { parseSequence } from '../cube/notation.ts'
 import { sequenceText } from '../cube/SequenceBar.tsx'
 import { highlight } from '../cube/state.ts'
@@ -6,6 +7,7 @@ import { award } from '../daily/badges.ts'
 import { istDay } from '../daily/date.ts'
 import { affectedPieces, analyse, highlightMask, type OrbitAnalysis, tracePiece } from '../engine/analysis.ts'
 import { ORBITS, type OrbitName } from '../engine/pieces.ts'
+import { shapeOf, shapeText } from '../engine/structure.ts'
 import { HelpHeading } from '../help/Help.tsx'
 import { kpuzzle, loadKPuzzle } from './kpuzzle.ts'
 
@@ -48,6 +50,35 @@ function stickerSummary(lengths: number[]) {
   const parts = [...counts.entries()].map(([len, count]) => `${say(count)} ${len}-cycle${count > 1 ? 's' : ''}`)
   const total = lengths.reduce((a, b) => a + b, 0)
   return `${total} stickers move, in ${parts.join(', ')}.`
+}
+
+/** Names the sequence's structure as written: a commutator, a conjugate, or neither. */
+function ShapeCard({ moves }: { moves: string[] }) {
+  const shape = shapeOf(moves)
+  return (
+    <div class="card">
+      <HelpHeading topic="structure">Shape</HelpHeading>
+      {shape.kind === 'moves' ? (
+        <p class="muted">No commutator or conjugate shape in these moves as written.</p>
+      ) : (
+        <>
+          <p class="mono shape">{shapeText(shape)}</p>
+          <p>
+            {shape.kind === 'commutator' ? (
+              <>
+                A <a href={href('learn', 'commutators')}>commutator</a>: it can only change pieces where its two parts
+                overlap.
+              </>
+            ) : (
+              <>
+                A <a href={href('learn', 'conjugates')}>conjugate</a>: set up, do the middle, undo the setup.
+              </>
+            )}
+          </p>
+        </>
+      )}
+    </div>
+  )
 }
 
 export function AnalysisPanel() {
@@ -175,6 +206,8 @@ export function AnalysisPanel() {
           <p>{stickerSummary(analysis.orbits.flatMap((o) => o.stickerCycleLengths))}</p>
         )}
       </div>
+
+      <ShapeCard moves={parsed.moves} />
 
       <div class="card">
         <HelpHeading topic="invariants">Invariants</HelpHeading>
