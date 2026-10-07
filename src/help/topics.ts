@@ -14,6 +14,8 @@ export const HELP = {
     "Each line is a cycle: the first piece moves to the second one's place, the second to the third, and the last back to the first. Twisted or flipped means the pieces come back turned. Stickers counts the same movement sticker by sticker.",
   invariants:
     "These are rules no sequence can break. Corner swaps and edge swaps always balance (both even or both odd), and the total corner twist and edge flip are always zero. That's why a cube with one twisted corner can never be solved.",
+  structure:
+    "Reads the sequence's shape from its moves. [X, Y] is a commutator, X Y X′ Y′. [A: B] is a conjugate, A B A′. Parts can nest: [R, [U′: L′]] is R U′ L′ U R′ U′ L U. Moves that only cancel after merging, such as R R, aren't recognised.",
   tracker:
     'Pick a corner or edge. Pieces are named by the faces they touch, so UFR is the up-front-right corner. The list shows where it sits after each move of the sequence, starting from solved. Press Reset, then Play, to watch it travel while the cube dims every other piece.',
   history:
@@ -35,6 +37,9 @@ export const HELP = {
   badges: 'Badges you can earn, named after the maths where possible. Earned ones show the day you got them.',
   version:
     'Galois updates itself when a new version is out. If a screen ever looks out of date, Update now loads the latest version. Your settings, progress, streak and results are kept.',
+  labs: 'Open-ended challenges. The analysis engine checks your sequence as you type. Hints unlock one at a time, so take only as many as you need.',
+  decode:
+    'Famous algorithms taken apart. Each colour is one part: setups and their undos, or the two halves of a commutator. Tap a part to play the algorithm up to the end of it.',
   share: 'Copy a short summary of today to paste anywhere. It shows times and move counts, never the solution.',
 } as const
 

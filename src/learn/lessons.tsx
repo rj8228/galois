@@ -1,7 +1,7 @@
-import { kpuzzle } from '../analysis/kpuzzle.ts'
+import { playWithFocus } from '../cube/focus.ts'
 import { invertMove } from '../cube/notation.ts'
-import { highlight, playFast, playSequence, reset } from '../cube/state.ts'
-import { type Analysis, affectedPieces, analyse, highlightMask } from '../engine/analysis.ts'
+import { playFast, playSequence, reset } from '../cube/state.ts'
+import type { Analysis } from '../engine/analysis.ts'
 import type { OrbitName } from '../engine/pieces.ts'
 import { TeX } from './TeX.tsx'
 import type { Lesson, StepContext } from './types.ts'
@@ -30,13 +30,6 @@ const orbit = (a: Analysis | null, name: OrbitName) => a?.orbits.find((o) => o.o
 function cornerCycle(a: Analysis | null) {
   const c = orbit(a, 'CORNERS')
   return c?.cycles.length === 1 && c.twistedInPlace.length === 0 ? c.cycles[0].positions.map((p) => c.names[p]) : null
-}
-/** Play a sequence from solved with focus on the pieces it moves. */
-function playWithFocus(sequence: string) {
-  reset()
-  const kp = kpuzzle.value
-  if (kp) highlight.value = highlightMask(affectedPieces(analyse(kp, sequence)))
-  playSequence(sequence.split(' '))
 }
 
 const CORNER_3_CYCLE = "R U R' D R U' R' D'"

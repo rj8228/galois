@@ -38,7 +38,7 @@ test('every section opens from the navigation', async ({ page }) => {
   for (const [name, text] of [
     ['Learn', 'Learn group theory by turning'],
     ['Daily', 'Solve of the Day #'],
-    ['Decode', 'Arrives in Phase 6'],
+    ['Decode', 'Famous algorithms, taken apart'],
     ['Home', 'Turn first, name it later'],
   ]) {
     await page.getByRole('navigation', { name: 'Sections' }).getByRole('link', { name }).click()

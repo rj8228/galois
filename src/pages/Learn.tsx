@@ -35,6 +35,13 @@ export function Learn() {
           )
         })}
       </ol>
+      <a class="tile" href={href('labs')}>
+        <span class="eyebrow">Labs</span>
+        <span class="tile-name">Put the lessons to work</span>
+        <span class="tile-text">
+          Open challenges checked live: order 1260, flipping two edges, the T-perm and more.
+        </span>
+      </a>
     </div>
   )
 }

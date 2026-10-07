@@ -6,8 +6,9 @@ import { installShortcuts } from '../cube/shortcuts.ts'
 import { BadgeToast } from '../daily/BadgeToast.tsx'
 import { Daily } from '../daily/Daily.tsx'
 import { About } from '../pages/About.tsx'
-import { ComingSoon } from '../pages/ComingSoon.tsx'
+import { Decode } from '../pages/Decode.tsx'
 import { Home } from '../pages/Home.tsx'
+import { Labs } from '../pages/Labs.tsx'
 import { Learn } from '../pages/Learn.tsx'
 import { Play } from '../pages/Play.tsx'
 import { SettingsPage } from '../pages/Settings.tsx'
@@ -27,16 +28,12 @@ function Panel() {
       return <About />
     case 'learn':
       return <Learn />
+    case 'labs':
+      return <Labs />
     case 'daily':
       return <Daily />
     case 'decode':
-      return (
-        <ComingSoon
-          title="Decode"
-          phase={6}
-          text="Famous algorithms taken apart: which part sets up, which part does the work, and which lesson explains why it works."
-        />
-      )
+      return <Decode />
   }
 }
 

@@ -2,7 +2,7 @@
 
 The finish line for Galois, gathered from the build plan, the focus plan, the discovery doc and `learnings/`. Galois is one of three focus projects (with Prayog and the DSA gym), so v1.0 is scoped to be finished, not to cover every idea. Anything not needed for v1.0 is in **Parked** at the bottom.
 
-**Now:** v0.4.1 live (Phases 0–4). **Next:** Phase 6.
+**Now:** v0.4.1 live (Phases 0–4); v0.4.2, v0.5.0 and v0.6.0 are in pull requests #8–#10. **Next:** lessons 9–12, then Phase 8.
 
 **Done means** a stranger can use it, and you can defend every design choice for 45 minutes.
 
@@ -22,10 +22,10 @@ The finish line for Galois, gathered from the build plan, the focus plan, the di
 
 ## 2. Phase 6: Labs and Decode (v0.6.0)
 
-- [ ] Labs: challenges checked live by the analysis engine, with hints that unlock one at a time (LB-1)
-- [ ] Commutator and conjugate detector (AN-6)
-- [ ] Algorithm breakdowns: Sune, T-perm, Niklas, beginner's corner algorithm, on a colour-coded setup/core/undo timeline (DC-1)
-- [ ] Exit: every breakdown links to the lesson that explains it
+- [x] Labs: challenges checked live by the analysis engine, with hints that unlock one at a time (LB-1)
+- [x] Commutator and conjugate detector (AN-6)
+- [x] Algorithm breakdowns: Sune, T-perm, Niklas, beginner's corner algorithm, on a colour-coded setup/core/undo timeline (DC-1)
+- [x] Exit: every breakdown links to the lesson that explains it
 
 ## 2b. Lessons 5–8 and the formal layer (v0.5.0)
 

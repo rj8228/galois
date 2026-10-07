@@ -1141,3 +1141,57 @@ input[type="range"] {
 .stage:has(.solve-timer) .stage-hint {
   visibility: hidden;
 }
+
+.shape {
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+/* Decode: an algorithm as a row of coloured parts. Colour is backed by each part's label. */
+.timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+.part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  border: 2px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.part-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.role-x,
+.role-setup {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.role-x-inverse,
+.role-undo {
+  border-color: var(--accent);
+  border-style: dashed;
+}
+.role-y {
+  border-color: var(--good);
+  background: color-mix(in srgb, var(--good) 18%, transparent);
+}
+.role-y-inverse {
+  border-color: var(--good);
+  border-style: dashed;
+}
+.related {
+  color: var(--muted);
+}
