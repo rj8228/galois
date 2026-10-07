@@ -90,5 +90,5 @@ Both checks were done locally with the real builds, served from the same address
 
 ## Follow-ups
 
-- [ ] Add an automated upgrade test: serve build A, let its worker take control, swap in build B, and assert the page reaches B within one reload.
-- [ ] Show a small "Updated to vX.Y" note after an automatic reload, so the change is visible rather than surprising.
+- [x] Add an automated upgrade test (`tests/e2e/upgrade.spec.ts`): serve build A, let its worker take control, swap in build B, and assert the page reaches B within one reload.
+- [x] Show a small "Updated to vX.Y" note after an automatic reload, so the change is visible rather than surprising.

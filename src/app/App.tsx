@@ -13,6 +13,7 @@ import { Play } from '../pages/Play.tsx'
 import { SettingsPage } from '../pages/Settings.tsx'
 import { Nav } from './Nav.tsx'
 import { href, route, routeParam } from './router.ts'
+import { UpdateToast } from './UpdateToast.tsx'
 
 function Panel() {
   switch (route.value) {
@@ -83,6 +84,7 @@ export function App() {
         </section>
       </main>
       <BadgeToast />
+      <UpdateToast />
     </div>
   )
 }
