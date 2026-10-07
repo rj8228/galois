@@ -93,9 +93,14 @@ test('the app says when it has updated itself', async ({ page }) => {
       sessionStorage.setItem('seeded', '1')
     }
   })
+  // A fake clock holds the note on screen however slowly the page loads; it hides after 6 s.
+  await page.clock.install()
   await page.goto('./')
-  await expect(page.getByRole('status').filter({ hasText: /^Updated to v\d/ })).toBeVisible()
+  const note = page.getByRole('status').filter({ hasText: /^Updated to v\d/ })
+  await expect(note).toBeVisible()
   await expect(page.getByRole('link', { name: "What's new" })).toHaveAttribute('href', /releases\/tag\/v\d/)
+  await page.clock.runFor(7000)
+  await expect(note).toBeHidden()
 
   // The next visit on the same version says nothing.
   await page.reload()
