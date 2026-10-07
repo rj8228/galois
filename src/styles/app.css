@@ -932,6 +932,21 @@ input[type="range"] {
 .formal p {
   margin-top: 6px;
 }
+/* Wide formulas scroll on their own instead of widening the page. */
+.formal {
+  min-width: 0;
+  max-width: 100%;
+}
+.formal .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+.tex-fallback {
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
 .lesson-nav {
   display: flex;
   align-items: center;

@@ -19,7 +19,7 @@ Galois is a free web app for phone, tablet and laptop. You turn a 3D cube, notic
 | 2 | Analysis engine | v0.2.0 |
 | 3 | First lessons (soft launch) | v0.3.0 |
 | 4 | Solve of the Day, on the device | v0.4.0 |
-| 5 | Competition backend | v0.5.0 |
+| 5 | Lessons 5–8 and the formal layer (the competition backend is deferred) | v0.5.0 |
 | 6 | Labs and algorithm breakdowns | v0.6.0 |
 | 7 | Full lesson path, formal layer, ebook unlock | v0.7.0 |
 | 8 | God's number | v1.0.0 |

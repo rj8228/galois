@@ -1,7 +1,9 @@
 import { kpuzzle } from '../analysis/kpuzzle.ts'
 import { invertMove } from '../cube/notation.ts'
 import { highlight, playFast, playSequence, reset } from '../cube/state.ts'
-import { affectedPieces, analyse, highlightMask } from '../engine/analysis.ts'
+import { type Analysis, affectedPieces, analyse, highlightMask } from '../engine/analysis.ts'
+import type { OrbitName } from '../engine/pieces.ts'
+import { TeX } from './TeX.tsx'
 import type { Lesson, StepContext } from './types.ts'
 
 const face = (move: string) => move[0]
@@ -20,6 +22,25 @@ function isCommutatorShape(ctx: StepContext, first?: string) {
 }
 
 const repeat = (moves: string[], times: number) => Array.from({ length: times }, () => moves).flat()
+
+/** How many pieces a sequence moves or turns, over corners, edges and centres. */
+const totalAffected = (a: Analysis | null) => a?.orbits.reduce((n, o) => n + o.affected, 0) ?? 0
+const orbit = (a: Analysis | null, name: OrbitName) => a?.orbits.find((o) => o.orbit === name)
+/** Names of the corners in a sequence's only corner cycle, when corners form exactly one cycle. */
+function cornerCycle(a: Analysis | null) {
+  const c = orbit(a, 'CORNERS')
+  return c?.cycles.length === 1 && c.twistedInPlace.length === 0 ? c.cycles[0].positions.map((p) => c.names[p]) : null
+}
+/** Play a sequence from solved with focus on the pieces it moves. */
+function playWithFocus(sequence: string) {
+  reset()
+  const kp = kpuzzle.value
+  if (kp) highlight.value = highlightMask(affectedPieces(analyse(kp, sequence)))
+  playSequence(sequence.split(' '))
+}
+
+const CORNER_3_CYCLE = "R U R' D R U' R' D'"
+const TWO_TWISTS = "R' D' R D R' D' R D U D' R' D R D' R' D R U'"
 
 export const LESSONS: Lesson[] = [
   {
@@ -78,8 +99,9 @@ export const LESSONS: Lesson[] = [
         ),
         formal: (
           <p>
-            A group has an identity element <i>e</i>, and every element <i>g</i> has an inverse <i>g</i>⁻¹ with <i>g</i>{' '}
-            · <i>g</i>⁻¹ = <i>e</i>. On the cube: R · R′ = <i>e</i>, and R2 · R2 = <i>e</i>.
+            A group has an identity element <TeX>e</TeX>, and every element <TeX>g</TeX> has an inverse{' '}
+            <TeX>{'g^{-1}'}</TeX> with <TeX>{'g\\,g^{-1} = e'}</TeX>. On the cube: <TeX>{"R\\,R' = e"}</TeX>, and{' '}
+            <TeX>{'R2 \\cdot R2 = e'}</TeX>.
           </p>
         ),
       },
@@ -100,8 +122,8 @@ export const LESSONS: Lesson[] = [
         hint: 'Take off your shoes before your socks: undo the last move first. The inverse of R U is U′ R′.',
         formal: (
           <p>
-            The inverse of a product reverses the order: (<i>g</i>
-            <i>h</i>)⁻¹ = <i>h</i>⁻¹<i>g</i>⁻¹. This is sometimes called the socks-and-shoes rule.
+            The inverse of a product reverses the order: <TeX>{'(g\\,h)^{-1} = h^{-1}g^{-1}'}</TeX>. This is sometimes
+            called the socks-and-shoes rule.
           </p>
         ),
       },
@@ -157,8 +179,8 @@ export const LESSONS: Lesson[] = [
         ),
         formal: (
           <p>
-            The order of <i>g</i> is the smallest <i>n</i> ≥ 1 with <i>g</i>
-            <sup>n</sup> = <i>e</i>. In a finite group every element has finite order.
+            The order of <TeX>g</TeX> is the smallest <TeX>{'n \\ge 1'}</TeX> with <TeX>{'g^n = e'}</TeX>. In a finite
+            group every element has finite order.
           </p>
         ),
       },
@@ -249,11 +271,8 @@ export const LESSONS: Lesson[] = [
         ),
         formal: (
           <p>
-            In general <i>g</i>
-            <i>h</i> ≠ <i>h</i>
-            <i>g</i>. A group where <i>g</i>
-            <i>h</i> = <i>h</i>
-            <i>g</i> for every pair is called abelian; the cube group is non-abelian.
+            In general <TeX>{'g\\,h \\ne h\\,g'}</TeX>. A group where <TeX>{'g\\,h = h\\,g'}</TeX> for every pair is
+            called abelian; the cube group is non-abelian.
           </p>
         ),
       },
@@ -274,9 +293,8 @@ export const LESSONS: Lesson[] = [
         hint: 'Opposite faces never touch the same pieces.',
         formal: (
           <p>
-            The commutator [<i>g</i>, <i>h</i>] = <i>g</i>
-            <i>h</i>
-            <i>g</i>⁻¹<i>h</i>⁻¹ equals <i>e</i> exactly when <i>g</i> and <i>h</i> commute.
+            The commutator <TeX>{'[g, h] = g\\,h\\,g^{-1}h^{-1}'}</TeX> equals <TeX>e</TeX> exactly when <TeX>g</TeX>{' '}
+            and <TeX>h</TeX> commute.
           </p>
         ),
       },
@@ -309,12 +327,7 @@ export const LESSONS: Lesson[] = [
         actions: [
           {
             label: "Play R U R' U' with focus",
-            run: () => {
-              reset()
-              const kp = kpuzzle.value
-              if (kp) highlight.value = highlightMask(affectedPieces(analyse(kp, "R U R' U'")))
-              playSequence(['R', 'U', "R'", "U'"])
-            },
+            run: () => playWithFocus("R U R' U'"),
           },
         ],
         task: 'Play it with focus on.',
@@ -347,8 +360,8 @@ export const LESSONS: Lesson[] = [
         ),
         formal: (
           <p>
-            In cycle notation the edges of R U R′ U′ are (UR UB FR). The cube group is a subgroup of the permutations of
-            its 48 moving stickers.
+            In cycle notation the edges of R U R′ U′ are <TeX>{'(\\text{UR}\\;\\text{UB}\\;\\text{FR})'}</TeX>. The cube
+            group is a subgroup of the permutations of its 48 moving stickers.
           </p>
         ),
       },
@@ -378,6 +391,402 @@ export const LESSONS: Lesson[] = [
         },
         success: 'A single 5-cycle of corners.',
         hint: 'Two different faces, one turn each, is enough.',
+      },
+    ],
+  },
+  {
+    id: 'commutators',
+    number: 5,
+    title: 'Change only a few pieces',
+    concept: 'Commutators',
+    summary: 'X Y X′ Y′ only disturbs the pieces X and Y share. Keep the overlap small and you move just a few pieces.',
+    steps: [
+      {
+        kind: 'do',
+        title: 'Four moves, few pieces',
+        fromSolved: true,
+        body: <p>Play R U R′ U′ with focus on. Pieces it leaves alone are dimmed.</p>,
+        actions: [{ label: "Play R U R' U' with focus", run: () => playWithFocus("R U R' U'") }],
+        task: 'Play it with focus on.',
+        done: (c) => c.actions.size >= 1,
+      },
+      {
+        kind: 'notice',
+        title: 'How much of the cube moved?',
+        body: <p>A cube has 20 pieces that move: 8 corners and 12 edges. How many stayed bright?</p>,
+        choices: [
+          {
+            text: '7',
+            correct: true,
+            feedback: 'Yes: 4 corners and 3 edges. The other 13 are exactly where they were.',
+          },
+          { text: '12', correct: false, feedback: 'Fewer than that. Count the bright corners and edges separately.' },
+          { text: 'All 20', correct: false, feedback: 'Look again: most of the cube is dimmed.' },
+        ],
+      },
+      {
+        kind: 'name',
+        title: 'Commutators',
+        body: (
+          <>
+            <p>
+              A sequence of the shape X Y X′ Y′ is a <b>commutator</b>. You met it in lesson 3 as a test for commuting.
+            </p>
+            <p>
+              Here's why it moves so little. A piece that only X touches is put back by X′. A piece that only Y touches
+              is put back by Y′. Only pieces in the <b>overlap</b>, the ones both X and Y touch, can end up somewhere
+              new. R and U share just a few pieces, so R U R′ U′ moves just a few.
+            </p>
+          </>
+        ),
+        formal: (
+          <p>
+            The commutator of <TeX>g</TeX> and <TeX>h</TeX> is <TeX>{'[g, h] = g\\,h\\,g^{-1}h^{-1}'}</TeX>. If{' '}
+            <TeX>g</TeX> and <TeX>h</TeX> move disjoint sets of pieces they commute, and <TeX>{'[g, h] = e'}</TeX>. When
+            the overlap is small, <TeX>{'[g, h]'}</TeX> moves only a few pieces.
+          </p>
+        ),
+      },
+      {
+        kind: 'explore',
+        title: 'Shrink the overlap to one piece',
+        fromSolved: true,
+        load: CORNER_3_CYCLE,
+        analysis: true,
+        body: (
+          <>
+            <p>
+              X doesn't have to be one move. Take X = R U R′: on the bottom layer it changes just one spot, the
+              front-right corner. Take Y = D, which turns only the bottom layer. They overlap in one place.
+            </p>
+            <p>
+              So X Y X′ Y′ = R U R′ D R U′ R′ D′. Play it and check the panel: exactly 3 corners move, and nothing else.
+            </p>
+          </>
+        ),
+        actions: [{ label: 'Play it with focus', run: () => playWithFocus(CORNER_3_CYCLE) }],
+        formal: (
+          <p>
+            This is <TeX>{"[R\\,U\\,R', D]"}</TeX>, a 3-cycle of corners. 3-cycles are the building blocks: every even
+            permutation is a product of them.
+          </p>
+        ),
+      },
+      {
+        kind: 'prove',
+        title: 'Your own 3-piece sequence',
+        load: '',
+        analysis: true,
+        body: <p>Find a sequence that moves exactly 3 pieces, but not the same 3 corners as the one in Explore.</p>,
+        task: 'Exactly 3 pieces move, and they are not UFR, DRF and DFL.',
+        done: (c) => {
+          if (totalAffected(c.analysis) !== 3) return false
+          const cycle = cornerCycle(c.analysis)
+          return !(cycle && ['UFR', 'DRF', 'DFL'].every((n) => cycle.includes(n)))
+        },
+        success: 'Three pieces, and the rest of the cube untouched.',
+        hint: "Keep X = R U R' and change Y: try D' instead of D (and D instead of D' at the end).",
+      },
+    ],
+  },
+  {
+    id: 'conjugates',
+    number: 6,
+    title: 'Set up, do, undo',
+    concept: 'Conjugates',
+    summary: 'A B A′ does B somewhere else. That one trick aims every algorithm at the pieces you need.',
+    steps: [
+      {
+        kind: 'do',
+        title: 'The same trick, moved',
+        fromSolved: true,
+        body: <p>Watch the corner 3-cycle from lesson 5, then the same thing with U2 before and after it.</p>,
+        actions: [
+          { label: 'Show the 3-cycle', run: () => playWithFocus(CORNER_3_CYCLE) },
+          { label: 'Show U2, the 3-cycle, U2', run: () => playWithFocus(`U2 ${CORNER_3_CYCLE} U2`) },
+        ],
+        task: 'Watch both.',
+        done: (c) => c.actions.size >= 2,
+      },
+      {
+        kind: 'notice',
+        title: 'What changed?',
+        body: <p>Compare which pieces stayed bright each time.</p>,
+        choices: [
+          {
+            text: 'The same kind of change, on different pieces',
+            correct: true,
+            feedback: 'Right: still 3 corners in a loop, but a different 3.',
+          },
+          {
+            text: 'A completely different kind of change',
+            correct: false,
+            feedback: 'Count again: 3 corners both times.',
+          },
+          { text: 'Nothing changed', correct: false, feedback: 'Look at which top corner joins in the second time.' },
+        ],
+      },
+      {
+        kind: 'name',
+        title: 'Conjugates',
+        body: (
+          <>
+            <p>
+              A B A′ is a <b>conjugate</b>. A is the <b>setup</b>: it moves the pieces you care about to where B works.
+              B does its job there. A′ puts everything back, carrying B's effect along.
+            </p>
+            <p>So a conjugate is the same move done from a different place. Speedcubers do this all the time.</p>
+          </>
+        ),
+        formal: (
+          <>
+            <p>
+              The conjugate of <TeX>h</TeX> by <TeX>g</TeX> is <TeX>{'g\\,h\\,g^{-1}'}</TeX>. It relabels the pieces: if{' '}
+              <TeX>h</TeX> is the cycle <TeX>{'(a\\; b\\; c)'}</TeX>, then
+            </p>
+            <TeX block>{'g\\,(a\\; b\\; c)\\,g^{-1} = (g(a)\\; g(b)\\; g(c))'}</TeX>
+            <p>So conjugates always have the same cycle shape.</p>
+          </>
+        ),
+      },
+      {
+        kind: 'explore',
+        title: 'Try other setups',
+        fromSolved: true,
+        load: `U ${CORNER_3_CYCLE} U'`,
+        analysis: true,
+        body: (
+          <p>
+            Change the setup at both ends (U and U′ here) to anything you like, as long as the end undoes the start.
+            Watch the panel: the pieces change, the shape never does.
+          </p>
+        ),
+      },
+      {
+        kind: 'prove',
+        title: 'Aim it at UBL',
+        load: CORNER_3_CYCLE,
+        analysis: true,
+        body: (
+          <p>Add a setup so that the 3-cycle includes the top-back-left corner, UBL, and still moves nothing else.</p>
+        ),
+        task: 'A single 3-cycle of corners that includes UBL.',
+        done: (c) => totalAffected(c.analysis) === 3 && (cornerCycle(c.analysis)?.includes('UBL') ?? false),
+        success: 'Aimed: the same 3-cycle, now working on UBL.',
+        hint: 'Which turn of the top face brings UBL to the front-right? Put it first, and its inverse last.',
+      },
+    ],
+  },
+  {
+    id: 'parity',
+    number: 7,
+    title: "Why you can't swap two edges",
+    concept: 'Parity',
+    summary:
+      'Every quarter turn is odd for corners and odd for edges, so the two always match. A lone swap breaks that.',
+    steps: [
+      {
+        kind: 'do',
+        title: 'Count the swaps',
+        fromSolved: true,
+        load: 'R',
+        analysis: true,
+        body: (
+          <>
+            <p>Play R. Four corners move round in a loop, and four edges do too.</p>
+            <p>
+              A loop of 4 can be built from swaps: swap the first two, then the first and third, then the first and
+              fourth. That's 3 swaps.
+            </p>
+          </>
+        ),
+        task: 'Play R.',
+        done: (c) => c.history.includes('R'),
+      },
+      {
+        kind: 'notice',
+        title: 'Odd or even?',
+        body: <p>A quarter turn is one 4-loop of corners and one 4-loop of edges. Each takes 3 swaps.</p>,
+        choices: [
+          { text: 'Odd for corners and odd for edges', correct: true, feedback: 'Yes: 3 swaps each, and 3 is odd.' },
+          { text: 'Odd for corners, even for edges', correct: false, feedback: 'The edges also move in a 4-loop.' },
+          { text: 'Even for both', correct: false, feedback: '3 swaps is an odd number.' },
+        ],
+      },
+      {
+        kind: 'name',
+        title: 'Parity',
+        body: (
+          <>
+            <p>
+              A rearrangement is <b>even</b> if it can be made from an even number of swaps and <b>odd</b> otherwise. It
+              can never be both. This is its <b>parity</b>.
+            </p>
+            <p>
+              Every quarter turn flips the corner parity and the edge parity together. So after any sequence they always
+              match. Swapping just two edges would make edges odd and corners even: no sequence can do that.
+            </p>
+          </>
+        ),
+        formal: (
+          <>
+            <p>
+              The sign <TeX>{'\\operatorname{sgn}(\\sigma) = \\pm 1'}</TeX> of a permutation is <TeX>{'(-1)'}</TeX> to
+              the number of swaps, and{' '}
+              <TeX>{'\\operatorname{sgn}(\\sigma\\tau) = \\operatorname{sgn}(\\sigma)\\operatorname{sgn}(\\tau)'}</TeX>.
+              A 4-cycle has sign <TeX>{'-1'}</TeX>. Every face turn has sign <TeX>{'-1'}</TeX> on corners and on edges,
+              so for every cube position
+            </p>
+            <TeX block>
+              {'\\operatorname{sgn}(\\sigma_{\\text{corners}}) = \\operatorname{sgn}(\\sigma_{\\text{edges}})'}
+            </TeX>
+          </>
+        ),
+      },
+      {
+        kind: 'explore',
+        title: 'They always agree',
+        load: 'R U',
+        analysis: true,
+        body: (
+          <p>
+            Type any sequences you like and watch the parity in the panel's invariants. Corners and edges always agree.
+          </p>
+        ),
+      },
+      {
+        kind: 'prove',
+        title: 'The impossible cube',
+        load: '',
+        analysis: true,
+        body: (
+          <p>
+            A friend hands you a cube that is solved except for two edges swapped. Then find a sequence that makes the
+            corners odd.
+          </p>
+        ),
+        choices: [
+          {
+            text: 'It was taken apart and put back',
+            correct: true,
+            feedback: 'Yes. No sequence of turns can swap just two edges.',
+          },
+          {
+            text: 'They found a clever sequence',
+            correct: false,
+            feedback: "Two edges swapped means edges odd, corners even. Turns can't separate them.",
+          },
+        ],
+        task: 'The sequence box makes the corners odd.',
+        done: (c) => orbit(c.analysis, 'CORNERS')?.parity === 'odd',
+        success: 'Corners odd, and the edges are odd too. They always match.',
+        hint: 'One quarter turn is enough.',
+      },
+    ],
+  },
+  {
+    id: 'twists',
+    number: 8,
+    title: "Why you can't twist one corner",
+    concept: 'Invariants',
+    summary:
+      'Corner twists add up to zero, edge flips add up to zero, and parities match. Only 1 in 12 reassembled cubes can be solved.',
+    steps: [
+      {
+        kind: 'do',
+        title: 'Twist a corner',
+        fromSolved: true,
+        load: "R' D' R D R' D' R D",
+        body: (
+          <p>
+            Play R′ D′ R D twice. It's the beginner's way to turn a top corner in place. Watch the top-front-right
+            corner, then look at the bottom layer.
+          </p>
+        ),
+        task: "Play R' D' R D R' D' R D.",
+        done: (c) => c.history.length >= 8,
+      },
+      {
+        kind: 'notice',
+        title: 'What happened below?',
+        body: <p>The top corner turned in place. Look at the bottom corners.</p>,
+        choices: [
+          {
+            text: 'Some bottom corners twisted too',
+            correct: true,
+            feedback: 'Yes. The twist had to go somewhere: the bottom corners balance it.',
+          },
+          { text: 'The bottom stayed perfect', correct: false, feedback: 'Turn the cube over and look again.' },
+        ],
+      },
+      {
+        kind: 'name',
+        title: 'Invariants',
+        body: (
+          <>
+            <p>
+              Give every corner a twist of 0, 1 or 2 (in thirds of a turn). However you turn the cube, the twists always
+              add up to a multiple of 3. Edge flips (0 or 1) always add up to an even number. And from lesson 7, the
+              parities match.
+            </p>
+            <p>
+              A rule that no sequence can break is an <b>invariant</b>. There are three here, worth 3, 2 and 2 ways to
+              go wrong. So if you take a cube apart and put it back at random, only 1 time in 3 × 2 × 2 = 12 can it be
+              solved.
+            </p>
+          </>
+        ),
+        formal: (
+          <>
+            <p>
+              With corner twists <TeX>{'c_i'}</TeX>, edge flips <TeX>{'e_j'}</TeX> and permutations{' '}
+              <TeX>{'\\sigma_c, \\sigma_e'}</TeX>, every position satisfies
+            </p>
+            <TeX block>
+              {
+                '\\begin{gathered} \\textstyle\\sum c_i \\equiv 0 \\pmod 3 \\\\ \\textstyle\\sum e_j \\equiv 0 \\pmod 2 \\\\ \\operatorname{sgn}\\sigma_c = \\operatorname{sgn}\\sigma_e \\end{gathered}'
+              }
+            </TeX>
+            <p>Counting what's left gives the size of the cube group:</p>
+            <TeX block>
+              {'|G| = \\frac{8!\\cdot 3^8 \\cdot 12! \\cdot 2^{12}}{3 \\cdot 2 \\cdot 2} \\approx 4.3 \\times 10^{19}'}
+            </TeX>
+          </>
+        ),
+      },
+      {
+        kind: 'explore',
+        title: 'Two twists, nothing else',
+        fromSolved: true,
+        load: TWO_TWISTS,
+        analysis: true,
+        body: (
+          <p>
+            Twist one corner, turn the top with U, then untwist the next corner with the reverse, D′ R′ D R twice. The
+            bottom layer repairs itself. Play it: one corner turns each way, and the panel's twist total stays 0.
+          </p>
+        ),
+        formal: (
+          <p>
+            A commutator again: <TeX>{"[\\,(R'D'RD)^2,\\; U\\,]"}</TeX>. Its two parts overlap in a single corner
+            position, so only two corners change.
+          </p>
+        ),
+      },
+      {
+        kind: 'prove',
+        title: 'Twist a different pair',
+        load: TWO_TWISTS,
+        analysis: true,
+        body: <p>Change the sequence so it twists UFR and ULF, the two front corners on top, and nothing else.</p>,
+        task: 'Only UFR and ULF are twisted in place.',
+        done: (c) => {
+          const corners = orbit(c.analysis, 'CORNERS')
+          const twisted = corners?.twistedInPlace.map((t) => corners.names[t.position]).sort()
+          return totalAffected(c.analysis) === 2 && twisted?.join(' ') === 'UFR ULF'
+        },
+        success: 'Two front corners twisted, the rest of the cube untouched.',
+        hint: "The U in the middle chooses the second corner. Try U' there, and U at the end.",
       },
     ],
   },
