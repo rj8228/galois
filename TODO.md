@@ -2,7 +2,7 @@
 
 The finish line for Galois, gathered from the build plan, the focus plan, the discovery doc and `learnings/`. Galois is one of three focus projects (with Prayog and the DSA gym), so v1.0 is scoped to be finished, not to cover every idea. Anything not needed for v1.0 is in **Parked** at the bottom.
 
-**Now:** v0.4.1 live (Phases 0–4); v0.4.2, v0.5.0, v0.6.0 and v0.6.1 are in pull requests #8–#11. **Next:** the rest of Phase 7 (beginner's method, Solve of the Day archive), then Phase 8.
+**Now:** v0.6.2 live (Phases 0–4 and 6, lessons 1–12, Labs, Decode). **Next (decided Oct 8):** A1 (focus mode from any position), then Phase 8 after a design discussion, then the wrap-up. The rest of Phase 7 is parked.
 
 **Done means** a stranger can use it, and you can defend every design choice for 45 minutes.
 
@@ -18,7 +18,7 @@ The finish line for Galois, gathered from the build plan, the focus plan, the di
 - [x] Automated upgrade test: serve build A, let its service worker take control, swap in build B, assert the page reaches B within one reload (from `learnings/`)
 - [x] Show "Updated to vX.Y" after an automatic reload (from `learnings/`)
 - [x] Add Lighthouse CI to `ci.yml`, with mobile performance and accessibility at 90+ (NF-11)
-- [ ] Let focus mode and the piece tracker work from any starting state, not only solved
+- [ ] **A1.** Let focus mode and the piece tracker work from any starting state, not only solved
 
 ## 2. Phase 6: Labs and Decode (v0.6.0)
 
@@ -40,11 +40,11 @@ Phase 5 (competition backend) is deferred, so v0.5.0 carries these lessons.
 The licence-code unlock is dropped because everything is free.
 
 - [x] Lessons 9–12: subgroups, cosets and Lagrange, where 43 quintillion comes from, God's number (LP-3) (v0.6.1)
-- [ ] Beginner's method walkthrough (DC-2, beginner part only)
-- [ ] Solve of the Day archive: play any past day, unranked (SD-12)
 - [ ] Exit: a non-maths friend finishes lessons 1–3 on a phone without help
 
 ## 4. Phase 8: God's number and solver bots (v1.0.0)
+
+Discuss before building: which bots ship, pattern database size against phone memory and load size, how the search view looks, and whether the comparison feeds the later arena shared with Prayog.
 
 Phase 8 and the solver-bot section of the discovery doc are combined here, so one piece of work covers the God's number chapter and the focus-plan bot requirement.
 
@@ -73,6 +73,7 @@ Phase 8 and the solver-bot section of the discovery doc are combined here, so on
 
 ## Parked (after v1.0, or never)
 
+- Rest of Phase 7: beginner's method walkthrough (DC-2) and Solve of the Day archive (SD-12)
 - Offline arena round on the shared service with Prayog. It needs Prayog's arena service first; this is the one focus-plan item that depends on another project, so it's v1.1.
 - Phase 5 online features: sign-in, leaderboards, verified Speed times, true optimal from a nightly job
 - Section 6, algebra in code: Terraform, Git and CRDTs checked against the group axioms (a good v1.1 chapter)
