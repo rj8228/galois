@@ -161,7 +161,7 @@ p {
 .tabs {
   grid-area: tabs;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border-top: var(--border) solid var(--line);
   background: var(--bg);
   padding-bottom: env(safe-area-inset-bottom, 0px);

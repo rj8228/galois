@@ -5,8 +5,7 @@ test('a lab reveals hints one at a time and checks the answer live', async ({ pa
   await openApp(page, '#/labs')
   await expect(page.locator('.lesson-list li')).toHaveCount(6)
   await page.getByRole('link', { name: /Flip two edges/ }).click()
-  // Labs sit under Learn in the navigation.
-  await expect(page.getByRole('navigation', { name: 'Sections' }).getByRole('link', { name: 'Learn' })).toHaveAttribute(
+  await expect(page.getByRole('navigation', { name: 'Sections' }).getByRole('link', { name: 'Labs' })).toHaveAttribute(
     'aria-current',
     'page',
   )

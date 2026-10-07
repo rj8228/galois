@@ -37,6 +37,7 @@ test('every section opens from the navigation', async ({ page }) => {
   await openApp(page)
   for (const [name, text] of [
     ['Learn', 'Learn group theory by turning'],
+    ['Labs', 'Challenges with no single answer'],
     ['Daily', 'Solve of the Day #'],
     ['Decode', 'Famous algorithms, taken apart'],
     ['Home', 'Turn first, name it later'],
