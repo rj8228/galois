@@ -7,6 +7,18 @@ export const BUILD = `${__BUILD_SHA__}, built ${__BUILD_DATE__}`
 /** What "Update now" in Settings is doing. */
 export const updateStatus = signal<'idle' | 'checking' | 'reloading'>('idle')
 
+// An automatic update reloads the page without asking, so say so afterwards rather than surprise.
+// The first visit sets the version silently; a later visit on a different version shows the note.
+const VERSION_KEY = 'galois.version'
+export const updatedTo = signal<string | null>(null)
+try {
+  const last = localStorage.getItem(VERSION_KEY)
+  if (last && last !== APP_VERSION) updatedTo.value = APP_VERSION
+  localStorage.setItem(VERSION_KEY, APP_VERSION)
+} catch {
+  // Storage blocked (private mode): skip the note.
+}
+
 let registration: ServiceWorkerRegistration | undefined
 
 // Registers the offline service worker. In autoUpdate mode a newer version activates as soon as it

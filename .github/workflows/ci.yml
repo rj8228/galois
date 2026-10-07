@@ -21,9 +21,13 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run e2e
+      # Mobile Lighthouse on the built site: performance and accessibility at 90+ (NF-11).
+      - run: npx --yes @lhci/cli@0.15.1 autorun
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
-          path: playwright-report
+          path: |
+            playwright-report
+            lighthouse-report
           retention-days: 7

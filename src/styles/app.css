@@ -1115,6 +1115,9 @@ input[type="range"] {
   color: var(--bg);
   font-size: 0.9rem;
 }
+.toast a {
+  color: inherit;
+}
 @media (min-width: 900px) {
   .toast {
     bottom: 24px;
