@@ -1,18 +1,6 @@
 import { href } from '../app/router.ts'
+import { SECTIONS } from '../app/sections.ts'
 import { sequenceText } from '../cube/SequenceBar.tsx'
-
-const SECTIONS = [
-  { to: 'play', name: 'Play', text: 'Turn the cube freely, play sequences, step through them.', status: 'Open' },
-  { to: 'learn', name: 'Learn', text: 'Group theory, one thing you do on the cube at a time.', status: 'Open' },
-  { to: 'labs', name: 'Labs', text: 'Open challenges, checked live as you type.', status: 'Open' },
-  {
-    to: 'daily',
-    name: 'Solve of the Day',
-    text: 'One scramble for everyone. Speed and fewest moves.',
-    status: 'Open',
-  },
-  { to: 'decode', name: 'Decode', text: 'Famous algorithms taken apart, piece by piece.', status: 'Open' },
-] as const
 
 export function Home() {
   return (
@@ -34,11 +22,10 @@ export function Home() {
       </div>
       <ul class="tiles">
         {SECTIONS.map((s) => (
-          <li key={s.to}>
-            <a class="tile" href={href(s.to)}>
-              <span class="tile-name">{s.name}</span>
+          <li key={s.id}>
+            <a class="tile" href={href(s.id)}>
+              <span class="tile-name">{s.label}</span>
               <span class="tile-text">{s.text}</span>
-              <span class={`chip ${s.status === 'Open' ? 'chip-on' : ''}`}>{s.status}</span>
             </a>
           </li>
         ))}
