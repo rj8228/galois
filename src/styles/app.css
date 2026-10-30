@@ -161,7 +161,7 @@ p {
 .tabs {
   grid-area: tabs;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   border-top: var(--border) solid var(--line);
   background: var(--bg);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -1194,4 +1194,278 @@ input[type="range"] {
 }
 .related {
   color: var(--muted);
+}
+
+/* Solver: a 2×2, rings of positions by distance, and a search you can watch */
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/* Holds the page's visually hidden labels, so they never stretch the document past the screen. */
+.solver-page {
+  position: relative;
+}
+.app[data-route="solver"] .controls:empty {
+  display: none;
+}
+.field {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.field-ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.field-dot {
+  fill: var(--accent);
+  opacity: 0.7;
+}
+.field-hard {
+  fill: var(--ink);
+  opacity: 1;
+}
+.field-label {
+  font: 600 11px / 1 var(--mono);
+  fill: var(--muted);
+  paint-order: stroke;
+  stroke: var(--stage);
+  stroke-width: 4px;
+}
+.facts,
+.steps-explained {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+.stat-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.stat-grid dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.stat-grid dd {
+  margin: 2px 0 0;
+  font: 600 1.15rem / 1.2 var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.work {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.work li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  font-size: 0.85rem;
+}
+.work-num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.work-bar {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.work-note {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.link-btn.inline {
+  display: inline;
+  padding: 0;
+  font-size: inherit;
+}
+.search-card {
+  scroll-margin-top: 12px;
+}
+@media (max-width: 899px) {
+  /* On phones the cube is sticky at the top; keep the search card clear of it. */
+  .search-card {
+    scroll-margin-top: calc(max(40svh, 240px) + 12px);
+  }
+}
+.solve-btn {
+  width: 100%;
+  font-weight: 600;
+}
+.seg.ring-pick button {
+  min-width: 40px;
+}
+.search-view {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.rings {
+  flex: 1 1 220px;
+  max-width: 300px;
+  height: auto;
+}
+.ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.ring-heat {
+  fill: none;
+  stroke: var(--accent);
+  transition:
+    opacity 0.25s ease,
+    stroke-width 0.25s ease;
+}
+.ring-floor {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+  transition: r 0.45s ease;
+}
+.ring-solved {
+  fill: var(--accent);
+}
+.ring-label {
+  font: 500 8px / 1 var(--mono);
+  fill: var(--muted);
+}
+.ring-dot {
+  transition: transform 0.45s ease;
+}
+.ring-dot circle {
+  fill: var(--ink);
+  stroke: var(--surface);
+  stroke-width: 3;
+}
+.ring-table {
+  border-collapse: collapse;
+  font: 0.8rem / 1.3 var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.ring-table th {
+  font-weight: 500;
+  color: var(--muted);
+  text-align: right;
+  padding: 0 0 4px 12px;
+}
+.ring-table td {
+  text-align: right;
+  padding: 1px 0 1px 12px;
+  color: var(--muted);
+}
+.ring-table th:first-child,
+.ring-table td:first-child {
+  text-align: left;
+  padding-left: 0;
+}
+.ring-table .ring-floor-row td {
+  color: var(--accent);
+}
+.ring-table .ring-here td {
+  color: var(--ink);
+  font-weight: 600;
+}
+.round-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+.round-log li {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  gap: 8px;
+}
+.round-log .round-found {
+  color: var(--accent);
+}
+.round-log .round-live {
+  color: var(--muted);
+}
+.result {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.result-note {
+  display: block;
+  margin-top: 2px;
+}
+.solution-moves {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.solution-moves li {
+  font: 600 0.95rem / 1 var(--mono);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  min-width: 2.6em;
+  text-align: center;
+}
+.solution-moves .done {
+  opacity: 0.45;
+}
+.solution-moves .next {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.compare {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.compare li {
+  display: grid;
+  grid-template-columns: 4.5em minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+.compare-name {
+  font-weight: 600;
+}
+.compare-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line);
+}
+.compare-on .compare-bar {
+  background: var(--accent);
+}
+.compare-text {
+  grid-column: 2;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring-heat,
+  .ring-floor,
+  .ring-dot {
+    transition: none;
+  }
 }

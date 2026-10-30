@@ -1,9 +1,14 @@
 import { useEffect, useRef } from 'preact/hooks'
+import { route } from '../app/router.ts'
 import { SolveTimer } from '../daily/SolveTimer.tsx'
 import { HelpHeading } from '../help/Help.tsx'
+import { SolverStage } from '../solver/SolverStage.tsx'
 import { createPlayer, history, locked, newScramble, notice, player, reset, undo } from './state.ts'
 
-/** The stage: the shared cube plus its quick actions. Mounted once, outside the routed panel. */
+/**
+ * The stage: the shared cube plus its quick actions. Mounted once, outside the routed panel.
+ * The Solver shows its own 2×2 here; the 3×3 stays mounted underneath, hidden, with its state intact.
+ */
 export function CubeStage() {
   const host = useRef<HTMLDivElement>(null)
 
@@ -14,6 +19,14 @@ export function CubeStage() {
   }, [])
 
   const ready = player.value !== null
+  if (route.value === 'solver') {
+    return (
+      <section class="stage" aria-label="2×2 cube">
+        <div ref={host} class="stage-player" hidden />
+        <SolverStage />
+      </section>
+    )
+  }
   return (
     <section class="stage" aria-label="Cube">
       <div ref={host} class="stage-player" />

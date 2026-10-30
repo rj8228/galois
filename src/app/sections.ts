@@ -32,4 +32,10 @@ export const SECTIONS: { id: Route; label: string; text: string; icon: string }[
     text: 'Famous algorithms taken apart, piece by piece.',
     icon: 'M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12M15 15l5 5',
   },
+  {
+    id: 'solver',
+    label: 'Solver',
+    text: 'Pick any 2×2 position and watch a solver prove the shortest solution.',
+    icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 1 0 0-9M12 11.2a.8.8 0 1 0 0 1.6a.8.8 0 1 0 0-1.6',
+  },
 ]
