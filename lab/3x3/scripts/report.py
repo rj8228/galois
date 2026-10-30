@@ -229,6 +229,70 @@ def random_state_section():
     return ("### Capped runs, estimated\n\n" + "\n".join(out) + "\n") if out else ""
 
 
+def random_state_detail():
+    d = load("bench-random-state.json")
+    if not d:
+        return ""
+    runs = {spec: r for spec, r in d["floors"].items() if r.get("solves")}
+    if not runs:
+        return ""
+    L = optimal_lengths()
+    uncapped = [r for r in runs.values() if not r["summary"]["dnf"]]
+    head = ["#", "Optimal"] + [f"`{spec}`" for spec in runs]
+    rows = []
+    n = max(len(r["solves"]) for r in runs.values())
+    for i in range(n):
+        row = [i, L.get(i, "–")]
+        for spec, r in runs.items():
+            s = next((x for x in r["solves"] if x["index"] == i), None)
+            if not s:
+                row.append("")
+            elif not s["dnf"]:
+                row.append(f"{num(s['nodes'])} / {secs(s['seconds'])}")
+            else:
+                ref = next((x for u in uncapped for x in u["solves"] if x["index"] == i), None)
+                est = estimate_solve(s, L.get(i), ref)
+                rate = r["summary"]["nodes_per_second"] or s["nodes"] / s["seconds"]
+                row.append(f"est. {num(est)} / {secs(est / rate)}" if est else "DNF")
+        rows.append(row)
+    return ("### Random-state positions, one by one\n\nNodes / time on one thread. *est.* marks a capped solve, "
+            "estimated as described under *Capped runs*.\n\n" + table(head, rows) + "\n")
+
+
+def proof_section():
+    """How deep each floor set proves in a time budget: the median time to finish depth bound b (so to
+    prove that no solution shorter than b + 1 exists), over the random-state positions."""
+    d = load("bench-random-state.json")
+    if not d:
+        return ""
+    rows = []
+    bounds = list(range(13, 19))
+    for spec, r in d["floors"].items():
+        if not r.get("solves"):
+            continue
+        rate = r["summary"]["nodes_per_second"] or (
+            sum(x["nodes"] for x in r["solves"]) / sum(x["seconds"] for x in r["solves"]))
+        cells = [f"`{spec}`"]
+        for b in bounds:
+            cum = []
+            for s in r["solves"]:
+                per = {int(k): v for k, v in s["nodes_per_bound"].items()}
+                finished = [k for k in per if k < (s["length"] if not s["dnf"] else max(per))]
+                if b in finished:
+                    cum.append(sum(v for k, v in per.items() if k <= b))
+            if len(cum) * 2 > len(r["solves"]):
+                cum.sort()
+                cells.append(secs(cum[len(cum) // 2] / rate))
+            else:
+                cells.append("–")
+        rows.append(cells)
+    return ("### How deep a floor set can prove, by time\n\nMedian time on one thread, over the random-state "
+            "positions, to finish depth bound *b*: after that the search has proved that no solution shorter than "
+            "*b* + 1 exists. This is the number for a search view that runs until a time limit. A dash means fewer "
+            "than half the positions finished that bound.\n\n"
+            + table(["Floor set"] + [f"b = {b}" for b in bounds], rows) + "\n")
+
+
 def superflip_section():
     d = load("superflip.json")
     if not d:
@@ -264,7 +328,7 @@ def main():
     runs = all_runs()
     parts = [machine_section(), builds_section(), verify_section(), overview_section(runs)]
     parts += [detail_section(runs, s) for s in SETS]
-    parts += [random_state_section(), superflip_section()]
+    parts += [random_state_section(), random_state_detail(), proof_section(), superflip_section()]
     body = "\n".join(p for p in parts if p)
     f = LAB / "FINDINGS.md"
     text = f.read_text()

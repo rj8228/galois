@@ -40,14 +40,14 @@ FLOORS = [
     ("Kociemba coordinates", "P1"),
     ("Kociemba coordinates", "P1x3"),
     ("Kociemba coordinates", "P1x3i"),
-    ("Corners", "C8"),
+    ("Corners", "C8", "moves-14"),
     ("Corners", "C8s"),
     ("Corners", "C8s+Ktsx3+Kfsx3+Ktfx3"),
     ("Corners + 6 edges", "C8s+E6x2"),
     ("Corners + 6 edges", "C8s+E6x8"),
-    ("Corners + 6 edges", "C8s+E6x24"),
-    ("Corners + 6 edges", "C8s+E6x24i"),
-    ("Corners + 6 edges", "C8s+E6x24+Ktsx3+Kfsx3+Ktfx3"),
+    ("Corners + 6 edges", "C8s+E6x24", "moves-14"),
+    ("Corners + 6 edges", "C8s+E6x24i", "moves-14"),
+    ("Corners + 6 edges", "C8s+E6x24+Ktsx3+Kfsx3+Ktfx3", "moves-14"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2+Ktsx3@2+Kfsx3@2+Ktfx3@2"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2+Ktsx3i+Kfsx3i+Ktfx3i"),
@@ -60,6 +60,10 @@ FLOORS = [
     ("Desktop", "C8s+E6x24i+E7x8i+P1x3i"),
     ("Desktop", "C8s@2+E7x24@2+P1x3@2"),
 ]
+
+# A third field stops a floor set after that scramble set: C8 has the same values as C8s, and the 4-bit
+# twins of the 2-bit phone sets search the same nodes, so the short sets are enough to compare speed.
+FLOORS = [f if len(f) == 3 else (*f, None) for f in FLOORS]
 
 SETS = ["moves-12", "moves-14", "moves-16", "random-state"]
 
@@ -74,6 +78,7 @@ BRANCHING = 13.35
 # depths they completed.
 RANDOM_STATE_TOP = {"desktop": 2, "phone": 1}
 PHONE_RANDOM_STATE_NODES = 750_000_000
+DESKTOP_RANDOM_STATE_NODES = 30_000_000_000
 
 
 def log(*a):
@@ -117,7 +122,7 @@ def cube3(args, env=None):
 
 def tokens():
     out = []
-    for _, spec in FLOORS:
+    for _, spec, _ in FLOORS:
         for t in spec.split("+"):
             if t not in out:
                 out.append(t)
@@ -146,7 +151,7 @@ def cmd_verify():
 
 
 def cmd_stats():
-    data = json.loads(cube3(["stats", *tokens(), *[spec for _, spec in FLOORS]]))
+    data = json.loads(cube3(["stats", *tokens(), *[spec for _, spec, _ in FLOORS]]))
     save("stats.json", {"machine": machine(), "samples": 1_000_000, "floors": data})
     log("stats: done")
 
@@ -259,20 +264,23 @@ def candidates(kind, top):
 
 
 def cmd_bench():
-    group_of = dict((spec, g) for g, spec in FLOORS)
+    group_of = dict((spec, g) for g, spec, _ in FLOORS)
     for set_name in SETS[:3]:
-        for group, spec in FLOORS:
+        for group, spec, last in FLOORS:
+            if last and SETS.index(set_name) > SETS.index(last):
+                continue
             bench_one(spec, group, set_name)
     # Random-state positions: all 20 for the best desktop and phone sets; the rest by estimate.
     desktop = candidates("desktop", RANDOM_STATE_TOP["desktop"])
     phone = candidates("phone", RANDOM_STATE_TOP["phone"])
     log("random-state with", desktop, phone)
     for spec in desktop:
-        bench_one(spec, group_of[spec], "random-state", force=True)
+        bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=DESKTOP_RANDOM_STATE_NODES)
     for spec in phone:
         bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=PHONE_RANDOM_STATE_NODES)
-    for group, spec in FLOORS:
-        bench_one(spec, group, "random-state")
+    for group, spec, last in FLOORS:
+        if not last:
+            bench_one(spec, group, "random-state")
 
 
 def cmd_superflip():
