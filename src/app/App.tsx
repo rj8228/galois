@@ -12,6 +12,8 @@ import { Labs } from '../pages/Labs.tsx'
 import { Learn } from '../pages/Learn.tsx'
 import { Play } from '../pages/Play.tsx'
 import { SettingsPage } from '../pages/Settings.tsx'
+import { Solver } from '../pages/Solver.tsx'
+import { SolverPad } from '../solver/SolverPad.tsx'
 import { Nav } from './Nav.tsx'
 import { href, route, routeParam } from './router.ts'
 import { UpdateToast } from './UpdateToast.tsx'
@@ -34,6 +36,8 @@ function Panel() {
       return <Daily />
     case 'decode':
       return <Decode />
+    case 'solver':
+      return <Solver />
   }
 }
 
@@ -73,8 +77,14 @@ export function App() {
       <main class="body">
         <CubeStage />
         <section class="controls" aria-label="Moves">
-          <MovePad />
-          <SequenceBar />
+          {route.value === 'solver' ? (
+            <SolverPad />
+          ) : (
+            <>
+              <MovePad />
+              <SequenceBar />
+            </>
+          )}
         </section>
         <section class="panel" id="panel" tabIndex={-1}>
           <Panel />

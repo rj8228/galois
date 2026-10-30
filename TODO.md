@@ -48,6 +48,7 @@ Discuss before building: which bots ship, pattern database size against phone me
 
 Phase 8 and the solver-bot section of the discovery doc are combined here, so one piece of work covers the God's number chapter and the focus-plan bot requirement.
 
+- [x] 2×2 solver you can watch (Solver section): pick any position, floors from smaller puzzles (weak, medium, strong), IDA* that proves the answer round by round, rings of all 3,674,160 positions, solution played on a 2×2. Unit tests check every floor on every position and the solutions against cubing.js
 - [ ] Bot interface: cube state in, move list out
 - [ ] Layer-by-layer bot (rule-based)
 - [ ] Kociemba two-phase bot (wrap the cubing.js solver)
