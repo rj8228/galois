@@ -1,4 +1,4 @@
-import type { FloorName, SolveReport } from './engine.ts'
+import type { Comparison, FloorName, SolveReport } from './engine.ts'
 import type { Reply, Request } from './protocol.ts'
 
 type Pending = { resolve: (r: Reply) => void; reject: (e: Error) => void }
@@ -8,7 +8,7 @@ let worker: Worker | null = null
 let nextId = 1
 const pending = new Map<number, Pending>()
 
-/** The solver runs in its own thread, so the cube keeps animating while it builds tables and searches. */
+/** The solver runs in its own thread, so the cube keeps animating while it searches. */
 function getWorker(): Worker {
   if (worker) return worker
   worker = new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' })
@@ -35,21 +35,24 @@ function call(body: Body): Promise<Reply> {
   })
 }
 
-/** Builds the tables (about a second) and returns how many positions lie on each ring. */
-export async function initSolver(): Promise<{ rings: number[]; ms: number }> {
+/** Builds the move tables and the two small floors (a few milliseconds). */
+export async function initSolver(): Promise<number> {
   const r = await call({ type: 'init' })
   if (r.type !== 'ready') throw new Error('Unexpected reply')
-  return { rings: r.rings, ms: r.ms }
+  return r.ms
 }
 
-export async function solveRemote(moves: string[], floor: FloorName): Promise<SolveReport> {
+export async function solveRemote(
+  moves: string[],
+  floor: FloorName,
+): Promise<{ report: SolveReport; buildMs: number }> {
   const r = await call({ type: 'solve', moves, floor })
   if (r.type !== 'solved') throw new Error('Unexpected reply')
-  return r.report
+  return { report: r.report, buildMs: r.buildMs }
 }
 
-export async function randomRemote(ring?: number): Promise<string[]> {
-  const r = await call({ type: 'random', ring })
-  if (r.type !== 'random') throw new Error('Unexpected reply')
-  return r.moves
+export async function compareRemote(moves: string[]): Promise<Comparison> {
+  const r = await call({ type: 'compare', moves })
+  if (r.type !== 'compared') throw new Error('Unexpected reply')
+  return r.comparison
 }

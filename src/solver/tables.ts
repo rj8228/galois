@@ -18,14 +18,11 @@ export type Tables = {
   loc7: Uint8Array
   /** The twist in each movable slot, per twist pattern (NT × 7). */
   twist7: Uint8Array
-  /** The truth: exact distance of every position. Used only to label rings, never by the solver. */
-  dist: Int8Array
-  /** How many positions lie at each distance. */
-  rings: number[]
   /** Floors: exact distances in smaller puzzles that ignore part of the cube. */
   twistFloor: Uint8Array
   permFloor: Uint8Array
-  cornerFloors: CornerFloor[]
+  /** The strong floor's two five-corner views, built the first time they are needed. */
+  cornerFloors: CornerFloor[] | null
 }
 
 export function moveTables() {
@@ -65,7 +62,10 @@ export function moveTables() {
   return { permMove, twistMove, perm7, loc7, twist7 }
 }
 
-/** Breadth-first search from solved over all 3,674,160 positions, one ring at a time. */
+/**
+ * Breadth-first search from solved over all 3,674,160 positions, one ring at a time.
+ * The app never runs this; the tests and the lab use it to check the solver against the truth.
+ */
 export function truthTable(permMove: Uint16Array, twistMove: Uint16Array) {
   const dist = new Int8Array(N).fill(-1)
   dist[0] = 0
@@ -170,15 +170,19 @@ export const STRONG_CORNERS = [
   [0, 3, 4, 5, 6],
 ]
 
+/** The move tables and the two small floors: a few milliseconds, and no scan of the cube's positions. */
 export function buildTables(): Tables {
   const mv = moveTables()
-  const { dist, rings } = truthTable(mv.permMove, mv.twistMove)
   return {
     ...mv,
-    dist,
-    rings,
     twistFloor: coordinateFloor(mv.twistMove, NT),
     permFloor: coordinateFloor(mv.permMove, NP),
-    cornerFloors: STRONG_CORNERS.map(cornerFloor),
+    cornerFloors: null,
   }
+}
+
+/** Builds the strong floor's corner views (about 1.2 million entries) if they are not built yet. */
+export function ensureStrong(t: Tables): CornerFloor[] {
+  t.cornerFloors ??= STRONG_CORNERS.map(cornerFloor)
+  return t.cornerFloors
 }

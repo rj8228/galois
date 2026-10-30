@@ -14,6 +14,7 @@ import { Play } from '../pages/Play.tsx'
 import { SettingsPage } from '../pages/Settings.tsx'
 import { Solver } from '../pages/Solver.tsx'
 import { SolverPad } from '../solver/SolverPad.tsx'
+import { mode } from '../solver/state.ts'
 import { Nav } from './Nav.tsx'
 import { href, route, routeParam } from './router.ts'
 import { UpdateToast } from './UpdateToast.tsx'
@@ -78,7 +79,7 @@ export function App() {
         <CubeStage />
         <section class="controls" aria-label="Moves">
           {route.value === 'solver' ? (
-            <SolverPad />
+            mode.value === 'one' && <SolverPad />
           ) : (
             <>
               <MovePad />

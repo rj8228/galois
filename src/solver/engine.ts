@@ -1,12 +1,12 @@
-import { applyMoves, canonical, indexOf, invertMoves, N, NT, SOLVED, toHeldView } from './cube2.ts'
-import { SEARCH_MOVES, type Tables } from './tables.ts'
+import { applyMoves, canonical, indexOf, NT, SOLVED, toHeldView } from './cube2.ts'
+import { ensureStrong, SEARCH_MOVES, type Tables } from './tables.ts'
 
 export type FloorName = 'weak' | 'medium' | 'strong'
 export const FLOORS: FloorName[] = ['weak', 'medium', 'strong']
 
 /** A floor: a number of moves the position certainly needs. Never higher than the truth. */
 export function floorOf(t: Tables, name: FloorName): (s: number) => number {
-  const { twistFloor, permFloor, cornerFloors, loc7, twist7 } = t
+  const { twistFloor, permFloor, loc7, twist7 } = t
   if (name === 'weak') return (s) => twistFloor[s % NT]
   if (name === 'medium') {
     return (s) => {
@@ -14,7 +14,11 @@ export function floorOf(t: Tables, name: FloorName): (s: number) => number {
       return Math.max(twistFloor[s - p * NT], permFloor[p])
     }
   }
-  const views = cornerFloors.map((f) => ({ corners: f.corners, table: f.table, pow: f.corners.map((_, i) => 21 ** i) }))
+  const views = ensureStrong(t).map((f) => ({
+    corners: f.corners,
+    table: f.table,
+    pow: f.corners.map((_, i) => 21 ** i),
+  }))
   return (s) => {
     const p = (s / NT) | 0
     const o = s - p * NT
@@ -37,8 +41,6 @@ export type Round = {
   bound: number
   /** Positions the solver looked at in this round. */
   nodes: number
-  /** Of those, how many lay on each ring (labelled with the truth, which the solver never uses). */
-  byRing: number[]
 }
 
 export type Search = { moves: string[]; rounds: Round[]; nodes: number; ms: number; floorAtStart: number }
@@ -46,14 +48,12 @@ export type Search = { moves: string[]; rounds: Round[]; nodes: number; ms: numb
 /** IDA*: raise the bound one round at a time; the first round that finds a solution proves it shortest. */
 export function ida(t: Tables, start: number, floor: FloorName): Search {
   const h = floorOf(t, floor)
-  const { permMove, twistMove, dist, rings } = t
+  const { permMove, twistMove } = t
   const path: number[] = []
   let nodes = 0
-  let byRing: number[] = []
   const FOUND = -1
   const dfs = (s: number, g: number, bound: number, lastFace: number): number => {
     nodes++
-    byRing[dist[s]]++
     const f = g + h(s)
     if (f > bound) return f
     if (s === 0) return FOUND
@@ -76,20 +76,24 @@ export function ida(t: Tables, start: number, floor: FloorName): Search {
   const rounds: Round[] = []
   let bound = floorAtStart
   for (;;) {
-    byRing = rings.map(() => 0)
     const before = nodes
     const r = dfs(start, 0, bound, -1)
-    rounds.push({ bound, nodes: nodes - before, byRing })
+    rounds.push({ bound, nodes: nodes - before })
     if (r === FOUND) break
     bound = r
   }
   return { moves: path.map((j) => SEARCH_MOVES[j]), rounds, nodes, ms: performance.now() - t0, floorAtStart }
 }
 
+/** The position as the solver sees it: turned so DBL is home, as an index. */
+function locate(position: readonly string[]) {
+  const { rel, turn } = canonical(applyMoves(SOLVED, position))
+  return { start: indexOf(rel), turn }
+}
+
 export type SolveReport = {
-  /** The position, as an index with DBL held still. */
-  start: number
-  trueDistance: number
+  /** Moves the position needs: the length of the proven-shortest solution. */
+  distance: number
   floor: FloorName
   floorAtStart: number
   rounds: Round[]
@@ -97,58 +101,32 @@ export type SolveReport = {
   ms: number
   /** The proven-shortest solution, as moves on the cube the way you hold it. */
   solution: string[]
-  /** The same search with each floor, for comparison. */
-  compare: Record<FloorName, { nodes: number; ms: number; floorAtStart: number; rounds: number }>
 }
 
+/** Searches this one position, and nothing else. */
 export function solve(t: Tables, position: readonly string[], floor: FloorName): SolveReport {
-  const { rel, turn } = canonical(applyMoves(SOLVED, position))
-  const start = indexOf(rel)
-  const runs = Object.fromEntries(FLOORS.map((f) => [f, ida(t, start, f)])) as Record<FloorName, Search>
-  const main = runs[floor]
+  const { start, turn } = locate(position)
+  const run = ida(t, start, floor)
   return {
-    start,
-    trueDistance: t.dist[start],
+    distance: run.moves.length,
     floor,
-    floorAtStart: main.floorAtStart,
-    rounds: main.rounds,
-    nodes: main.nodes,
-    ms: main.ms,
-    solution: toHeldView(main.moves, turn),
-    compare: Object.fromEntries(
-      FLOORS.map((f) => [
-        f,
-        { nodes: runs[f].nodes, ms: runs[f].ms, floorAtStart: runs[f].floorAtStart, rounds: runs[f].rounds.length },
-      ]),
-    ) as SolveReport['compare'],
+    floorAtStart: run.floorAtStart,
+    rounds: run.rounds,
+    nodes: run.nodes,
+    ms: run.ms,
+    solution: toHeldView(run.moves, turn),
   }
 }
 
-/** An optimal solution read straight off the truth table: always step to a neighbour one ring in. */
-export function downhill(t: Tables, index: number): string[] {
-  const { permMove, twistMove, dist } = t
-  const out: string[] = []
-  let s = index
-  while (s !== 0) {
-    const p = (s / NT) | 0
-    const o = s - p * NT
-    for (let j = 0; j < 9; j++) {
-      const n = permMove[p * 9 + j] * NT + twistMove[o * 9 + j]
-      if (dist[n] === dist[s] - 1) {
-        out.push(SEARCH_MOVES[j])
-        s = n
-        break
-      }
-    }
-  }
-  return out
-}
+export type Comparison = Record<FloorName, { nodes: number; ms: number; floorAtStart: number; rounds: number }>
 
-/** A uniformly random position (on a given ring, if asked), as the moves that make it from solved. */
-export function randomPosition(t: Tables, ring?: number, rand: () => number = Math.random): string[] {
-  if (ring === 0) return []
-  let idx: number
-  do idx = Math.floor(rand() * N)
-  while (ring !== undefined && t.dist[idx] !== ring)
-  return invertMoves(downhill(t, idx))
+/** The same position searched with each floor, only when you ask for it. */
+export function compareFloors(t: Tables, position: readonly string[]): Comparison {
+  const { start } = locate(position)
+  return Object.fromEntries(
+    FLOORS.map((f) => {
+      const run = ida(t, start, f)
+      return [f, { nodes: run.nodes, ms: run.ms, floorAtStart: run.floorAtStart, rounds: run.rounds.length }]
+    }),
+  ) as Comparison
 }

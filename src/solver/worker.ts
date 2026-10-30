@@ -1,7 +1,7 @@
 /// <reference lib="webworker" />
-import { randomPosition, solve } from './engine.ts'
+import { compareFloors, solve } from './engine.ts'
 import type { Reply, Request } from './protocol.ts'
-import { buildTables, type Tables } from './tables.ts'
+import { buildTables, ensureStrong, type Tables } from './tables.ts'
 
 let tables: Tables | null = null
 let buildMs = 0
@@ -20,9 +20,17 @@ self.onmessage = (e: MessageEvent<Request>) => {
   let reply: Reply
   try {
     const t = ready()
-    if (msg.type === 'init') reply = { id: msg.id, type: 'ready', rings: t.rings, ms: buildMs }
-    else if (msg.type === 'solve') reply = { id: msg.id, type: 'solved', report: solve(t, msg.moves, msg.floor) }
-    else reply = { id: msg.id, type: 'random', moves: randomPosition(t, msg.ring) }
+    if (msg.type === 'init') reply = { id: msg.id, type: 'ready', ms: buildMs }
+    else if (msg.type === 'solve') {
+      // The strong floor's tables are built on first use, and that time is reported separately.
+      let extra = 0
+      if (msg.floor === 'strong' && !t.cornerFloors) {
+        const t0 = performance.now()
+        ensureStrong(t)
+        extra = performance.now() - t0
+      }
+      reply = { id: msg.id, type: 'solved', report: solve(t, msg.moves, msg.floor), buildMs: extra }
+    } else reply = { id: msg.id, type: 'compared', comparison: compareFloors(t, msg.moves) }
   } catch (err) {
     reply = { id: msg.id, type: 'error', message: err instanceof Error ? err.message : String(err) }
   }

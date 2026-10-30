@@ -12,11 +12,10 @@ import {
   SOLVED,
   stateOf,
 } from '../../src/solver/cube2'
-import { FLOORS, floorOf, randomPosition, solve } from '../../src/solver/engine'
-import { buildTables, type Tables } from '../../src/solver/tables'
-
-/** Positions at each distance from solved, half-turn metric (published). */
-const PUBLISHED = [1, 9, 54, 321, 1847, 9992, 50136, 227536, 870072, 1887748, 623800, 2644]
+import { compareFloors, FLOORS, floorOf, solve } from '../../src/solver/engine'
+import { HARDEST } from '../../src/solver/hardest'
+import { EXAMPLE, RING_COUNTS } from '../../src/solver/report'
+import { buildTables, ensureStrong, type Tables, truthTable } from '../../src/solver/tables'
 
 /** A small seeded random generator, so failures repeat. */
 function seeded(seed: number) {
@@ -32,16 +31,27 @@ function seeded(seed: number) {
 const randomFaces = (rand: () => number, n: number) =>
   Array.from({ length: n }, () => MOVES[Math.floor(rand() * MOVES.length)].name)
 
-const distanceOf = (t: Tables, moves: string[]) => t.dist[indexOf(canonical(applyMoves(SOLVED, moves)).rel)]
-
 describe('2×2 solver', () => {
   let t: Tables
+  // The tests check the solver against the full table of every position. The app never builds it.
+  let dist: Int8Array
+  let rings: number[]
+  const distanceOf = (moves: string[]) => dist[indexOf(canonical(applyMoves(SOLVED, moves)).rel)]
+
   beforeAll(() => {
     t = buildTables()
+    ensureStrong(t)
+    ;({ dist, rings } = truthTable(t.permMove, t.twistMove))
   })
 
-  it('finds the published number of positions at every distance', () => {
-    expect(t.rings).toEqual(PUBLISHED)
+  it('the app builds no table of every position', () => {
+    const fresh = buildTables()
+    expect(fresh.cornerFloors).toBeNull()
+    expect(Object.values(fresh).some((v) => ArrayBuffer.isView(v) && v.byteLength >= N)).toBe(false)
+  })
+
+  it('agrees with the published number of positions at every distance', () => {
+    expect(rings).toEqual(RING_COUNTS)
   })
 
   it('knows the 24 ways to hold the cube', () => {
@@ -55,7 +65,7 @@ describe('2×2 solver', () => {
   it.each(FLOORS)('the %s floor is never higher than the truth, on every position', (floor) => {
     const h = floorOf(t, floor)
     let tooHigh = 0
-    for (let s = 0; s < N; s++) if (h(s) > t.dist[s]) tooHigh++
+    for (let s = 0; s < N; s++) if (h(s) > dist[s]) tooHigh++
     expect(tooHigh).toBe(0)
   })
 
@@ -64,12 +74,14 @@ describe('2×2 solver', () => {
     for (let i = 0; i < 60; i++) {
       // All six faces, so the solver has to turn its view to hold DBL still.
       const position = randomFaces(rand, 14)
-      const truth = distanceOf(t, position)
-      const report = solve(t, position, 'medium')
-      expect(report.trueDistance).toBe(truth)
-      expect(report.solution).toHaveLength(truth)
-      expect(report.rounds.at(-1)?.bound).toBe(truth)
-      expect(isSolvedAnyWay(applyMoves(applyMoves(SOLVED, position), report.solution))).toBe(true)
+      const truth = distanceOf(position)
+      for (const floor of ['medium', 'strong'] as const) {
+        const report = solve(t, position, floor)
+        expect(report.distance).toBe(truth)
+        expect(report.solution).toHaveLength(truth)
+        expect(report.rounds.at(-1)?.bound).toBe(truth)
+        expect(isSolvedAnyWay(applyMoves(applyMoves(SOLVED, position), report.solution))).toBe(true)
+      }
     }
   })
 
@@ -84,13 +96,20 @@ describe('2×2 solver', () => {
     }
   })
 
-  it('makes a random position on any ring, 0 to 11', () => {
-    const rand = seeded(5)
-    for (let ring = 0; ring <= 11; ring++) {
-      const moves = randomPosition(t, ring, rand)
-      expect(moves).toHaveLength(ring)
-      expect(distanceOf(t, moves)).toBe(ring)
-    }
+  it('lists only positions that really need 11 moves as the hardest', () => {
+    expect(HARDEST).toHaveLength(30)
+    for (const alg of HARDEST) expect(distanceOf(parseMoves(alg) ?? [])).toBe(11)
+  })
+
+  it('reproduces the worked example in the whole-cube view', () => {
+    const position = parseMoves(EXAMPLE.scramble) ?? []
+    const report = solve(t, position, EXAMPLE.floor)
+    expect(report.floorAtStart).toBe(EXAMPLE.floorAtStart)
+    expect(report.rounds).toEqual(EXAMPLE.rounds)
+    expect(report.solution.join(' ')).toBe(EXAMPLE.solution)
+    const c = compareFloors(t, position)
+    expect(c.weak.nodes).toBe(EXAMPLE.weak.nodes)
+    expect(c.strong.nodes).toBe(EXAMPLE.strong.nodes)
   })
 
   it('reads 2×2 face turns and nothing else', () => {

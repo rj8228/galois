@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'preact/hooks'
+import { Field } from './Field.tsx'
 import {
   createSolverPlayer,
+  mode,
   phase,
   played,
   position,
@@ -20,21 +22,35 @@ export function SolverStage() {
     })
   }, [])
 
+  if (mode.value === 'all') {
+    return (
+      <>
+        <div ref={host} class="stage-player" hidden />
+        <Field />
+        <span class="stage-hint">1 dot = 1,000 positions</span>
+      </>
+    )
+  }
   const r = report.value
-  const left = r ? r.trueDistance - played.value : 0
+  const n = r?.solution.length ?? 0
+  const done = Math.min(played.value, n)
   const hint = !solverPlayer.value
     ? 'Loading cube…'
     : phase.value === 'searching'
       ? 'Searching…'
       : phase.value === 'proven' && r
-        ? left > 0
-          ? `${left} move${left === 1 ? '' : 's'} to go`
-          : 'Solved'
+        ? done < n
+          ? `Move ${done + 1} of ${n}: ${r.solution[done]} · ${n - done} to go`
+          : n
+            ? `Solved in ${n}`
+            : 'Already solved'
         : positionLabel.value
   return (
     <>
       <div ref={host} class="stage-player" />
-      <span class="stage-hint">{hint}</span>
+      <span class="stage-hint" aria-live="polite">
+        {hint}
+      </span>
       <div class="stage-actions">
         <button
           type="button"
