@@ -38,4 +38,10 @@ export const SECTIONS: { id: Route; label: string; text: string; icon: string }[
     text: 'Pick any 2×2 position and watch a solver prove the shortest solution.',
     icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 1 0 0-9M12 11.2a.8.8 0 1 0 0 1.6a.8.8 0 1 0 0-1.6',
   },
+  {
+    id: 'paper',
+    label: 'Paper',
+    text: 'How the solver proves a solution is the shortest, written up like a research paper.',
+    icon: 'M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6',
+  },
 ]

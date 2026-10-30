@@ -9,11 +9,12 @@ const FACE_SET = new Set<string>(FACES)
 /**
  * Laptop shortcuts: a face letter turns it, Shift makes it prime, Alt/Option makes it a double.
  * Ctrl/Cmd+Z undoes, Space plays or pauses, arrow keys step. In the Solver they drive the 2×2,
- * which has no slices.
+ * which has no slices. The Paper has no cube, so there the keys scroll and search as usual.
  */
 export function installShortcuts(): () => void {
   const onKey = (e: KeyboardEvent) => {
     const target = e.target as HTMLElement | null
+    if (route.value === 'paper') return
     if (target?.closest('input, textarea, select, [contenteditable="true"]')) return
     const solver = route.value === 'solver'
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') {

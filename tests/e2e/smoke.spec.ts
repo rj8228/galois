@@ -41,6 +41,7 @@ test('every section opens from the navigation', async ({ page }) => {
     ['Daily', 'Solve of the Day #'],
     ['Decode', 'Famous algorithms, taken apart'],
     ['Solver', 'Watch an optimal solve'],
+    ['Paper', 'Proving the shortest solve'],
     ['Home', 'Turn first, name it later'],
   ]) {
     await page.getByRole('navigation', { name: 'Sections' }).getByRole('link', { name }).click()

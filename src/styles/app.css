@@ -161,7 +161,7 @@ p {
 .tabs {
   grid-area: tabs;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   border-top: var(--border) solid var(--line);
   background: var(--bg);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -170,10 +170,18 @@ p {
   display: grid;
   justify-items: center;
   gap: 2px;
-  padding: 8px 4px 10px;
+  padding: 8px 2px 10px;
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   text-decoration: none;
+  min-width: 0;
+}
+/* Eight tabs share a phone's width; a label that cannot fit is cut rather than widening the bar. */
+.tab-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .tabs a[aria-current="page"] {
   color: var(--accent);
@@ -1467,5 +1475,22 @@ input[type="range"] {
   .ring-floor,
   .ring-dot {
     transition: none;
+  }
+}
+
+/* Paper: the solver written up like a research paper. No cube, one readable column. */
+.app[data-route="paper"] .stage,
+.app[data-route="paper"] .controls {
+  display: none;
+}
+@media (min-width: 900px) {
+  .app[data-route="paper"] .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .app[data-route="paper"] .panel {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    border-left: 0;
+    padding: 28px 32px 56px;
   }
 }

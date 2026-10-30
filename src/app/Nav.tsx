@@ -11,7 +11,7 @@ export function Nav() {
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d={item.icon} />
           </svg>
-          <span>{item.label}</span>
+          <span class="tab-label">{item.label}</span>
         </a>
       ))}
     </nav>

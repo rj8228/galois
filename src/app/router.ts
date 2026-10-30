@@ -1,8 +1,8 @@
 import { signal } from '@preact/signals'
 
-export type Route = 'home' | 'learn' | 'labs' | 'play' | 'daily' | 'decode' | 'solver' | 'settings' | 'about'
+export type Route = 'home' | 'learn' | 'labs' | 'play' | 'daily' | 'decode' | 'solver' | 'paper' | 'settings' | 'about'
 
-const ROUTES: Route[] = ['home', 'learn', 'labs', 'play', 'daily', 'decode', 'solver', 'settings', 'about']
+const ROUTES: Route[] = ['home', 'learn', 'labs', 'play', 'daily', 'decode', 'solver', 'paper', 'settings', 'about']
 
 /** Hash routes (#/play) so deep links work on GitHub Pages without server rewrites. */
 function parse(): Route {

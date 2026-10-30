@@ -1,3 +1,5 @@
+import { signal } from '@preact/signals'
+import type { FunctionComponent } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { CubeStage } from '../cube/CubeStage.tsx'
 import { MovePad } from '../cube/MovePad.tsx'
@@ -19,8 +21,26 @@ import { Nav } from './Nav.tsx'
 import { href, route, routeParam } from './router.ts'
 import { UpdateToast } from './UpdateToast.tsx'
 
+// The paper is long and read rarely, so it loads the first time it is opened.
+const paperPage = signal<FunctionComponent | null>(null)
+let paperLoading = false
+
+function LazyPaper() {
+  const Page = paperPage.value
+  if (Page) return <Page />
+  if (!paperLoading) {
+    paperLoading = true
+    import('../pages/Paper.tsx').then((m) => {
+      paperPage.value = m.Paper
+    })
+  }
+  return <p class="muted small">Loading the paper…</p>
+}
+
 function Panel() {
   switch (route.value) {
+    case 'paper':
+      return <LazyPaper />
     case 'home':
       return <Home />
     case 'play':
@@ -78,7 +98,7 @@ export function App() {
       <main class="body">
         <CubeStage />
         <section class="controls" aria-label="Moves">
-          {route.value === 'solver' ? (
+          {route.value === 'paper' ? null : route.value === 'solver' ? (
             mode.value === 'one' && <SolverPad />
           ) : (
             <>
