@@ -1,0 +1,107 @@
+{
+ "c012": {
+  "entries": 9072,
+  "max": 6
+ },
+ "c0123": {
+  "entries": 136080,
+  "max": 7
+ },
+ "c01234": {
+  "entries": 1632960,
+  "max": 8
+ },
+ "c012345": {
+  "entries": 14696640,
+  "max": 10
+ },
+ "c234567": {
+  "entries": 14696640,
+  "max": 10
+ },
+ "c34567": {
+  "entries": 1632960,
+  "max": 8
+ },
+ "c4567": {
+  "entries": 136080,
+  "max": 7
+ },
+ "floors": {
+  "k3": {
+   "bytes": 4536,
+   "mean_floor": 4.07771164021164,
+   "exact_fraction": 0.00045182663066750857
+  },
+  "k4": {
+   "bytes": 68040,
+   "mean_floor": 5.2917475014697235,
+   "exact_fraction": 0.005197310405643739
+  },
+  "k4x2": {
+   "bytes": 136080,
+   "mean_floor": 5.682667999851213,
+   "exact_fraction": 0.008064847928959725
+  },
+  "k5": {
+   "bytes": 816480,
+   "mean_floor": 6.365320644718793,
+   "exact_fraction": 0.047357400512407374
+  },
+  "k5x2": {
+   "bytes": 1632960,
+   "mean_floor": 6.770805231672001,
+   "exact_fraction": 0.07127193698695757
+  },
+  "k6": {
+   "bytes": 7348320,
+   "mean_floor": 7.609932882618068,
+   "exact_fraction": 0.31004860067788736
+  },
+  "k6x2": {
+   "bytes": 14696640,
+   "mean_floor": 7.981913689115335,
+   "exact_fraction": 0.4308142087806011
+  },
+  "symplain": {
+   "bytes": 1156644,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  },
+  "symplain_mod3": {
+   "bytes": 618642,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  },
+  "syminv": {
+   "bytes": 795789,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  },
+  "syminv_mod3": {
+   "bytes": 438215,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  },
+  "full_4bit": {
+   "bytes": 44089920,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  },
+  "full_mod3": {
+   "bytes": 22044960,
+   "mean_floor": 8.764133684071098,
+   "exact_fraction": 1.0
+  }
+ },
+ "symplain": {
+  "perm_classes": 984,
+  "entries": 2152008,
+  "unfilled": 0
+ },
+ "syminv": {
+  "perm_classes": 654,
+  "entries": 1430298,
+  "unfilled": 0
+ }
+}

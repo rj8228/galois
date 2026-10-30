@@ -1,0 +1,50 @@
+{
+ "perim5": {
+  "k": 5,
+  "sym": false,
+  "entries": 236552,
+  "bytes": 443535,
+  "mean_floor": 5.996925533092371,
+  "exact_fraction": 0.015934118274653256
+ },
+ "perim5sym": {
+  "k": 5,
+  "sym": true,
+  "entries": 5169,
+  "bytes": 13570,
+  "mean_floor": 5.996925533092371,
+  "exact_fraction": 0.015934118274653256
+ },
+ "perim6": {
+  "k": 6,
+  "sym": false,
+  "entries": 1405068,
+  "bytes": 2107602,
+  "mean_floor": 6.980991414817718,
+  "exact_fraction": 0.07720240816948636
+ },
+ "perim6sym": {
+  "k": 6,
+  "sym": true,
+  "entries": 29822,
+  "bytes": 67100,
+  "mean_floor": 6.980991414817718,
+  "exact_fraction": 0.07720240816948636
+ },
+ "perim7": {
+  "k": 7,
+  "sym": false,
+  "entries": 6807696,
+  "bytes": 8509620,
+  "mean_floor": 7.903789006648232,
+  "exact_fraction": 0.31281381322533586
+ },
+ "perim7sym": {
+  "k": 7,
+  "sym": true,
+  "entries": 142895,
+  "bytes": 285791,
+  "mean_floor": 7.903789006648232,
+  "exact_fraction": 0.31281381322533586
+ }
+}
