@@ -137,6 +137,13 @@ export function hardestPosition() {
 
 export const usePosition = (moves: string[]) => setPosition(moves, 'Your moves')
 
+/** Sets up the Solver on a position and floor from elsewhere, such as the Paper's worked example. */
+export function openInSolver(moves: string[], label: string, f: FloorName) {
+  mode.value = 'one'
+  floor.value = f
+  setPosition(moves, label)
+}
+
 /** Turns the 2×2 by hand, carrying on from whatever the cube shows. */
 export function turnSolver(move: string) {
   const base = shown()

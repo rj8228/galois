@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks'
+import { href } from '../app/router.ts'
 import { parseMoves } from '../solver/cube2.ts'
 import { FLOORS, type FloorName, type SolveReport } from '../solver/engine.ts'
 import { Rings } from '../solver/Rings.tsx'
@@ -500,9 +501,14 @@ function WholeCube() {
           solver. For a 3×3 it would be 43 quintillion numbers. So the solver works from small floors and a search,
           which is the part that carries over to bigger cubes.
         </p>
-        <button type="button" class="btn small" onClick={() => chooseMode('one')}>
-          Try one yourself
-        </button>
+        <div class="row">
+          <button type="button" class="btn small" onClick={() => chooseMode('one')}>
+            Try one yourself
+          </button>
+          <a class="small" href={href('paper')}>
+            Read the whole method as a paper
+          </a>
+        </div>
       </div>
     </>
   )
