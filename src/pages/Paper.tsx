@@ -14,6 +14,7 @@ import {
 import { parseMoves } from '../solver/cube2.ts'
 import { EXAMPLE, EXHAUSTIVE, RING_COUNTS, TOTAL_POSITIONS } from '../solver/report.ts'
 import { openInSolver } from '../solver/state.ts'
+import '../paper/paper.css'
 
 const fmt = (n: number) => n.toLocaleString('en-US')
 
