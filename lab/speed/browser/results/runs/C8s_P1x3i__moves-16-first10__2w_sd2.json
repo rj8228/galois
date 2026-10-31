@@ -1,0 +1,306 @@
+{
+ "kind": "solve",
+ "when": "2026-10-31T18:27:16.501Z",
+ "chromium": "153.0.8010.12",
+ "floor": "C8s+P1x3i",
+ "set": "moves-16-first10",
+ "workers": 2,
+ "sd": 2,
+ "maxnodes": 3000000000,
+ "setup": {
+  "init_ms": 124.40000000002328,
+  "total_ms": 1278.0999999999767,
+  "loads": [
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 1152.3000000000466,
+    "idb_read_ms": 781.0999999999767,
+    "index_ms": 1.900000000023283,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 891.5999999999767,
+    "idb_read_ms": 732.4000000000233,
+    "index_ms": 1.400000000023283,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   }
+  ],
+  "hardwareConcurrency": 4
+ },
+ "wasm_memory_per_worker": [
+  92536832,
+  92536832
+ ],
+ "chromium_pss": {
+  "before_setup": 187315200,
+  "after_setup": 589358080,
+  "peak": 602328064,
+  "procs_after_setup": [
+   {
+    "pid": 1808,
+    "type": "browser",
+    "pss": 42784768
+   },
+   {
+    "pid": 1810,
+    "type": "zygote",
+    "pss": 11216896
+   },
+   {
+    "pid": 1811,
+    "type": "zygote",
+    "pss": 9928704
+   },
+   {
+    "pid": 1826,
+    "type": "gpu-process",
+    "pss": 29410304
+   },
+   {
+    "pid": 1828,
+    "type": "utility",
+    "pss": 26172416
+   },
+   {
+    "pid": 1837,
+    "type": "renderer",
+    "pss": 27067392
+   },
+   {
+    "pid": 1861,
+    "type": "renderer",
+    "pss": 442777600
+   }
+  ]
+ },
+ "solves": [
+  {
+   "index": 0,
+   "scramble": "B L' F2 U' R F D2 B' U2 B U' D' L' U2 R F2",
+   "length": 16,
+   "solution": "F2 R' U2 L U D B' U2 B D2 F' R' U F2 L B'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 76681032,
+   "perBound": {
+    "10": 18,
+    "11": 288,
+    "12": 4662,
+    "13": 61992,
+    "14": 814044,
+    "15": 10672674,
+    "16": 65127354
+   },
+   "found_ms": 8983.800000000047,
+   "drain_ms": 9016.099999999977,
+   "tasks_run": 1079
+  },
+  {
+   "index": 1,
+   "scramble": "D L2 U' R2 D' F B2 R2 F' R' U L D2 R2 F R",
+   "length": 16,
+   "solution": "R' F' R2 D2 L' U' R F R2 F' B2 D R2 U L2 D'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 84568758,
+   "perBound": {
+    "10": 57,
+    "11": 744,
+    "12": 8313,
+    "13": 104334,
+    "14": 1276269,
+    "15": 15896847,
+    "16": 67282194
+   },
+   "found_ms": 10063.5,
+   "drain_ms": 10176.599999999977,
+   "tasks_run": 1088
+  },
+  {
+   "index": 2,
+   "scramble": "L U' L2 U L2 B' U F2 B' L2 F L' F B L' F2",
+   "length": 16,
+   "solution": "U L2 F R2 B D B' U' B2 U F D' F' L' U' B",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 17635846,
+   "perBound": {
+    "10": 18,
+    "11": 291,
+    "12": 4308,
+    "13": 61530,
+    "14": 840051,
+    "15": 11219526,
+    "16": 5510122
+   },
+   "found_ms": 2093.4000000000233,
+   "drain_ms": 2123.3000000000466,
+   "tasks_run": 964
+  },
+  {
+   "index": 3,
+   "scramble": "R' F2 L' F' B' L2 F U' L F D' L' B L' B R2",
+   "length": 16,
+   "solution": "R2 B' L B' L D F' L' U F' L2 F B L F2 R",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 87395296,
+   "perBound": {
+    "10": 84,
+    "11": 945,
+    "12": 10272,
+    "13": 112080,
+    "14": 1297323,
+    "15": 15520731,
+    "16": 70453861
+   },
+   "found_ms": 8778.300000000047,
+   "drain_ms": 9006.800000000047,
+   "tasks_run": 1097
+  },
+  {
+   "index": 4,
+   "scramble": "F L2 F R2 U L2 U R L U' R2 B2 D' L D2 F2",
+   "length": 16,
+   "solution": "F2 D2 L' D B2 R2 U R' L' U' L2 U' R2 F' L2 F'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 104807217,
+   "perBound": {
+    "10": 72,
+    "11": 720,
+    "12": 8715,
+    "13": 102978,
+    "14": 1231509,
+    "15": 15179295,
+    "16": 88283928
+   },
+   "found_ms": 11565.099999999977,
+   "drain_ms": 11714,
+   "tasks_run": 1116
+  },
+  {
+   "index": 5,
+   "scramble": "U D2 R D L B D' R' L' U' L2 F2 B2 D2 B D'",
+   "length": 16,
+   "solution": "D B' D2 F2 B2 L2 U R L D B' L' D' R' U' D2",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 116916245,
+   "perBound": {
+    "10": 72,
+    "11": 774,
+    "12": 7827,
+    "13": 87840,
+    "14": 1082634,
+    "15": 13577211,
+    "16": 102159887
+   },
+   "found_ms": 13559.29999999993,
+   "drain_ms": 13720.000000000116,
+   "tasks_run": 1149
+  },
+  {
+   "index": 6,
+   "scramble": "R' L B U2 L2 U R B' D2 L U2 B' L' B U' F2",
+   "length": 16,
+   "solution": "F2 U B' L B U2 L' D2 B R' U' L2 U2 B' R L'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 85610217,
+   "perBound": {
+    "10": 33,
+    "11": 447,
+    "12": 5481,
+    "13": 70860,
+    "14": 915435,
+    "15": 11774418,
+    "16": 72843543
+   },
+   "found_ms": 9868.199999999953,
+   "drain_ms": 9874,
+   "tasks_run": 1069
+  },
+  {
+   "index": 7,
+   "scramble": "U D2 R D' B' L2 B' D' L2 B' U B L' B' D' R",
+   "length": 16,
+   "solution": "R' D B L B' U' B L2 D B L2 B D R' U' D2",
+   "verified": true,
+   "dnf": false,
+   "h0": 9,
+   "nodes": 99464669,
+   "perBound": {
+    "9": 18,
+    "10": 126,
+    "11": 1245,
+    "12": 11811,
+    "13": 124941,
+    "14": 1406673,
+    "15": 16630371,
+    "16": 81289484
+   },
+   "found_ms": 11741.100000000093,
+   "drain_ms": 11917.600000000093,
+   "tasks_run": 1128
+  },
+  {
+   "index": 8,
+   "scramble": "U' F2 R2 D F R' U D2 B2 D2 F2 B2 U2 L' F R2",
+   "length": 14,
+   "solution": "R2 F' L B2 U2 F2 B2 U' R F' D' R2 F2 U",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 291493,
+   "perBound": {
+    "10": 18,
+    "11": 342,
+    "12": 4590,
+    "13": 59955,
+    "14": 226588
+   },
+   "found_ms": 60,
+   "drain_ms": 60.4000000001397,
+   "tasks_run": 542
+  },
+  {
+   "index": 9,
+   "scramble": "B2 D2 R L' D R' L B2 R2 B' R2 F U R' L2 U'",
+   "length": 16,
+   "solution": "U R L2 U' F' R2 B R2 B2 R L' D' R' L D2 B2",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 15571634,
+   "perBound": {
+    "10": 30,
+    "11": 354,
+    "12": 5562,
+    "13": 75405,
+    "14": 993786,
+    "15": 12878088,
+    "16": 1618409
+   },
+   "found_ms": 1949,
+   "drain_ms": 2022.5,
+   "tasks_run": 971
+  }
+ ]
+}

@@ -12,4 +12,4 @@ for f in 'C8s@2+E6x8@2' 'C8s+P1x3i'; do
   run "$f" moves-12 $S/moves-12.txt
   run "$f" moves-14 $S/moves-14.txt
 done
-run 'C8s+P1x3i' moves-16-first10 data/moves-16-first10.txt
+run 'C8s+P1x3i' moves-16-first10 scrambles/moves-16-first10.txt

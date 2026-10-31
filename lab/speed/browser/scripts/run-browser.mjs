@@ -4,7 +4,7 @@
 //                                                              then a cached load in a fresh page
 //   node scripts/run-browser.mjs solve <floor> <set> <workers> [count] [sd] [maxnodes]
 //
-// <set> is a file in lab/3x3/scrambles (moves-12, moves-14, ...) or in data/ (moves-16-first10, ...).
+// <set> is a file in lab/3x3/scrambles (moves-12, moves-14, ...) or in scrambles/ (moves-16-first10, ...).
 // The Chromium profile (and so the IndexedDB table cache) lives in data/chrome-profile.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -24,7 +24,7 @@ const slug = (f) => f.replace(/[@+]/g, '_')
 
 function scrambles(set) {
   const a = join(here, '..', '..', '3x3', 'scrambles', `${set}.txt`)
-  const b = join(here, 'data', `${set}.txt`)
+  const b = join(here, 'scrambles', `${set}.txt`)
   return readFileSync(existsSync(a) ? a : b, 'utf8')
     .split('\n')
     .map((l) => l.trim())
