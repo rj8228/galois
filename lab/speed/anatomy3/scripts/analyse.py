@@ -182,6 +182,41 @@ for (dev, s), d in data.items():
         )
     summary[(dev, s)] = row
 
+# --------------------------------------------------------------- gravity
+ENTRIES = {'corners_sym': 6053616, 'edges6': 42577920, 'phase1_sym': 140908410}
+for (dev, s) in list(summary):
+    meta, rows = load(dev, s + '-gravity')
+    if not rows:
+        continue
+    rows = [r for r in rows if 'gravity' in r]
+    for r in rows:
+        g = r['gravity']
+        if g['capped'] or g['found_length'] != r['length'] or not g['verified']:
+            problems.append(f'{dev} {s} #{r["index"]}: gravity rerun failed')
+        if dev == 'phone' and g['allowed'] != g['survived']:
+            problems.append(f'{dev} {s} #{r["index"]}: phone masks should be exact')
+    tg = sum(r['gravity']['tight_generated'] for r in rows)
+    fl = sum(r['gravity']['final']['lookups'] for r in rows)
+    al = sum(r['gravity']['allowed'] for r in rows)
+    ad = sum(r['gravity']['allowed_down_only'] for r in rows)
+    sv = sum(r['gravity']['survived'] for r in rows)
+    te = sum(r['gravity']['tight_expansions'] for r in rows)
+    mr = sum(r['gravity']['mask_reads'] for r in rows)
+    md = sum(r['gravity']['mask_reads_down_only'] for r in rows)
+    ent = sum(ENTRIES[t] for t, _ in TABLES[FLOORS[dev]])
+    summary[(dev, s)]['gravity'] = dict(
+        n=len(rows), final_lookups=fl / len(rows), tight_generated_share=tg / fl,
+        allowed_of_tight=al / tg, allowed_down_of_tight=ad / tg, survived_of_tight=sv / tg,
+        lookups_saved_share=(tg - al) / fl, lookups_saved_share_down=(tg - ad) / fl,
+        mask_reads_per_tight_expansion=mr / te, mask_reads_down_per_tight_expansion=md / te,
+        children_per_tight_expansion=tg / te,
+        mask_bytes_full=ent * 36 / 8, mask_bytes_down=ent * 18 / 8, floor_bytes=floor_bytes(FLOORS[dev]))
+if problems:
+    print('PROBLEMS:')
+    for p in problems:
+        print('  ', p)
+    sys.exit(1)
+
 # --------------------------------------------------------------- outputs
 out = {f'{dev}/{s}': v for (dev, s), v in summary.items()}
 json.dump(out, open(os.path.join(ROOT, 'results', 'anatomy.json'), 'w'), indent=1)
@@ -312,6 +347,26 @@ for k in order:
     for b, x in v['doors']['by_count'].items():
         L.append(f'| {name(*k)} | {b} | {x["n"]} | {num(x["mean_first"])} | {num(x["mean_full"])} | '
                  f'{pct(x["mean_fraction"])} |')
+L.append('')
+L.append('### Gravity: what downhill masks on the direct lookups would let through\n')
+L.append('The final round again, at every tight node (g + h = bound, one move or more from the end). *Full masks*: every '
+         'direct lookup at the parent\'s maximum must go down, every one at maximum − 1 must not go up (two 18-bit masks '
+         'per table entry). *Down only*: just the first rule (one 18-bit mask). Inverse lookups cannot use masks (the move '
+         'acts on the other side) and are read as usual for the children the masks let through. *Lookups saved* is the '
+         'share of the final round\'s lookups a mask would skip. Mask memory counts every entry of the floor\'s tables.\n')
+L.append('| Floor, scrambles | Children per tight node | Survive | Let through: full masks | Down only | '
+         'Lookups saved: full / down only | Mask reads per tight node: full / down only | Mask memory: full / down only (floor) |')
+L.append('| --- | --: | --: | --: | --: | --: | --: | --: |')
+for k in order:
+    v = summary[k]
+    if 'gravity' not in v:
+        continue
+    g = v['gravity']
+    L.append(f'| {name(*k)} | {g["children_per_tight_expansion"]:.2f} | {100 * g["survived_of_tight"]:.1f}% | '
+             f'{100 * g["allowed_of_tight"]:.1f}% | {100 * g["allowed_down_of_tight"]:.1f}% | '
+             f'{pct(g["lookups_saved_share"])} / {pct(g["lookups_saved_share_down"])} | '
+             f'{g["mask_reads_per_tight_expansion"]:.1f} / {g["mask_reads_down_per_tight_expansion"]:.1f} | '
+             f'{g["mask_bytes_full"] / 1e6:,.0f} / {g["mask_bytes_down"] / 1e6:,.0f} MB ({g["floor_bytes"] / 1e6:.1f} MB) |')
 L.append('')
 caps = [f'{name(*k)}: {summary[k]["capped"]} capped' for k in order if summary[k].get('capped')]
 L.append('**Capped runs:** ' + ('; '.join(caps) if caps else 'none') + '.\n')

@@ -17,6 +17,7 @@
  *                           f = final round again, children ordered by the floor
  *                           m = final round again, children ordered by the mirror floor
  *                           n = final round again in count mode (all shortest solutions)
+ *                           g = final round again, measuring what downhill masks would let through
  *   mirror-floor: a 4-bit floor whose inverse lookups give h(x^-1) for the m order when <floor>
  *                 has no inverse lookups of its own (2-bit tables cannot be read on the inverse).
  */
@@ -39,6 +40,11 @@ typedef struct {
   RStat st;
   uint8_t root_moves[18];
   int nroot;
+  /* gravity mode: at tight nodes, which children would downhill masks on the direct lookups let
+   * through? full rule: lookups at the parent's max must go down, at max - 1 must not go up;
+   * down-only rule: only the first part (one 18-bit mask per entry instead of two). */
+  int gravity;
+  uint64_t g_gen, g_allowed, g_allowed_down, g_survived, g_mask_reads, g_mask_reads_down, g_expansions;
 } ASearch;
 
 static inline int a_next_lastf(const ASearch *A, int g, int f) { return g == 0 && A->nroot < 18 ? f + 6 : f; }
@@ -135,6 +141,26 @@ static int adfs(ASearch *A, const Cube *x, const Coords *cx, int g, int rem, int
       if (ok) alive[w++] = i;
     }
     na = w;
+  }
+  if (A->gravity && tight) {
+    A->g_expansions++;
+    A->g_gen += (uint64_t)nc;
+    A->g_survived += (uint64_t)na;
+    for (int l = 0; l < F->n1; l++) {
+      if (hv[l] == hp) A->g_mask_reads++, A->g_mask_reads_down++;
+      else if (hv[l] == hp - 1) A->g_mask_reads++;
+    }
+    for (int i = 0; i < nc; i++) {
+      int ok = 1, okd = 1;
+      for (int l = 0; l < F->n1; l++) {
+        if (hv[l] < hp - 1) continue;
+        int v = entry_value(&F->L[l], lookup_index_c(&F->L[l], &ncs[i], &cs[i]), hv[l]);
+        if (hv[l] == hp && v >= hv[l]) ok = okd = 0;
+        if (hv[l] == hp - 1 && v > hv[l]) ok = 0;
+      }
+      A->g_allowed += (uint64_t)ok;
+      A->g_allowed_down += (uint64_t)okd;
+    }
   }
   uint64_t cut = (uint64_t)(nc - na);
   if (tight) A->st.cut_tight += cut;
@@ -289,12 +315,13 @@ static int cmd_anat(int argc, char **argv) {
     double secs = now() - t0;
     int verified = length >= 0 && replay_ok(&c, sol, length);
     /* extra final-round runs */
-    RStat ext[4];
-    int ext_ok[4] = {0}, ext_ab[4] = {0}, ext_len[4] = {-1, -1, -1, -1};
-    double ext_s[4] = {0};
+    RStat ext[5];
+    int ext_ok[5] = {0}, ext_ab[5] = {0}, ext_len[5] = {-1, -1, -1, -1, -1};
+    double ext_s[5] = {0};
     uint64_t nsol = 0, nsol_raw = 0, first = 0;
-    const char *codes = "cfmn";
-    for (int e = 0; e < 4; e++) {
+    const char *codes = "cfmng";
+    uint64_t gv[7] = {0};
+    for (int e = 0; e < 5; e++) {
       if (length < 0 || !strchr(modes, codes[e])) continue;
       double te = now();
       a_init(&A, &F, &c, maxnodes, &nstab);
@@ -302,7 +329,13 @@ static int cmd_anat(int argc, char **argv) {
       A.target = sol;
       A.M = e == 2 && have_m ? &M : NULL;
       A.count = e == 3;
+      A.gravity = e == 4;
       a_round(&A, &c, &cx, hv, length);
+      if (e == 4) {
+        uint64_t t[7] = {A.g_gen, A.g_allowed, A.g_allowed_down, A.g_survived, A.g_mask_reads, A.g_mask_reads_down,
+                         A.g_expansions};
+        memcpy(gv, t, sizeof t);
+      }
       ext[e] = A.st;
       ext_ab[e] = A.aborted;
       ext_len[e] = A.nsol ? length : -1;
@@ -324,8 +357,8 @@ static int cmd_anat(int argc, char **argv) {
         print_rstat(&rounds[r]);
       }
       printf("]");
-      const char *names[4] = {"compass", "by_floor", "by_mirror", "count"};
-      for (int e = 0; e < 4; e++) {
+      const char *names[5] = {"compass", "by_floor", "by_mirror", "count", "gravity"};
+      for (int e = 0; e < 5; e++) {
         if (length < 0 || !strchr(modes, codes[e])) continue;
         printf(", \"%s\": {\"final\": ", names[e]);
         print_rstat(&ext[e]);
@@ -333,6 +366,11 @@ static int cmd_anat(int argc, char **argv) {
                ext_ok[e] ? "true" : "false", ext_ab[e] ? "true" : "false", ext_s[e]);
         if (e == 3) printf(", \"solutions\": %llu, \"solutions_raw\": %llu, \"first_at\": %llu", (unsigned long long)nsol,
                              (unsigned long long)nsol_raw, (unsigned long long)first);
+        if (e == 4)
+          printf(", \"tight_generated\": %llu, \"allowed\": %llu, \"allowed_down_only\": %llu, \"survived\": %llu, "
+                 "\"mask_reads\": %llu, \"mask_reads_down_only\": %llu, \"tight_expansions\": %llu",
+                 (unsigned long long)gv[0], (unsigned long long)gv[1], (unsigned long long)gv[2], (unsigned long long)gv[3],
+                 (unsigned long long)gv[4], (unsigned long long)gv[5], (unsigned long long)gv[6]);
         printf("}");
       }
       printf("}\n");

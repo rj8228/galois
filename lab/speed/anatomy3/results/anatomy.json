@@ -210,6 +210,77 @@
    }
   }
  },
+ "desktop/moves-16": {
+  "n": 50,
+  "done": 50,
+  "capped": 0,
+  "checked": 50,
+  "mean_length": 15.92,
+  "mean_h0": 9.94,
+  "mean_lookups": 87239983.96,
+  "median_lookups": 95181530.0,
+  "mean_final": 74074407.4,
+  "mean_proof": 13165576.56,
+  "final_share": 0.8490878154443897,
+  "final_share_median": 0.8481147975287711,
+  "mean_seconds": 10.56573,
+  "cut_share": 0.9250789378526612,
+  "tight_share_of_generated": 0.9216842448855489,
+  "cut_rate_tight": 0.9780031687539952,
+  "cut_rate_loose": 0.30222304221380913,
+  "tests_share": 2.0265936784337757e-06,
+  "cut_share_final": 0.9250791808561941,
+  "mean_expansions": 6536069.16,
+  "children_per_expansion": 13.347469530141876,
+  "survivors_per_expansion": 1.0000065941774705,
+  "tight_expansion_share": 0.9216820282238262,
+  "lookups_per_round": [
+   37.14,
+   496.38,
+   6437.64,
+   82578.9,
+   1052158.4,
+   null,
+   null,
+   null
+  ],
+  "rounds_from_end": [
+   74074407.4,
+   12130779.6,
+   952617.78,
+   75568.32
+  ],
+  "compass": {
+   "n": 50,
+   "mean_final": 206.38,
+   "mean_total": 13165782.94,
+   "base_final": 74074407.4,
+   "base_total": 87239983.96,
+   "saving_total": 0.8490854497859996,
+   "speedup_total": 6.626266311511893,
+   "mean_extra": 0
+  },
+  "by_floor": {
+   "n": 50,
+   "mean_final": 69013334.8,
+   "mean_total": 82178911.36,
+   "base_final": 74074407.4,
+   "base_total": 87239983.96,
+   "saving_total": 0.05801322249578278,
+   "speedup_total": 1.061586026344752,
+   "mean_extra": 0
+  },
+  "by_mirror": {
+   "n": 50,
+   "mean_final": 62369083,
+   "mean_total": 75534659.56,
+   "base_final": 74074407.4,
+   "base_total": 87239983.96,
+   "saving_total": 0.13417384860326154,
+   "speedup_total": 1.1549662693680645,
+   "mean_extra": 0
+  }
+ },
  "phone/moves-12": {
   "n": 50,
   "done": 50,
