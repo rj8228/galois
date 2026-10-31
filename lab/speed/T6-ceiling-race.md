@@ -21,7 +21,7 @@ So run a strong ceiling solver alongside the prover. If, by the time the proof r
 | 19 or more (2) | bound 18 ran out after 46–47 min | bound 19 hit the node cap | not finished |
 
 - **If the ceiling always won in time,** the mean over the 18 solved positions would fall from 690 s to 187 s, which is 3.7×. The worst case would fall from 28 minutes to under 5.
-- **The two unfinished positions would finish in about 47 minutes.** A two-phase solver finds 19 moves in milliseconds; only the proof is hard.
+- **The two unfinished positions would finish in about 47 minutes,** if they need 19 moves. Nearly every such position does: only about 490 million positions need 20. A two-phase solver finds 19 moves in milliseconds; only the proof is hard.
 
 **The open question is how fast a two-phase solver reaches the optimal length.** csTimer's min2phase averages 19.1 moves on random states after 36 ms, and 18.6 moves with ten times more search ([source](https://cuberoot.me/code/algorithms/min2phase)). So 18 moves may take seconds, and 17 much longer. The proof leaves it about 200 s for an 18-move position, but only about 19 s for a 17-move one. Our ceiling can also use the lab's exact phase-1 table, which min2phase doesn't have.
 
