@@ -35,6 +35,21 @@ From T6's per-position traces, on T6's machine (7.71 M nodes/s per thread), with
 | **Race + masks, two threads** | **220 s** | **165 s** | 917 s |
 | Proof rounds only, one thread with masks (the most a race can save) | 151 s | 156 s | 230 s |
 
+Projected further, after the merge, from the same traces. These figures assume:
+- split efficiency 0.85
+- the ceiling thread joins the final round when it misses
+- laptop cores 1.75× this machine's
+- masks give the same 1.46× in wasm (not measured)
+
+| Projected setup | Mean | Median | Worst |
+|---|--:|--:|--:|
+| Native, 4 threads: 3 provers + ceiling, masks | 96 s | 65 s | 285 s |
+| Native, fast 8-core laptop | 33 s | 18 s | 127 s |
+| Laptop browser, 8 workers, masks | 59 s | 33 s | 232 s |
+| Laptop browser, 8 workers, no masks | 76 s | 43 s | 259 s |
+
+Round 3 (T7, T8) measures the first and builds toward the third.
+
 - **The race has a tail.** When the ceiling misses the optimum (3 of 18 random states within 250 s), the race is just one prover thread, slower than the split.
   - Position 15 is the worst case above.
   - The fix T6 suggested but did not try: once the proof ends, let the ceiling thread join the prover's final round.
