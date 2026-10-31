@@ -34,5 +34,5 @@ export function serve(port = 0, coi = false) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = +(process.argv[2] || 8125)
   await serve(port, process.argv.includes('--coi'))
-  console.log(`http://127.0.0.1:${port}/speed/browser/bench/index.html`)
+  console.log(`http://127.0.0.1:${port}/speed/webengine/bench/index.html`)
 }
