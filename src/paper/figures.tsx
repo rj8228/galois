@@ -1,6 +1,6 @@
-import { useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { EXAMPLE, RING_COUNTS, TOTAL_POSITIONS } from '../solver/report.ts'
-import { FLOOR_TABLE } from './data.ts'
+import { FLOOR_TABLE, GODS_NUMBER_BOUNDS } from './data.ts'
 
 const fmt = (n: number) => n.toLocaleString('en-US')
 
@@ -23,7 +23,7 @@ function useTip() {
     onFocus: () => setTip(t),
     onBlur: () => setTip(null),
   })
-  return { tip, bind }
+  return { tip, setTip, bind }
 }
 
 /** The readout, placed over the chart in viewBox units: value first, then what it is. */
@@ -513,5 +513,202 @@ export function LandscapeFigure() {
         solved
       </text>
     </svg>
+  )
+}
+
+// ---------------- Figure 7: God's number for the 3×3, closed in from both sides ----------------
+
+const BW = 420
+const BH = 290
+const BM = { l: 40, r: 12, t: 28, b: 40 }
+const YEAR0 = 1979.5
+const YEAR1 = 2011.5
+const MOVES0 = 14
+const MOVES1 = 56
+const B_PLOT_W = BW - BM.l - BM.r
+const B_PLOT_H = BH - BM.t - BM.b
+const bx = (year: number) => BM.l + ((year - YEAR0) / (YEAR1 - YEAR0)) * B_PLOT_W
+const by = (moves: number) => BM.t + ((MOVES1 - moves) / (MOVES1 - MOVES0)) * B_PLOT_H
+
+type BoundEvent = { key: string; kind: 'floor' | 'ceiling'; year: number; moves: number; date: string; who: string }
+
+/** Each result that moved a bound: the ceiling falling, or the floor rising. */
+const BOUND_EVENTS: BoundEvent[] = GODS_NUMBER_BOUNDS.flatMap((row, i) => {
+  const prev = GODS_NUMBER_BOUNDS[i - 1]
+  const out: BoundEvent[] = []
+  if (row.upper !== null && row.upper !== prev?.upper) {
+    out.push({ key: `c${i}`, kind: 'ceiling', year: row.year, moves: row.upper, date: row.date, who: row.who })
+  }
+  if (row.lower !== prev?.lower) {
+    out.push({ key: `f${i}`, kind: 'floor', year: row.year, moves: row.lower, date: row.date, who: row.who })
+  }
+  return out
+})
+
+const boundTip = (e: BoundEvent, x: number, y: number): Tip => ({
+  key: e.key,
+  x,
+  y,
+  value:
+    e.kind === 'ceiling'
+      ? `${e.moves} moves at most${e.moves === 20 ? ': floor = ceiling' : ''}`
+      : `${e.moves} moves at least`,
+  label: `${e.date} · ${e.who}`,
+})
+
+export function BoundsChart() {
+  const { tip, setTip } = useTip()
+  const svg = useRef<SVGSVGElement>(null)
+  // Keyboard focus shows the readout too. Like the other charts' marks, each point is a focusable SVG
+  // shape with a name, which browsers expose as a graphics symbol.
+  const focusTip = (t: Tip) => ({ onFocus: () => setTip(t), onBlur: () => setTip(null) })
+  const plotW = B_PLOT_W
+  const plotH = B_PLOT_H
+  const x = bx
+  const y = by
+  const steps = (kind: BoundEvent['kind']) => {
+    const ev = BOUND_EVENTS.filter((e) => e.kind === kind)
+    return `M${x(ev[0].year)} ${y(ev[0].moves)}${ev
+      .slice(1)
+      .map((e) => `H${x(e.year)}V${y(e.moves)}`)
+      .join('')}H${x(YEAR1)}`
+  }
+  // The pointer picks the nearest result, so results only months apart stay easy to hover.
+  useEffect(() => {
+    const el = svg.current
+    if (!el) return
+    const nearest = (ev: PointerEvent) => {
+      const box = el.getBoundingClientRect()
+      const px = ((ev.clientX - box.left) / box.width) * BW
+      const py = ((ev.clientY - box.top) / box.height) * BH
+      let best: BoundEvent | null = null
+      let bestD = 30 * 30
+      for (const e of BOUND_EVENTS) {
+        const d = (bx(e.year) - px) ** 2 + (by(e.moves) - py) ** 2
+        if (d < bestD) {
+          bestD = d
+          best = e
+        }
+      }
+      setTip(best ? boundTip(best, bx(best.year), by(best.moves)) : null)
+    }
+    const clear = () => setTip(null)
+    el.addEventListener('pointermove', nearest)
+    el.addEventListener('pointerdown', nearest)
+    el.addEventListener('pointerleave', clear)
+    return () => {
+      el.removeEventListener('pointermove', nearest)
+      el.removeEventListener('pointerdown', nearest)
+      el.removeEventListener('pointerleave', clear)
+    }
+  }, [setTip])
+  return (
+    <div class="chart-box">
+      <svg ref={svg} viewBox={`0 0 ${BW} ${BH}`}>
+        <title>God's number for the 3×3: the best proven upper and lower bounds from 1980 to 2010</title>
+        {[20, 30, 40, 50].map((m) => (
+          <g key={m}>
+            <line class="chart-grid" x1={BM.l} x2={BW - BM.r} y1={y(m)} y2={y(m)} />
+            <text class="chart-tick" x={BM.l - 6} y={y(m) + 4} text-anchor="end">
+              {m}
+            </text>
+          </g>
+        ))}
+        <line class="chart-axis" x1={BM.l} x2={BW - BM.r} y1={BM.t + plotH} y2={BM.t + plotH} />
+        {[1980, 1990, 2000, 2010].map((yr) => (
+          <text key={yr} class="chart-tick" x={x(yr)} y={BM.t + plotH + 16} text-anchor="middle">
+            {yr}
+          </text>
+        ))}
+        <text class="chart-title" x={BM.l + plotW / 2} y={BH - 4} text-anchor="middle">
+          Year
+        </text>
+        <text class="chart-title" x={0} y={12}>
+          Moves (half-turn metric)
+        </text>
+        <path class="bound-line ceiling" d={steps('ceiling')} />
+        <path class="bound-line floor" d={steps('floor')} />
+        <text class="chart-value" x={x(1981.5) + 2} y={y(52) - 8}>
+          52, Thistlethwaite (1981)
+        </text>
+        <text class="chart-value" x={x(1995.04) + 6} y={y(29) - 8}>
+          29, two-phase (1995)
+        </text>
+        <text class="chart-value" x={x(1980) + 4} y={y(18) + 14}>
+          18, by counting
+        </text>
+        <text class="chart-value" x={x(1995.04) + 6} y={y(20) - 7}>
+          20, superflip (1995)
+        </text>
+        <text class="chart-value" x={x(YEAR1)} y={y(20) + 15} text-anchor="end">
+          20 = 20 (2010)
+        </text>
+        {BOUND_EVENTS.map((e) => (
+          <circle key={e.key} class={`bound-dot ${e.kind}`} cx={x(e.year)} cy={y(e.moves)} r={3.5} />
+        ))}
+        {BOUND_EVENTS.map((e) => (
+          <circle
+            key={`hit-${e.key}`}
+            class={tip?.key === e.key ? 'chart-hit on' : 'chart-hit'}
+            cx={x(e.year)}
+            cy={y(e.moves)}
+            r={7}
+            tabIndex={0}
+            aria-label={`${e.date}: ${e.kind === 'ceiling' ? 'at most' : 'at least'} ${e.moves} moves, ${e.who}`}
+            {...focusTip(boundTip(e, x(e.year), y(e.moves)))}
+          />
+        ))}
+      </svg>
+      <ChartTip tip={tip} width={BW} height={BH} />
+    </div>
+  )
+}
+
+export function BoundsLegend() {
+  return (
+    <div class="chart-legend" aria-hidden="true">
+      <span>
+        <i class="key ceiling" />
+        Ceiling: proven upper bound
+      </span>
+      <span>
+        <i class="key floor" />
+        Floor: proven lower bound
+      </span>
+    </div>
+  )
+}
+
+export function BoundsTable() {
+  return (
+    <details class="table-twin">
+      <summary>Show the history as a table</summary>
+      <div class="table-wrap">
+        <table class="wide-twin">
+          <thead>
+            <tr>
+              <th scope="col">When</th>
+              <th scope="col" class="num">
+                Floor
+              </th>
+              <th scope="col" class="num">
+                Ceiling
+              </th>
+              <th scope="col">Result by</th>
+            </tr>
+          </thead>
+          <tbody>
+            {GODS_NUMBER_BOUNDS.map((row) => (
+              <tr key={`${row.date} ${row.who}`}>
+                <td>{row.date}</td>
+                <td class="num">{row.lower}</td>
+                <td class="num">{row.upper ?? '–'}</td>
+                <td>{row.who}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
   )
 }
