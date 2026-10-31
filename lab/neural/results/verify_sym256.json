@@ -1,0 +1,90 @@
+{
+ "name": "sym256",
+ "sizes": [
+  88,
+  256,
+  128,
+  64,
+  1
+ ],
+ "sym": true,
+ "over_weight": 4.0,
+ "params": 64001,
+ "positions_checked": 88179840,
+ "delta": 0.001,
+ "formats": {
+  "fp16": {
+   "weight_bytes": 128002,
+   "max_pred_diff": 5.7220458984375e-06,
+   "margins": {
+    "0": {
+     "corrections": 211990,
+     "correction_bytes_ef": 397482,
+     "correction_bytes_simple": 1059950,
+     "total_bytes": 525484,
+     "mean_floor": 8.09040363420936,
+     "exact_fraction": 0.4474778815656731,
+     "net_over_fraction": 0.11446057284748985,
+     "max_floor_minus_truth": 0
+    },
+    "1": {
+     "corrections": 34384,
+     "correction_bytes_ef": 77364,
+     "correction_bytes_simple": 171920,
+     "total_bytes": 205366,
+     "mean_floor": 7.20510956926209,
+     "exact_fraction": 0.11470593505272861,
+     "net_over_fraction": 0.018390790910938374,
+     "max_floor_minus_truth": 0
+    },
+    "2": {
+     "corrections": 4231,
+     "correction_bytes_ef": 11107,
+     "correction_bytes_simple": 21155,
+     "total_bytes": 139109,
+     "mean_floor": 6.223535470239002,
+     "exact_fraction": 0.018425900976912636,
+     "net_over_fraction": 0.002212285710656767,
+     "max_floor_minus_truth": 0
+    }
+   }
+  },
+  "int8": {
+   "weight_bytes": 65348,
+   "max_pred_diff": 5.7220458984375e-06,
+   "margins": {
+    "0": {
+     "corrections": 213837,
+     "correction_bytes_ef": 400945,
+     "correction_bytes_simple": 1069185,
+     "total_bytes": 466293,
+     "mean_floor": 8.093531061067926,
+     "exact_fraction": 0.44971018318926415,
+     "net_over_fraction": 0.11548570512262213,
+     "max_floor_minus_truth": 0
+    },
+    "1": {
+     "corrections": 34695,
+     "correction_bytes_ef": 78065,
+     "correction_bytes_simple": 173475,
+     "total_bytes": 143413,
+     "mean_floor": 7.209240762968044,
+     "exact_fraction": 0.11570970190011685,
+     "net_over_fraction": 0.018549058378876625,
+     "max_floor_minus_truth": 0
+    },
+    "2": {
+     "corrections": 4246,
+     "correction_bytes_ef": 11146,
+     "correction_bytes_simple": 21230,
+     "total_bytes": 76494,
+     "mean_floor": 6.227836090426111,
+     "exact_fraction": 0.018595327458067513,
+     "net_over_fraction": 0.0022216075692584607,
+     "max_floor_minus_truth": 0
+    }
+   }
+  }
+ },
+ "seconds": 43.154067277908325
+}

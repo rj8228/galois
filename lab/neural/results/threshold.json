@@ -1,0 +1,30 @@
+{
+ "threshold": 9,
+ "bit_entries": 1430298,
+ "bit_bytes": 178788,
+ "perm_map_bytes": 80640,
+ "perim5inv_bit9": {
+  "k": 5,
+  "perimeter_bytes": 7401,
+  "bytes": 266829,
+  "mean_floor": 8.058484093416364,
+  "exact_fraction": 0.5306959504576103,
+  "max_floor_minus_truth": 0
+ },
+ "perim6inv_bit9": {
+  "k": 6,
+  "perimeter_bytes": 36856,
+  "bytes": 296284,
+  "mean_floor": 8.355363788367047,
+  "exact_fraction": 0.5919642403524433,
+  "max_floor_minus_truth": 0
+ },
+ "perim7inv_bit9": {
+  "k": 7,
+  "perimeter_bytes": 155572,
+  "bytes": 415000,
+  "mean_floor": 8.590975193422896,
+  "exact_fraction": 0.8275756454082929,
+  "max_floor_minus_truth": 0
+ }
+}
