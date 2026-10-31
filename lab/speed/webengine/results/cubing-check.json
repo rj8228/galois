@@ -1,0 +1,29 @@
+{
+ "files": {
+  "build.json": 0,
+  "copies-1w__C8s_P1x3i__moves-14.json": 50,
+  "copies-2w__C8s_P1x3i__moves-14_sd2.json": 50,
+  "copies-4w__C8s_P1x3i__moves-14_sd2.json": 50,
+  "copies-4w__C8s_P1x3i__moves-16-first10_sd2.json": 10,
+  "copies-4w__C8s_P1x3i__random-idx0-idx7_sd2.json": 2,
+  "isolation.json": 0,
+  "node-check-shared__C8s_2_E6x8_2__moves-12.json": 50,
+  "node-check-shared__C8s_P1x3i__moves-12.json": 50,
+  "node-check-shared__C8s_P1x3i__moves-14.json": 50,
+  "race-3p1c__C8s_P1x3i__moves-14_sd2.json": 50,
+  "race-3p1c__C8s_P1x3i__moves-16-first10_sd2.json": 10,
+  "race-3p1c__C8s_P1x3i__moves-16_sd2.json": 50,
+  "race-3p1c__C8s_P1x3i__random-0-4-5-6-7_sd2.json": 5,
+  "shared-1w__C8s_P1x3i__moves-14.json": 50,
+  "shared-1w__C8s_P1x3i__moves-16-first10.json": 10,
+  "shared-2w__C8s_P1x3i__moves-14_sd2.json": 50,
+  "shared-2w__C8s_P1x3i__moves-16-first10_sd2.json": 10,
+  "shared-4w__C8s_P1x3i__moves-14_sd2.json": 50,
+  "shared-4w__C8s_P1x3i__moves-16-first10_sd2.json": 10,
+  "shared-4w__C8s_P1x3i__moves-16_sd2.json": 50,
+  "shared-4w__C8s_P1x3i__random-0-4-5-6-7_sd2.json": 5,
+  "shared-4w__C8s_P1x3i__random-idx0-idx7_sd2.json": 2
+ },
+ "solutions": 664,
+ "failures": []
+}
