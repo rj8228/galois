@@ -1,0 +1,255 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "cores": 4,
+  "threads_used": 4,
+  "ram_gb": 16.9,
+  "os": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+ },
+ "tables": [
+  {
+   "table": "corners",
+   "entries": 88179840,
+   "bytes_4bit": 44089920,
+   "bytes_2bit": 22044960,
+   "max": 11,
+   "mean_over_entries": 8.7641,
+   "build_seconds": 1.33,
+   "threads": 4,
+   "counts": [
+    1,
+    18,
+    243,
+    2874,
+    28000,
+    205416,
+    1168516,
+    5402628,
+    20776176,
+    45391616,
+    15139616,
+    64736
+   ]
+  },
+  {
+   "table": "corners_sym",
+   "entries": 6053616,
+   "bytes_4bit": 3026808,
+   "bytes_2bit": 1513404,
+   "max": 11,
+   "mean_over_entries": 8.7682,
+   "build_seconds": 0.17,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    23,
+    213,
+    1974,
+    13968,
+    79267,
+    370042,
+    1422664,
+    3106728,
+    1052624,
+    6108
+   ]
+  },
+  {
+   "table": "edges6",
+   "entries": 42577920,
+   "bytes_4bit": 21288960,
+   "bytes_2bit": 10644480,
+   "max": 10,
+   "mean_over_entries": 7.668,
+   "build_seconds": 1.44,
+   "threads": 4,
+   "counts": [
+    1,
+    15,
+    182,
+    2208,
+    25329,
+    258827,
+    2165560,
+    12222708,
+    24596752,
+    3305973,
+    365
+   ]
+  },
+  {
+   "table": "edges7",
+   "entries": 510935040,
+   "bytes_4bit": 255467520,
+   "bytes_2bit": 127733760,
+   "max": 11,
+   "mean_over_entries": 8.5076,
+   "build_seconds": 28.05,
+   "threads": 4,
+   "counts": [
+    1,
+    15,
+    191,
+    2455,
+    30519,
+    356462,
+    3766700,
+    32719467,
+    186297009,
+    274719633,
+    13042507,
+    81
+   ]
+  },
+  {
+   "table": "flip",
+   "entries": 2048,
+   "bytes_4bit": 1024,
+   "bytes_2bit": 512,
+   "max": 7,
+   "mean_over_entries": 4.6089,
+   "build_seconds": 0.0,
+   "threads": 4,
+   "counts": [
+    1,
+    2,
+    25,
+    202,
+    620,
+    900,
+    285,
+    13
+   ]
+  },
+  {
+   "table": "flip_slice",
+   "entries": 1013760,
+   "bytes_4bit": 506880,
+   "bytes_2bit": 253440,
+   "max": 9,
+   "mean_over_entries": 6.8365,
+   "build_seconds": 0.01,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    50,
+    532,
+    4804,
+    41832,
+    238263,
+    555636,
+    172314,
+    324
+   ]
+  },
+  {
+   "table": "phase1_sym",
+   "entries": 140908410,
+   "bytes_4bit": 70454205,
+   "bytes_2bit": 35227103,
+   "max": 12,
+   "mean_over_entries": 9.5255,
+   "build_seconds": 4.98,
+   "threads": 4,
+   "counts": [
+    1,
+    1,
+    5,
+    44,
+    487,
+    5841,
+    68364,
+    776568,
+    7950748,
+    52098876,
+    76236234,
+    3771112,
+    129
+   ]
+  },
+  {
+   "table": "slice",
+   "entries": 495,
+   "bytes_4bit": 248,
+   "bytes_2bit": 124,
+   "max": 5,
+   "mean_over_entries": 3.1919,
+   "build_seconds": 0.0,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    50,
+    286,
+    152,
+    2
+   ]
+  },
+  {
+   "table": "twist",
+   "entries": 2187,
+   "bytes_4bit": 1094,
+   "bytes_2bit": 547,
+   "max": 6,
+   "mean_over_entries": 4.4591,
+   "build_seconds": 0.0,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    34,
+    186,
+    816,
+    1018,
+    128
+   ]
+  },
+  {
+   "table": "twist_flip",
+   "entries": 4478976,
+   "bytes_4bit": 2239488,
+   "bytes_2bit": 1119744,
+   "max": 9,
+   "mean_over_entries": 7.1691,
+   "build_seconds": 0.07,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    46,
+    504,
+    5662,
+    61008,
+    549711,
+    2422226,
+    1431344,
+    8470
+   ]
+  },
+  {
+   "table": "twist_slice",
+   "entries": 1082565,
+   "bytes_4bit": 541283,
+   "bytes_2bit": 270642,
+   "max": 9,
+   "mean_over_entries": 6.7391,
+   "build_seconds": 0.02,
+   "threads": 4,
+   "counts": [
+    1,
+    4,
+    50,
+    586,
+    6184,
+    54066,
+    296322,
+    582492,
+    142520,
+    340
+   ]
+  }
+ ]
+}
