@@ -4,6 +4,8 @@ Galois solves cubes optimally with a framework of three parts. A **ceiling** is 
 
 This lab asks one question: **how can the same guarantee be reached with less work?** We use the 2×2 as a microscope, because the true distance of all 3,674,160 positions is known (`lab/2x2`). Then we check what carries over to the 3×3 (`lab/3x3`).
 
+**Round 1 results:** [SYNTHESIS.md](SYNTHESIS.md) (atlas, compass, 3×3 anatomy).
+
 ## What we already know: the anatomy of an optimal solve
 
 Measured on the same 1,000 random 2×2 positions (`lab/2x2/exp7_where_time_goes.py`, `exp8_doors_and_compass.py`, findings in `lab/2x2/FINDINGS.md` §8):
