@@ -4,7 +4,28 @@ Speed lab task T3 (issue #23, part of #20). The question: do stored downhill mas
 
 ## Verdict
 
-VERDICT
+**Yes. Downhill masks make the desktop set about 1.5 times faster, and they fit in its memory budget once packed in 18 bits.** The search is the same: the same solutions, and the same expansions in every round on every solve.
+
+- **Speed-up, one thread, down masks packed in 18 bits (331 MB):** 1.42× on the 14-move set, and 1.46× on the 16-move set (7.23 s → 4.97 s per solve). With uint32 masks (588 MB) it is 1.48× and 1.51×. On the two random states timed it is 1.59× (90 s → 56 s, uint32).
+- **Full masks (down and up, 1.18 GB) give 1.63–1.68×.** That is the best time, but it is far over the 500 MB budget.
+- **Two threads keep the gain.** With `CUBE3_SPLIT`, uint32 down masks are 1.53× faster (3.44 s → 2.25 s at 16 moves), and full masks 1.68×. The extra memory traffic doesn't eat the gain when two threads share it.
+- **Why it pays:** the masks skip 75% of the children the baseline generates (86% with full masks), as T4 predicted. Instead of 87.2 million children per 16-move solve, the masked search generates 21.5 million and reads 13.0 million masks.
+  - Each skipped child would have cost a cube multiply, a coordinate update and at least one table read.
+  - The time saved (about 1.5×) is less than the count saved (about 4×). A tight node still needs its mask reads, which are random accesses, and the surviving children are read as before.
+- **Cost: 331 MB and about 12 seconds.**
+  - **Memory:** 18-bit masks take 331 MB. With the 76.8 MB floor that is 408 MB, inside the 500 MB budget. uint32 masks (661 MB in all) are over it.
+  - **Speed of the packed layout:** it costs about 4% of speed against uint32 (1.46× instead of 1.51×). Unpacking is a shift and a mask.
+  - **Build:** the masks build in 6.3 s on 4 threads and are written in 4.7 s. Packing to 18 bits takes about a second at load.
+- **Memory spent on masks beats memory spent on a stronger floor.** In `lab/3x3/results/bench-moves-16.json`, the bigger desktop floors search 1–2% fewer nodes than `C8s+P1x3i`, but they are slower:
+  - `C8s+E7x2i+P1x3i` (332 MB) takes 1.58× the time.
+  - `C8s+E7x8i+P1x3i` (332 MB) takes 2.6× the time.
+
+  Masks spend about the same memory and are 1.46× faster.
+- **For the desktop set: yes.** Use the 18-bit down masks. Full masks would only make sense with a bigger budget, or packed into 36 bits (661 MB), which this run didn't test.
+- **For the browser (T5):** the build is a single pass over the 141 million phase-1 entries, 18 neighbour reads each, and needs only the floor table. It could run in a web worker.
+  - **Time:** single-threaded WebAssembly is untested here; a guess is 30–60 s, or the 331 MB could be downloaded instead.
+  - **Memory:** 331 MB plus the floor is too much for a phone, and fine for a desktop browser tab.
+  - **Still to measure:** the in-browser speed-up. WebAssembly's memory access pattern differs from native C.
 
 ## Results
 
@@ -33,4 +54,12 @@ So every child the masks skip is one the baseline generates and then cuts. Every
 
 ## Caveats
 
-CAVEATS
+- **Timing noise.** Each mode ran as its own process, one at a time, on a 4-core cloud VM. The modes took turns in chunks of 10 scrambles, so a drift in machine speed hits them alike. Each set was timed once, so a few percent between modes (uint32 against packed) is near the noise; the 1.4–1.7× gains are far above it.
+- **The baseline is lab/3x3's `dfs()` in the same binary.** Its node counts equal lab/3x3's on every single-thread solve. On this idle machine it runs a 16-move solve in 7.2 s, against 9.6 s in lab/3x3's bench, which ran 4 solves at once. Comparisons with lab/3x3's other floors use ratios within that bench, not absolute times.
+- **The 12-move set is too fast to time well.** Solves take about 1 ms, and times are stored to 0.1 ms.
+- **Random states: only 2 solves, baseline and uint32 down masks.** They are lab/3x3's two cheapest desktop random states (#4 and #7). Full and packed masks were not timed on them.
+- **Not tried:**
+  - huge pages for the masks (transparent huge pages are opt-in on this machine)
+  - packing full masks into 36 bits
+  - masks for the inverse lookups, which can't have them
+  - combining masks with a compass or with T6's ceiling race

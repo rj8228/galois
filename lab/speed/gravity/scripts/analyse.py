@@ -53,7 +53,7 @@ for f in sorted(os.listdir(RAW)):
         continue
     runs[(m.group(1), int(m.group(2)), int(m.group(3)))] = load(os.path.join(RAW, f))
 
-checked_lengths = checked_nodes = 0
+checked_lengths = checked_nodes = checked_proof_rounds = 0
 for (st, th, mode), (meta, solves) in runs.items():
     tag = f"{st} t{th} m{mode}"
     for s in solves:
@@ -62,9 +62,15 @@ for (st, th, mode), (meta, solves) in runs.items():
         if L and L["length"] > 0:
             check(L["length"] == s["length"], f"{tag}: length {s['length']} != lab/3x3 {L['length']}")
             checked_lengths += 1
-            if mode == 0:
+            if mode == 0 and th == 1:
                 check(L["nodes"] == s["nodes"], f"{tag}: nodes {s['nodes']} != lab/3x3 {L['nodes']}")
                 checked_nodes += 1
+            elif mode == 0:  # split mode: the final round is a race; the proof rounds must still match
+                last = str(s["length"])
+                for k, (n, sk) in s["nodes_per_bound"].items():
+                    if k != last:
+                        check(L["nodes_per_bound"][k] == n, f"{tag}: proof round {k}: {n} != lab/3x3")
+                checked_proof_rounds += 1
     base = runs.get((st, th, 0))
     if mode and base:
         bs = {s["scramble"]: s for s in base[1]}
@@ -74,6 +80,10 @@ for (st, th, mode), (meta, solves) in runs.items():
                 check(b["solution"] == s["solution"], f"{tag}: solution differs from baseline")
                 for k, (n, sk) in s["nodes_per_bound"].items():
                     check(b["nodes_per_bound"][k][0] == n + sk, f"{tag}: round {k}: {n} + {sk} != {b['nodes_per_bound'][k][0]}")
+            else:
+                for k, (n, sk) in s["nodes_per_bound"].items():
+                    if k != str(s["length"]):
+                        check(b["nodes_per_bound"][k][0] == n + sk, f"{tag}: proof round {k} differs from baseline")
             check(b["length"] == s["length"], f"{tag}: length differs from baseline")
 
 if fails:
@@ -106,7 +116,7 @@ for t in ("corners_sym", "phase1_sym"):
 mc = json.load(open(os.path.join(ROOT, "results", "maskcheck.json")))
 mcw = json.load(open(os.path.join(ROOT, "results", "maskcheck-wrong-frame.json")))
 json.dump({"floor": FLOOR, "rows": rows, "mask_builds": builds, "maskcheck": mc, "maskcheck_wrong_frame": mcw,
-           "checks": {"lengths_vs_lab3x3": checked_lengths, "baseline_nodes_vs_lab3x3": checked_nodes}},
+           "checks": {"lengths_vs_lab3x3": checked_lengths, "baseline_nodes_vs_lab3x3": checked_nodes, "two_thread_proof_rounds_vs_lab3x3": checked_proof_rounds}},
           open(os.path.join(ROOT, "results", "gravity.json"), "w"), indent=1)
 
 frontier = []
@@ -154,7 +164,9 @@ out += ["", f"**Mapping check:** {fmt(mc['positions'])} positions (half uniforml
         "so the check does catch a backwards map.", "",
         f"**Checks:** every solution replayed to solved; single-thread masked runs gave the baseline's solution, and per round "
         f"children generated + skipped = the baseline's children generated, on every solve; {checked_nodes} baseline node counts "
-        f"and {checked_lengths} lengths equal lab/3x3's, 0 differences; no run capped."]
+        f"and {checked_lengths} lengths equal lab/3x3's, 0 differences. Two-thread runs race in the final round, so only their "
+        f"proof rounds are compared: {checked_proof_rounds} baseline solves match lab/3x3 round by round, and masked runs' generated + "
+        f"skipped match the baseline's in every proof round. No run capped."]
 
 fp = os.path.join(ROOT, "FINDINGS.md")
 if os.path.exists(fp):
