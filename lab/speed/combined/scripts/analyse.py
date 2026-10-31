@@ -108,7 +108,7 @@ def rate(rows, pred=lambda r, b: True, min_bound=4):
 rs_e = load("rs-race-masks-help")
 rs5_b = load("rs5-split-masks")
 rs5_c = load("rs5-race")
-rs5_e2 = load("rs5-race-masks-help-2s10")
+rs5_e2 = load("rs5-race-masks-help-5s25")
 no_help = lambda r, b: str(b) not in r["helper_nodes_per_bound"]
 R = {
     "split_4t": rate(load("m16-split")),  # 4 provers, dfs (16-move set: (a) was not run on random states)
@@ -127,8 +127,8 @@ summary["rates_nodes_per_s"] = {k: round(v) if v else None for k, v in R.items()
 B = bench("random-state")
 t6 = {r["index"]: r for r in map(json.loads, open(T6 / "traces.jsonl")) if r["set"] == "random-state"}
 lines = []
-for tag, rows, conf in [("race-masks-help", rs_e, "c-4t-race-masks-help"), ("split-masks", rs5_b, "c-4t-split-masks"),
-                        ("race", rs5_c, "c-4t-race"), ("race-masks-help-2s10", rs5_e2, "c-4t-race-masks-help, help max(2 s, 10%)")]:
+for tag, rows, conf in [("race-masks-help", rs_e, "c-4t-race-masks-help, help max(60 s, 25%)"), ("split-masks", rs5_b, "c-4t-split-masks"),
+                        ("race", rs5_c, "c-4t-race"), ("race-masks-help-5s25", rs5_e2, "c-4t-race-masks-help, help max(5 s, 25%) (as in the brief)")]:
     if not rows:
         continue
     summary["checks"][f"random-state {tag}"] = check(rows, "random-state")
@@ -204,8 +204,8 @@ if rs_e:
 if rs5_e2 and rs_e:
     idx = [r["index"] for r in rs5_e2]
     rsum["help_threshold"] = {
-        "max(5 s, 25%)": stats([r["secs"] for r in rs_e if r["index"] in idx]),
-        "max(2 s, 10%)": stats([r["secs"] for r in rs5_e2]),
+        "max(60 s, 25%)": stats([r["secs"] for r in rs_e if r["index"] in idx]),
+        "max(5 s, 25%)": stats([r["secs"] for r in rs5_e2]),
         "indices": idx,
     }
 summary["random-state"] = rsum
@@ -218,7 +218,7 @@ notes = {
     "c-4t-split-masks": "4 prover threads, gdfs with 18-bit packed down masks",
     "c-4t-race": "3 prover threads + T6 ceiling thread",
     "c-4t-race-masks": "3 masked prover threads + ceiling thread",
-    "c-4t-race-masks-help": "3 masked prover threads + ceiling thread that helps prove once stuck for max(5 s, 25% of elapsed)",
+    "c-4t-race-masks-help": "3 masked prover threads + ceiling thread that helps prove once stuck for max(60 s, 25% of elapsed)",
 }
 frontier = []
 for impl in CONF:
