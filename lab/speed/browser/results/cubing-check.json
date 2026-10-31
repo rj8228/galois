@@ -1,0 +1,21 @@
+{
+ "files": {
+  "C8s_2_E6x8_2__moves-12__1w.json": 50,
+  "C8s_2_E6x8_2__moves-12__4w_sd2.json": 50,
+  "C8s_2_E6x8_2__moves-14__1w.json": 50,
+  "C8s_2_E6x8_2__moves-14__4w_sd2.json": 50,
+  "C8s_P1x3i__moves-12__1w.json": 50,
+  "C8s_P1x3i__moves-14__1w.json": 50,
+  "C8s_P1x3i__moves-14__2w_sd2.json": 50,
+  "C8s_P1x3i__moves-14__4w_sd2.json": 50,
+  "C8s_P1x3i__moves-16-first10__1w.json": 10,
+  "C8s_P1x3i__moves-16-first10__2w_sd2.json": 10,
+  "C8s_P1x3i__moves-16-first10__4w_sd2.json": 10,
+  "C8s_P1x3i__moves-16-first10__4w_sd3.json": 10,
+  "C8s_P1x3i__moves-16-first10__8w_sd2.json": 10,
+  "C8s_P1x3i__random-idx0-idx7__4w_sd2.json": 2,
+  "build.json": 0
+ },
+ "solutions": 452,
+ "failures": []
+}

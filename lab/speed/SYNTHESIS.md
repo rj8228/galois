@@ -1,5 +1,7 @@
 # Speed lab, round 1: what we found
 
+**Round 2 is in [SYNTHESIS-2.md](SYNTHESIS-2.md).**
+
 Three tasks, stitched together: the search atlas of every 2×2 position (T1, `atlas/`), the compass (T2, `compass/`) and the 3×3 anatomy (T4, `anatomy3/`). Each folder's FINDINGS.md has the full tables and checks. Every solve in every task was checked: lengths against the 2×2 truth table, and 3×3 solutions replayed and compared with `lab/3x3`.
 
 ## In one paragraph

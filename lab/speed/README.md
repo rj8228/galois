@@ -4,7 +4,12 @@ Galois solves cubes optimally with a framework of three parts. A **ceiling** is 
 
 This lab asks one question: **how can the same guarantee be reached with less work?** We use the 2×2 as a microscope, because the true distance of all 3,674,160 positions is known (`lab/2x2`). Then we check what carries over to the 3×3 (`lab/3x3`).
 
-**Round 1 results:** [SYNTHESIS.md](SYNTHESIS.md) (atlas, compass, 3×3 anatomy). **Round 2** moves to the 3×3: a ceiling solver racing the prover (T6), downhill masks (T3) and browser speed (T5).
+**Round 1 results:** [SYNTHESIS.md](SYNTHESIS.md) (atlas, compass, 3×3 anatomy).
+
+**Round 2 results:** [SYNTHESIS-2.md](SYNTHESIS-2.md) (ceiling race, downhill masks, browser speed). Three findings:
+- The ceiling race beats splitting the prover over two threads 2× at 16 moves.
+- Downhill masks make every round 1.46× faster in 331 MB.
+- The solver runs in a browser at 0.55× native speed per core.
 
 ## What we already know: the anatomy of an optimal solve
 
@@ -35,11 +40,11 @@ Each task runs in its own cloud session, on its own branch, in its own folder.
 | T1 Search atlas: dataset + visuals | [T1-atlas.md](T1-atlas.md) | `speed-atlas` | `lab/speed/atlas/` | Done (round 1) |
 | T2 Compass: learned move ordering | [T2-compass.md](T2-compass.md) | `speed-compass` | `lab/speed/compass/` | Done (round 1) |
 | T4 3×3 anatomy: does it hold at scale? | [T4-3x3-anatomy.md](T4-3x3-anatomy.md) | `speed-3x3-anatomy` | `lab/speed/anatomy3/` | Done (round 1) |
-| T6 Ceiling race: the prover only proves | [T6-ceiling-race.md](T6-ceiling-race.md) | `speed-ceiling` | `lab/speed/ceiling/` | Round 2 |
-| T3 Gravity on the 3×3: downhill masks | [T3-gravity.md](T3-gravity.md) | `speed-gravity` | `lab/speed/gravity/` | Round 2 (rescoped to the 3×3) |
-| T5 Browser speed | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` | Round 2 |
+| T6 Ceiling race: the prover only proves | [T6-ceiling-race.md](T6-ceiling-race.md) | `speed-ceiling` | `lab/speed/ceiling/` | Done (round 2, #32) |
+| T3 Gravity on the 3×3: downhill masks | [T3-gravity.md](T3-gravity.md) | `speed-gravity` | `lab/speed/gravity/` | Done (round 2, #33) |
+| T5 Browser speed | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` | Done (round 2, #31) |
 
-Cloud credit is limited, so each task is boxed to **about 2 hours of session time**. Round 2 runs T6 and T3 in cloud sessions, plus T5 if the credit allows; the main session stitches the results. Best twin, round 1's other lead, is folded into T6 as a short check: the desktop floor gives a position and all its symmetric twins the same value, so only the inverse searches a different tree. GitHub issues: tracker #20; tasks #21–#25 and #29.
+Cloud credit is limited, so each task is boxed to **about 2 hours of session time**. The main session reviews each pull request, reruns part of it, and stitches the results. Best twin, round 1's other lead, was folded into T6 as a short check and not reached; the desktop floor gives a position and all its symmetric twins the same value, so only the inverse searches a different tree. GitHub issues: tracker #20; tasks #21–#25 and #29.
 
 ## Rules for every task
 
