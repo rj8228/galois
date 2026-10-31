@@ -1,0 +1,1819 @@
+{
+ "positions": 3674160,
+ "symmetry_classes": 613058,
+ "distance_invariant_on_classes": true,
+ "doors_invariant_on_classes": true,
+ "floors": {
+  "400 KB + mirror": {
+   "mean_lookups": 85.13921576632482,
+   "mean_proof": 27.123437193807565,
+   "mean_find": 58.015778572517256,
+   "find_share_of_all_work": 0.6814225154686506,
+   "cut_on_arrival_share": 0.7866708263550231,
+   "cut_below_tight_parent_share": 0.7399531137085354,
+   "expansions_share": 0.20158370487363397,
+   "tail": {
+    "top_0.1": 0.01338030672630475,
+    "top_1": 0.07187855678361256,
+    "top_10": 0.337911202694783,
+    "top_50": 0.7931526585732189
+   },
+   "by_distance": {
+    "0": {
+     "mean_lookups": 1.0,
+     "mean_proof": 0.0,
+     "mean_find": 1.0,
+     "work_share": 3.196776615972897e-09
+    },
+    "1": {
+     "mean_lookups": 6.0,
+     "mean_proof": 0.0,
+     "mean_find": 6.0,
+     "work_share": 1.7262593726253644e-07
+    },
+    "2": {
+     "mean_lookups": 9.5,
+     "mean_proof": 0.0,
+     "mean_find": 9.5,
+     "work_share": 1.6399464039940961e-06
+    },
+    "3": {
+     "mean_lookups": 12.981308411214954,
+     "mean_proof": 0.0,
+     "mean_find": 12.981308411214954,
+     "work_share": 1.3320968158759063e-05
+    },
+    "4": {
+     "mean_lookups": 16.450460205739038,
+     "mean_proof": 0.0,
+     "mean_find": 16.450460205739038,
+     "work_share": 9.71308606997205e-05
+    },
+    "5": {
+     "mean_lookups": 19.877502001601282,
+     "mean_proof": 0.0,
+     "mean_find": 19.877502001601282,
+     "work_share": 0.0006349309843580729
+    },
+    "6": {
+     "mean_lookups": 23.279499760651028,
+     "mean_proof": 0.0,
+     "mean_find": 23.279499760651028,
+     "work_share": 0.003731089056343223
+    },
+    "7": {
+     "mean_lookups": 26.7300690879685,
+     "mean_proof": 0.025402573658673794,
+     "mean_find": 26.704666514309825,
+     "work_share": 0.019442964807507807
+    },
+    "8": {
+     "mean_lookups": 34.00232164694416,
+     "mean_proof": 1.2850269862724004,
+     "mean_find": 32.71729466067176,
+     "work_share": 0.09457493549839846
+    },
+    "9": {
+     "mean_lookups": 74.0494107264317,
+     "mean_proof": 15.00557701557623,
+     "mean_find": 59.04383371085547,
+     "work_share": 0.4468666204193256
+    },
+    "10": {
+     "mean_lookups": 213.47006252003848,
+     "mean_proof": 108.79646040397563,
+     "mean_find": 104.67360211606284,
+     "work_share": 0.4256911657215679
+    },
+    "11": {
+     "mean_lookups": 1058.4160363086232,
+     "mean_proof": 884.2745839636914,
+     "mean_find": 174.14145234493193,
+     "work_share": 0.008946025914522586
+    }
+   },
+   "by_gap": {
+    "0": {
+     "positions": 1563495,
+     "mean_lookups": 37.11212443915714,
+     "work_share": 0.1854917515634899
+    },
+    "1": {
+     "positions": 1418923,
+     "mean_lookups": 83.65075694734668,
+     "work_share": 0.37943814931108455
+    },
+    "2": {
+     "positions": 602034,
+     "mean_lookups": 177.0611958793025,
+     "work_share": 0.3407663493841367
+    },
+    "3": {
+     "positions": 86654,
+     "mean_lookups": 315.76458097721974,
+     "work_share": 0.08747104571527703
+    },
+    "4": {
+     "positions": 3008,
+     "mean_lookups": 687.829454787234,
+     "work_share": 0.00661410204745838
+    },
+    "5": {
+     "positions": 45,
+     "mean_lookups": 1468.6666666666667,
+     "work_share": 0.00021127496654964876
+    },
+    "6": {
+     "positions": 1,
+     "mean_lookups": 2292.0,
+     "work_share": 7.32701200380988e-06
+    }
+   },
+   "work_map": {
+    "0,0": {
+     "positions": 1,
+     "mean_lookups": 1.0,
+     "work_share": 3.196776615972897e-09
+    },
+    "1,0": {
+     "positions": 9,
+     "mean_lookups": 6.0,
+     "work_share": 1.7262593726253644e-07
+    },
+    "2,0": {
+     "positions": 54,
+     "mean_lookups": 9.5,
+     "work_share": 1.6399464039940961e-06
+    },
+    "3,0": {
+     "positions": 321,
+     "mean_lookups": 12.981308411214954,
+     "work_share": 1.3320968158759063e-05
+    },
+    "4,0": {
+     "positions": 1847,
+     "mean_lookups": 16.450460205739038,
+     "work_share": 9.71308606997205e-05
+    },
+    "5,0": {
+     "positions": 9992,
+     "mean_lookups": 19.877502001601282,
+     "work_share": 0.0006349309843580729
+    },
+    "6,0": {
+     "positions": 50136,
+     "mean_lookups": 23.279499760651028,
+     "work_share": 0.003731089056343223
+    },
+    "7,0": {
+     "positions": 226958,
+     "mean_lookups": 26.701394090536574,
+     "work_share": 0.019372769986574275
+    },
+    "7,1": {
+     "positions": 578,
+     "mean_lookups": 37.98961937716263,
+     "work_share": 7.019482093353288e-05
+    },
+    "8,0": {
+     "positions": 765764,
+     "mean_lookups": 32.08734675435252,
+     "work_share": 0.0785490691512364
+    },
+    "8,1": {
+     "positions": 102451,
+     "mean_lookups": 47.79225190578911,
+     "work_share": 0.01565258193849152
+    },
+    "8,2": {
+     "positions": 1855,
+     "mean_lookups": 62.85822102425876,
+     "work_share": 0.00037275054697567177
+    },
+    "8,3": {
+     "positions": 2,
+     "mean_lookups": 83.5,
+     "work_share": 5.338616948674738e-07
+    },
+    "9,0": {
+     "positions": 507761,
+     "mean_lookups": 51.070795118175674,
+     "work_share": 0.0828980375854681
+    },
+    "9,1": {
+     "positions": 1152238,
+     "mean_lookups": 76.45099363152404,
+     "work_share": 0.28160322093913237
+    },
+    "9,2": {
+     "positions": 223463,
+     "mean_lookups": 112.21669806634655,
+     "work_share": 0.08016326551958884
+    },
+    "9,3": {
+     "positions": 4285,
+     "mean_lookups": 160.70338389731623,
+     "work_share": 0.0022013451326315606
+    },
+    "9,4": {
+     "positions": 1,
+     "mean_lookups": 235.0,
+     "work_share": 7.512425047536308e-07
+    },
+    "10,0": {
+     "positions": 652,
+     "mean_lookups": 92.87883435582822,
+     "work_share": 0.0001935872015334707
+    },
+    "10,1": {
+     "positions": 163648,
+     "mean_lookups": 156.93172541063745,
+     "work_share": 0.08209822006003477
+    },
+    "10,2": {
+     "positions": 376101,
+     "mean_lookups": 215.24254654999586,
+     "work_share": 0.25878845599592715
+    },
+    "10,3": {
+     "positions": 81072,
+     "mean_lookups": 312.93730264456286,
+     "work_share": 0.08110367088703943
+    },
+    "10,4": {
+     "positions": 2320,
+     "mean_lookups": 470.8810344827586,
+     "work_share": 0.0034922994334598955
+    },
+    "10,5": {
+     "positions": 7,
+     "mean_lookups": 667.2857142857143,
+     "work_share": 1.4932143573209403e-05
+    },
+    "11,1": {
+     "positions": 8,
+     "mean_lookups": 544.75,
+     "work_share": 1.3931552492409886e-05
+    },
+    "11,2": {
+     "positions": 615,
+     "mean_lookups": 733.4,
+     "work_share": 0.0014418773216450314
+    },
+    "11,3": {
+     "positions": 1295,
+     "mean_lookups": 1006.2007722007722,
+     "work_share": 0.004165495833911164
+    },
+    "11,4": {
+     "positions": 687,
+     "mean_lookups": 1421.1237263464338,
+     "work_share": 0.003121051371493731
+    },
+    "11,5": {
+     "positions": 38,
+     "mean_lookups": 1616.2894736842106,
+     "work_share": 0.00019634282297643937
+    },
+    "11,6": {
+     "positions": 1,
+     "mean_lookups": 2292.0,
+     "work_share": 7.32701200380988e-06
+    }
+   },
+   "gap_law_base": 2.1555267903902937,
+   "top1pct_profile": {
+    "mean_distance": 10.0693195018505,
+    "mean_gap": 2.4137558419104734,
+    "median_doors": 7.0,
+    "share_unique_door": 0.031877245589864114
+   },
+   "overall_profile": {
+    "mean_distance": 8.755576240555664,
+    "mean_gap": 0.7879939904631262,
+    "median_doors": 2.0,
+    "share_unique_door": 0.33913329849543844
+   },
+   "corr_find_doors_raw": 0.24184868816314795,
+   "corr_find_doors_within_distance": -0.2813495493425385,
+   "corr_find_doors_by_distance": {
+    "5": -0.09963229594114642,
+    "6": -0.12095260361258535,
+    "7": -0.12735309304948128,
+    "8": -0.15211384677197026,
+    "9": -0.30574865846487653,
+    "10": -0.35214558550134134,
+    "11": -0.26988799516822753
+   },
+   "symmetry_spread": {
+    "median_max_over_min": 2.41025641025641
+   }
+  },
+  "100 KB + mirror": {
+   "mean_lookups": 395.1346275066954,
+   "mean_proof": 177.25395246804712,
+   "mean_find": 217.8806750386483,
+   "find_share_of_all_work": 0.551408709516243,
+   "cut_on_arrival_share": 0.8249295933799881,
+   "cut_below_tight_parent_share": 0.7728535725174825,
+   "expansions_share": 0.1725396236149637,
+   "tail": {
+    "top_0.1": 0.013997534900145875,
+    "top_1": 0.07772635963586864,
+    "top_10": 0.38006114781882766,
+    "top_50": 0.8659592894800126
+   },
+   "by_distance": {
+    "0": {
+     "mean_lookups": 1.0,
+     "mean_proof": 0.0,
+     "mean_find": 1.0,
+     "work_share": 6.888058780913761e-10
+    },
+    "1": {
+     "mean_lookups": 6.0,
+     "mean_proof": 0.0,
+     "mean_find": 6.0,
+     "work_share": 3.719551741693431e-08
+    },
+    "2": {
+     "mean_lookups": 9.5,
+     "mean_proof": 0.0,
+     "mean_find": 9.5,
+     "work_share": 3.53357415460876e-07
+    },
+    "3": {
+     "mean_lookups": 12.981308411214954,
+     "mean_proof": 0.0,
+     "mean_find": 12.981308411214954,
+     "work_share": 2.8702540940067644e-06
+    },
+    "4": {
+     "mean_lookups": 16.450460205739038,
+     "mean_proof": 0.0,
+     "mean_find": 16.450460205739038,
+     "work_share": 2.0928677799928373e-05
+    },
+    "5": {
+     "mean_lookups": 19.877502001601282,
+     "mean_proof": 0.0,
+     "mean_find": 19.877502001601282,
+     "work_share": 0.00013680786828299676
+    },
+    "6": {
+     "mean_lookups": 23.332036859741503,
+     "mean_proof": 0.019147917663954045,
+     "mean_find": 23.31288894207755,
+     "work_share": 0.0008057478960443396
+    },
+    "7": {
+     "mean_lookups": 31.93440598410801,
+     "mean_proof": 1.7936150762956191,
+     "mean_find": 30.14079090781239,
+     "work_share": 0.0050050198691462666
+    },
+    "8": {
+     "mean_lookups": 81.91303938064895,
+     "mean_proof": 16.60202833788468,
+     "mean_find": 65.31101104276428,
+     "work_share": 0.04909136162259488
+    },
+    "9": {
+     "mean_lookups": 332.6756701636023,
+     "mean_proof": 106.96520933938217,
+     "mean_find": 225.71046082422018,
+     "work_share": 0.43257548548021557
+    },
+    "10": {
+     "mean_lookups": 1168.1704119910228,
+     "mean_proof": 675.7657390189163,
+     "mean_find": 492.4046729721064,
+     "work_share": 0.5019360828192305
+    },
+    "11": {
+     "mean_lookups": 5724.406202723147,
+     "mean_proof": 4893.843419062027,
+     "mean_find": 830.5627836611195,
+     "work_share": 0.010425304270852748
+    }
+   },
+   "by_gap": {
+    "0": {
+     "positions": 352015,
+     "mean_lookups": 35.81878329048478,
+     "work_share": 0.008684980426578762
+    },
+    "1": {
+     "positions": 955423,
+     "mean_lookups": 130.59800318811668,
+     "work_share": 0.0859466736835046
+    },
+    "2": {
+     "positions": 1628462,
+     "mean_lookups": 350.9855397301257,
+     "work_share": 0.3936984434439847
+    },
+    "3": {
+     "positions": 664898,
+     "mean_lookups": 940.9252246209193,
+     "work_share": 0.43093025128741214
+    },
+    "4": {
+     "positions": 72299,
+     "mean_lookups": 1549.2717188342854,
+     "work_share": 0.07715369469449401
+    },
+    "5": {
+     "positions": 1046,
+     "mean_lookups": 4819.803059273422,
+     "work_share": 0.0034726244776799664
+    },
+    "6": {
+     "positions": 17,
+     "mean_lookups": 9678.470588235294,
+     "work_share": 0.0001133319863458865
+    }
+   },
+   "work_map": {
+    "0,0": {
+     "positions": 1,
+     "mean_lookups": 1.0,
+     "work_share": 6.888058780913761e-10
+    },
+    "1,0": {
+     "positions": 9,
+     "mean_lookups": 6.0,
+     "work_share": 3.719551741693431e-08
+    },
+    "2,0": {
+     "positions": 54,
+     "mean_lookups": 9.5,
+     "work_share": 3.53357415460876e-07
+    },
+    "3,0": {
+     "positions": 321,
+     "mean_lookups": 12.981308411214954,
+     "work_share": 2.8702540940067644e-06
+    },
+    "4,0": {
+     "positions": 1847,
+     "mean_lookups": 16.450460205739038,
+     "work_share": 2.0928677799928373e-05
+    },
+    "5,0": {
+     "positions": 9992,
+     "mean_lookups": 19.877502001601282,
+     "work_share": 0.00013680786828299676
+    },
+    "6,0": {
+     "positions": 50040,
+     "mean_lookups": 23.311510791366906,
+     "work_share": 0.0008034975672406151
+    },
+    "6,1": {
+     "positions": 96,
+     "mean_lookups": 34.03125,
+     "work_share": 2.250328803724526e-06
+    },
+    "7,0": {
+     "positions": 187490,
+     "mean_lookups": 29.341260867246252,
+     "work_share": 0.003789254074915132
+    },
+    "7,1": {
+     "positions": 39864,
+     "mean_lookups": 44.03095524784266,
+     "work_share": 0.001209026517519888
+    },
+    "7,2": {
+     "positions": 182,
+     "mean_lookups": 53.75824175824176,
+     "work_share": 6.739276711246025e-06
+    },
+    "8,0": {
+     "positions": 102261,
+     "mean_lookups": 55.811237910836,
+     "work_share": 0.003931230742507326
+    },
+    "8,1": {
+     "positions": 659538,
+     "mean_lookups": 80.80090760502048,
+     "work_share": 0.03670733933814874
+    },
+    "8,2": {
+     "positions": 107875,
+     "mean_lookups": 113.17512862108923,
+     "work_share": 0.008409470473848017
+    },
+    "8,3": {
+     "positions": 398,
+     "mean_lookups": 158.02261306532662,
+     "work_share": 4.332106809080092e-05
+    },
+    "9,1": {
+     "positions": 255925,
+     "mean_lookups": 272.4491550258865,
+     "work_share": 0.048028057499032245
+    },
+    "9,2": {
+     "positions": 1436227,
+     "mean_lookups": 331.2045407863799,
+     "work_share": 0.32765455799453197
+    },
+    "9,3": {
+     "positions": 194911,
+     "mean_lookups": 421.6803618061577,
+     "work_share": 0.05661305224195902
+    },
+    "9,4": {
+     "positions": 685,
+     "mean_lookups": 593.0452554744526,
+     "work_share": 0.0002798177446923283
+    },
+    "10,2": {
+     "positions": 84178,
+     "mean_lookups": 993.883900781677,
+     "work_share": 0.057627675698893426
+    },
+    "10,3": {
+     "positions": 469377,
+     "mean_lookups": 1155.549213105883,
+     "work_share": 0.3736001962099362
+    },
+    "10,4": {
+     "positions": 69803,
+     "mean_lookups": 1457.2267954099393,
+     "work_share": 0.07006450873001284
+    },
+    "10,5": {
+     "positions": 442,
+     "mean_lookups": 2114.2963800904977,
+     "work_share": 0.0006437021803880748
+    },
+    "11,3": {
+     "positions": 212,
+     "mean_lookups": 4613.41037735849,
+     "work_share": 0.0006736817674261238
+    },
+    "11,4": {
+     "positions": 1811,
+     "mean_lookups": 5458.728879072336,
+     "work_share": 0.0068093682197888465
+    },
+    "11,5": {
+     "positions": 604,
+     "mean_lookups": 6799.66059602649,
+     "work_share": 0.0028289222972918914
+    },
+    "11,6": {
+     "positions": 17,
+     "mean_lookups": 9678.470588235294,
+     "work_share": 0.0001133319863458865
+    }
+   },
+   "gap_law_base": 2.7812170000901917,
+   "top1pct_profile": {
+    "mean_distance": 10.071832210389045,
+    "mean_gap": 3.255813953488372,
+    "median_doors": 6.0,
+    "share_unique_door": 0.037817865681373616
+   },
+   "overall_profile": {
+    "mean_distance": 8.755576240555664,
+    "mean_gap": 1.7695388878002047,
+    "median_doors": 2.0,
+    "share_unique_door": 0.33913329849543844
+   },
+   "corr_find_doors_raw": 0.25543280473793534,
+   "corr_find_doors_within_distance": -0.30509588205170696,
+   "corr_find_doors_by_distance": {
+    "5": -0.09963229594114642,
+    "6": -0.11978280889860027,
+    "7": -0.10017667779175757,
+    "8": -0.17956871122514034,
+    "9": -0.3380061381690921,
+    "10": -0.3383036639243313,
+    "11": -0.2485180349404928
+   },
+   "symmetry_spread": {
+    "median_max_over_min": 2.9257142857142857
+   }
+  },
+  "20 KB + mirror": {
+   "mean_lookups": 1812.721043449387,
+   "mean_proof": 859.5072865634594,
+   "mean_find": 953.2137568859276,
+   "find_share_of_all_work": 0.5258469086187019,
+   "cut_on_arrival_share": 0.8318538599440792,
+   "cut_below_tight_parent_share": 0.7999312197332386,
+   "expansions_share": 0.16759448319530582,
+   "tail": {
+    "top_0.1": 0.012821769151345202,
+    "top_1": 0.07463048524923516,
+    "top_10": 0.3797196063169887,
+    "top_50": 0.875830571315549
+   },
+   "by_distance": {
+    "0": {
+     "mean_lookups": 1.0,
+     "mean_proof": 0.0,
+     "mean_find": 1.0,
+     "work_share": 1.501450292352484e-10
+    },
+    "1": {
+     "mean_lookups": 6.0,
+     "mean_proof": 0.0,
+     "mean_find": 6.0,
+     "work_share": 8.107831578703413e-09
+    },
+    "2": {
+     "mean_lookups": 9.5,
+     "mean_proof": 0.0,
+     "mean_find": 9.5,
+     "work_share": 7.702439999768242e-08
+    },
+    "3": {
+     "mean_lookups": 12.981308411214954,
+     "mean_proof": 0.0,
+     "mean_find": 12.981308411214954,
+     "work_share": 6.2565433682328e-07
+    },
+    "4": {
+     "mean_lookups": 16.450460205739038,
+     "mean_proof": 0.0,
+     "mean_find": 16.450460205739038,
+     "work_share": 4.562006568283787e-06
+    },
+    "5": {
+     "mean_lookups": 19.885108086469174,
+     "mean_proof": 0.0040032025620496394,
+     "mean_find": 19.881104883907124,
+     "work_share": 2.9832616148809974e-05
+    },
+    "6": {
+     "mean_lookups": 28.352022498803255,
+     "mean_proof": 2.021541407371948,
+     "mean_find": 26.330481091431306,
+     "work_share": 0.00021342470282164846
+    },
+    "7": {
+     "mean_lookups": 73.23939508473384,
+     "mean_proof": 15.022308557766683,
+     "mean_find": 58.21708652696716,
+     "work_share": 0.002502106704048691
+    },
+    "8": {
+     "mean_lookups": 316.2018637538043,
+     "mean_proof": 89.61244816520932,
+     "mean_find": 226.58941558859496,
+     "work_share": 0.04130765840941441
+    },
+    "9": {
+     "mean_lookups": 1531.6432018468568,
+     "mean_proof": 531.693192099793,
+     "mean_find": 999.9500097470637,
+     "work_share": 0.4341227898562173
+    },
+    "10": {
+     "mean_lookups": 5466.878340814364,
+     "mean_proof": 3233.16773004168,
+     "mean_find": 2233.7106107726836,
+     "work_share": 0.5120303906619807
+    },
+    "11": {
+     "mean_lookups": 24657.25945537065,
+     "mean_proof": 21151.93343419062,
+     "mean_find": 3505.3260211800302,
+     "work_share": 0.00978852410608676
+    }
+   },
+   "by_gap": {
+    "0": {
+     "positions": 62528,
+     "mean_lookups": 28.01276228249744,
+     "work_share": 0.00026299133059793484
+    },
+    "1": {
+     "positions": 273026,
+     "mean_lookups": 115.90769743540908,
+     "work_share": 0.004751461818348262
+    },
+    "2": {
+     "positions": 952305,
+     "mean_lookups": 506.0253815741805,
+     "work_share": 0.0723534633608335
+    },
+    "3": {
+     "positions": 1744043,
+     "mean_lookups": 1620.394592335166,
+     "work_share": 0.4243155350075884
+    },
+    "4": {
+     "positions": 613367,
+     "mean_lookups": 5028.791602743545,
+     "work_share": 0.46312156477472716
+    },
+    "5": {
+     "positions": 28462,
+     "mean_lookups": 7832.350397020589,
+     "work_share": 0.033470984099013945
+    },
+    "6": {
+     "positions": 429,
+     "mean_lookups": 26765.102564102563,
+     "work_share": 0.0017239996088908168
+    }
+   },
+   "work_map": {
+    "0,0": {
+     "positions": 1,
+     "mean_lookups": 1.0,
+     "work_share": 1.501450292352484e-10
+    },
+    "1,0": {
+     "positions": 9,
+     "mean_lookups": 6.0,
+     "work_share": 8.107831578703413e-09
+    },
+    "2,0": {
+     "positions": 54,
+     "mean_lookups": 9.5,
+     "work_share": 7.702439999768242e-08
+    },
+    "3,0": {
+     "positions": 321,
+     "mean_lookups": 12.981308411214954,
+     "work_share": 6.2565433682328e-07
+    },
+    "4,0": {
+     "positions": 1847,
+     "mean_lookups": 16.450460205739038,
+     "work_share": 4.562006568283787e-06
+    },
+    "5,0": {
+     "positions": 9988,
+     "mean_lookups": 19.881657989587506,
+     "work_share": 2.9815499615477155e-05
+    },
+    "5,1": {
+     "positions": 4,
+     "mean_lookups": 28.5,
+     "work_share": 1.7116533332818317e-08
+    },
+    "6,0": {
+     "positions": 40014,
+     "mean_lookups": 25.46116359274254,
+     "work_share": 0.00015296820621995877
+    },
+    "6,1": {
+     "positions": 10120,
+     "mean_lookups": 39.77816205533597,
+     "work_share": 6.0441632243795417e-05
+    },
+    "6,2": {
+     "positions": 2,
+     "mean_lookups": 49.5,
+     "work_share": 1.486435789428959e-08
+    },
+    "7,0": {
+     "positions": 10294,
+     "mean_lookups": 48.482805517777344,
+     "work_share": 7.493468148078623e-05
+    },
+    "7,1": {
+     "positions": 197803,
+     "mean_lookups": 71.53235795210387,
+     "work_share": 0.0021244493143337383
+    },
+    "7,2": {
+     "positions": 19437,
+     "mean_lookups": 103.72125327982714,
+     "work_share": 0.0003026968832891378
+    },
+    "7,3": {
+     "positions": 2,
+     "mean_lookups": 86.0,
+     "work_share": 2.5824945028462723e-08
+    },
+    "8,1": {
+     "positions": 65099,
+     "mean_lookups": 262.582082674081,
+     "work_share": 0.0025665537552373953
+    },
+    "8,2": {
+     "positions": 758498,
+     "mean_lookups": 315.65669388712956,
+     "work_share": 0.0359484692704435
+    },
+    "8,3": {
+     "positions": 46465,
+     "mean_lookups": 400.19924674486174,
+     "work_share": 0.0027919855560469865
+    },
+    "8,4": {
+     "positions": 10,
+     "mean_lookups": 432.8,
+     "work_share": 6.49827686530155e-07
+    },
+    "9,2": {
+     "positions": 174368,
+     "mean_lookups": 1378.9766528262066,
+     "work_share": 0.036102282342742965
+    },
+    "9,3": {
+     "positions": 1638390,
+     "mean_lookups": 1535.7506869548765,
+     "work_share": 0.3777887017528807
+    },
+    "9,4": {
+     "positions": 74986,
+     "mean_lookups": 1796.8143653481984,
+     "work_share": 0.020229928947728147
+    },
+    "9,5": {
+     "positions": 4,
+     "mean_lookups": 3125.0,
+     "work_share": 1.8768128654406049e-06
+    },
+    "10,3": {
+     "positions": 59186,
+     "mean_lookups": 4921.499138309736,
+     "work_share": 0.04373482187371565
+    },
+    "10,4": {
+     "positions": 538260,
+     "mean_lookups": 5475.6456916731695,
+     "work_share": 0.44252560521791295
+    },
+    "10,5": {
+     "positions": 26340,
+     "mean_lookups": 6512.788572513287,
+     "work_share": 0.0257569069586098
+    },
+    "10,6": {
+     "positions": 14,
+     "mean_lookups": 6211.428571428572,
+     "work_share": 1.30566117422972e-05
+    },
+    "11,4": {
+     "positions": 111,
+     "mean_lookups": 21923.594594594593,
+     "work_share": 0.00036538078139953243
+    },
+    "11,5": {
+     "positions": 2118,
+     "mean_lookups": 24251.65533522191,
+     "work_share": 0.007712200327538709
+    },
+    "11,6": {
+     "positions": 415,
+     "mean_lookups": 27458.47951807229,
+     "work_share": 0.0017109429971485196
+    }
+   },
+   "gap_law_base": 3.383170628783978,
+   "top1pct_profile": {
+    "mean_distance": 10.071947535987373,
+    "mean_gap": 4.10947236659501,
+    "median_doors": 6.0,
+    "share_unique_door": 0.03861329559988027
+   },
+   "overall_profile": {
+    "mean_distance": 8.755576240555664,
+    "mean_gap": 2.72391975308642,
+    "median_doors": 2.0,
+    "share_unique_door": 0.33913329849543844
+   },
+   "corr_find_doors_raw": 0.2537447483891952,
+   "corr_find_doors_within_distance": -0.30248267856043964,
+   "corr_find_doors_by_distance": {
+    "5": -0.0998253472364746,
+    "6": -0.09429977388676852,
+    "7": -0.13846337221719518,
+    "8": -0.20628724461439185,
+    "9": -0.3331788357089088,
+    "10": -0.32112212129736367,
+    "11": -0.23530539992447702
+   },
+   "symmetry_spread": {
+    "median_max_over_min": 3.106463878326996
+   }
+  },
+  "2 KB + mirror": {
+   "mean_lookups": 12772.509944313802,
+   "mean_proof": 6134.7809382280575,
+   "mean_find": 6637.729006085745,
+   "find_share_of_all_work": 0.5196886935320647,
+   "cut_on_arrival_share": 0.8331767937167643,
+   "cut_below_tight_parent_share": 0.7933667667586707,
+   "expansions_share": 0.1667449131361283,
+   "tail": {
+    "top_0.1": 0.012675829135809604,
+    "top_1": 0.07450265874620147,
+    "top_10": 0.3814659019049012,
+    "top_50": 0.8792511928912446
+   },
+   "by_distance": {
+    "0": {
+     "mean_lookups": 1.0,
+     "mean_proof": 0.0,
+     "mean_find": 1.0,
+     "work_share": 2.1309128374194462e-11
+    },
+    "1": {
+     "mean_lookups": 6.0,
+     "mean_proof": 0.0,
+     "mean_find": 6.0,
+     "work_share": 1.1506929322065009e-09
+    },
+    "2": {
+     "mean_lookups": 9.5,
+     "mean_proof": 0.0,
+     "mean_find": 9.5,
+     "work_share": 1.0931582855961759e-08
+    },
+    "3": {
+     "mean_lookups": 12.981308411214954,
+     "mean_proof": 0.0,
+     "mean_find": 12.981308411214954,
+     "work_share": 8.879513793526832e-08
+    },
+    "4": {
+     "mean_lookups": 16.848944233892798,
+     "mean_proof": 0.20032485110990797,
+     "mean_find": 16.64861938278289,
+     "work_share": 6.631400750049317e-07
+    },
+    "5": {
+     "mean_lookups": 31.29523618895116,
+     "mean_proof": 4.541633306645316,
+     "mean_find": 26.753602882305845,
+     "work_share": 6.663407060867357e-06
+    },
+    "6": {
+     "mean_lookups": 90.3188327748524,
+     "mean_proof": 22.109940960587203,
+     "mean_find": 68.2088918142652,
+     "work_share": 9.649252783223672e-05
+    },
+    "7": {
+     "mean_lookups": 398.06240331200337,
+     "mean_proof": 115.21401448561986,
+     "mean_find": 282.84838882638354,
+     "work_share": 0.0019300429141465682
+    },
+    "8": {
+     "mean_lookups": 2116.0691276124276,
+     "mean_proof": 645.5541472429868,
+     "mean_find": 1470.5149803694408,
+     "work_share": 0.03923292875378333
+    },
+    "9": {
+     "mean_lookups": 10777.689269436387,
+     "mean_proof": 3803.667741668909,
+     "mean_find": 6974.021527767478,
+     "work_share": 0.4335461789292179
+    },
+    "10": {
+     "mean_lookups": 38782.8269301058,
+     "mean_proof": 23055.37223789676,
+     "mean_find": 15727.454692209041,
+     "work_share": 0.5155259347195479
+    },
+    "11": {
+     "mean_lookups": 171472.5900151286,
+     "mean_proof": 147054.1527987897,
+     "mean_find": 24418.43721633888,
+     "work_share": 0.009660994709613447
+    }
+   },
+   "by_gap": {
+    "0": {
+     "positions": 8979,
+     "mean_lookups": 24.69562312061477,
+     "work_share": 4.725128743950628e-06
+    },
+    "1": {
+     "positions": 57235,
+     "mean_lookups": 125.45664366209488,
+     "work_share": 0.00015301043069131546
+    },
+    "2": {
+     "positions": 272962,
+     "mean_lookups": 766.3972054718239,
+     "work_share": 0.004457812419562669
+    },
+    "3": {
+     "positions": 954412,
+     "mean_lookups": 3803.2554682883283,
+     "work_share": 0.07734942245130047
+    },
+    "4": {
+     "positions": 1672450,
+     "mean_lookups": 11537.819494155281,
+     "work_share": 0.4111900233359881
+    },
+    "5": {
+     "positions": 647480,
+     "mean_lookups": 32140.77835608822,
+     "work_share": 0.4434538540541378
+    },
+    "6": {
+     "positions": 59840,
+     "mean_lookups": 47778.7393382353,
+     "work_share": 0.06092449768051935
+    },
+    "7": {
+     "positions": 747,
+     "mean_lookups": 132594.1218206158,
+     "work_share": 0.0021106224771636935
+    },
+    "8": {
+     "positions": 51,
+     "mean_lookups": 295195.7450980392,
+     "work_share": 0.00032080856541831526
+    },
+    "9": {
+     "positions": 4,
+     "mean_lookups": 413243.75,
+     "work_share": 3.522345647433409e-05
+    }
+   },
+   "work_map": {
+    "0,0": {
+     "positions": 1,
+     "mean_lookups": 1.0,
+     "work_share": 2.1309128374194462e-11
+    },
+    "1,0": {
+     "positions": 9,
+     "mean_lookups": 6.0,
+     "work_share": 1.1506929322065009e-09
+    },
+    "2,0": {
+     "positions": 54,
+     "mean_lookups": 9.5,
+     "work_share": 1.0931582855961759e-08
+    },
+    "3,0": {
+     "positions": 321,
+     "mean_lookups": 12.981308411214954,
+     "work_share": 8.879513793526832e-08
+    },
+    "4,0": {
+     "positions": 1810,
+     "mean_lookups": 16.683977900552485,
+     "work_share": 6.434930586439244e-07
+    },
+    "4,1": {
+     "positions": 37,
+     "mean_lookups": 24.91891891891892,
+     "work_share": 1.9647016361007294e-08
+    },
+    "5,0": {
+     "positions": 5520,
+     "mean_lookups": 24.25199275362319,
+     "work_share": 2.852674324581787e-06
+    },
+    "5,1": {
+     "positions": 4468,
+     "mean_lookups": 39.99328558639212,
+     "work_share": 3.8077281491848085e-06
+    },
+    "5,2": {
+     "positions": 4,
+     "mean_lookups": 35.25,
+     "work_share": 3.004587100761419e-09
+    },
+    "6,0": {
+     "positions": 1264,
+     "mean_lookups": 41.88132911392405,
+     "work_share": 1.1280626378731065e-06
+    },
+    "6,1": {
+     "positions": 39032,
+     "mean_lookups": 83.32206907153105,
+     "work_share": 6.930212264502133e-05
+    },
+    "6,2": {
+     "positions": 9818,
+     "mean_lookups": 124.21735587696068,
+     "work_share": 2.5987888454802845e-05
+    },
+    "6,3": {
+     "positions": 22,
+     "mean_lookups": 158.8181818181818,
+     "work_share": 7.445409453943546e-08
+    },
+    "7,1": {
+     "positions": 13698,
+     "mean_lookups": 273.6656446196525,
+     "work_share": 7.98809328807483e-05
+    },
+    "7,2": {
+     "positions": 186120,
+     "mean_lookups": 390.8879647539222,
+     "work_share": 0.0015502831565001249
+    },
+    "7,3": {
+     "positions": 27614,
+     "mean_lookups": 506.5465343666256,
+     "work_share": 0.00029806731445347634
+    },
+    "7,4": {
+     "positions": 104,
+     "mean_lookups": 817.4134615384615,
+     "work_share": 1.8115103122186455e-06
+    },
+    "8,2": {
+     "positions": 77020,
+     "mean_lookups": 1755.7198000519345,
+     "work_share": 0.00288153837002064
+    },
+    "8,3": {
+     "positions": 711792,
+     "mean_lookups": 2110.5371822105335,
+     "work_share": 0.032011925389802375
+    },
+    "8,4": {
+     "positions": 81002,
+     "mean_lookups": 2502.3180662205873,
+     "work_share": 0.004319206213832815
+    },
+    "8,5": {
+     "positions": 254,
+     "mean_lookups": 3637.6259842519685,
+     "work_share": 1.9688718325235592e-05
+    },
+    "8,6": {
+     "positions": 4,
+     "mean_lookups": 6688.0,
+     "work_share": 5.700618022664503e-07
+    },
+    "9,3": {
+     "positions": 214984,
+     "mean_lookups": 9831.512605589252,
+     "work_share": 0.045039355292950084
+    },
+    "9,4": {
+     "positions": 1511946,
+     "mean_lookups": 10766.179733932297,
+     "work_share": 0.3468674853806946
+    },
+    "9,5": {
+     "positions": 160402,
+     "mean_lookups": 12138.751966933081,
+     "work_share": 0.041490579656575495
+    },
+    "9,6": {
+     "positions": 413,
+     "mean_lookups": 16757.95641646489,
+     "work_share": 0.00014748124460642133
+    },
+    "9,7": {
+     "positions": 3,
+     "mean_lookups": 19981.333333333332,
+     "work_share": 1.2773543912627129e-06
+    },
+    "10,4": {
+     "positions": 79398,
+     "mean_lookups": 35463.94178694677,
+     "work_share": 0.060001520231148464
+    },
+    "10,5": {
+     "positions": 486356,
+     "mean_lookups": 38630.7662165163,
+     "work_share": 0.40036240177211724
+    },
+    "10,6": {
+     "positions": 57697,
+     "mean_lookups": 44448.24853978543,
+     "work_share": 0.05464791168971343
+    },
+    "10,7": {
+     "positions": 337,
+     "mean_lookups": 67089.19584569732,
+     "work_share": 0.0004817793406507367
+    },
+    "10,8": {
+     "positions": 12,
+     "mean_lookups": 126400.0,
+     "work_share": 3.232168591797816e-05
+    },
+    "11,5": {
+     "positions": 468,
+     "mean_lookups": 158551.6794871795,
+     "work_share": 0.001581183907119855
+    },
+    "11,6": {
+     "positions": 1726,
+     "mean_lookups": 166628.8400926999,
+     "work_share": 0.006128534684397227
+    },
+    "11,7": {
+     "positions": 407,
+     "mean_lookups": 187662.914004914,
+     "work_share": 0.0016275657821216943
+    },
+    "11,8": {
+     "positions": 39,
+     "mean_lookups": 347132.89743589744,
+     "work_share": 0.0002884868795003371
+    },
+    "11,9": {
+     "positions": 4,
+     "mean_lookups": 413243.75,
+     "work_share": 3.522345647433409e-05
+    }
+   },
+   "gap_law_base": 3.3164984358578162,
+   "top1pct_profile": {
+    "mean_distance": 10.07196124326384,
+    "mean_gap": 5.154509825268086,
+    "median_doors": 6.0,
+    "share_unique_door": 0.03864786892384737
+   },
+   "overall_profile": {
+    "mean_distance": 8.755576240555664,
+    "mean_gap": 3.7446131904979643,
+    "median_doors": 2.0,
+    "share_unique_door": 0.33913329849543844
+   },
+   "corr_find_doors_raw": 0.24900683087742992,
+   "corr_find_doors_within_distance": -0.2964933172336056,
+   "corr_find_doors_by_distance": {
+    "5": -0.07700668035176035,
+    "6": -0.12239913942728066,
+    "7": -0.1591955890516222,
+    "8": -0.21302896818661185,
+    "9": -0.32730994183459844,
+    "10": -0.3150205053678974,
+    "11": -0.23547501454619624
+   },
+   "symmetry_spread": {
+    "median_max_over_min": 3.2956844346119727
+   }
+  },
+  "20 KB": {
+   "mean_lookups": 2375.6068007381277,
+   "mean_proof": 1129.740646569556,
+   "mean_find": 1245.866154168572,
+   "find_share_of_all_work": 0.524441230670609,
+   "cut_on_arrival_share": 0.832231563920796,
+   "cut_below_tight_parent_share": 0.7882035542188037,
+   "expansions_share": 0.16734749099700894,
+   "tail": {
+    "top_0.1": 0.013038707585504244,
+    "top_1": 0.07549201946635727,
+    "top_10": 0.3815842993734313,
+    "top_50": 0.8770779953449817
+   },
+   "by_distance": {
+    "0": {
+     "mean_lookups": 1.0,
+     "mean_proof": 0.0,
+     "mean_find": 1.0,
+     "work_share": 1.1456906672412773e-10
+    },
+    "1": {
+     "mean_lookups": 6.0,
+     "mean_proof": 0.0,
+     "mean_find": 6.0,
+     "work_share": 6.186729603102898e-09
+    },
+    "2": {
+     "mean_lookups": 9.5,
+     "mean_proof": 0.0,
+     "mean_find": 9.5,
+     "work_share": 5.8773931229477526e-08
+    },
+    "3": {
+     "mean_lookups": 12.981308411214954,
+     "mean_proof": 0.0,
+     "mean_find": 12.981308411214954,
+     "work_share": 4.774093010394402e-07
+    },
+    "4": {
+     "mean_lookups": 16.450460205739038,
+     "mean_proof": 0.0,
+     "mean_find": 16.450460205739038,
+     "work_share": 3.4810665233458967e-06
+    },
+    "5": {
+     "mean_lookups": 19.983586869495596,
+     "mean_proof": 0.05204163330664532,
+     "mean_find": 19.931545236188953,
+     "work_share": 2.2876692967206928e-05
+    },
+    "6": {
+     "mean_lookups": 32.371369873942875,
+     "mean_proof": 3.4376097016116165,
+     "mean_find": 28.933760172331258,
+     "work_share": 0.0001859422727903243
+    },
+    "7": {
+     "mean_lookups": 92.18745605091063,
+     "mean_proof": 21.19661064622741,
+     "mean_find": 70.99084540468321,
+     "work_share": 0.002403196733687968
+    },
+    "8": {
+     "mean_lookups": 412.2132880956978,
+     "mean_proof": 119.82906931840124,
+     "mean_find": 292.3842187772966,
+     "work_share": 0.04109079612251804
+    },
+    "9": {
+     "mean_lookups": 2006.6118798695588,
+     "mean_proof": 699.8606551298161,
+     "mean_find": 1306.7512247397428,
+     "work_share": 0.43398505416484573
+    },
+    "10": {
+     "mean_lookups": 7169.3190493748,
+     "mean_proof": 4241.863257454313,
+     "mean_find": 2927.455791920487,
+     "work_share": 0.5123782117029471
+    },
+    "11": {
+     "mean_lookups": 32780.53177004539,
+     "mean_proof": 28123.019667170953,
+     "mean_find": 4657.5121028744325,
+     "work_share": 0.009929898759189317
+    }
+   },
+   "by_gap": {
+    "0": {
+     "positions": 51980,
+     "mean_lookups": 29.10371296652559,
+     "work_share": 0.00017332134439999438
+    },
+    "1": {
+     "positions": 237941,
+     "mean_lookups": 125.1965697378762,
+     "work_share": 0.00341294341256453
+    },
+    "2": {
+     "positions": 870616,
+     "mean_lookups": 562.6611939132752,
+     "work_share": 0.05612301360342585
+    },
+    "3": {
+     "positions": 1732604,
+     "mean_lookups": 1988.8961603459302,
+     "work_share": 0.3948015030443723
+    },
+    "4": {
+     "positions": 715631,
+     "mean_lookups": 5805.575963031227,
+     "work_share": 0.4759943881885141
+    },
+    "5": {
+     "positions": 64752,
+     "mean_lookups": 9044.484170373116,
+     "work_share": 0.06709719508467225
+    },
+    "6": {
+     "positions": 636,
+     "mean_lookups": 32904.75314465409,
+     "work_share": 0.002397635322051045
+    }
+   },
+   "work_map": {
+    "0,0": {
+     "positions": 1,
+     "mean_lookups": 1.0,
+     "work_share": 1.1456906672412773e-10
+    },
+    "1,0": {
+     "positions": 9,
+     "mean_lookups": 6.0,
+     "work_share": 6.186729603102898e-09
+    },
+    "2,0": {
+     "positions": 54,
+     "mean_lookups": 9.5,
+     "work_share": 5.8773931229477526e-08
+    },
+    "3,0": {
+     "positions": 321,
+     "mean_lookups": 12.981308411214954,
+     "work_share": 4.774093010394402e-07
+    },
+    "4,0": {
+     "positions": 1847,
+     "mean_lookups": 16.450460205739038,
+     "work_share": 3.4810665233458967e-06
+    },
+    "5,0": {
+     "positions": 9940,
+     "mean_lookups": 19.93229376257545,
+     "work_share": 2.2699225482851253e-05
+    },
+    "5,1": {
+     "positions": 52,
+     "mean_lookups": 29.78846153846154,
+     "work_share": 1.7746748435567384e-07
+    },
+    "6,0": {
+     "positions": 33174,
+     "mean_lookups": 26.993971182251162,
+     "work_share": 0.00010259637011332293
+    },
+    "6,1": {
+     "positions": 16933,
+     "mean_lookups": 42.850174216027874,
+     "work_share": 8.312925257182604e-05
+    },
+    "6,2": {
+     "positions": 29,
+     "mean_lookups": 65.20689655172414,
+     "work_share": 2.1665010517532553e-07
+    },
+    "7,0": {
+     "positions": 6634,
+     "mean_lookups": 57.89372927343985,
+     "work_share": 4.400219774953556e-05
+    },
+    "7,1": {
+     "positions": 179724,
+     "mean_lookups": 85.74193763771116,
+     "work_share": 0.0017654960282070683
+    },
+    "7,2": {
+     "positions": 41104,
+     "mean_lookups": 125.71494258466329,
+     "work_share": 0.0005920227059923902
+    },
+    "7,3": {
+     "positions": 74,
+     "mean_lookups": 197.66216216216216,
+     "work_share": 1.6758017389738163e-06
+    },
+    "8,1": {
+     "positions": 41232,
+     "mean_lookups": 331.1113213038417,
+     "work_share": 0.0015641406643012803
+    },
+    "8,2": {
+     "positions": 717845,
+     "mean_lookups": 400.74454652466756,
+     "work_share": 0.03295836629555556
+    },
+    "8,3": {
+     "positions": 110870,
+     "mean_lookups": 516.2039235140254,
+     "work_share": 0.006556962864724851
+    },
+    "8,4": {
+     "positions": 125,
+     "mean_lookups": 790.88,
+     "work_share": 1.1326297936347268e-05
+    },
+    "9,2": {
+     "positions": 111638,
+     "mean_lookups": 1764.8120801160894,
+     "work_share": 0.022572407951772715
+    },
+    "9,3": {
+     "positions": 1582363,
+     "mean_lookups": 1983.047834788857,
+     "work_share": 0.3595064487331909
+    },
+    "9,4": {
+     "positions": 193586,
+     "mean_lookups": 2337.692648228694,
+     "work_share": 0.051847608921402624
+    },
+    "9,5": {
+     "positions": 161,
+     "mean_lookups": 3176.285714285714,
+     "work_share": 5.858855847951788e-05
+    },
+    "10,3": {
+     "positions": 39297,
+     "mean_lookups": 6382.720462121791,
+     "work_share": 0.02873641564471755
+    },
+    "10,4": {
+     "positions": 521811,
+     "mean_lookups": 7088.620931716656,
+     "work_share": 0.42378185547974867
+    },
+    "10,5": {
+     "positions": 62613,
+     "mean_lookups": 8332.936754348138,
+     "work_share": 0.059776429925485916
+    },
+    "10,6": {
+     "positions": 79,
+     "mean_lookups": 9226.721518987342,
+     "work_share": 8.351065299495067e-05
+    },
+    "11,4": {
+     "positions": 109,
+     "mean_lookups": 28314.91743119266,
+     "work_share": 0.00035359748942641024
+    },
+    "11,5": {
+     "positions": 1978,
+     "mean_lookups": 32045.94944388271,
+     "work_share": 0.007262176600706811
+    },
+    "11,6": {
+     "positions": 557,
+     "mean_lookups": 36263.03770197486,
+     "work_share": 0.0023141246690560947
+    }
+   },
+   "gap_law_base": 3.3835981159350883,
+   "top1pct_profile": {
+    "mean_distance": 10.071955368077289,
+    "mean_gap": 4.216791400190502,
+    "median_doors": 6.0,
+    "share_unique_door": 0.038182065587154715
+   },
+   "overall_profile": {
+    "mean_distance": 8.755576240555664,
+    "mean_gap": 2.8216204520216865,
+    "median_doors": 2.0,
+    "share_unique_door": 0.33913329849543844
+   },
+   "corr_find_doors_raw": 0.25297292466872484,
+   "corr_find_doors_within_distance": -0.2983556566673811,
+   "corr_find_doors_by_distance": {
+    "5": -0.0998493889262535,
+    "6": -0.10906414836631545,
+    "7": -0.13610879257013894,
+    "8": -0.2021372631003736,
+    "9": -0.32905336830632953,
+    "10": -0.3189309952082012,
+    "11": -0.23540136785957597
+   },
+   "symmetry_spread": {
+    "median_max_over_min": 3.1864406779661016
+   }
+  }
+ },
+ "doors_by_distance": {
+  "0": {
+   "count": 1,
+   "mean": 1.0,
+   "median": 1.0,
+   "max": 1.0,
+   "share_unique": 1.0,
+   "histogram": {
+    "1": 1
+   }
+  },
+  "1": {
+   "count": 9,
+   "mean": 1.0,
+   "median": 1.0,
+   "max": 1.0,
+   "share_unique": 1.0,
+   "histogram": {
+    "1": 9
+   }
+  },
+  "2": {
+   "count": 54,
+   "mean": 1.0,
+   "median": 1.0,
+   "max": 1.0,
+   "share_unique": 1.0,
+   "histogram": {
+    "1": 54
+   }
+  },
+  "3": {
+   "count": 321,
+   "mean": 1.0093457943925233,
+   "median": 1.0,
+   "max": 2.0,
+   "share_unique": 0.9906542056074766,
+   "histogram": {
+    "1": 318,
+    "2": 3
+   }
+  },
+  "4": {
+   "count": 1847,
+   "mean": 1.0362750406063888,
+   "median": 1.0,
+   "max": 4.0,
+   "share_unique": 0.9745533297238765,
+   "histogram": {
+    "1": 1800,
+    "2": 36,
+    "3": 2,
+    "4": 9
+   }
+  },
+  "5": {
+   "count": 9992,
+   "mean": 1.0832666132906326,
+   "median": 1.0,
+   "max": 3.0,
+   "share_unique": 0.9175340272217775,
+   "histogram": {
+    "1": 9168,
+    "2": 816,
+    "3": 8
+   }
+  },
+  "6": {
+   "count": 50136,
+   "mean": 1.1881282910483484,
+   "median": 1.0,
+   "max": 4.0,
+   "share_unique": 0.8396361895643849,
+   "histogram": {
+    "1": 42096,
+    "2": 6984,
+    "3": 720,
+    "4": 336
+   }
+  },
+  "7": {
+   "count": 227536,
+   "mean": 1.3587652063849236,
+   "median": 1.0,
+   "max": 24.0,
+   "share_unique": 0.7255818859433233,
+   "histogram": {
+    "1": 165096,
+    "2": 50196,
+    "3": 7728,
+    "4": 3444,
+    "5": 384,
+    "6": 480,
+    "7": 48,
+    "8": 72,
+    "10": 48,
+    "12": 36,
+    "24": 4
+   }
+  },
+  "8": {
+   "count": 870072,
+   "mean": 1.6922737428626597,
+   "median": 1.0,
+   "max": 20.0,
+   "share_unique": 0.5786555595399001,
+   "histogram": {
+    "1": 503472,
+    "2": 238776,
+    "3": 67392,
+    "4": 37248,
+    "5": 11184,
+    "6": 6712,
+    "7": 1920,
+    "8": 1932,
+    "9": 528,
+    "10": 576,
+    "12": 236,
+    "17": 48,
+    "20": 48
+   }
+  },
+  "9": {
+   "count": 1887748,
+   "mean": 2.9662645649737147,
+   "median": 2.0,
+   "max": 28.0,
+   "share_unique": 0.27629111512765475,
+   "histogram": {
+    "1": 521568,
+    "2": 481872,
+    "3": 320328,
+    "4": 219696,
+    "5": 126264,
+    "6": 87600,
+    "7": 48768,
+    "8": 34548,
+    "9": 17352,
+    "10": 13632,
+    "11": 4512,
+    "12": 5340,
+    "13": 2112,
+    "14": 1896,
+    "15": 768,
+    "16": 348,
+    "17": 192,
+    "18": 304,
+    "19": 96,
+    "20": 264,
+    "22": 216,
+    "26": 48,
+    "28": 24
+   }
+  },
+  "10": {
+   "count": 623800,
+   "mean": 11.727451106123757,
+   "median": 11.0,
+   "max": 96.0,
+   "share_unique": 0.003924334722667522,
+   "histogram": {
+    "1": 2448,
+    "2": 7488,
+    "3": 13328,
+    "4": 20544,
+    "5": 26832,
+    "6": 35600,
+    "7": 37488,
+    "8": 49884,
+    "9": 47440,
+    "10": 50688,
+    "11": 43632,
+    "12": 46128,
+    "13": 35232,
+    "14": 37704,
+    "15": 29200,
+    "16": 27636,
+    "17": 19680,
+    "18": 19864,
+    "19": 15072,
+    "20": 14292,
+    "21": 8976,
+    "22": 8472,
+    "23": 5808,
+    "24": 4712,
+    "25": 2976,
+    "26": 3264,
+    "27": 2000,
+    "28": 1944,
+    "29": 1152,
+    "30": 984,
+    "31": 768,
+    "32": 720,
+    "33": 384,
+    "34": 216,
+    "35": 144,
+    "36": 212,
+    "37": 144,
+    "38": 168,
+    "39": 96,
+    "40": 48,
+    "42": 168,
+    "44": 48,
+    "45": 16,
+    "46": 96,
+    "48": 24,
+    "50": 48,
+    "56": 24,
+    "96": 8
+   }
+  },
+  "11": {
+   "count": 2644,
+   "mean": 57.40393343419062,
+   "median": 55.0,
+   "max": 196.0,
+   "share_unique": 0.0,
+   "histogram": {
+    "16": 12,
+    "20": 48,
+    "24": 60,
+    "26": 48,
+    "28": 96,
+    "34": 48,
+    "36": 168,
+    "40": 48,
+    "42": 144,
+    "44": 144,
+    "46": 96,
+    "48": 48,
+    "50": 48,
+    "51": 48,
+    "52": 48,
+    "54": 144,
+    "55": 144,
+    "56": 96,
+    "60": 152,
+    "62": 48,
+    "63": 48,
+    "64": 24,
+    "66": 96,
+    "68": 96,
+    "70": 48,
+    "71": 96,
+    "72": 48,
+    "73": 48,
+    "74": 48,
+    "75": 16,
+    "77": 96,
+    "78": 24,
+    "81": 96,
+    "86": 48,
+    "88": 48,
+    "128": 24,
+    "132": 16,
+    "158": 24,
+    "196": 12
+   }
+  }
+ },
+ "share_unique_overall": 0.33913329849543844
+}
