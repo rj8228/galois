@@ -12,7 +12,7 @@ run duel-moves-16 ./race ceil duel data/in-moves-16.txt 60 60 1
 OMP_NUM_THREADS=2 run duel-random-state ./race ceil duel data/in-random-state.txt 120 250 1
 # The race: one solve at a time
 for s in moves-14 moves-16; do
-  run run-$s-1t ./race ceil run data/in-$s.txt 1t 1 120
+  run run-$s-1t1 ./race ceil run data/in-$s.txt 1t 1 120
   run run-$s-split2 ./race ceil run data/in-$s.txt split 2 120
   run run-$s-race2 ./race ceil run data/in-$s.txt race 2 120
   run run-$s-split4 ./race ceil run data/in-$s.txt split 4 120
