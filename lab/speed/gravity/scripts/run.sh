@@ -1,7 +1,7 @@
 #!/bin/sh
 # Runs every timing in FINDINGS.md. Raw output: results/raw/*.jsonl (one line per solve; skips files that exist).
 # Needs: make; CUBE3_TABLES=data/tables ./grav3 build corners_sym phase1_sym; ... ./grav3 masks corners_sym phase1_sym
-# Modes: 0 baseline (lab/3x3's dfs), 1 down masks uint32, 2 full masks (down + up), 3 down masks packed in 3 bytes.
+# Modes: 0 baseline (lab/3x3's dfs), 1 down masks uint32, 2 full masks (down + up), 3 down masks packed in 18 bits.
 # Timed runs go one at a time on an otherwise idle machine. Sets are cut into chunks of 10 scrambles and the
 # modes take turns chunk by chunk, so a drift in machine speed hits every mode alike.
 set -e

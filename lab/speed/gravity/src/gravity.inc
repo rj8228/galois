@@ -8,7 +8,7 @@
  *        mode 0: lab/3x3's dfs() unchanged (the baseline)
  *        mode 1: down-only masks, one uint32 per entry
  *        mode 2: full masks (down and up), two uint32 per entry
- *        mode 3: down-only masks packed in 3 bytes per entry
+ *        mode 3: down-only masks packed in 18 bits per entry
  *
  * A table's down mask at entry e holds the moves m whose neighbour (in the table's own graph) has
  * value(e) - 1; the up mask those with value(e) + 1. A move changes any table value by at most 1.
@@ -24,7 +24,7 @@
 
 typedef struct {
   const uint32_t *down, *up;
-  uint8_t *down24; /* 3 bytes per entry, plus one byte of padding */
+  uint8_t *down18; /* 18 bits per entry (entry e at bit 18 e), plus 4 bytes of padding */
 } Mask;
 static Mask MASKS[NTABLES];
 
@@ -120,13 +120,13 @@ static void load_masks(Table *T, int mode) {
   size_t n = (size_t)T->n;
   if (!M->down) M->down = (const uint32_t *)map_file(mask_path(T, "down32"), n * 4);
   if (mode == 2 && !M->up) M->up = (const uint32_t *)map_file(mask_path(T, "up32"), n * 4);
-  if (mode == 3 && !M->down24) {
-    M->down24 = malloc(n * 3 + 1);
+  if (mode == 3 && !M->down18) {
+    M->down18 = calloc((n * 18 + 7) / 8 + 4, 1);
     for (size_t e = 0; e < n; e++) {
-      uint32_t d = M->down[e];
-      M->down24[e * 3] = (uint8_t)d, M->down24[e * 3 + 1] = (uint8_t)(d >> 8), M->down24[e * 3 + 2] = (uint8_t)(d >> 16);
+      uint64_t d = (uint64_t)M->down[e] << ((e * 18) & 7);
+      uint8_t *p = M->down18 + ((e * 18) >> 3);
+      for (int b = 0; b < 4; b++) p[b] |= (uint8_t)(d >> (8 * b));
     }
-    M->down24[n * 3] = 0;
     munmap((void *)M->down, n * 4);
     M->down = NULL;
   }
@@ -153,14 +153,14 @@ static inline uint64_t mlookup(const Lookup *L, const Coords *co, int *at) {
 static inline uint32_t read_down(const Mask *M, uint64_t e) {
   if (M->down) return M->down[e];
   uint32_t v;
-  memcpy(&v, M->down24 + e * 3, 4);
-  return v & MALL;
+  memcpy(&v, M->down18 + ((e * 18) >> 3), 4);
+  return (v >> ((e * 18) & 7)) & MALL;
 }
 
 static inline void prefetch_mask(const Mask *M, uint64_t e, int up) {
   if (up) __builtin_prefetch(&M->up[e]);
   else if (M->down) __builtin_prefetch(&M->down[e]);
-  else __builtin_prefetch(M->down24 + e * 3);
+  else __builtin_prefetch(M->down18 + ((e * 18) >> 3));
 }
 
 /* ---------------------------------------------------------- mask check */
@@ -458,7 +458,7 @@ static int cmd_gsolve(int argc, char **argv) {
         int dup = 0;
         for (int j = 0; j < l; j++) dup |= F.L[j].T == T;
         load_masks(T, mode);
-        if (!dup) mask_bytes += (size_t)T->n * (mode == 2 ? 8 : mode == 3 ? 3 : 4);
+        if (!dup) mask_bytes += mode == 3 ? ((size_t)T->n * 18 + 7) / 8 : (size_t)T->n * (mode == 2 ? 8 : 4);
       }
   double mask_load_s = now() - tm;
   FILE *f = fopen(argv[1], "r");
