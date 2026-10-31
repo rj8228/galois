@@ -358,5 +358,41 @@
   "mean_final_round_lookups": 13759296.6,
   "mean_ms": null,
   "notes": "9% fewer lookups than move order on these scrambles"
+ },
+ {
+  "task": "3x3-anatomy",
+  "puzzle": "3x3",
+  "floor": "C8s@2+E6x8@2",
+  "floor_bytes": 12157884,
+  "extra_bytes": 0,
+  "positions": 12,
+  "optimal": 12,
+  "lookups_counting": "exp8",
+  "mean_extra_work": null,
+  "extra_work_unit": null,
+  "impl": "c",
+  "method": "IDA*, move order (16 moves scrambles)",
+  "mean_lookups": 2225431729.8,
+  "mean_final_round_lookups": 1822487886.5,
+  "mean_ms": 215413.68,
+  "notes": "lookup = one generated child; final round 82%, cut on arrival 93%"
+ },
+ {
+  "task": "3x3-anatomy",
+  "puzzle": "3x3",
+  "floor": "C8s@2+E6x8@2",
+  "floor_bytes": 12157884,
+  "extra_bytes": 0,
+  "positions": 12,
+  "optimal": 12,
+  "lookups_counting": "exp8",
+  "mean_extra_work": null,
+  "extra_work_unit": null,
+  "impl": "c",
+  "method": "IDA*, perfect compass for the found solution (bound) (16 moves scrambles)",
+  "mean_lookups": 402944049.5,
+  "mean_final_round_lookups": 206.2,
+  "mean_ms": null,
+  "notes": "82% fewer lookups than move order on these scrambles"
  }
 ]
