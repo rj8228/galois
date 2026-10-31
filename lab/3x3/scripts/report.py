@@ -9,6 +9,10 @@ replaced; the prose around it is not touched.
 import json
 import pathlib
 import re
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from lab import FLOORS  # noqa: E402
 
 LAB = pathlib.Path(__file__).resolve().parent.parent
 RESULTS = LAB / "results"
@@ -101,13 +105,15 @@ def verify_section():
 
 
 def all_runs():
+    """Every floor set's runs, in the order lab.py lists them."""
     runs = {}
     for s in SETS:
         d = load(f"bench-{s}.json")
         if d:
             for spec, r in d["floors"].items():
                 runs.setdefault(spec, {})[s] = r
-    return runs
+    order = [spec for _, spec, _ in FLOORS]
+    return dict(sorted(runs.items(), key=lambda kv: order.index(kv[0]) if kv[0] in order else len(order)))
 
 
 def memory(r):
@@ -119,15 +125,32 @@ def memory(r):
     return None
 
 
-def optimal_lengths():
-    """Optimal length of each random-state scramble, from any run that solved it."""
+def optimal_lengths(set_name):
+    """Optimal length of each scramble in a set, from any run that solved it."""
     out = {}
-    d = load("bench-random-state.json") or {"floors": {}}
+    d = load(f"bench-{set_name}.json") or {"floors": {}}
     for run in d["floors"].values():
         for s in run.get("solves", []):
             if not s["dnf"]:
                 out[s["index"]] = s["length"]
     return out
+
+
+def capped_estimates(set_name, run):
+    """Per-solve nodes for a capped run: measured where it finished, estimated where it hit the cap.
+    Returns (list of nodes or None, nodes per second)."""
+    d = load(f"bench-{set_name}.json") or {"floors": {}}
+    L = optimal_lengths(set_name)
+    uncapped = [r for r in d["floors"].values() if r.get("solves") and not r["summary"]["dnf"]]
+    ests = []
+    for s in run["solves"]:
+        if not s["dnf"]:
+            ests.append(s["nodes"])
+            continue
+        ref = next((x for u in uncapped for x in u["solves"] if x["index"] == s["index"]), None)
+        ests.append(estimate_solve(s, L.get(s["index"]), ref))
+    rate = sum(x["nodes"] for x in run["solves"]) / sum(x["seconds"] for x in run["solves"])
+    return ests, rate
 
 
 def estimate_solve(s, L, ref):
@@ -165,19 +188,22 @@ def overview_section(runs):
                 cells.append("")
             elif run.get("skipped"):
                 cells.append("skipped")
+            elif run["summary"]["dnf"]:
+                ests, rate = capped_estimates(s, run)
+                ok = [e for e in ests if e]
+                mean = sum(ok) / len(ok) if ok else None
+                cells.append(f"est. {num(mean)} / {secs(mean / rate)}" if mean else f"{run['summary']['dnf']} DNF")
             else:
                 sm = run["summary"]
-                c = f"{num(sm['mean_nodes'])} / {secs(sm['mean_seconds'])}"
-                if sm["dnf"]:
-                    c += f" ({sm['dnf']} DNF)"
-                cells.append(c)
+                cells.append(f"{num(sm['mean_nodes'])} / {secs(sm['mean_seconds'])}")
         rows.append(cells)
     head = ["Floor set", "Family", "Memory", "Mean floor"] + [SET_TITLE[s] for s in SETS]
     return ("### Overview: mean nodes / mean time per solve\n\nMemory is what the app holds: packed tables "
             "plus the small class tables that index the symmetry-reduced ones (those can also be computed "
             "at startup in about a second). Mean floor is over 1,000,000 random positions. Each solve runs "
             "on one thread, four at a time. *Skipped* means the estimate from the previous set (or a 4-scramble "
-            "probe) was over the budget; the reason is in the JSON.\n\n"
+            "probe) was over the budget; the reason is in the JSON. *est.* marks a capped run, estimated as described "
+            "under *Capped runs*.\n\n"
             + table(head, rows, ["---", "---"] + ["--:"] * (len(head) - 2)) + "\n")
 
 
@@ -188,7 +214,11 @@ def detail_section(runs, s):
         if not run or run.get("skipped"):
             continue
         sm = run["summary"]
-        rows.append([f"`{spec}`", mb(sm["bytes"] + sm["aux_bytes"]), f"{sm['solved']}/{sm['scrambles']}",
+        if sm["dnf"]:
+            spec_cell = f"`{spec}` (capped at {num(run.get('max_nodes'))} nodes; finished solves only)"
+        else:
+            spec_cell = f"`{spec}`"
+        rows.append([spec_cell, mb(sm["bytes"] + sm["aux_bytes"]), f"{sm['solved']}/{sm['scrambles']}",
                      f"{sm['mean_h0']:.2f}", num(sm["mean_nodes"]), num(sm["max_nodes"]), secs(sm["mean_seconds"]),
                      secs(sm["max_seconds"]), f"{(sm['nodes_per_second'] or 0) / 1e6:.1f}M",
                      lengths(sm["lengths"])])
@@ -199,34 +229,30 @@ def detail_section(runs, s):
                      "Max time", "Nodes/s", "Optimal lengths"], rows, ["---"] + ["--:"] * 8 + ["---"]) + "\n")
 
 
-def random_state_section():
-    d = load("bench-random-state.json")
-    if not d:
-        return ""
-    L = optimal_lengths()
-    uncapped = {spec: r for spec, r in d["floors"].items() if r.get("solves") and not r["summary"]["dnf"]}
+def capped_section():
     out = []
-    for spec, r in d["floors"].items():
-        if not r.get("solves") or not r["summary"]["dnf"]:
-            continue
-        rate = r["summary"]["nodes_per_second"]
-        ests = []
-        for s in r["solves"]:
-            ref = next((x for u in uncapped.values() for x in u["solves"] if x["index"] == s["index"]), None)
-            ests.append(s["nodes"] if not s["dnf"] else estimate_solve(s, L.get(s["index"]), ref))
-        ok = [e for e in ests if e]
-        if not ok:
-            continue
-        if not rate:
-            tot_n = sum(x["nodes"] for x in r["solves"])
-            tot_s = sum(x["seconds"] for x in r["solves"])
-            rate = tot_n / tot_s
-        mean = sum(ok) / len(ok)
-        out.append(f"- `{spec}`: {r['summary']['solved']} of {r['summary']['scrambles']} solved within the cap of "
-                   f"{num(r.get('max_nodes'))} nodes. Estimated from the depths each capped solve completed "
-                   f"(see `report.py`, `estimate_solve`): mean {num(mean)} nodes, max {num(max(ok))}, so about "
-                   f"{secs(mean / rate)} per solve on one thread at its measured {rate / 1e6:.1f}M nodes/s.")
-    return ("### Capped runs, estimated\n\n" + "\n".join(out) + "\n") if out else ""
+    for set_name in SETS:
+        d = load(f"bench-{set_name}.json") or {"floors": {}}
+        for spec, r in d["floors"].items():
+            if not r.get("solves") or not r["summary"]["dnf"]:
+                continue
+            ests, rate = capped_estimates(set_name, r)
+            ok = [e for e in ests if e]
+            if not ok:
+                continue
+            mean = sum(ok) / len(ok)
+            out.append(f"- `{spec}`, {SET_TITLE[set_name]}: {r['summary']['solved']} of {r['summary']['scrambles']} "
+                       f"solved within the cap of {num(r.get('max_nodes'))} nodes. With the capped ones estimated: "
+                       f"mean {num(mean)} nodes, max {num(max(ok))}; about {secs(mean / rate)} per solve (max "
+                       f"{secs(max(ok) / rate)}) on one thread at its measured {rate / 1e6:.1f}M nodes/s.")
+    if not out:
+        return ""
+    return ("### Capped runs, estimated\n\nPhone sets would need hours per deep position, so their runs on the "
+            "16-move and random-state sets stop each solve at a node cap. A capped solve still finishes some depth "
+            "bounds. Its total is estimated by growing the last finished bound by the ratio of the last two, up to "
+            "the scramble's optimal length (known from an uncapped run). The final bound is added at the fraction "
+            "the uncapped run needed before its first solution (`estimate_solve` in `report.py`). Treat these as "
+            "rough, within a factor of two.\n\n" + "\n".join(out) + "\n")
 
 
 def random_state_detail():
@@ -236,7 +262,7 @@ def random_state_detail():
     runs = {spec: r for spec, r in d["floors"].items() if r.get("solves")}
     if not runs:
         return ""
-    L = optimal_lengths()
+    L = optimal_lengths("random-state")
     uncapped = [r for r in runs.values() if not r["summary"]["dnf"]]
     head = ["#", "Optimal"] + [f"`{spec}`" for spec in runs]
     rows = []
@@ -328,7 +354,7 @@ def main():
     runs = all_runs()
     parts = [machine_section(), builds_section(), verify_section(), overview_section(runs)]
     parts += [detail_section(runs, s) for s in SETS]
-    parts += [random_state_section(), random_state_detail(), proof_section(), superflip_section()]
+    parts += [capped_section(), random_state_detail(), proof_section(), superflip_section()]
     body = "\n".join(p for p in parts if p)
     f = LAB / "FINDINGS.md"
     text = f.read_text()

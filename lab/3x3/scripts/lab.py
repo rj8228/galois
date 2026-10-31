@@ -5,7 +5,8 @@
     python3 scripts/lab.py stats       # mean floor over 1,000,000 random states, lookup cost
     python3 scripts/lab.py bench       # IDA* on the scramble sets, every floor set
     python3 scripts/lab.py superflip   # superflip with the best desktop set (and the best phone set, capped)
-    python3 scripts/lab.py all         # the five above, in order
+    python3 scripts/lab.py sizes       # compressed table sizes, single-thread build times
+    python3 scripts/lab.py all         # the six above, in order
 
 Run from lab/3x3 after `make`. bench and superflip skip work that is
 already in results/, so an interrupted run picks up where it stopped (delete a file to redo it).
@@ -48,12 +49,16 @@ FLOORS = [
     ("Corners + 6 edges", "C8s+E6x24", "moves-14"),
     ("Corners + 6 edges", "C8s+E6x24i", "moves-14"),
     ("Corners + 6 edges", "C8s+E6x24+Ktsx3+Kfsx3+Ktfx3", "moves-14"),
+    ("Phone, 2-bit tables", "C8s@2+E6x8@2"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2+Ktsx3@2+Kfsx3@2+Ktfx3@2"),
     ("Phone, 2-bit tables", "C8s@2+E6x24@2+Ktsx3i+Kfsx3i+Ktfx3i"),
     ("Corners + 7 edges", "C8s+E7x2"),
     ("Corners + 7 edges", "C8s+E7x8"),
     ("Corners + 7 edges", "C8s+E7x8i"),
+    ("Desktop", "C8s@2+P1x3@2"),
+    ("Desktop", "C8s+P1x3i"),
+    ("Desktop", "C8s+E6x8+P1x3i"),
     ("Desktop", "C8s+E7x2+P1x3"),
     ("Desktop", "C8s+E7x2i+P1x3i"),
     ("Desktop", "C8s+E7x8i+P1x3i"),
@@ -76,8 +81,9 @@ BRANCHING = 13.35
 # The best desktop and phone sets (by the 16-move set) run all 20 random-state scrambles. Phone sets
 # are capped lower there: their solves would take hours, and report.py estimates the total from the
 # depths they completed.
-RANDOM_STATE_TOP = {"desktop": 2, "phone": 1}
+RANDOM_STATE_TOP = {"desktop": 1, "phone": 1}
 PHONE_RANDOM_STATE_NODES = 750_000_000
+PHONE_16_NODES = 600_000_000
 DESKTOP_RANDOM_STATE_NODES = 30_000_000_000
 
 
@@ -216,7 +222,7 @@ def estimate(spec, set_name):
 def bench_one(spec, group, set_name, force=False, maxnodes=MAX_NODES):
     name = f"bench-{set_name}.json"
     data = load(name) or {"set": set_name, "machine": machine(), "max_nodes": MAX_NODES, "floors": {}}
-    if spec in data["floors"]:
+    if spec in data["floors"] and not (force and data["floors"][spec].get("skipped")):
         return data["floors"][spec]
     n = sum(1 for line in open(SCRAMBLES / f"{set_name}.txt") if line.strip() and not line.startswith("#"))
     est = estimate(spec, set_name)
@@ -253,12 +259,13 @@ def bench_one(spec, group, set_name, force=False, maxnodes=MAX_NODES):
     return run
 
 
-def candidates(kind, top):
-    """Best floor sets within the phone or desktop budget, by mean time on the 16-move set."""
+def candidates(kind, top, set_name):
+    """Best floor sets within the phone or desktop budget, by mean time on set_name. A capped run
+    (with unfinished solves) only counts for the phone, where every set is capped on deep sets."""
     limit = PHONE_BYTES if kind == "phone" else DESKTOP_BYTES
-    runs = (load("bench-moves-16.json") or {}).get("floors", {})
+    runs = (load(f"bench-{set_name}.json") or {}).get("floors", {})
     ok = [(r["summary"]["mean_seconds"], spec) for spec, r in runs.items()
-          if r.get("summary") and r["summary"]["dnf"] == 0
+          if r.get("summary") and r["summary"]["solved"] and (r["summary"]["dnf"] == 0 or kind == "phone")
           and r["summary"]["bytes"] + r["summary"]["aux_bytes"] <= limit]
     return [spec for _, spec in sorted(ok)[:top]]
 
@@ -270,9 +277,18 @@ def cmd_bench():
             if last and SETS.index(set_name) > SETS.index(last):
                 continue
             bench_one(spec, group, set_name)
+    # The best phone and desktop sets on the 14-move set (which every useful set completes) run the
+    # 16-move set even when the estimate is over budget: those are the numbers the app needs.
+    for kind in RANDOM_STATE_TOP:
+        for spec in candidates(kind, RANDOM_STATE_TOP[kind], "moves-14"):
+            bench_one(spec, group_of[spec], "moves-16", force=True,
+                      maxnodes=PHONE_16_NODES if kind == "phone" else MAX_NODES)
     # Random-state positions: all 20 for the best desktop and phone sets; the rest by estimate.
-    desktop = candidates("desktop", RANDOM_STATE_TOP["desktop"])
-    phone = candidates("phone", RANDOM_STATE_TOP["phone"])
+    desktop = candidates("desktop", RANDOM_STATE_TOP["desktop"], "moves-16")
+    # ... and the best set with the 7-edge table, to see whether 255 MB pays off on deep positions.
+    with_e7 = [spec for spec in candidates("desktop", 99, "moves-16") if "E7" in spec][:1]
+    desktop += [spec for spec in with_e7 if spec not in desktop]
+    phone = candidates("phone", RANDOM_STATE_TOP["phone"], "moves-14")  # the one forced through moves-16
     log("random-state with", desktop, phone)
     for spec in desktop:
         bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=DESKTOP_RANDOM_STATE_NODES)
@@ -292,7 +308,7 @@ def cmd_superflip():
               if r.get("summary") and r["summary"]["dnf"] == 0 and r["summary"]["bytes"] + r["summary"]["aux_bytes"] <= limit]
         if ok:
             return sorted(ok)[0][1]
-        top = candidates("phone" if limit == PHONE_BYTES else "desktop", 1)
+        top = candidates("phone", 1, "moves-14") if limit == PHONE_BYTES else candidates("desktop", 1, "moves-16")
         return top[0] if top else None
 
     # One solve on every thread (CUBE3_SPLIT=3 shares the depth-3 subtrees), so time is wall-clock
@@ -320,10 +336,37 @@ def cmd_superflip():
         log(f"superflip {spec}: length {s['length']}, nodes {s['nodes']:.3g}, {s['seconds']:.0f}s, dnf {s['dnf']}")
 
 
+def cmd_sizes():
+    """What a table costs to ship: gzip and xz sizes, and how long one thread takes to build it
+    (the alternative to downloading it: compute it on the device and cache it)."""
+    import gzip
+    import lzma
+    import tempfile
+
+    out = {"machine": machine(), "tables": {}}
+    with tempfile.TemporaryDirectory() as tmp:
+        for t in (load("builds.json") or {}).get("tables", []):
+            name = t["table"]
+            t0 = time.time()
+            subprocess.run([CUBE3, "build", name], cwd=LAB, check=True, capture_output=True,
+                           env=dict(os.environ, OMP_NUM_THREADS="1", CUBE3_TABLES=tmp))
+            row = {"build_seconds_1_thread": round(time.time() - t0, 2)}
+            for bits in (4, 2):
+                raw = (LAB / "tables" / f"{name}.{bits}.bin").read_bytes()
+                row[f"bytes_{bits}bit"] = len(raw)
+                row[f"gzip9_{bits}bit"] = len(gzip.compress(raw, 9))
+                if len(raw) <= 150_000_000:  # xz on the 255 MB table takes minutes; gzip is enough there
+                    row[f"xz_{bits}bit"] = len(lzma.compress(raw, preset=6))
+            out["tables"][name] = row
+            log("sizes:", name, row)
+    save("sizes.json", out)
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "all"
     steps = {"builds": [cmd_builds], "verify": [cmd_verify], "stats": [cmd_stats], "bench": [cmd_bench],
-             "superflip": [cmd_superflip], "all": [cmd_builds, cmd_verify, cmd_stats, cmd_bench, cmd_superflip]}[cmd]
+             "superflip": [cmd_superflip], "sizes": [cmd_sizes],
+             "all": [cmd_builds, cmd_verify, cmd_stats, cmd_bench, cmd_superflip, cmd_sizes]}[cmd]
     for step in steps:
         step()
 
