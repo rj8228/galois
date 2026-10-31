@@ -119,7 +119,8 @@ def chosen_tables(B):
 
 
 # ---------- compiled IDA* with exp8 counting ----------
-# Order modes: 0 = move order; 1 = static key per child (lower first; ties keep move order).
+# Order modes: 0 = move order; m >= 1 = static key per child (lower first; ties keep move order), applied only at
+# nodes with at least m - 1 moves left in the budget (m = 1: everywhere).
 # score_evals counts key evaluations, only at nodes with two or more surviving children
 # (a lone survivor needs no ranking). Counts are split into all rounds and the final round.
 
@@ -145,7 +146,7 @@ def _dfs(s, g, bound, lastface, h, key, mode, pm, om, faces, st, stack_t, stack_
         stack_t[base + n] = t
         stack_k[base + n] = j
         n += 1
-    if mode == 1 and n > 1:
+    if mode >= 1 and n > 1 and bound - g >= mode - 1:
         st[1] += n
         # insertion sort by key, stable
         for a in range(1, n):
@@ -200,10 +201,10 @@ def run_bench(states, h, key, mode, pm, om, faces):
     return out
 
 
-def evaluate(h, key=None, states=None):
+def evaluate(h, key=None, states=None, min_left=0):
     """Run the benchmark. Asserts every length equals the truth table."""
     states = bench if states is None else states
-    mode = 0 if key is None else 1
+    mode = 0 if key is None else 1 + min_left
     k = np.zeros(1, np.float32) if key is None else np.ascontiguousarray(key, dtype=np.float32)
     out = run_bench(states.astype(np.int64), h, k, mode, PM, OM, FACES)
     optimal = int((out[:, 4] == dist[states]).sum())
