@@ -1,0 +1,156 @@
+{
+ "kind": "solve",
+ "when": "2026-10-31T18:33:51.241Z",
+ "chromium": "153.0.8010.12",
+ "floor": "C8s+P1x3i",
+ "set": "random-idx0-idx7",
+ "workers": 4,
+ "sd": 2,
+ "maxnodes": 6000000000,
+ "setup": {
+  "init_ms": 226.19999999995343,
+  "total_ms": 1236.5999999998603,
+  "loads": [
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 846.1000000000931,
+    "idb_read_ms": 659.1999999999534,
+    "index_ms": 1.5,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 975.6999999999534,
+    "idb_read_ms": 775.1999999999534,
+    "index_ms": 1.3000000000465661,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 1009.3000000000466,
+    "idb_read_ms": 856.5,
+    "index_ms": 1.3000000000465661,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 900.8000000000466,
+    "idb_read_ms": 750.6999999999534,
+    "index_ms": 1.3000000000465661,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   }
+  ],
+  "hardwareConcurrency": 4
+ },
+ "wasm_memory_per_worker": [
+  92536832,
+  92536832,
+  92536832,
+  92536832
+ ],
+ "chromium_pss": {
+  "before_setup": 188204032,
+  "after_setup": 981948416,
+  "peak": 981948416,
+  "procs_after_setup": [
+   {
+    "pid": 2519,
+    "type": "browser",
+    "pss": 42832896
+   },
+   {
+    "pid": 2521,
+    "type": "zygote",
+    "pss": 11508736
+   },
+   {
+    "pid": 2522,
+    "type": "zygote",
+    "pss": 10021888
+   },
+   {
+    "pid": 2537,
+    "type": "gpu-process",
+    "pss": 30024704
+   },
+   {
+    "pid": 2539,
+    "type": "utility",
+    "pss": 26331136
+   },
+   {
+    "pid": 2550,
+    "type": "renderer",
+    "pss": 27443200
+   },
+   {
+    "pid": 2573,
+    "type": "renderer",
+    "pss": 833785856
+   }
+  ]
+ },
+ "solves": [
+  {
+   "index": 0,
+   "scramble": "F U2 R L' U' F B' R' F' L F2 D2 B' L2 F' B2 U2 B R2 F D2",
+   "length": 18,
+   "solution": "U F D2 F2 B L' U2 B D' R L F' B' L' D' F' D2 F2",
+   "verified": true,
+   "dnf": false,
+   "h0": 11,
+   "nodes": 2090445680,
+   "perBound": {
+    "11": 129,
+    "12": 2790,
+    "13": 38919,
+    "14": 573930,
+    "15": 8200428,
+    "16": 115393326,
+    "17": 1606006587,
+    "18": 360229571
+   },
+   "found_ms": 116324.19999999995,
+   "drain_ms": 131563.69999999995,
+   "tasks_run": 1400
+  },
+  {
+   "index": 1,
+   "scramble": "B2 U2 L2 F2 R2 U2 F2 U L2 B2 U L2 R' B D R' D U L' U'",
+   "length": 17,
+   "solution": "U L' B2 R2 F' B D F B L' B2 R' F R' F L F'",
+   "verified": true,
+   "dnf": false,
+   "h0": 11,
+   "nodes": 328254408,
+   "perBound": {
+    "11": 141,
+    "12": 3936,
+    "13": 65544,
+    "14": 909093,
+    "15": 12136845,
+    "16": 160032804,
+    "17": 155106045
+   },
+   "found_ms": 18918.799999999814,
+   "drain_ms": 20770.5,
+   "tasks_run": 1164
+  }
+ ]
+}
