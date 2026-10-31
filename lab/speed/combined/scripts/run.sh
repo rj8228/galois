@@ -20,3 +20,6 @@ head -n 5 data/in-random-state.txt > data/rs5.txt
 run rs5-split-masks ./comb comb run data/rs5.txt split 4 1 0 1800
 run rs5-race ./comb comb run data/rs5.txt race 4 0 0 1800
 COMB_HELP_MIN=2 COMB_HELP_FRAC=0.10 run rs5-race-masks-help-2s10 ./comb comb run data/rs5.txt race 4 1 1 1800
+# one thread, lab/3x3's dfs, for this machine's nodes per second
+head -n 5 data/in-moves-16.txt | cut -d' ' -f2- > data/m16-5.scr
+OMP_NUM_THREADS=1 run m16-5-1t ./comb gsolve C8s+P1x3i data/m16-5.scr 100000000000 0
