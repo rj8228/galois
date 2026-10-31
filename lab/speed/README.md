@@ -36,6 +36,8 @@ Each task runs in its own cloud session, on its own branch, in its own folder.
 | T4 3×3 anatomy: does it hold at scale? | [T4-3x3-anatomy.md](T4-3x3-anatomy.md) | `speed-3x3-anatomy` | `lab/speed/anatomy3/` |
 | T5 Browser speed (optional) | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` |
 
+Cloud credit is limited, so not every task runs at once. **T2 and T4 run in cloud sessions now. T1 runs in the main session. T3 waits for T4's result. T5 is deferred.** Aim to finish each cloud task within about 2 hours of session time. GitHub issues: tracker #20, tasks #21–#25.
+
 ## Rules for every task
 
 1. **Start from the lab base:** `git fetch origin && git checkout -b <your branch> origin/phase-8-speed-lab`. It already contains `lab/2x2`, `lab/3x3`, `lab/neural` and the 3×3 engine in `src/solver3`.
