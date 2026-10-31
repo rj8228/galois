@@ -1,0 +1,1 @@
+{"index": 0, "D": 18, "floor0": 11, "fullfloor": 1, "target": {"found": true, "length": 18, "secs": 51.7336, "nodes": 545415383, "cap": 120.0}, "trace": [[0.0017, 22, 81798], [0.0038, 21, 211698], [0.0059, 19, 249211], [52.8142, 18, 545645372]], "trace_nodes": 545645372, "trace_cap": 250.0, "shorter_than_D": false}
