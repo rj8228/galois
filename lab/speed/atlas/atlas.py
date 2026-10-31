@@ -273,8 +273,7 @@ for name in ATLAS_FLOORS:
     starts = np.r_[0, np.flatnonzero(np.diff(cs)) + 1]
     mx = np.maximum.reduceat(ts, starts)
     mn = np.minimum.reduceat(ts, starts)
-    f['symmetry_spread'] = {'median_max_over_min': float(np.median(mx / mn)), 'mean_class_min_over_mean': float(
-        mn.sum() / (ts.sum() / (len(ts) / len(starts))) / len(starts))}
+    f['symmetry_spread'] = {'median_max_over_min': float(np.median(mx / mn))}  # best-twin savings: twins.py
     agg['floors'][name] = f
     log(f"{name}: find share {f['find_share_of_all_work']:.1%}, top 1% {f['tail']['top_1']:.1%}, top 10% {f['tail']['top_10']:.1%}, "
         f"gap base {f['gap_law_base']:.2f}, corr(find, doors) raw {f['corr_find_doors_raw']:+.2f} within-d {f['corr_find_doors_within_distance']:+.2f}, "
