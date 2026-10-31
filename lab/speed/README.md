@@ -4,7 +4,7 @@ Galois solves cubes optimally with a framework of three parts. A **ceiling** is 
 
 This lab asks one question: **how can the same guarantee be reached with less work?** We use the 2×2 as a microscope, because the true distance of all 3,674,160 positions is known (`lab/2x2`). Then we check what carries over to the 3×3 (`lab/3x3`).
 
-**Round 1 results:** [SYNTHESIS.md](SYNTHESIS.md) (atlas, compass, 3×3 anatomy).
+**Round 1 results:** [SYNTHESIS.md](SYNTHESIS.md) (atlas, compass, 3×3 anatomy). **Round 2** moves to the 3×3: a ceiling solver racing the prover (T6), downhill masks (T3) and browser speed (T5).
 
 ## What we already know: the anatomy of an optimal solve
 
@@ -30,21 +30,24 @@ Measured on the same 1,000 random 2×2 positions (`lab/2x2/exp7_where_time_goes.
 
 Each task runs in its own cloud session, on its own branch, in its own folder.
 
-| Task | Brief | Branch | Folder |
-|---|---|---|---|
-| T1 Search atlas: dataset + visuals | [T1-atlas.md](T1-atlas.md) | `speed-atlas` | `lab/speed/atlas/` |
-| T2 Compass: learned move ordering | [T2-compass.md](T2-compass.md) | `speed-compass` | `lab/speed/compass/` |
-| T3 Gravity: downhill maps | [T3-gravity.md](T3-gravity.md) | `speed-gravity` | `lab/speed/gravity/` |
-| T4 3×3 anatomy: does it hold at scale? | [T4-3x3-anatomy.md](T4-3x3-anatomy.md) | `speed-3x3-anatomy` | `lab/speed/anatomy3/` |
-| T5 Browser speed (optional) | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` |
+| Task | Brief | Branch | Folder | Status |
+|---|---|---|---|---|
+| T1 Search atlas: dataset + visuals | [T1-atlas.md](T1-atlas.md) | `speed-atlas` | `lab/speed/atlas/` | Done (round 1) |
+| T2 Compass: learned move ordering | [T2-compass.md](T2-compass.md) | `speed-compass` | `lab/speed/compass/` | Done (round 1) |
+| T4 3×3 anatomy: does it hold at scale? | [T4-3x3-anatomy.md](T4-3x3-anatomy.md) | `speed-3x3-anatomy` | `lab/speed/anatomy3/` | Done (round 1) |
+| T6 Ceiling race: the prover only proves | [T6-ceiling-race.md](T6-ceiling-race.md) | `speed-ceiling` | `lab/speed/ceiling/` | Round 2 |
+| T3 Gravity on the 3×3: downhill masks | [T3-gravity.md](T3-gravity.md) | `speed-gravity` | `lab/speed/gravity/` | Round 2 (rescoped to the 3×3) |
+| T5 Browser speed | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` | Round 2 |
 
-Cloud credit is limited, so not every task runs at once. **T2 and T4 run in cloud sessions now. T1 runs in the main session. T3 waits for T4's result. T5 is deferred.** Aim to finish each cloud task within about 2 hours of session time. GitHub issues: tracker #20, tasks #21–#25.
+Cloud credit is limited, so each task is boxed to **about 2 hours of session time**. Round 2 runs T6 and T3 in cloud sessions, plus T5 if the credit allows; the main session stitches the results. Best twin, round 1's other lead, is folded into T6 as a short check: the desktop floor gives a position and all its symmetric twins the same value, so only the inverse searches a different tree. GitHub issues: tracker #20; tasks #21–#25 and #29.
 
 ## Rules for every task
 
 1. **Start from the lab base:** `git fetch origin && git checkout -b <your branch> origin/phase-8-speed-lab`. It already contains `lab/2x2`, `lab/3x3`, `lab/neural` and the 3×3 engine in `src/solver3`.
 2. **Stay in your folder.** Don't change other tasks' folders, `lab/2x2`, `lab/3x3` or the app (`src/`, `tests/`, `public/`), except where your brief says so. Copy code you need into your folder.
-3. **Rebuild the 2×2 data first.** `lab/2x2/data/` is not committed. From `lab/2x2`, run `exp1_truth.py`, `exp2_floors.py`, `exp3_neural.py 6` and `exp5_finder.py 12` in that order (about 10 minutes), or only the ones your task needs. See `lab/2x2/README.md`.
+3. **Rebuild the data you need first.** Neither puzzle's data is committed.
+   - **2×2:** `lab/2x2/data/`. From `lab/2x2`, run `exp1_truth.py`, `exp2_floors.py`, `exp3_neural.py 6` and `exp5_finder.py 12` in that order (about 10 minutes), or only the ones your task needs. See `lab/2x2/README.md`.
+   - **3×3:** run `make`, then `./cube3 build corners_sym phase1_sym` for the desktop set or `./cube3 build corners_sym edges6` for the phone set, with `CUBE3_TABLES` pointing at a git-ignored `data/` folder. Each takes under a minute (see `lab/speed/anatomy3/README.md`). `lab/3x3/results` already holds the per-bound node counts of every benchmark solve, so reuse them rather than rerunning hours of solves.
 4. **Never commit large files.** Anything over 5 MB goes in a git-ignored `data/` folder in your task folder and must be rebuildable by your scripts.
 5. **Tools.** Use Python 3 with numpy. Packages from PyPI install with pip (numba, scipy, matplotlib). PyTorch cannot be installed (download.pytorch.org is blocked), so write networks in numpy like `lab/2x2/nets.py`. arxiv.org may be blocked. C is fine (gcc is available).
 6. **Correctness comes first.**

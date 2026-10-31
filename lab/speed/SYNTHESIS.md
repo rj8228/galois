@@ -48,6 +48,11 @@ From T4's tables, desktop set `C8s+P1x3i`, one thread, native C:
 
 ## Next experiments
 
+Round 2 briefs:
+- [T6-ceiling-race.md](T6-ceiling-race.md) carries out experiment 1, widened into a race: the ceiling does the finding, so the prover only has to prove.
+- [T3-gravity.md](T3-gravity.md) carries out experiment 2.
+- [T5-browser-speed.md](T5-browser-speed.md) carries out experiment 3.
+
 1. **Ceiling as compass (3×3).** At the first few levels of the final round, run the two-phase solver from each surviving child and try the shortest first.
    - Measure: final-round lookups against the perfect-compass bound, and the time of the two-phase calls.
    - Sets: 14 and 16 moves, then random states.
