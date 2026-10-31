@@ -226,3 +226,25 @@ def canon_index(idx, scp, sco, icp, ico):
         if v < best:
             best = v
     return best
+
+
+@njit(cache=True)
+def inverse_index(idx):
+    """The index of the inverse position, which is the same distance from solved."""
+    cp = np.zeros(8, np.int64)
+    co = np.zeros(8, np.int64)
+    a = np.zeros(8, np.int64)
+    b = np.zeros(8, np.int64)
+    decode(idx, cp, co)
+    for i in range(8):
+        a[cp[i]] = i
+        b[cp[i]] = (3 - co[i]) % 3
+    return encode(a, b)
+
+
+@njit(cache=True)
+def canon_inv_index(idx, scp, sco, icp, ico):
+    """Representative under the 48 symmetries and inversion: the smaller of the two class reps."""
+    a = canon_index(idx, scp, sco, icp, ico)
+    b = canon_index(inverse_index(idx), scp, sco, icp, ico)
+    return a if a < b else b

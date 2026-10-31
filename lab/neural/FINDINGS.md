@@ -2,25 +2,35 @@
 
 **Question.** On the 2×2, a network trained to underestimate, plus a table of its remaining overestimates, gave a floor that is never too high, but it used more bytes than plain tables. Does that change at 3×3 scale? The test case is the 8-corner table (88,179,840 positions, 44,089,920 bytes at 4 bits), the table that "Learning Admissible Heuristics for A*" (arXiv 2509.22626) compressed about 51×.
 
-## Verdict: no, it does not beat plain tables per byte
+## Verdict: no, with a narrow exception inside a full 3×3 search
 
-The 2×2 result carries over. Every net configuration is beaten by a plain table on bytes and search nodes together:
+The 2×2 result mostly carries over:
 
-1. **At full strength, a plain table is smaller and exact.** A table reduced by the cube's 48 symmetries and by inversion (d(s) = d(s⁻¹)) holds the exact distance in **438,215 bytes** stored mod 3 (101× smaller than 44 MB). It searches exactly like the 44 MB table: 2,209 IDA* nodes. Every net configuration of 438 KB or more has a weaker floor and more nodes.
-2. **Below that, the network is not what does the work.** The correction table is. Replace the net with a constant and keep the corrections, and you get a *perimeter table*: the exact distance of every position within distance k, and k + 1 everywhere else. Each net was set beside the perimeter table with k = 7 − margin and the same inputs:
-   - **Bytes:** the perimeter table is 1.2–32× smaller (1.2–1.5× for the raw net, 1.6–32× for the sym nets).
-   - **Search:** the net needs about the same IDA* nodes as its twin, from 6% fewer to 74% more.
+1. **At full strength, a plain table is smaller and exact.** A table reduced by the cube's 48 symmetries and by inversion (d(s) = d(s⁻¹)) holds the exact distance in **438,215 bytes** stored mod 3, 101× smaller than 44 MB. It searches exactly like the 44 MB table. Every net configuration of 438 KB or more has a weaker floor and searches more nodes, on the corner puzzle and in the full 3×3.
+2. **On the corner puzzle, the correction table does the work, not the network.** Replace the net with a constant and keep the corrections, and you get a *perimeter table*: the exact distance of every position within distance k, and k + 1 everywhere else. Set each net beside the perimeter table with k = 7 − margin and the same inputs:
+   - **Bytes:** the perimeter table is 1.2–32× smaller.
+   - **Search:** the net searches between 6% fewer and 74% more nodes than its twin.
    - **Mean floor:** the net is higher by only 0.05–0.31.
 
    At margin 0 the raw net's correction table contains 6,801,927 of the 6,807,696 positions within distance 7, which is a perimeter table in all but name.
+3. **In a full 3×3 search the nets do a little better, but only fill gaps.** With the corner floor combined with two 6-edge tables, every net searches 2–18% fewer nodes than its twin. Four net configurations end up on the bytes-against-nodes frontier (one of them by only 371 nodes). All four sit in the gaps between plain tables:
+   - **108 KB**, between the 37 KB and 156 KB perimeter tables.
+   - **284–428 KB**, between the 156 KB perimeter table and the 438 KB exact table.
 
-What the nets do achieve is a large ratio against the 44 MB table: up to 576× (76 KB) while staying never too high. But perimeter tables over symmetry classes reach the same search strength with no network at all, at 154× to 3,249×.
+   In both gaps, bytes spent on stepping up to the next plain table buy 2.5–4× more search reduction than bytes spent on the net. These frontier nets also searched 4–13× slower in wall-clock time than the plain tables either side of them.
 
-Every floor here, net or plain, was checked against the BFS truth on all 88,179,840 positions, and none is ever too high (largest floor − truth: 0). IDA* also compared every floor value it computed with the truth: 0 violations in every run. Every solution it returned was optimal.
+So a net is only worth it if the memory budget falls exactly in one of those gaps, and slower search is acceptable. Everywhere else, a plain table is smaller and searches at least as well.
 
-## Plain floors
+What the nets do achieve is a large ratio against the 44 MB table: up to 615× (72 KB) while staying never too high. But perimeter tables over symmetry+inverse classes reach the same corner-puzzle search strength with no network at all, at 283× to 5,957×.
 
-"Mean floor" is over all 88,179,840 positions; the truth's is 8.764. "Exact" is the share of positions where the floor equals the distance. IDA* nodes are summed over 50 scrambles of 12 random moves (seeded; no face turned twice in a row). The 12 moves leave the corners at distance 4–9 from solved.
+**Checks:**
+- Every floor here, net or plain, was checked against the BFS truth on all 88,179,840 positions, and none is ever too high (largest floor − truth: 0).
+- Both searches compared every corner floor value they computed with the truth: 0 violations in every run.
+- Every solution was optimal. On the full cube, every floor returned the same 50 optimal lengths, and every solution was replayed on the cube to check that it solves it.
+
+## Plain floors (corner puzzle)
+
+"Mean floor" is over all 88,179,840 positions; the truth's is 8.764. "Exact" is the share of positions where the floor equals the distance. IDA* nodes are summed over 50 scrambles of 12 random moves (seeded; no face turned twice in a row), solving the corners only. The 12 moves leave the corners at distance 4–9 from solved.
 
 | floor | bytes | vs 44 MB | mean floor | exact | IDA* nodes, 50 scrambles |
 |---|---:|---:|---:|---:|---:|
@@ -38,17 +48,25 @@ Every floor here, net or plain, was checked against the BFS truth on all 88,179,
 | perimeter table: exact to distance 5, 6 beyond | 443,535 | 99× | 5.997 | 1.6% | 163,943 |
 | **symmetry+inverse-reduced table, 2 bits (mod 3)** | **438,215** | **101×** | **8.764** | **100.0%** | **2,209** |
 | perimeter table over symmetry classes: exact to 7, 8 beyond | 285,791 | 154× | 7.904 | 31.3% | 2,947 |
+| perimeter table over symmetry+inverse classes: exact to 7, 8 beyond | 155,572 | 283× | 7.904 | 31.3% | 2,947 |
 | max of two 4-corner tables | 136,080 | 324× | 5.683 | 0.8% | 1,417,867 |
 | 4-corner table | 68,040 | 648× | 5.292 | 0.5% | 30,730,621 |
 | perimeter table over symmetry classes: exact to 6, 7 beyond | 67,100 | 657× | 6.981 | 7.7% | 13,996 |
+| perimeter table over symmetry+inverse classes: exact to 6, 7 beyond | 36,856 | 1,196× | 6.981 | 7.7% | 13,996 |
 | perimeter table over symmetry classes: exact to 5, 6 beyond | 13,570 | 3,249× | 5.997 | 1.6% | 163,943 |
+| perimeter table over symmetry+inverse classes: exact to 5, 6 beyond | 7,401 | 5,957× | 5.997 | 1.6% | 163,943 |
 | 3-corner table | 4,536 | 9,720× | 4.078 | 0.0% | 358,853,434 |
 
 The mod-3 rows store each distance mod 3 in 2 bits. They give the same values as their 4-bit versions, because a search knows its parent's exact distance and a child differs from it by at most 1. Their node counts are therefore those of the 4-bit tables. The mod-3 lookup itself was not implemented here.
 
-## Nets beside their zero-parameter twins (int8)
+## Nets beside their zero-parameter twins (corner puzzle, int8)
 
 Net bytes = int8 weights (with an fp16 scale and fp16 bias per unit) + the correction table. The correction table stores Elias–Fano coded sorted keys plus 4 bits per value: 10–21 bits per entry, fewer when the keys are dense. The twin is the perimeter table with k = 7 − margin, over the same inputs, coded the same way.
+
+There are three kinds of input:
+- **raw:** the position itself.
+- **sym:** its representative under the 48 symmetries.
+- **sym+inv:** its representative under the symmetries and inversion. This is the same trained sym net, read at a different representative, with corrections only for those 934,778 classes. No retraining is needed.
 
 | net (int8) | margin | bytes: weights + corrections | mean floor | IDA* nodes | twin: perimeter k | twin bytes | twin mean floor | twin nodes |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -64,22 +82,71 @@ Net bytes = int8 weights (with an fp16 scale and fp16 bias per unit) + the corre
 | sym MLP 256-128-64 (100 epochs) | 0 | 466,293 = 65,348 + 400,945 | 8.094 | 2,934 | 7 (sym) | 285,791 | 7.904 | 2,947 |
 | sym MLP 256-128-64 (100 epochs) | 1 | 143,413 = 65,348 + 78,065 | 7.209 | 13,920 | 6 (sym) | 67,100 | 6.981 | 13,996 |
 | sym MLP 256-128-64 (100 epochs) | 2 | 76,494 = 65,348 + 11,146 | 6.228 | 160,022 | 5 (sym) | 13,570 | 5.997 | 163,943 |
+| sym+inv MLP 512-256-128 (30 epochs) | 0 | 424,312 = 212,612 + 211,700 | 8.089 | 2,840 | 7 (sym+inv) | 155,572 | 7.904 | 2,947 |
+| sym+inv MLP 512-256-128 (30 epochs) | 1 | 253,855 = 212,612 + 41,243 | 7.202 | 13,313 | 6 (sym+inv) | 36,856 | 6.981 | 13,996 |
+| sym+inv MLP 512-256-128 (30 epochs) | 2 | 218,886 = 212,612 + 6,274 | 6.220 | 153,747 | 5 (sym+inv) | 7,401 | 5.997 | 163,943 |
+| sym+inv MLP 512-256-128 (100 epochs) | 0 | 428,116 = 212,612 + 215,504 | 8.168 | 3,220 | 7 (sym+inv) | 155,572 | 7.904 | 2,947 |
+| sym+inv MLP 512-256-128 (100 epochs) | 1 | 236,417 = 212,612 + 23,805 | 7.282 | 19,392 | 6 (sym+inv) | 36,856 | 6.981 | 13,996 |
+| sym+inv MLP 512-256-128 (100 epochs) | 2 | 213,966 = 212,612 + 1,354 | 6.292 | 279,798 | 5 (sym+inv) | 7,401 | 5.997 | 163,943 |
+| sym+inv MLP 256-128-64 (100 epochs) | 0 | 284,368 = 65,348 + 219,020 | 8.094 | 2,918 | 7 (sym+inv) | 155,572 | 7.904 | 2,947 |
+| sym+inv MLP 256-128-64 (100 epochs) | 1 | 108,250 = 65,348 + 42,902 | 7.211 | 13,894 | 6 (sym+inv) | 36,856 | 6.981 | 13,996 |
+| sym+inv MLP 256-128-64 (100 epochs) | 2 | 71,750 = 65,348 + 6,402 | 6.229 | 160,344 | 5 (sym+inv) | 7,401 | 5.997 | 163,943 |
 
 fp16 weights give the same floors (within 0.012 mean floor), the same correction counts to within 3%, and nearly the same node counts. They cost 1.02–2× the total bytes, so int8 is the better format throughout. All rows, fp16 included, are in `results/table.md` and `results/summary.json`.
 
+## In a full 3×3 search
+
+The corner floor's real job is inside a full-cube search. There, the floor is max(corner floor, edge table A, edge table B), as in Korf's 1997 optimal solver. The two 6-edge tables are the same for every row (42,577,920 entries each), so the bytes column counts only the corner floor. The 50 scrambles are the same move sequences, now applied to the whole cube; their optimal lengths are 8 (3 scrambles), 9 (2), 10 (6), 11 (8) and 12 (31). Rows below are the frontier, plus the comparisons that matter. Every row is in `results/table_full3x3.md`.
+
+| corner floor | corner bytes | mean corner floor | full-3×3 nodes, 50 scrambles | vs exact | seconds | frontier |
+|---|---:|---:|---:|---:|---:|---|
+| no corner floor (the two edge tables alone) | 0 | – | 66,552,574 | 5.76× | 45 | **yes** |
+| perimeter table over symmetry+inverse classes: exact to 5, 6 beyond | 7,401 | 5.997 | 58,662,838 | 5.08× | 44 | **yes** |
+| perimeter table over symmetry+inverse classes: exact to 6, 7 beyond | 36,856 | 6.981 | 41,269,162 | 3.57× | 33 | **yes** |
+| sym+inv MLP 256-128-64, int8, margin 2 | 71,750 | 6.229 | 55,199,584 | 4.78× | 168 | |
+| **sym+inv MLP 256-128-64, int8, margin 1** | **108,250** | **7.211** | **35,969,262** | **3.11×** | **137** | **yes** |
+| max of two 4-corner tables | 136,080 | 5.683 | 60,158,770 | 5.21× | 45 | |
+| perimeter table over symmetry+inverse classes: exact to 7, 8 beyond | 155,572 | 7.904 | 17,094,941 | 1.48× | 16 | **yes** |
+| sym+inv MLP 512-256-128 (100 epochs), int8, margin 1 | 236,417 | 7.282 | 34,062,546 | 2.95× | 160 | |
+| **sym+inv MLP 256-128-64, int8, margin 0** | **284,368** | **8.094** | **15,904,172** | **1.38×** | **92** | **yes** |
+| **sym+inv MLP 512-256-128 (100 epochs), int8, margin 0** | **428,116** | **8.168** | **15,724,617** | **1.36×** | **104** | **yes** |
+| symmetry+inverse-reduced table, 2 bits (mod 3) | 438,215 | 8.764 | 11,550,222 | 1.00× | 8 | **yes** |
+| raw MLP 512-256-128, int8, margin 0 | 9,929,777 | 7.953 | 16,714,693 | 1.45× | 40 | |
+| perimeter table: exact to distance 7, 8 beyond | 8,509,620 | 7.904 | 17,094,941 | 1.48× | 16 | |
+| max of two 6-corner tables | 14,696,640 | 7.982 | 18,571,735 | 1.61× | 16 | |
+| 8-corner table, 4 bits (the truth) | 44,089,920 | 8.764 | 11,550,222 | 1.00× | 8 | |
+
+The 30-epoch sym+inv net at margin 0 (424,312 bytes, 15,903,801 nodes) is on the frontier as well, but only by 371 nodes; it is left out above.
+
+**What changes from the corner puzzle:**
+
+- **The corner floor matters, but less than on its own.** The exact corner table cuts the edge-only search 5.8×, and the perimeter-7 table cuts it 3.9×.
+- **The search now spends where the nets are stronger.** With the exact corner table, the nodes a full-cube search generates have corners at distance 7.3 on average, and 47.5% of them are at distance 8 or more. On the corner puzzle these scrambles start at distance 4–9; over all positions, 92.3% are at 8 or more. The nets' extra floor height is at distances 8–11, so they now beat their twins: by 2–8% at margins 0 and 2, and by 4–18% at margin 1.
+- **That makes some nets frontier points, but at a poor exchange rate.** Here is what each extra byte buys, measured as reduction in log(nodes) per KB:
+
+  | step | extra bytes | nodes | reduction per KB |
+  |---|---:|---:|---:|
+  | perimeter-6 → net at margin 1 | +71 KB | 12.8% fewer | 0.0019 |
+  | perimeter-6 → perimeter-7 | +119 KB | 58.6% fewer | 0.0074 |
+  | perimeter-7 → net at margin 0 | +129 KB | 7.0% fewer | 0.00056 |
+  | perimeter-7 → exact | +283 KB | 32.4% fewer | 0.0014 |
+
+  So in each gap, the next plain table buys 2.5–4× more search per byte than the net does.
+- **Nets are slow per node.** A forward pass plus 96 conjugations to find the class representative cost microseconds; a table lookup costs nanoseconds. The edge tables are checked first and the net only runs when they can't prune, and the net-floor searches still took 40–206 s against 8–45 s for the plain floors. These are single-threaded runs that shared 4 cores, so the times are indicative only.
+
 ## Why the nets lose
 
-- **Overestimates sit at the shallow end, and correcting them builds a perimeter table.** Most positions (51%) are at distance 9 and 17% at distance 10. A net trained under a squared-error loss settles near 8–9 almost everywhere, so its overestimates are the 7.7% of positions at distance ≤ 7. Storing their true distances makes the floor exact near solved, which is where IDA* finishes every iteration. That shallow exactness, not the net, is what keeps node counts low, and it is exactly what a perimeter table provides without the weights.
-- **The net's own contribution lands where these searches spend little.** The net raises the floor by 0.05–0.31 on average, mostly at distances 8–11. These scrambles start at distance 4–9, so the extra height buys nothing here.
-- **A better-trained net can search worse.** The 100-epoch sym net has a higher mean floor than the 30-epoch one (7.28 vs 7.20 at int8, margin 1), but it needs 47% more nodes (19,904 vs 13,562). Mean floor by true distance (`results/by_depth.json`) shows why:
+- **Overestimates sit at the shallow end, and correcting them builds a perimeter table.** Most positions (51%) are at distance 9 and 17% at distance 10. A net trained under a squared-error loss settles near 8–9 almost everywhere, so its overestimates are the 7.7% of positions at distance ≤ 7. Storing their true distances makes the floor exact near solved, which is where IDA* finishes every iteration. That shallow exactness, not the net, is what keeps corner-puzzle node counts low, and it is exactly what a perimeter table provides without the weights.
+- **The net's own contribution is small.** It raises the floor by 0.05–0.31 on average, mostly at distances 8–11. On the corner puzzle the scrambles start at distance 4–9, so this buys nothing. In the full 3×3 search it buys 2–18%.
+- **A better-trained net can search worse.** The 100-epoch sym net has a higher mean floor than the 30-epoch one (7.28 vs 7.20 at int8, margin 1), but it needs 47% more corner-puzzle nodes (19,904 vs 13,562). Mean floor by true distance (`results/by_depth.json`) shows why:
   - The 30-epoch net overestimated shallow positions more, so the correction table made them exact: 4.00 at distance 4 and 6.97 at distance 7.
-  - The better-calibrated 100-epoch net overestimates them less, gets fewer corrections, and is left weaker exactly where search starts (3.91 and 6.79).
-  - Its gains are at distances 9–11 (7.49 vs 7.32 at distance 10).
-- **Symmetry helps both sides, and the plain table gains more.** Feeding the net a symmetry-class representative cuts its corrections about 37× at margin 0 (7.8M positions down to 210k classes). The same symmetries, plus inversion, shrink an exact plain table to 438 KB. Neither the nets nor the perimeter tables come close to that table's strength.
+  - The better-calibrated 100-epoch net overestimates them less, gets fewer corrections, and is left weaker exactly where the corner search starts (3.91 and 6.79).
+  - Its gains are at distances 9–11 (7.49 vs 7.32 at distance 10). In the full 3×3 search, which spends more at those distances, the order flips: 34.1M against 36.3M nodes.
+- **Symmetry and inversion help both sides, and the plain tables gain more.** Feeding the net a class representative cuts its corrections about 37× at margin 0, and inversion halves them again. But the same reductions shrink an exact plain table to 438 KB and a perimeter-7 table to 156 KB, and the net's weights don't shrink at all.
 
 ## Against the paper
 
-I couldn't open arXiv 2509.22626 from this session (arxiv.org is not in the network allowlist), so the only figure used is the brief's "about 51×". I don't know which baseline that ratio was measured against. Here, the nets reach 73× (margin 0) to 576× (margin 2) against the 44 MB table. But plain tables that use the same symmetry knowledge reach 101× exact, and 154× to 3,249× at the nets' search strength. A ratio against the unreduced table overstates what a network contributes unless the baseline also uses symmetry and a perimeter.
+I couldn't open arXiv 2509.22626 from this session (arxiv.org is not in the network allowlist), so the only figure used is the brief's "about 51×". I don't know which baseline that ratio was measured against. Here, against the 44 MB table, the int8 symmetry nets reach 73–155× at margin 0 and up to 615× at margin 2. But plain tables that use the same symmetry knowledge reach 101× exact, and 283× to 5,957× at the nets' corner-puzzle search strength. A ratio against the unreduced table overstates what a network contributes unless the baseline also uses symmetry and a perimeter.
 
 ## What was built
 
@@ -95,18 +162,25 @@ I couldn't open arXiv 2509.22626 from this session (arxiv.org is not in the netw
    - **The guard.** The search evaluates the net one position at a time in numba, with a different float summation order from the batched check. So the check adds a guard of 0.001 to the prediction before rounding, and it measures the gap between the two code paths on 200,000 positions; the largest gap is 9e-6. Within that bound, the search's floor is never above the checked one.
 5. **Plain tables** (`plain.py`, `perimeter.py`).
    - **Partial tables:** 3–6 corners, each built by its own BFS, and maxes of two.
-   - **The symmetry-reduced 8-corner table:** one entry per (corner-permutation class, twist), with 984 permutation classes. A version also reduced by inversion has 654 classes. Filling both from the truth found zero conflicts, which also verifies d(s) = d(s⁻¹) on every position. Their bytes include a 2-byte-per-permutation map: class, symmetry and inverse flag, packed mixed-radix to under 62,784.
+   - **The symmetry-reduced 8-corner table:** one entry per (corner-permutation class, twist), with 984 permutation classes. A version also reduced by inversion has 654 classes. Filling both from the truth found zero conflicts. Their bytes include a 2-byte-per-permutation map: class, symmetry and inverse flag, packed mixed-radix to under 62,784.
    - **Perimeter tables:** stored exactly like the correction tables, so the comparison with the nets is like for like.
-6. **IDA*** (`search.py`, `run_search.py`). On the 8-corner puzzle, with the usual move pruning (no face twice in a row; opposite faces in one order). It counts every node visited across all iterations.
+6. **Inversion for both sides** (`inverse.py`). Representatives under the symmetries and inversion: 934,778 classes. The script asserts d(s) = d(s⁻¹) on every position. It builds the perimeter tables and the sym nets' correction tables over these classes, and checks each floor on all 88,179,840 positions. The inverse perimeter tables reproduce the old node counts exactly, which also tests the new lookup.
+7. **Corner-puzzle IDA*** (`search.py`, `run_search.py`). The usual move pruning (no face twice in a row; opposite faces in one order). It counts every node generated, across all iterations.
+8. **The full 3×3** (`cube3.py`, `edges.py`, `search3.py`, `run_search3.py`).
+   - **Edge model:** edges use Kociemba's convention, like the corners. The full-cube model reproduces the known position counts to depth 4 (1, 18, 243, 3,240, 43,239) and the order of R U (105 = 15 on the corners × 7 on the edges).
+   - **Edge tables:** two 6-edge tables by BFS (UR UF UL UB DR DF, and DL DB FR FL BL BR), max 10, mean 7.62.
+   - **Search:** IDA* takes the max of the corner floor and both edge floors. It looks up the edge floors first, which changes the time but not the node counts.
 
 ## Limits
 
 - **numpy, not PyTorch.** `pip install torch --index-url https://download.pytorch.org/whl/cpu` failed: download.pytorch.org is blocked by this session's network proxy (403). Each training run got 10–50 minutes on a shared 4-core machine.
   - **One stalled run.** An earlier raw run with an 8× overestimate weight and learning rate 2e-3 stayed at a constant prediction for 2,000 steps and was stopped.
-  - **What longer training would need.** A longer-trained or larger net would have a higher floor. To beat the plain tables it would have to beat its perimeter twin by more than its own weights, while leaving few overestimates, and the 100-epoch run moved the wrong way on search nodes.
-- **Search is on the corner puzzle, not the full 3×3.** In a full 3×3 search the corner floor is consulted at positions whose corners are spread far more evenly over all distances. There, the mean floor counts for more than exactness near solved, and the nets' +0.2–0.3 over the perimeter tables would matter more. Even so, the exact 438 KB table beats every net at 438 KB or more on mean floor too. Between 76 and 286 KB the sym nets have the highest mean floor measured for their size, but only narrowly. Stepping from the 67 KB perimeter table to the 286 KB one adds 4.2 of mean floor per extra MB, more than any net adds over its twin (at most 3.7 per MB).
-- **Bytes are stored bytes.** Permutation maps and int8 scales are counted. Code is not. The full table rebuilds by BFS in 3 seconds here, so download size is rarely the binding constraint; memory during search is.
-- **Small sweep.** One loss weight (4×), two net shapes and one raw net were tried. Lossy symmetry-aware plain tables (for example, 1 bit per class) were not.
+  - **What longer training would need.** A longer-trained or larger net would have a higher floor. To beat the plain tables it would have to beat its perimeter twin by more than its own weights, while leaving few overestimates.
+- **Full-cube scope.** The scrambles are 12 random moves (optimal 8–12), and the edge floor is Korf's pair of 6-edge tables. Deeper scrambles spend even more of the search at large corner distances, which would help the nets somewhat. Stronger edge tables would leave the corner floor less often decisive.
+- **One plain idea untested in the upper gap.** A perimeter-7 table plus 1 bit per entry of the symmetry+inverse table, marking distance ≥ 9, would have a mean floor of 8.59 (computed from the distance counts) in about 415 KB. That is above the best net's 8.18, and it might close the 284–428 KB gap. It was not built or searched.
+- **Bytes are stored bytes.** Permutation maps and int8 scales are counted. Code is not. The full corner table rebuilds by BFS in 3 seconds here, so download size is rarely the binding constraint; memory during search is.
+- **Small sweep.** One loss weight (4×), two net shapes and one raw net were tried.
+- **A numba caching trap, caught.** numba's on-disk cache doesn't notice changes to functions in other modules. A cached full-cube search kept an old corner-floor function and gave floors above the truth for the sym+inv nets. The violation count and length checks stopped it before any result was recorded. The full-cube search is no longer cached. An earlier full-cube run was re-run with freshly compiled code and matched exactly on all 50 scrambles.
 
 ## Reproduce
 
@@ -114,7 +188,10 @@ I couldn't open arXiv 2509.22626 from this session (arxiv.org is not in the netw
 cd lab/neural
 python3 bfs.py && python3 sym.py && python3 plain.py && python3 plain.py sym && python3 plain.py stats && python3 perimeter.py
 python3 train.py --name sym256 --sym --sizes 256,128,64 --epochs 100 --over 4 --lr 1e-3
-python3 verify.py sym256 && python3 run_search.py sym256 && python3 by_depth.py sym256 && python3 report.py
+python3 verify.py sym256 && python3 inverse.py sym256 && python3 by_depth.py sym256
+python3 run_search.py sym256 sym256inv
+python3 cube3.py && python3 edges.py && python3 run_search3.py && python3 run_search3.py sym256inv
+python3 report.py
 ```
 
-Trained weights are in `weights/`, and `verify.py` rebuilds the correction tables from them; the raw net's check takes about 30 minutes. Results are in `results/`. `summary.json` has every row with the fields used above; `table.md`, `table_plain.md` and `table_nets.md` are the tables. The tables themselves (`data/`, about 0.7 GB) are rebuilt by the scripts and are not committed.
+Trained weights are in `weights/`, and `verify.py` and `inverse.py` rebuild the correction tables from them; the raw net's check takes about 30 minutes. Results are in `results/`. `summary.json` has every row with the fields used above; `table.md`, `table_plain.md`, `table_nets.md` and `table_full3x3.md` are the tables. The tables themselves (`data/`, about 0.8 GB) are rebuilt by the scripts and are not committed.

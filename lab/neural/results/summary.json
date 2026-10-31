@@ -9,7 +9,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 1.0
+   "times_smaller": 1.0,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": false
   },
   {
    "floor": "full_mod3",
@@ -20,7 +24,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 2.0
+   "times_smaller": 2.0,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": false
   },
   {
    "floor": "k6x2",
@@ -31,7 +39,11 @@
    "exact_fraction": 0.4308142087806011,
    "nodes": 9382,
    "violations": 0,
-   "times_smaller": 3.0
+   "times_smaller": 3.0,
+   "full_cube_nodes": 18571735,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 15.971823453903198,
+   "frontier": false
   },
   {
    "floor": "perim7",
@@ -43,7 +55,11 @@
    "exact_fraction": 0.31281381322533586,
    "nodes": 2947,
    "violations": 0,
-   "times_smaller": 5.181185528848527
+   "times_smaller": 5.181185528848527,
+   "full_cube_nodes": 17094941,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 16.40085244178772,
+   "frontier": false
   },
   {
    "floor": "k6",
@@ -66,7 +82,11 @@
    "exact_fraction": 0.07720240816948636,
    "nodes": 13996,
    "violations": 0,
-   "times_smaller": 20.919471513122495
+   "times_smaller": 20.919471513122495,
+   "full_cube_nodes": 41269162,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 33.1435489654541,
+   "frontier": false
   },
   {
    "floor": "k5x2",
@@ -77,7 +97,11 @@
    "exact_fraction": 0.07127193698695757,
    "nodes": 117427,
    "violations": 0,
-   "times_smaller": 27.0
+   "times_smaller": 27.0,
+   "full_cube_nodes": 44907070,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 35.03052854537964,
+   "frontier": false
   },
   {
    "floor": "symplain",
@@ -88,7 +112,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 38.118833452644026
+   "times_smaller": 38.118833452644026,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": false
   },
   {
    "floor": "k5",
@@ -110,7 +138,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 55.40403297859106
+   "times_smaller": 55.40403297859106,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": false
   },
   {
    "floor": "symplain_mod3",
@@ -121,7 +153,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 71.26887602199656
+   "times_smaller": 71.26887602199656,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": false
   },
   {
    "floor": "perim5",
@@ -133,7 +169,11 @@
    "exact_fraction": 0.015934118274653256,
    "nodes": 163943,
    "violations": 0,
-   "times_smaller": 99.40572897291082
+   "times_smaller": 99.40572897291082,
+   "full_cube_nodes": 58662838,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 43.89555764198303,
+   "frontier": false
   },
   {
    "floor": "syminv_mod3",
@@ -144,7 +184,11 @@
    "exact_fraction": 1.0,
    "nodes": 2209,
    "violations": 0,
-   "times_smaller": 100.6125303789236
+   "times_smaller": 100.6125303789236,
+   "full_cube_nodes": 11550222,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 8.407390832901001,
+   "frontier": true
   },
   {
    "floor": "perim7sym",
@@ -156,7 +200,27 @@
    "exact_fraction": 0.31281381322533586,
    "nodes": 2947,
    "violations": 0,
-   "times_smaller": 154.27329761958913
+   "times_smaller": 154.27329761958913,
+   "full_cube_nodes": 17094941,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 16.40085244178772,
+   "frontier": false
+  },
+  {
+   "floor": "perim7inv",
+   "label": "perimeter table over symmetry+inverse classes: exact to 7, 8 beyond",
+   "kind": "plain",
+   "bytes": 155572,
+   "entries": 73210,
+   "mean_floor": 7.903789006648232,
+   "exact_fraction": 0.31281381322533586,
+   "nodes": 2947,
+   "violations": 0,
+   "times_smaller": 283.4052400174839,
+   "full_cube_nodes": 17094941,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 16.40085244178772,
+   "frontier": true
   },
   {
    "floor": "k4x2",
@@ -167,7 +231,11 @@
    "exact_fraction": 0.008064847928959725,
    "nodes": 1417867,
    "violations": 0,
-   "times_smaller": 324.0
+   "times_smaller": 324.0,
+   "full_cube_nodes": 60158770,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 45.14953398704529,
+   "frontier": false
   },
   {
    "floor": "k4",
@@ -190,7 +258,27 @@
    "exact_fraction": 0.07720240816948636,
    "nodes": 13996,
    "violations": 0,
-   "times_smaller": 657.0777943368107
+   "times_smaller": 657.0777943368107,
+   "full_cube_nodes": 41269162,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 33.1435489654541,
+   "frontier": false
+  },
+  {
+   "floor": "perim6inv",
+   "label": "perimeter table over symmetry+inverse classes: exact to 6, 7 beyond",
+   "kind": "plain",
+   "bytes": 36856,
+   "entries": 15518,
+   "mean_floor": 6.980991414817718,
+   "exact_fraction": 0.07720240816948636,
+   "nodes": 13996,
+   "violations": 0,
+   "times_smaller": 1196.2752333405688,
+   "full_cube_nodes": 41269162,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 33.1435489654541,
+   "frontier": true
   },
   {
    "floor": "perim5sym",
@@ -202,7 +290,27 @@
    "exact_fraction": 0.015934118274653256,
    "nodes": 163943,
    "violations": 0,
-   "times_smaller": 3249.0729550479
+   "times_smaller": 3249.0729550479,
+   "full_cube_nodes": 58662838,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 43.89555764198303,
+   "frontier": false
+  },
+  {
+   "floor": "perim5inv",
+   "label": "perimeter table over symmetry+inverse classes: exact to 5, 6 beyond",
+   "kind": "plain",
+   "bytes": 7401,
+   "entries": 2819,
+   "mean_floor": 5.996925533092371,
+   "exact_fraction": 0.015934118274653256,
+   "nodes": 163943,
+   "violations": 0,
+   "times_smaller": 5957.292257802999,
+   "full_cube_nodes": 58662838,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 43.89555764198303,
+   "frontier": true
   },
   {
    "floor": "k3",
@@ -269,7 +377,7 @@
    "nodes": 13395,
    "violations": 0,
    "times_smaller": 16.294145147133552,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": false,
    "twin": "perim6"
   },
@@ -298,7 +406,7 @@
    "nodes": 156091,
    "violations": 0,
    "times_smaller": 50.66327761779894,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
    "twin": "perim5"
   },
@@ -329,7 +437,11 @@
    "times_smaller": 4.440172221390269,
    "cheapest_plain_as_strong": "syminv_mod3",
    "beats_plain_per_byte": false,
-   "twin": "perim7"
+   "twin": "perim7",
+   "full_cube_nodes": 16714693,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 40.48949313163757,
+   "frontier": false
   },
   {
    "floor": "raw512_int8_m1",
@@ -356,9 +468,13 @@
    "nodes": 13383,
    "violations": 0,
    "times_smaller": 17.614787978934128,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": false,
-   "twin": "perim6"
+   "twin": "perim6",
+   "full_cube_nodes": 39713104,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 74.51116800308228,
+   "frontier": false
   },
   {
    "floor": "raw512_int8_m2",
@@ -385,9 +501,13 @@
    "nodes": 155842,
    "violations": 0,
    "times_smaller": 66.46203938889182,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
-   "twin": "perim5"
+   "twin": "perim5",
+   "full_cube_nodes": 57659407,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 92.97300052642822,
+   "frontier": false
   },
   {
    "floor": "sym512e30_fp16_m0",
@@ -443,7 +563,7 @@
    "nodes": 13472,
    "violations": 0,
    "times_smaller": 89.07918343596955,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": false,
    "twin": "perim6sym"
   },
@@ -472,7 +592,7 @@
    "nodes": 153817,
    "violations": 0,
    "times_smaller": 102.32505030391222,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
    "twin": "perim5sym"
   },
@@ -503,7 +623,11 @@
    "times_smaller": 73.36142004272907,
    "cheapest_plain_as_strong": "syminv_mod3",
    "beats_plain_per_byte": false,
-   "twin": "perim7sym"
+   "twin": "perim7sym",
+   "full_cube_nodes": 15897281,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 74.64290380477905,
+   "frontier": false
   },
   {
    "floor": "sym512e30_int8_m1",
@@ -530,9 +654,13 @@
    "nodes": 13562,
    "violations": 0,
    "times_smaller": 153.27947045653656,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": false,
-   "twin": "perim6sym"
+   "twin": "perim6sym",
+   "full_cube_nodes": 36255934,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 124.78564190864563,
+   "frontier": false
   },
   {
    "floor": "sym512e30_int8_m2",
@@ -559,9 +687,13 @@
    "nodes": 154381,
    "violations": 0,
    "times_smaller": 197.145961608113,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
-   "twin": "perim5sym"
+   "twin": "perim5sym",
+   "full_cube_nodes": 55459330,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 153.70725274085999,
+   "frontier": false
   },
   {
    "floor": "sym512_fp16_m0",
@@ -617,7 +749,7 @@
    "nodes": 19707,
    "violations": 0,
    "times_smaller": 95.13373553248233,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": false,
    "twin": "perim6sym"
   },
@@ -646,7 +778,7 @@
    "nodes": 284971,
    "violations": 0,
    "times_smaller": 104.44086490174155,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
    "twin": "perim5sym"
   },
@@ -677,7 +809,11 @@
    "times_smaller": 72.61125978870398,
    "cheapest_plain_as_strong": "syminv_mod3",
    "beats_plain_per_byte": false,
-   "twin": "perim7sym"
+   "twin": "perim7sym",
+   "full_cube_nodes": 15731036,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 66.60489106178284,
+   "frontier": false
   },
   {
    "floor": "sym512_int8_m1",
@@ -704,9 +840,13 @@
    "nodes": 19904,
    "violations": 0,
    "times_smaller": 172.59841533306192,
-   "cheapest_plain_as_strong": "perim7sym",
-   "beats_plain_per_byte": true,
-   "twin": "perim6sym"
+   "cheapest_plain_as_strong": "perim7inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim6sym",
+   "full_cube_nodes": 34075848,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 112.2881669998169,
+   "frontier": false
   },
   {
    "floor": "sym512_int8_m2",
@@ -733,9 +873,13 @@
    "nodes": 279438,
    "violations": 0,
    "times_smaller": 205.1533650982728,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
-   "twin": "perim5sym"
+   "twin": "perim5sym",
+   "full_cube_nodes": 53839111,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 139.74926280975342,
+   "frontier": false
   },
   {
    "floor": "sym256_fp16_m0",
@@ -791,8 +935,8 @@
    "nodes": 13929,
    "violations": 0,
    "times_smaller": 214.689481218897,
-   "cheapest_plain_as_strong": "perim7sym",
-   "beats_plain_per_byte": true,
+   "cheapest_plain_as_strong": "perim7inv",
+   "beats_plain_per_byte": false,
    "twin": "perim6sym"
   },
   {
@@ -820,7 +964,7 @@
    "nodes": 161147,
    "violations": 0,
    "times_smaller": 316.9451293589919,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
    "twin": "perim5sym"
   },
@@ -851,7 +995,11 @@
    "times_smaller": 94.55411082731244,
    "cheapest_plain_as_strong": "syminv_mod3",
    "beats_plain_per_byte": false,
-   "twin": "perim7sym"
+   "twin": "perim7sym",
+   "full_cube_nodes": 15909345,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 55.25284719467163,
+   "frontier": false
   },
   {
    "floor": "sym256_int8_m1",
@@ -878,9 +1026,13 @@
    "nodes": 13920,
    "violations": 0,
    "times_smaller": 307.43321735128615,
-   "cheapest_plain_as_strong": "perim7sym",
+   "cheapest_plain_as_strong": "perim7inv",
    "beats_plain_per_byte": true,
-   "twin": "perim6sym"
+   "twin": "perim6sym",
+   "full_cube_nodes": 36003064,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 90.27130794525146,
+   "frontier": false
   },
   {
    "floor": "sym256_int8_m2",
@@ -907,11 +1059,314 @@
    "nodes": 160022,
    "violations": 0,
    "times_smaller": 576.3840301200094,
-   "cheapest_plain_as_strong": "perim6sym",
+   "cheapest_plain_as_strong": "perim6inv",
    "beats_plain_per_byte": false,
-   "twin": "perim5sym"
+   "twin": "perim5sym",
+   "full_cube_nodes": 55240144,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 111.65165519714355,
+   "frontier": false
+  },
+  {
+   "floor": "sym512e30inv_int8_m0",
+   "kind": "net",
+   "net": "sym512e30inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 0,
+   "label": "sym+inv MLP 512-256-128 (30 epochs), int8, margin 0",
+   "weight_bytes": 212612,
+   "corrections": 105850,
+   "correction_bytes": 211700,
+   "bytes": 424312,
+   "mean_floor": 8.089315879910872,
+   "exact_fraction": 0.44529148612653413,
+   "max_floor_minus_truth": 0,
+   "nodes": 2840,
+   "violations": 0,
+   "times_smaller": 103.90919889138182,
+   "cheapest_plain_as_strong": "syminv_mod3",
+   "beats_plain_per_byte": true,
+   "twin": "perim7inv",
+   "full_cube_nodes": 15903801,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 114.14943766593933,
+   "frontier": true
+  },
+  {
+   "floor": "sym512e30inv_int8_m1",
+   "kind": "net",
+   "net": "sym512e30inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 1,
+   "label": "sym+inv MLP 512-256-128 (30 epochs), int8, margin 1",
+   "weight_bytes": 212612,
+   "corrections": 17365,
+   "correction_bytes": 41243,
+   "bytes": 253855,
+   "mean_floor": 7.2016569433557605,
+   "exact_fraction": 0.11234106344488717,
+   "max_floor_minus_truth": 0,
+   "nodes": 13313,
+   "violations": 0,
+   "times_smaller": 173.68151109885565,
+   "cheapest_plain_as_strong": "perim7inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim6inv",
+   "full_cube_nodes": 36253530,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 171.51857566833496,
+   "frontier": false
+  },
+  {
+   "floor": "sym512e30inv_int8_m2",
+   "kind": "net",
+   "net": "sym512e30inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 2,
+   "label": "sym+inv MLP 512-256-128 (30 epochs), int8, margin 2",
+   "weight_bytes": 212612,
+   "corrections": 2281,
+   "correction_bytes": 6274,
+   "bytes": 218886,
+   "mean_floor": 6.219596735489654,
+   "exact_fraction": 0.01793972409113013,
+   "max_floor_minus_truth": 0,
+   "nodes": 153747,
+   "violations": 0,
+   "times_smaller": 201.4286889065541,
+   "cheapest_plain_as_strong": "perim6inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim5inv",
+   "full_cube_nodes": 55442233,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 205.761892080307,
+   "frontier": false
+  },
+  {
+   "floor": "sym512inv_int8_m0",
+   "kind": "net",
+   "net": "sym512inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 0,
+   "label": "sym+inv MLP 512-256-128 (100 epochs), int8, margin 0",
+   "weight_bytes": 212612,
+   "corrections": 107752,
+   "correction_bytes": 215504,
+   "bytes": 428116,
+   "mean_floor": 8.16778722891763,
+   "exact_fraction": 0.5071431860162141,
+   "max_floor_minus_truth": 0,
+   "nodes": 3220,
+   "violations": 0,
+   "times_smaller": 102.98591970400545,
+   "cheapest_plain_as_strong": "syminv_mod3",
+   "beats_plain_per_byte": true,
+   "twin": "perim7inv",
+   "full_cube_nodes": 15724617,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 103.8697669506073,
+   "frontier": true
+  },
+  {
+   "floor": "sym512inv_int8_m1",
+   "kind": "net",
+   "net": "sym512inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 1,
+   "label": "sym+inv MLP 512-256-128 (100 epochs), int8, margin 1",
+   "weight_bytes": 212612,
+   "corrections": 9522,
+   "correction_bytes": 23805,
+   "bytes": 236417,
+   "mean_floor": 7.282448720705323,
+   "exact_fraction": 0.11466149178769207,
+   "max_floor_minus_truth": 0,
+   "nodes": 19392,
+   "violations": 0,
+   "times_smaller": 186.4921727286955,
+   "cheapest_plain_as_strong": "perim7inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim6inv",
+   "full_cube_nodes": 34062546,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 160.3953263759613,
+   "frontier": false
+  },
+  {
+   "floor": "sym512inv_int8_m2",
+   "kind": "net",
+   "net": "sym512inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    512,
+    256,
+    128
+   ],
+   "params": 209921,
+   "format": "int8",
+   "margin": 2,
+   "label": "sym+inv MLP 512-256-128 (100 epochs), int8, margin 2",
+   "weight_bytes": 212612,
+   "corrections": 451,
+   "correction_bytes": 1354,
+   "bytes": 213966,
+   "mean_floor": 6.292353671768967,
+   "exact_fraction": 0.009904644871208658,
+   "max_floor_minus_truth": 0,
+   "nodes": 279798,
+   "violations": 0,
+   "times_smaller": 206.060402119963,
+   "cheapest_plain_as_strong": "perim6inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim5inv",
+   "full_cube_nodes": 53840806,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 195.5135142803192,
+   "frontier": false
+  },
+  {
+   "floor": "sym256inv_int8_m0",
+   "kind": "net",
+   "net": "sym256inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    256,
+    128,
+    64
+   ],
+   "params": 64001,
+   "format": "int8",
+   "margin": 0,
+   "label": "sym+inv MLP 256-128-64 (100 epochs), int8, margin 0",
+   "weight_bytes": 65348,
+   "corrections": 109510,
+   "correction_bytes": 219020,
+   "bytes": 284368,
+   "mean_floor": 8.094451362125401,
+   "exact_fraction": 0.4504114772719025,
+   "max_floor_minus_truth": 0,
+   "nodes": 2918,
+   "violations": 0,
+   "times_smaller": 155.04529342260733,
+   "cheapest_plain_as_strong": "syminv_mod3",
+   "beats_plain_per_byte": true,
+   "twin": "perim7inv",
+   "full_cube_nodes": 15904172,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 92.37681460380554,
+   "frontier": true
+  },
+  {
+   "floor": "sym256inv_int8_m1",
+   "kind": "net",
+   "net": "sym256inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    256,
+    128,
+    64
+   ],
+   "params": 64001,
+   "format": "int8",
+   "margin": 1,
+   "label": "sym+inv MLP 256-128-64 (100 epochs), int8, margin 1",
+   "weight_bytes": 65348,
+   "corrections": 18064,
+   "correction_bytes": 42902,
+   "bytes": 108250,
+   "mean_floor": 7.210679073584166,
+   "exact_fraction": 0.11622771145876427,
+   "max_floor_minus_truth": 0,
+   "nodes": 13894,
+   "violations": 0,
+   "times_smaller": 407.29718244803695,
+   "cheapest_plain_as_strong": "perim7inv",
+   "beats_plain_per_byte": true,
+   "twin": "perim6inv",
+   "full_cube_nodes": 35969262,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 137.4685845375061,
+   "frontier": true
+  },
+  {
+   "floor": "sym256inv_int8_m2",
+   "kind": "net",
+   "net": "sym256inv",
+   "inputs": "symmetry+inverse class",
+   "hidden": [
+    256,
+    128,
+    64
+   ],
+   "params": 64001,
+   "format": "int8",
+   "margin": 2,
+   "label": "sym+inv MLP 256-128-64 (100 epochs), int8, margin 2",
+   "weight_bytes": 65348,
+   "corrections": 2328,
+   "correction_bytes": 6402,
+   "bytes": 71750,
+   "mean_floor": 6.229376873444089,
+   "exact_fraction": 0.01869779985992263,
+   "max_floor_minus_truth": 0,
+   "nodes": 160344,
+   "violations": 0,
+   "times_smaller": 614.4936585365854,
+   "cheapest_plain_as_strong": "perim6inv",
+   "beats_plain_per_byte": false,
+   "twin": "perim5inv",
+   "full_cube_nodes": 55199584,
+   "full_cube_violations": 0,
+   "full_cube_seconds": 168.13527941703796,
+   "frontier": false
   }
  ],
+ "edges_only": {
+  "floor": "edges_only",
+  "label": "no corner floor (the two edge tables alone)",
+  "kind": "plain",
+  "bytes": 0,
+  "mean_floor": 0.0,
+  "nodes": null,
+  "full_cube_nodes": 66552574,
+  "full_cube_seconds": 44.982463359832764,
+  "frontier": true
+ },
  "scrambles": [
   "B R U D' F U2 F D' F L' B2 L",
   "R B D' U2 R' U' B' L2 B2 R' D' L2",

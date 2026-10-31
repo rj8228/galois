@@ -23,18 +23,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 
 
-def main(nets, force):
+def load_common():
+    """The truth, move tables, coordinate tables and symmetries every search needs."""
     dist = np.load(os.path.join(DATA, "corner.npy"))
     pm = np.load(os.path.join(DATA, "move_perm.npy")).astype(np.int64)
     tm = np.load(os.path.join(DATA, "move_twist.npy")).astype(np.int64)
     inv, cot = nn.coord_tables()
-    scp, sco, icp, ico = cube.symmetries()
-    starts = []
-    for seq in search.scrambles():
-        i = 0
-        for m in seq:
-            i = pm[i // 2187, m] * 2187 + tm[i % 2187, m]
-        starts.append(i)
+    return dist, pm, tm, inv, cot, cube.symmetries()
+
+
+def build_floors(nets, formats=("fp16", "int8")):
+    """[(name, kind, args)] for every corner floor; args fill in search.heur's parameters."""
     e1 = np.zeros(0, np.int64)
     eu = np.zeros(1, np.uint8)
     ef = np.zeros((1, 1), np.float32)
@@ -54,29 +53,45 @@ def main(nets, force):
         floors.append((name, 2, {f: np.load(os.path.join(DATA, f"{name}_{f[:3]}.npy")).astype(np.int64)
                                  for f in ("cls_id", "sym_of", "inv_of")} | {"symtab": np.load(os.path.join(DATA, f"{name}.npy"))}))
     for k in (5, 6, 7):
-        for sym in (False, True):
-            name = f"perim{k}{'sym' if sym else ''}"
-            c = np.load(os.path.join(DATA, f"corr_{name}_const_m0.npz"))
+        for suffix, kind in (("", 3), ("sym", 4), ("inv", 5)):
+            name = f"perim{k}{suffix}"
+            path = os.path.join(DATA, f"corr_{name}_const_m0.npz")
+            if not os.path.exists(path):  # the inv tables come from inverse.py
+                continue
+            c = np.load(path)
             const = (np.zeros((88, 1), np.float32), np.zeros(1, np.float32), np.zeros((1, 1), np.float32),
                      np.zeros(1, np.float32), np.zeros((1, 1), np.float32), np.zeros(1, np.float32),
                      np.zeros((1, 1), np.float32), np.full(1, k + 1, np.float32))  # a "net" that always says k + 1
-            floors.append((name, 4 if sym else 3, {"net": const, "keys": c["keys"].astype(np.int64), "vals": c["vals"]}))
+            floors.append((name, kind, {"net": const, "keys": c["keys"].astype(np.int64), "vals": c["vals"]}))
     for net in nets:
-        params, sizes, sym, _ = verify.load(net)
-        for kind in ("fp16", "int8"):
+        # "<net>inv" is <net> read at its class representative under symmetries and inversion (inverse.py)
+        inverse = net.endswith("inv")
+        params, sizes, sym, _ = verify.load(net[:-3] if inverse else net)
+        for kind in ("int8",) if inverse else formats:
             q = nn.as_fp16(params) if kind == "fp16" else nn.as_int8(params)
             for m in (0, 1, 2):
                 c = np.load(os.path.join(DATA, f"corr_{net}_{kind}_m{m}.npz"))
-                floors.append((f"{net}_{kind}_m{m}", 4 if sym else 3,
+                floors.append((f"{net}_{kind}_m{m}", 5 if inverse else 4 if sym else 3,
                                {"net": tuple(q), "keys": c["keys"].astype(np.int64), "vals": c["vals"], "margin": m}))
+    return [(name, kind, {**base, **cfg}) for name, kind, cfg in floors]
+
+
+def main(nets, force):
+    dist, pm, tm, inv, cot, (scp, sco, icp, ico) = load_common()
+    starts = []
+    for seq in search.scrambles():
+        i = 0
+        for m in seq:
+            i = pm[i // 2187, m] * 2187 + tm[i % 2187, m]
+        starts.append(i)
+    floors = build_floors(nets)
 
     path = os.path.join(HERE, "results", "search.json")
     out = json.load(open(path)) if os.path.exists(path) else {}
     out["scrambles"] = [" ".join(cube.MOVE_NAMES[m] for m in s) for s in search.scrambles()]
-    for name, kind, cfg in floors:
+    for name, kind, a in floors:
         if name in out and not force:
             continue
-        a = {**base, **cfg}
         t0 = time.time()
         lens, nodes, viol = [], [], 0
         for s in starts:

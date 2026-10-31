@@ -6,6 +6,7 @@ Floors (kind):
   2 symplain  the symmetry-reduced plain table (syminv: reduced by inversion too)
   3 net       MLP on the raw position, then the correction table
   4 symnet    MLP on the position's symmetry-class representative, then the correction table
+  5 syminvnet  the same, with classes under the symmetries and inversion
 
 Every floor value the search computes is also compared with the true distance; a single
 value above it would be counted in `violations`.
@@ -93,6 +94,8 @@ def heur(kind, idx, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_
     key = idx
     if kind == 4:
         key = cube.canon_index(idx, scp, sco, icp, ico)
+    elif kind == 5:
+        key = cube.canon_inv_index(idx, scp, sco, icp, ico)
     c = lookup(keys, vals, key)
     if c >= 0:
         return np.int64(c)

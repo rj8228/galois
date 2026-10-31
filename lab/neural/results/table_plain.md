@@ -14,8 +14,11 @@
 | perimeter table: exact to distance 5, 6 beyond | 443,535 | 99× | 5.997 | 1.6% | 163,943 |
 | symmetry+inverse-reduced table, 2 bits (mod 3) | 438,215 | 101× | 8.764 | 100.0% | 2,209 |
 | perimeter table over symmetry classes: exact to 7, 8 beyond | 285,791 | 154× | 7.904 | 31.3% | 2,947 |
+| perimeter table over symmetry+inverse classes: exact to 7, 8 beyond | 155,572 | 283× | 7.904 | 31.3% | 2,947 |
 | max of two 4-corner tables | 136,080 | 324× | 5.683 | 0.8% | 1,417,867 |
 | 4-corner table | 68,040 | 648× | 5.292 | 0.5% | 30,730,621 |
 | perimeter table over symmetry classes: exact to 6, 7 beyond | 67,100 | 657× | 6.981 | 7.7% | 13,996 |
+| perimeter table over symmetry+inverse classes: exact to 6, 7 beyond | 36,856 | 1196× | 6.981 | 7.7% | 13,996 |
 | perimeter table over symmetry classes: exact to 5, 6 beyond | 13,570 | 3249× | 5.997 | 1.6% | 163,943 |
+| perimeter table over symmetry+inverse classes: exact to 5, 6 beyond | 7,401 | 5957× | 5.997 | 1.6% | 163,943 |
 | 3-corner table | 4,536 | 9720× | 4.078 | 0.0% | 358,853,434 |
