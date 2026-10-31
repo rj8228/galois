@@ -1,0 +1,46 @@
+{
+ "2 KB + mirror": {
+  "tables": 12,
+  "ns_per_floor_lookup": 1125.9472169999754,
+  "ns_per_tiny_table_eval_x_and_inverse": {
+   "729 B": 94.31668950003314,
+   "5 KB": 94.91115399998762,
+   "144 KB": 94.86473699996623
+  },
+  "ns_per_mlp64_eval": 633.6172610000403,
+  "mlp64_multiply_adds": 3392
+ },
+ "20 KB + mirror": {
+  "tables": 8,
+  "ns_per_floor_lookup": 758.5022590000108,
+  "ns_per_tiny_table_eval_x_and_inverse": {
+   "729 B": 106.20253600001206,
+   "5 KB": 83.91934700000547,
+   "144 KB": 75.3225875000112
+  },
+  "ns_per_mlp64_eval": 572.68258900001,
+  "mlp64_multiply_adds": 2880
+ },
+ "100 KB + mirror": {
+  "tables": 20,
+  "ns_per_floor_lookup": 1730.926570500003,
+  "ns_per_tiny_table_eval_x_and_inverse": {
+   "729 B": 95.20726300002025,
+   "5 KB": 93.31739550003704,
+   "144 KB": 101.16710500000181
+  },
+  "ns_per_mlp64_eval": 667.6109120001001,
+  "mlp64_multiply_adds": 4416
+ },
+ "400 KB + mirror": {
+  "tables": 13,
+  "ns_per_floor_lookup": 1224.2035680000072,
+  "ns_per_tiny_table_eval_x_and_inverse": {
+   "729 B": 97.16435500001808,
+   "5 KB": 78.98391399999127,
+   "144 KB": 76.87918200002741
+  },
+  "ns_per_mlp64_eval": 540.2771579999808,
+  "mlp64_multiply_adds": 3520
+ }
+}
