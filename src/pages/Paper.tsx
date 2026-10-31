@@ -3,6 +3,9 @@ import { href } from '../app/router.ts'
 import { TeX } from '../learn/TeX.tsx'
 import { FLOOR_TABLE, FRAMEWORK, GRAVITY, NETWORKS, OVERESTIMATES, REFERENCES } from '../paper/data.ts'
 import {
+  BoundsChart,
+  BoundsLegend,
+  BoundsTable,
   DistanceChart,
   DistanceTable,
   ExampleFloors,
@@ -865,6 +868,35 @@ export function Paper() {
           The 3×3 has 43,252,003,274,489,856,000 positions, about twelve trillion times as many as the 2×2, and its
           God's number is 20 (Rokicki et al. 2010). No table of every answer will ever fit, so floors from smaller
           puzzles are the whole game, and the framework carries over unchanged.
+        </p>
+        <p>
+          The same framework tells the story of God's number itself, asked of the worst position instead of one position
+          (Figure 7). The ceiling fell from Thistlethwaite's 52 in 1981 to 20 in 2010. The floor rose from 18, found by
+          counting move sequences, to 20 when Michael Reid proved in 1995 that the superflip needs 20 moves. The last
+          step split all positions into 2,217,093,120 cosets of the subgroup Kociemba's algorithm uses (U, D and half
+          turns of the other faces), each of 19,508,428,800 positions. Symmetry and set covering cut that to 55,882,296,
+          and a solution of 20 moves or fewer was found for every position in each: about 35 CPU-years of computing,
+          donated by Google (Rokicki et al. 2010).
+        </p>
+        <Figure
+          n={7}
+          caption={
+            <>
+              God's number for the 3×3, closed in from both sides: the best proven bounds after each result, from
+              cube20.org. The ceiling fell from 52 to 20 while the floor rose from 18 to 20, and they met in July 2010.
+              Hover or focus a point for the result and who found it.
+            </>
+          }
+        >
+          <BoundsLegend />
+          <BoundsChart />
+          <BoundsTable />
+        </Figure>
+        <p>
+          Notice what that proof did not need: a shortest solution for every position. To show that no position needs
+          more than 20 moves, any solution of 20 or fewer is enough, and one position known to need 20 settles the
+          floor. Proving the shortest solution of one particular position, the question the Solver answers, is a
+          different and costlier job.
         </p>
         <ul>
           <li>
