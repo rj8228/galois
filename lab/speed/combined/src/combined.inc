@@ -128,8 +128,16 @@ static void run_round(Pool *P, Round *R) {
 /* ------------------------------------------------------------ the ceiling thread */
 
 static double HELP_MIN = 5.0, HELP_FRAC = 0.25;
+static int HELP_BOUND; /* COMB_HELP_RULE=bound: help once ceiling <= the prover's bound + 1 */
 
 static int stuck(const Ceil *C) {
+  if (HELP_BOUND) {
+    /* Ceiling = bound + 1: the ceiling holds the optimum (the round is proof) or can only beat the
+     * prover's own final round by finding a solution of exactly the bound, which the prover is
+     * searching for too. Either way another prover thread is worth more. */
+    Race *rs = C->arg;
+    return atomic_load(&rs->ceiling) <= atomic_load(&rs->bound) + 1;
+  }
   double el = now() - C->t0, last = C->nlog ? C->log_t[C->nlog - 1] : 0.0;
   double thr = HELP_FRAC * el > HELP_MIN ? HELP_FRAC * el : HELP_MIN;
   return el - last >= thr;
@@ -280,6 +288,7 @@ static int cmd_comb(int argc, char **argv) {
   ceil_init();
   if (getenv("COMB_HELP_MIN")) HELP_MIN = atof(getenv("COMB_HELP_MIN"));
   if (getenv("COMB_HELP_FRAC")) HELP_FRAC = atof(getenv("COMB_HELP_FRAC"));
+  HELP_BOUND = getenv("COMB_HELP_RULE") && !strcmp(getenv("COMB_HELP_RULE"), "bound");
   char *lines[1024];
   int n = read_lines(argv[1], lines, 1024);
   const char *mode = argv[2];
@@ -302,9 +311,10 @@ static int cmd_comb(int argc, char **argv) {
         load_masks(T, 3);
         if (!dup) mask_bytes += ((size_t)T->n * 18 + 7) / 8;
       }
-  fprintf(stderr, "comb: %s k=%d masks=%d help=%d (min %.1fs, frac %.2f), mask load %.1fs, %zu bytes\n", mode, k, masks,
-          help, HELP_MIN, HELP_FRAC, now() - tm, mask_bytes);
-  for (int i = 0; i < n; i++) {
+  fprintf(stderr, "comb: %s k=%d masks=%d help=%d (%s, min %.1fs, frac %.2f), mask load %.1fs, %zu bytes\n", mode, k, masks,
+          help, HELP_BOUND ? "bound rule" : "time rule", HELP_MIN, HELP_FRAC, now() - tm, mask_bytes);
+  int skip = getenv("COMB_SKIP") ? atoi(getenv("COMB_SKIP")) : 0; /* start at line skip, keep the index */
+  for (int i = skip; i < n; i++) {
     int D;
     Cube c;
     parse_dline(lines[i], &D, &c);
@@ -356,8 +366,8 @@ static int cmd_comb(int argc, char **argv) {
     char sol[256];
     sol_str(path ? path : (int[]){0}, len > 0 ? len : 0, sol);
     printf("{\"index\": %d, \"D\": %d, \"mode\": \"%s\", \"k\": %d, \"masks\": %d, \"help\": %d, \"help_min\": %.2f, "
-           "\"help_frac\": %.3f, \"length\": %d, \"solution\": \"%s\", \"verified\": %s, \"ended\": \"%s\", ",
-           i, D, mode, k, masks, help, HELP_MIN, HELP_FRAC, len, sol, ok ? "true" : "false", ended);
+           "\"help_frac\": %.3f, \"help_rule\": \"%s\", \"length\": %d, \"solution\": \"%s\", \"verified\": %s, \"ended\": \"%s\", ",
+           i, D, mode, k, masks, help, HELP_MIN, HELP_FRAC, HELP_BOUND ? "bound" : "time", len, sol, ok ? "true" : "false", ended);
     printf("\"proven_floor\": %d, \"secs\": %.4f, \"nodes\": %llu, \"h0\": %d, \"helped_at\": %.3f, \"mask_bytes\": %zu, ",
            CR.cert ? CR.bound_end : len >= 0 ? len : CR.bound_end - 1, secs, (unsigned long long)CR.nodes, CR.h0,
            ct.helped_at, mask_bytes);

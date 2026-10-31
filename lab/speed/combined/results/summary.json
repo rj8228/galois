@@ -1,0 +1,185 @@
+{
+ "checks": {
+  "random-state race-masks-help-5s25": {
+   "solves": 5,
+   "rounds_vs_lab3x3": 37,
+   "rounds_masked_vs_unmasked": 0
+  },
+  "random-state race-masks-help-60s25": {
+   "solves": 8,
+   "rounds_vs_lab3x3": 58,
+   "rounds_masked_vs_unmasked": 0
+  }
+ },
+ "moves-16": {},
+ "random-state": {
+  "c-4t-split": {
+   "measured": null,
+   "measured_indices": [],
+   "estimated_all20": null,
+   "estimated_18_known": null,
+   "estimated_on_measured": null
+  },
+  "c-4t-split-masks": {
+   "measured": null,
+   "measured_indices": [],
+   "estimated_all20": null,
+   "estimated_18_known": null,
+   "estimated_on_measured": null
+  },
+  "c-4t-race": {
+   "measured": null,
+   "measured_indices": [],
+   "estimated_all20": null,
+   "estimated_18_known": null,
+   "estimated_on_measured": null
+  },
+  "c-4t-race-masks": {
+   "measured": null,
+   "measured_indices": [],
+   "estimated_all20": null,
+   "estimated_18_known": null,
+   "estimated_on_measured": null
+  },
+  "c-4t-race-masks-help": {
+   "measured": null,
+   "measured_indices": [],
+   "estimated_all20": null,
+   "estimated_18_known": null,
+   "estimated_on_measured": null
+  }
+ },
+ "rates_nodes_per_s": {
+  "split_4t": null,
+  "split_masks_4t": null,
+  "prover_3t": null,
+  "prover_masks_3t": null,
+  "prover_masks_4t_helped": null
+ },
+ "ceiling_time_here_over_t6": {
+  "median": 1.88,
+  "n": 1
+ },
+ "per_position_estimates": {
+  "0": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "1": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "2": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "3": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "4": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "5": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "6": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "7": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "8": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "9": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "10": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "11": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "12": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "13": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "14": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "15": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "16": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "17": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "18": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  },
+  "19": {
+   "c-4t-split": null,
+   "c-4t-split-masks": null,
+   "c-4t-race": null,
+   "c-4t-race-masks": null
+  }
+ }
+}
