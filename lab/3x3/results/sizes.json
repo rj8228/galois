@@ -1,0 +1,110 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "cores": 4,
+  "threads_used": 4,
+  "ram_gb": 16.9,
+  "os": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+ },
+ "tables": {
+  "corners": {
+   "build_seconds_1_thread": 4.04,
+   "bytes_4bit": 44089920,
+   "gzip9_4bit": 22852963,
+   "xz_4bit": 9519712,
+   "bytes_2bit": 22044960,
+   "gzip9_2bit": 16670966,
+   "xz_2bit": 7546044
+  },
+  "corners_sym": {
+   "build_seconds_1_thread": 0.71,
+   "bytes_4bit": 3026808,
+   "gzip9_4bit": 1569472,
+   "xz_4bit": 1256760,
+   "bytes_2bit": 1513404,
+   "gzip9_2bit": 1143798,
+   "xz_2bit": 1070744
+  },
+  "edges6": {
+   "build_seconds_1_thread": 5.25,
+   "bytes_4bit": 21288960,
+   "gzip9_4bit": 9010149,
+   "xz_4bit": 8083844,
+   "bytes_2bit": 10644480,
+   "gzip9_2bit": 7507263,
+   "xz_2bit": 7035676
+  },
+  "edges7": {
+   "build_seconds_1_thread": 94.11,
+   "bytes_4bit": 255467520,
+   "gzip9_4bit": 104826597,
+   "bytes_2bit": 127733760,
+   "gzip9_2bit": 88594248,
+   "xz_2bit": 82895816
+  },
+  "flip": {
+   "build_seconds_1_thread": 0.02,
+   "bytes_4bit": 1024,
+   "gzip9_4bit": 477,
+   "xz_4bit": 548,
+   "bytes_2bit": 512,
+   "gzip9_2bit": 413,
+   "xz_2bit": 508
+  },
+  "flip_slice": {
+   "build_seconds_1_thread": 0.05,
+   "bytes_4bit": 506880,
+   "gzip9_4bit": 213766,
+   "xz_4bit": 198172,
+   "bytes_2bit": 253440,
+   "gzip9_2bit": 183840,
+   "xz_2bit": 173596
+  },
+  "phase1_sym": {
+   "build_seconds_1_thread": 17.11,
+   "bytes_4bit": 70454205,
+   "gzip9_4bit": 27062615,
+   "xz_4bit": 24551304,
+   "bytes_2bit": 35227103,
+   "gzip9_2bit": 23844902,
+   "xz_2bit": 22074760
+  },
+  "slice": {
+   "build_seconds_1_thread": 0.02,
+   "bytes_4bit": 248,
+   "gzip9_4bit": 147,
+   "xz_4bit": 224,
+   "bytes_2bit": 124,
+   "gzip9_2bit": 134,
+   "xz_2bit": 184
+  },
+  "twist": {
+   "build_seconds_1_thread": 0.02,
+   "bytes_4bit": 1094,
+   "gzip9_4bit": 604,
+   "xz_4bit": 728,
+   "bytes_2bit": 547,
+   "gzip9_2bit": 466,
+   "xz_2bit": 588
+  },
+  "twist_flip": {
+   "build_seconds_1_thread": 0.19,
+   "bytes_4bit": 2239488,
+   "gzip9_4bit": 920642,
+   "xz_4bit": 842152,
+   "bytes_2bit": 1119744,
+   "gzip9_2bit": 792448,
+   "xz_2bit": 742896
+  },
+  "twist_slice": {
+   "build_seconds_1_thread": 0.06,
+   "bytes_4bit": 541283,
+   "gzip9_4bit": 237419,
+   "xz_4bit": 217928,
+   "bytes_2bit": 270642,
+   "gzip9_2bit": 198080,
+   "xz_2bit": 188676
+  }
+ }
+}

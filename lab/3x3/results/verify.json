@@ -11,6 +11,58 @@
  ],
  "floors": [
   {
+   "floor": "C8s+P1x3i",
+   "lookups": 7,
+   "positions": 8240087,
+   "violations": 0,
+   "max_floor_minus_distance": 0,
+   "fast_slow_mismatches": 0,
+   "mean_floor_by_distance": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    3.9294,
+    4.8853,
+    5.8475
+   ],
+   "max_floor_by_distance": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "floor": "C8s@2+E6x8@2",
+   "lookups": 9,
+   "positions": 8240087,
+   "violations": 0,
+   "max_floor_minus_distance": 0,
+   "fast_slow_mismatches": 0,
+   "mean_floor_by_distance": [
+    0.0,
+    1.0,
+    2.0,
+    3.0,
+    3.9862,
+    4.9729,
+    5.9449
+   ],
+   "max_floor_by_distance": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
    "floor": "C8s+E7x2i+P1x3i",
    "lookups": 11,
    "positions": 8240087,
@@ -583,6 +635,32 @@
    ]
   },
   {
+   "floor": "E6x8@2",
+   "lookups": 8,
+   "positions": 8240087,
+   "violations": 0,
+   "max_floor_minus_distance": 0,
+   "fast_slow_mismatches": 0,
+   "mean_floor_by_distance": [
+    0.0,
+    1.0,
+    1.963,
+    2.9667,
+    3.9662,
+    4.9493,
+    5.9079
+   ],
+   "max_floor_by_distance": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
    "floor": "E6x24@2",
    "lookups": 24,
    "positions": 8240087,
@@ -843,6 +921,32 @@
    ]
   },
   {
+   "floor": "P1x3@2",
+   "lookups": 3,
+   "positions": 8240087,
+   "violations": 0,
+   "max_floor_minus_distance": 0,
+   "fast_slow_mismatches": 0,
+   "mean_floor_by_distance": [
+    0.0,
+    0.6667,
+    1.5309,
+    2.4741,
+    3.4136,
+    4.3763,
+    5.3498
+   ],
+   "max_floor_by_distance": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
    "floor": "E7x2i",
    "lookups": 4,
    "positions": 8240087,
@@ -893,35 +997,91 @@
     5,
     6
    ]
-  },
-  {
-   "floor": "P1x3@2",
-   "lookups": 3,
-   "positions": 8240087,
-   "violations": 0,
-   "max_floor_minus_distance": 0,
-   "fast_slow_mismatches": 0,
-   "mean_floor_by_distance": [
-    0.0,
-    0.6667,
-    1.5309,
-    2.4741,
-    3.4136,
-    4.3763,
-    5.3498
-   ],
-   "max_floor_by_distance": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6
-   ]
   }
  ],
  "ida_check": [
+  {
+   "floor": "C8s+P1x3i",
+   "per_distance": [
+    {
+     "distance": 0,
+     "solved": 1,
+     "optimal": 1
+    },
+    {
+     "distance": 1,
+     "solved": 18,
+     "optimal": 18
+    },
+    {
+     "distance": 2,
+     "solved": 243,
+     "optimal": 243
+    },
+    {
+     "distance": 3,
+     "solved": 3240,
+     "optimal": 3240
+    },
+    {
+     "distance": 4,
+     "solved": 43239,
+     "optimal": 43239
+    },
+    {
+     "distance": 5,
+     "solved": 3000,
+     "optimal": 3000
+    },
+    {
+     "distance": 6,
+     "solved": 3000,
+     "optimal": 3000
+    }
+   ],
+   "all_optimal": true
+  },
+  {
+   "floor": "C8s@2+E6x8@2",
+   "per_distance": [
+    {
+     "distance": 0,
+     "solved": 1,
+     "optimal": 1
+    },
+    {
+     "distance": 1,
+     "solved": 18,
+     "optimal": 18
+    },
+    {
+     "distance": 2,
+     "solved": 243,
+     "optimal": 243
+    },
+    {
+     "distance": 3,
+     "solved": 3240,
+     "optimal": 3240
+    },
+    {
+     "distance": 4,
+     "solved": 43239,
+     "optimal": 43239
+    },
+    {
+     "distance": 5,
+     "solved": 3000,
+     "optimal": 3000
+    },
+    {
+     "distance": 6,
+     "solved": 3000,
+     "optimal": 3000
+    }
+   ],
+   "all_optimal": true
+  },
   {
    "floor": "C8s+E7x2i+P1x3i",
    "per_distance": [
@@ -1046,7 +1206,7 @@
    "all_optimal": true
   }
  ],
- "seconds": 122.5,
+ "seconds": 128.7,
  "machine": {
   "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
   "cores": 4,

@@ -119,10 +119,15 @@ def save(name, data):
 
 
 def cube3(args, env=None):
+    """Runs ./cube3 and returns its stdout. Its progress (stderr) goes to results/cube3.log."""
     e = dict(os.environ, OMP_NUM_THREADS=str(THREADS), **(env or {}))
-    r = subprocess.run([CUBE3, *args], cwd=LAB, capture_output=True, text=True, env=e)
+    RESULTS.mkdir(exist_ok=True)
+    with open(RESULTS / "cube3.log", "a") as err:
+        err.write(f"--- {time.strftime('%H:%M:%S')} cube3 {' '.join(args)}\n")
+        err.flush()
+        r = subprocess.run([CUBE3, *args], cwd=LAB, stdout=subprocess.PIPE, stderr=err, text=True, env=e)
     if r.returncode:
-        sys.exit(f"cube3 {' '.join(args)} failed:\n{r.stderr}")
+        sys.exit(f"cube3 {' '.join(args)} failed (see results/cube3.log)")
     return r.stdout
 
 
@@ -143,11 +148,13 @@ def cmd_builds():
 
 
 def cmd_verify():
-    # The first three floor sets also go through the search (--ida=3): every position at distance
-    # <= 4 and 3,000 sampled at 5 and 6 must solve in exactly its distance.
-    ida = ["C8s+E7x2i+P1x3i", "C8s@2+E6x24@2+Ktsx3i+Kfsx3i+Ktfx3i", "C8s@2+E7x24@2+P1x3@2"]
+    # These floor sets also go through the search (--ida): every position at distance <= 4 and 3,000
+    # sampled at 5 and 6 must solve in exactly its distance. They include the recommended phone and
+    # desktop sets and cover 2-bit tables, inverse lookups and all three kinds of symmetric lookup.
+    ida = ["C8s+P1x3i", "C8s@2+E6x8@2", "C8s+E7x2i+P1x3i", "C8s@2+E6x24@2+Ktsx3i+Kfsx3i+Ktfx3i",
+           "C8s@2+E7x24@2+P1x3@2"]
     t0 = time.time()
-    data = json.loads(cube3(["verify", "--ida=3", *ida, *tokens()]))
+    data = json.loads(cube3(["verify", f"--ida={len(ida)}", *ida, *tokens()]))
     data["seconds"] = round(time.time() - t0, 1)
     data["machine"] = machine()
     save("verify.json", data)
@@ -290,13 +297,35 @@ def cmd_bench():
     desktop += [spec for spec in with_e7 if spec not in desktop]
     phone = candidates("phone", RANDOM_STATE_TOP["phone"], "moves-14")  # the one forced through moves-16
     log("random-state with", desktop, phone)
-    for spec in desktop:
+    for spec in desktop[:1]:
         bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=DESKTOP_RANDOM_STATE_NODES)
     for spec in phone:
         bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=PHONE_RANDOM_STATE_NODES)
+    # The 7-edge set on random states takes about 2 more hours (its two 19-move positions alone run into
+    # the cap); the 16-move set already shows what it adds. LAB_FULL=1 runs it anyway.
+    if os.environ.get("LAB_FULL"):
+        for spec in desktop[1:]:
+            bench_one(spec, group_of[spec], "random-state", force=True, maxnodes=DESKTOP_RANDOM_STATE_NODES)
     for group, spec, last in FLOORS:
         if not last:
             bench_one(spec, group, "random-state")
+
+
+def superflip_estimate(s, ref):
+    """A capped superflip run: grow its last completed depth bound by the ratio of the last two, to get
+    the cost of proving 19 moves impossible; then add bound 20 at the fraction of a full bound the
+    uncapped run (ref) needed before its first solution."""
+    per = {int(k): v for k, v in s["nodes_per_bound"].items()}
+    done = sorted(per)[:-1]  # the last bound was cut off
+    r = per[done[-1]] / per[done[-2]]
+    prove = sum(per[b] for b in done) + sum(per[done[-1]] * r ** (b - done[-1]) for b in range(done[-1] + 1, 20))
+    frac = 1.0
+    if ref:
+        rp = {int(k): v for k, v in ref["nodes_per_bound"].items()}
+        frac = rp[20] / (rp[19] * rp[19] / rp[18])
+    return {"completed_bounds": done, "growth_per_bound": r, "nodes_to_prove_19_impossible": prove,
+            "final_bound_fraction": frac, "nodes_to_finish": prove + per[done[-1]] * r ** (20 - done[-1]) * frac,
+            "nodes_per_second": s["nodes"] / s["seconds"]}
 
 
 def cmd_superflip():
@@ -319,18 +348,12 @@ def cmd_superflip():
             continue
         log(f"superflip with {spec} (cap {cap:.3g} nodes)")
         t0 = time.time()
-        run = run_set(spec, "superflip", cap, env={"CUBE3_SPLIT": "3"})
+        run = run_set(spec, "superflip", cap, env={"CUBE3_SPLIT": "3", "CUBE3_VERBOSE": "1"})
         run["wall_seconds"] = round(time.time() - t0, 1)
         s = run["solves"][0]
         if s["dnf"]:
-            # Extrapolate: each depth bound costs about as many times the previous one as the last
-            # two completed bounds did, and the final bound (20) runs until the first solution.
-            per = {int(k): v for k, v in s["nodes_per_bound"].items()}
-            done = sorted(per)[:-1]  # the last bound was cut off
-            r = per[done[-1]] / per[done[-2]]
-            est = sum(per[b] for b in done) + sum(per[done[-1]] * r ** (b - done[-1]) for b in range(done[-1] + 1, 21))
-            run["estimate"] = {"completed_bounds": done, "growth_per_bound": r, "nodes_to_prove_20": est,
-                               "note": "upper estimate: assumes bound 20 is searched to the end"}
+            ref = next((r["solves"][0] for r in data["runs"].values() if not r["solves"][0]["dnf"]), None)
+            run["estimate"] = superflip_estimate(s, ref)
         data["runs"][spec] = run
         save("superflip.json", data)
         log(f"superflip {spec}: length {s['length']}, nodes {s['nodes']:.3g}, {s['seconds']:.0f}s, dnf {s['dnf']}")

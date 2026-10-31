@@ -3,9 +3,15 @@
  *
  *   cube3 build <table>|all          breadth-first search, writes tables/<name>.{4,2}.bin
  *   cube3 selftest                   symmetry, coordinate and fast-path checks
- *   cube3 verify <floor> ...         every floor against the true distance, all positions <= 6 moves
+ *   cube3 verify [--ida=N] <floor>.. every floor against the true distance, all positions <= 6 moves;
+ *                                    the first N floors also solve them with IDA*
  *   cube3 stats <floor> ...          mean floor over random states, lookup speed
- *   cube3 solve <floor> <file> ...   IDA* on every scramble in <file>, one JSON line per solve
+ *   cube3 solve <floor> <file> [max] IDA* on every scramble in <file>, one JSON line per solve,
+ *                                    each solve stopped after max nodes
+ *
+ * Environment: CUBE3_TABLES (table directory, default tables), CUBE3_SPLIT=d (one solve at a time on
+ * all threads, sharing the subtrees at depth d), CUBE3_VERBOSE (nodes per depth bound on stderr),
+ * OMP_NUM_THREADS.
  *
  * Cube model, move and symmetry definitions follow Kociemba's cubie conventions (the same
  * corner labels as src/solver/cube2.ts). A floor is a '+'-joined list of tokens, see parse_floor.

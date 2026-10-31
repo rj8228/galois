@@ -18,7 +18,7 @@ LAB = pathlib.Path(__file__).resolve().parent.parent
 RESULTS = LAB / "results"
 SETS = ["moves-12", "moves-14", "moves-16", "random-state"]
 SET_TITLE = {"moves-12": "12 random moves", "moves-14": "14 random moves", "moves-16": "16 random moves",
-             "random-state": "random state (cubing.js)"}
+             "random-state": "Random state (cubing.js)"}
 
 
 def load(name):
@@ -136,6 +136,12 @@ def optimal_lengths(set_name):
     return out
 
 
+def proved_at_least(s):
+    """A capped solve still proves something: no solution shorter than its last finished bound + 1."""
+    per = sorted(int(k) for k in s["nodes_per_bound"])
+    return per[-2] + 1 if len(per) >= 2 else None
+
+
 def capped_estimates(set_name, run):
     """Per-solve nodes for a capped run: measured where it finished, estimated where it hit the cap.
     Returns (list of nodes or None, nodes per second)."""
@@ -185,14 +191,22 @@ def overview_section(runs):
         for s in SETS:
             run = r.get(s)
             if not run:
-                cells.append("")
+                cells.append("–")
             elif run.get("skipped"):
                 cells.append("skipped")
             elif run["summary"]["dnf"]:
                 ests, rate = capped_estimates(s, run)
-                ok = [e for e in ests if e]
-                mean = sum(ok) / len(ok) if ok else None
-                cells.append(f"est. {num(mean)} / {secs(mean / rate)}" if mean else f"{run['summary']['dnf']} DNF")
+                sm = run["summary"]
+                known = [e for e in ests if e]
+                if len(known) == len(ests):
+                    mean = sum(known) / len(known)
+                    cells.append(f"est. {num(mean)} / {secs(mean / rate)}")
+                elif sm["solved"] == len(known):
+                    cells.append(f"{num(sm['mean_nodes'])} / {secs(sm['mean_seconds'])} ({sm['solved']} of "
+                                 f"{sm['scrambles']}; {sm['dnf']} capped)")
+                else:
+                    mean = sum(known) / len(known)
+                    cells.append(f"est. {num(mean)} / {secs(mean / rate)} ({len(known)} of {len(ests)})")
             else:
                 sm = run["summary"]
                 cells.append(f"{num(sm['mean_nodes'])} / {secs(sm['mean_seconds'])}")
@@ -202,8 +216,9 @@ def overview_section(runs):
             "plus the small class tables that index the symmetry-reduced ones (those can also be computed "
             "at startup in about a second). Mean floor is over 1,000,000 random positions. Each solve runs "
             "on one thread, four at a time. *Skipped* means the estimate from the previous set (or a 4-scramble "
-            "probe) was over the budget; the reason is in the JSON. *est.* marks a capped run, estimated as described "
-            "under *Capped runs*.\n\n"
+            "probe) was over the budget; the reason is in the JSON. A dash means not run: `C8` and the 4-bit twins "
+            "of the 2-bit phone sets search exactly the same nodes as their twins, so they stop after 14 moves. "
+            "*est.* marks a capped run, estimated as described under *Capped runs*.\n\n"
             + table(head, rows, ["---", "---"] + ["--:"] * (len(head) - 2)) + "\n")
 
 
@@ -237,22 +252,31 @@ def capped_section():
             if not r.get("solves") or not r["summary"]["dnf"]:
                 continue
             ests, rate = capped_estimates(set_name, r)
-            ok = [e for e in ests if e]
-            if not ok:
-                continue
-            mean = sum(ok) / len(ok)
-            out.append(f"- `{spec}`, {SET_TITLE[set_name]}: {r['summary']['solved']} of {r['summary']['scrambles']} "
-                       f"solved within the cap of {num(r.get('max_nodes'))} nodes. With the capped ones estimated: "
-                       f"mean {num(mean)} nodes, max {num(max(ok))}; about {secs(mean / rate)} per solve (max "
-                       f"{secs(max(ok) / rate)}) on one thread at its measured {rate / 1e6:.1f}M nodes/s.")
+            head = (f"- `{spec}`, {SET_TITLE[set_name]}: {r['summary']['solved']} of {r['summary']['scrambles']} "
+                    f"solved within the cap of {num(r.get('max_nodes'))} nodes.")
+            known = [e for e in ests if e]
+            lost = [(x["index"], proved_at_least(x), x["nodes"], x["seconds"]) for x, e in zip(r["solves"], ests)
+                    if not e]
+            line = head
+            if len(known) > r["summary"]["solved"]:
+                mean = sum(known) / len(known)
+                line += (f" With the capped ones estimated{f' ({len(known)} of {len(ests)})' if lost else ''}: mean "
+                         f"{num(mean)} nodes, max {num(max(known))}; about {secs(mean / rate)} per solve (max "
+                         f"{secs(max(known) / rate)}) on one thread at its measured {rate / 1e6:.1f}M nodes/s.")
+            if lost:
+                line += (" Positions no run solved have no known length, so they cannot be estimated or averaged: "
+                         + "; ".join(f"#{i} (proved to need at least {b} moves before the cap, after {num(n)} nodes, "
+                                     f"{secs(t)})" for i, b, n, t in lost) + ".")
+            out.append(line)
     if not out:
         return ""
-    return ("### Capped runs, estimated\n\nPhone sets would need hours per deep position, so their runs on the "
-            "16-move and random-state sets stop each solve at a node cap. A capped solve still finishes some depth "
-            "bounds. Its total is estimated by growing the last finished bound by the ratio of the last two, up to "
-            "the scramble's optimal length (known from an uncapped run). The final bound is added at the fraction "
-            "the uncapped run needed before its first solution (`estimate_solve` in `report.py`). Treat these as "
-            "rough, within a factor of two.\n\n" + "\n".join(out) + "\n")
+    return ("### Capped runs, estimated\n\nEvery solve stops at a node cap. Phone sets would need hours per deep "
+            "position, so on the 16-move and random-state sets they are capped low (600 and 750 million nodes); the "
+            "desktop set's random-state cap is 30 billion. A capped solve still finishes some depth bounds. Its total "
+            "is estimated by growing the last finished bound by the ratio of the last two, up to the scramble's "
+            "optimal length (known from an uncapped run). The final bound is added at the fraction the uncapped run "
+            "needed before its first solution (`estimate_solve` in `report.py`). Treat these as rough, within a "
+            "factor of two.\n\n" + "\n".join(out) + "\n")
 
 
 def random_state_detail():
@@ -279,7 +303,10 @@ def random_state_detail():
                 ref = next((x for u in uncapped for x in u["solves"] if x["index"] == i), None)
                 est = estimate_solve(s, L.get(i), ref)
                 rate = r["summary"]["nodes_per_second"] or s["nodes"] / s["seconds"]
-                row.append(f"est. {num(est)} / {secs(est / rate)}" if est else "DNF")
+                row.append(f"est. {num(est)} / {secs(est / rate)}" if est else
+                           f"≥ {proved_at_least(s)} proved, capped at {num(s['nodes'])} / {secs(s['seconds'])}")
+                if row[1] == "–" and proved_at_least(s):
+                    row[1] = f"≥ {proved_at_least(s)}"
         rows.append(row)
     return ("### Random-state positions, one by one\n\nNodes / time on one thread. *est.* marks a capped solve, "
             "estimated as described under *Capped runs*.\n\n" + table(head, rows) + "\n")
@@ -328,17 +355,21 @@ def superflip_section():
         s = r["solves"][0]
         est = r.get("estimate")
         rows.append([f"`{spec}`", mb(r["summary"]["bytes"] + r["summary"]["aux_bytes"]),
-                     s["length"] if not s["dnf"] else "DNF (capped)", s["h0"], s["root_symmetries"], num(s["nodes"]),
+                     s["length"] if not s["dnf"] else "capped", s["h0"], s["root_symmetries"], num(s["nodes"]),
                      secs(s["seconds"]), s["solution"] or "–",
-                     num(est["nodes_to_prove_20"]) if est else "–"])
+                     f"{num(est['nodes_to_finish'])} / {secs(est['nodes_to_finish'] / est['nodes_per_second'])}"
+                     if est else "–"])
     per = []
     for spec, r in d["runs"].items():
         s = r["solves"][0]
         per.append(f"- `{spec}`: " + ", ".join(f"{b}: {num(n)}" for b, n in s["nodes_per_bound"].items()))
     return ("### Superflip\n\nOne solve on all four threads (the subtrees at depth 3 are shared out), so time is "
-            "wall-clock on four cores. The first move is limited to one per orbit of superflip's 48 symmetries.\n\n"
+            "wall-clock on four cores. The first move is limited to one per orbit of superflip's 48 symmetries. "
+            "The capped phone run is estimated like the capped benchmark runs: its last finished depth bound grown "
+            "by the ratio of the last two up to 19, plus bound 20 at the fraction the desktop run needed before its "
+            "first solution (`superflip_estimate` in `lab.py`).\n\n"
             + table(["Floor set", "Memory", "Length", "Root floor", "Root symmetries", "Nodes", "Time", "Solution",
-                     "Estimated nodes to finish"], rows, ["---"] + ["--:"] * 6 + ["---", "--:"])
+                     "Estimated to finish (nodes / time)"], rows, ["---"] + ["--:"] * 6 + ["---", "--:"])
             + "\n\nNodes per depth bound:\n\n" + "\n".join(per) + "\n")
 
 

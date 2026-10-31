@@ -16,7 +16,7 @@ This is a measurement lab, not app code: the solver is C, built and run on a des
 | `scripts/check-solutions.mjs` | Re-checks every solution in `results/` with cubing.js |
 | `scrambles/` | The scramble sets the results used |
 | `results/` | Every number in FINDINGS.md, as JSON |
-| `tables/` | Built tables, about 650 MB (gitignored; rebuilt in under a minute) |
+| `tables/` | Built tables, about 600 MB (gitignored; rebuilt in under a minute) |
 
 ## Rerun every number
 
@@ -26,7 +26,7 @@ Needs a C compiler with OpenMP (gcc), Python 3.9+, Node 22, and about 2 GB of fr
 cd lab/3x3
 make                                  # builds ./cube3
 ./cube3 selftest                      # symmetries, coordinates, fast lookups vs slow ones
-python3 scripts/lab.py all            # tables, exhaustive check, stats, benchmark, superflip
+python3 scripts/lab.py all            # tables, exhaustive check, stats, benchmark, superflip, sizes
 node scripts/check-solutions.mjs      # every solution again, with cubing.js
 python3 scripts/report.py             # rewrites the tables in FINDINGS.md
 ```
@@ -37,11 +37,12 @@ python3 scripts/report.py             # rewrites the tables in FINDINGS.md
 | --- | --- | --- |
 | `builds` | `tables/*.bin`, `results/builds.json` | 40 s |
 | `verify` | `results/verify.json` | 2 min |
-| `stats` | `results/stats.json` | 10 min |
-| `bench` | `results/bench-moves-12.json`, `-14`, `-16`, `bench-random-state.json` | about 2 hours |
-| `superflip` | `results/superflip.json` | about 1 hour |
+| `stats` | `results/stats.json` | 3 min |
+| `bench` | `results/bench-moves-12.json`, `-14`, `-16`, `bench-random-state.json` | about 3½ hours (2 of them random states) |
+| `superflip` | `results/superflip.json` | 30 min (25 for the desktop set, 5 for the capped phone set) |
+| `sizes` | `results/sizes.json` | 10 min |
 
-Times are for 4 threads on the machine in FINDINGS.md. `bench` and `superflip` skip any floor set already in their result file, so an interrupted run continues where it stopped; delete a result file to measure it again. `LAB_THREADS=n` sets the thread count.
+Times are for 4 threads on the machine in FINDINGS.md. `bench` and `superflip` skip any floor set already in their result file, so an interrupted run continues where it stopped; delete a result file (or one floor set's entry in it) to measure it again. `LAB_FULL=1` also runs the 7-edge desktop set on the random states (about 2 more hours). `LAB_THREADS=n` sets the thread count. The solver's progress goes to `results/cube3.log`, the driver's to stdout.
 
 The random-move scrambles are seeded, so `make_scrambles.py` rewrites the same files. cubing.js random-state scrambles cannot be seeded: `node scripts/export-scrambles.mjs` draws a new set, so only run it to measure on fresh positions.
 
