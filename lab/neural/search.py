@@ -7,6 +7,8 @@ Floors (kind):
   3 net       MLP on the raw position, then the correction table
   4 symnet    MLP on the position's symmetry-class representative, then the correction table
   5 syminvnet  the same, with classes under the symmetries and inversion
+  6 perimbit   a perimeter table over symmetry+inverse classes (keys, vals), and beyond it one bit
+              per entry of the symmetry+inverse table (symtab, packed): hi if set, else lo
 
 Every floor value the search computes is also compared with the true distance; a single
 value above it would be counted in `violations`.
@@ -77,7 +79,7 @@ def lookup(keys, vals, key):
 
 @njit(cache=True)
 def heur(kind, idx, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, act):
+         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, act):
     if kind == 0:
         return np.int64(dist[idx])
     p = idx // 2187
@@ -91,6 +93,12 @@ def heur(kind, idx, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_
         return h
     if kind == 2:
         return np.int64(symtab[plain.sym_plain_index(idx, cls_id, sym_of, inv_of, scp, sco, icp, ico)])
+    if kind == 6:
+        c = lookup(keys, vals, cube.canon_inv_index(idx, scp, sco, icp, ico))
+        if c >= 0:
+            return np.int64(c)
+        j = plain.sym_plain_index(idx, cls_id, sym_of, inv_of, scp, sco, icp, ico)
+        return np.int64(hi if (symtab[j >> 3] >> (7 - (j & 7))) & 1 else lo)
     key = idx
     if kind == 4:
         key = cube.canon_index(idx, scp, sco, icp, ico)
@@ -107,7 +115,7 @@ def heur(kind, idx, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_
 
 @njit(cache=True)
 def ida(start, kind, margin, pm, tm, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-        scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals):
+        scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi):
     """Returns (solution length, nodes visited over all iterations, floor violations)."""
     act = np.zeros(16, np.int64)
     stack_idx = np.zeros(32, np.int64)
@@ -116,7 +124,7 @@ def ida(start, kind, margin, pm, tm, dist, inv, cot, sA, tA, sB, tB, cls_id, sym
     nodes = 0
     viol = 0
     h0 = heur(kind, start, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-              scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, act)
+              scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, act)
     if h0 > dist[start]:
         viol += 1
     bound = h0
@@ -145,7 +153,7 @@ def ida(start, kind, margin, pm, tm, dist, inv, cot, sA, tA, sB, tB, cls_id, sym
             cur = stack_idx[d]
             nxt = pm[cur // 2187, m] * 2187 + tm[cur % 2187, m]
             h = heur(kind, nxt, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-                     scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, act)
+                     scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, act)
             nodes += 1
             if h > dist[nxt]:
                 viol += 1

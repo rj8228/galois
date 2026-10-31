@@ -35,6 +35,8 @@ for _k in (5, 6, 7):
     LABEL[f"perim{_k}"] = f"perimeter table: exact to distance {_k}, {_k + 1} beyond"
     LABEL[f"perim{_k}sym"] = f"perimeter table over symmetry classes: exact to {_k}, {_k + 1} beyond"
     LABEL[f"perim{_k}inv"] = f"perimeter table over symmetry+inverse classes: exact to {_k}, {_k + 1} beyond"
+    LABEL[f"perim{_k}inv_bit9"] = (f"perimeter table over symmetry+inverse classes (exact to {_k}) + 1 bit per entry "
+                                   f"(9 if distance ≥ 9, else {_k + 1})")
 NETS = {
     "raw512": "raw MLP 512-256-128 (2 epochs)",
     "sym512e30": "sym MLP 512-256-128 (30 epochs)",
@@ -73,6 +75,14 @@ def main():
         s = search[name]
         rows.append({"floor": name, "label": LABEL[name], "kind": "plain", "bytes": f["bytes"],
                      "entries": f["entries"], "mean_floor": f["mean_floor"], "exact_fraction": f["exact_fraction"],
+                     "nodes": s["total_nodes"], "violations": s["violations"]})
+    threshold = json.load(open(os.path.join(RES, "threshold.json")))
+    for name, f in threshold.items():
+        if not name.startswith("perim"):
+            continue
+        s = search[name]
+        rows.append({"floor": name, "label": LABEL[name], "kind": "plain", "bytes": f["bytes"],
+                     "mean_floor": f["mean_floor"], "exact_fraction": f["exact_fraction"],
                      "nodes": s["total_nodes"], "violations": s["violations"]})
     for net, f in inverse["nets"].items():
         base = json.load(open(os.path.join(RES, f"verify_{net[:-3]}.json")))

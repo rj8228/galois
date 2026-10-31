@@ -65,7 +65,7 @@ def main(nets, force):
                 c, np.array(es, np.int64), np.array(ef, np.int64), kind >= 0, max(kind, 0), a["margin"],
                 pm, tm, dest, flip, eA, eB, dist, inv, cot, a["sA"], a["tA"], a["sB"], a["tB"],
                 a["cls_id"], a["sym_of"], a["inv_of"], a["symtab"], scp, sco, icp, ico, *a["net"],
-                a["keys"], a["vals"], 10 ** 12)
+                a["keys"], a["vals"], a["lo"], a["hi"], 10 ** 12)
             assert ln >= 0, name
             s = (c, es, ef)
             for m in moves:

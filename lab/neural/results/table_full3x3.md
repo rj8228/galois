@@ -18,11 +18,14 @@
 | sym+inv MLP 512-256-128 (100 epochs), int8, margin 1 | 236,417 | 7.282 | 34,062,546 | 2.95× | 160 |  |
 | sym+inv MLP 512-256-128 (30 epochs), int8, margin 1 | 253,855 | 7.202 | 36,253,530 | 3.14× | 172 |  |
 | sym MLP 512-256-128 (100 epochs), int8, margin 1 | 255,448 | 7.283 | 34,075,848 | 2.95× | 112 |  |
+| perimeter table over symmetry+inverse classes (exact to 5) + 1 bit per entry (9 if distance ≥ 9, else 6) | 266,829 | 8.058 | 20,898,154 | 1.81× | 100 |  |
 | sym+inv MLP 256-128-64 (100 epochs), int8, margin 0 | 284,368 | 8.094 | 15,904,172 | 1.38× | 92 | **yes** |
 | perimeter table over symmetry classes: exact to 7, 8 beyond | 285,791 | 7.904 | 17,094,941 | 1.48× | 16 |  |
 | sym MLP 512-256-128 (30 epochs), int8, margin 1 | 287,644 | 7.201 | 36,255,934 | 3.14× | 125 |  |
-| sym+inv MLP 512-256-128 (30 epochs), int8, margin 0 | 424,312 | 8.089 | 15,903,801 | 1.38× | 114 | **yes** |
-| sym+inv MLP 512-256-128 (100 epochs), int8, margin 0 | 428,116 | 8.168 | 15,724,617 | 1.36× | 104 | **yes** |
+| perimeter table over symmetry+inverse classes (exact to 6) + 1 bit per entry (9 if distance ≥ 9, else 7) | 296,284 | 8.355 | 16,658,356 | 1.44× | 89 |  |
+| perimeter table over symmetry+inverse classes (exact to 7) + 1 bit per entry (9 if distance ≥ 9, else 8) | 415,000 | 8.591 | 11,628,102 | 1.01× | 72 | **yes** |
+| sym+inv MLP 512-256-128 (30 epochs), int8, margin 0 | 424,312 | 8.089 | 15,903,801 | 1.38× | 114 |  |
+| sym+inv MLP 512-256-128 (100 epochs), int8, margin 0 | 428,116 | 8.168 | 15,724,617 | 1.36× | 104 |  |
 | symmetry+inverse-reduced table, 2 bits (mod 3) | 438,215 | 8.764 | 11,550,222 | 1.00× | 8 | **yes** |
 | perimeter table: exact to distance 5, 6 beyond | 443,535 | 5.997 | 58,662,838 | 5.08× | 44 |  |
 | sym MLP 256-128-64 (100 epochs), int8, margin 0 | 466,293 | 8.094 | 15,909,345 | 1.38× | 55 |  |

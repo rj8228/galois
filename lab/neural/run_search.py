@@ -40,7 +40,7 @@ def build_floors(nets, formats=("fp16", "int8")):
     ef1 = np.zeros(1, np.float32)
     empty_net = (ef, ef1, ef, ef1, ef, ef1, ef, ef1)
     base = dict(sA=e1, tA=eu, sB=e1, tB=eu, cls_id=e1, sym_of=e1, inv_of=e1, symtab=eu, net=empty_net,
-                keys=e1, vals=np.zeros(0, np.int8), margin=0)
+                keys=e1, vals=np.zeros(0, np.int8), margin=0, lo=0, hi=0)
 
     floors = [("exact", 0, {})]
     for name, subs in plain.SUBSETS.items():
@@ -63,6 +63,14 @@ def build_floors(nets, formats=("fp16", "int8")):
                      np.zeros(1, np.float32), np.zeros((1, 1), np.float32), np.zeros(1, np.float32),
                      np.zeros((1, 1), np.float32), np.full(1, k + 1, np.float32))  # a "net" that always says k + 1
             floors.append((name, kind, {"net": const, "keys": c["keys"].astype(np.int64), "vals": c["vals"]}))
+    bits_path = os.path.join(DATA, "syminv_bit9.npy")
+    if os.path.exists(bits_path):  # perimeter + 1 bit per symmetry+inverse entry (threshold.py)
+        smap = {f: np.load(os.path.join(DATA, f"syminv_{f[:3]}.npy")).astype(np.int64)
+                for f in ("cls_id", "sym_of", "inv_of")}
+        for k in (5, 6, 7):
+            c = np.load(os.path.join(DATA, f"corr_perim{k}inv_const_m0.npz"))
+            floors.append((f"perim{k}inv_bit9", 6, {**smap, "symtab": np.load(bits_path), "lo": k + 1, "hi": 9,
+                                                    "keys": c["keys"].astype(np.int64), "vals": c["vals"]}))
     for net in nets:
         # "<net>inv" is <net> read at its class representative under symmetries and inversion (inverse.py)
         inverse = net.endswith("inv")
@@ -97,7 +105,7 @@ def main(nets, force):
         for s in starts:
             ln, nd, v = search.ida(s, kind, a["margin"], pm, tm, dist, inv, cot, a["sA"], a["tA"], a["sB"], a["tB"],
                                    a["cls_id"], a["sym_of"], a["inv_of"], a["symtab"], scp, sco, icp, ico, *a["net"],
-                                   a["keys"], a["vals"])
+                                   a["keys"], a["vals"], a["lo"], a["hi"])
             assert ln == dist[s], (name, ln, dist[s])
             lens.append(int(ln)); nodes.append(int(nd)); viol += int(v)
         out[name] = {"total_nodes": int(sum(nodes)), "mean_nodes": float(np.mean(nodes)),

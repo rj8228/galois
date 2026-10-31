@@ -36,7 +36,7 @@ def edge_floor(es, ef, eA, eB, ts, tf):
 @njit
 def ida3(cstart, es0, ef0, use_corner, kind, margin, pm, tm, edest, eflip, eA, eB,
          dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, max_nodes):
+         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, max_nodes):
     """Returns (solution length or -1 if max_nodes ran out, nodes, violations, moves, hist)."""
     D = 32
     act = np.zeros(16, np.int64)
@@ -56,7 +56,7 @@ def ida3(cstart, es0, ef0, use_corner, kind, margin, pm, tm, edest, eflip, eA, e
     h0 = edge_floor(es[0], ef[0], eA, eB, ts, tf)
     if use_corner:
         hc = search.heur(kind, cstart, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-                         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, act)
+                         scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, act)
         if hc > dist[cstart]:
             viol += 1
         if hc > h0:
@@ -102,7 +102,7 @@ def ida3(cstart, es0, ef0, use_corner, kind, margin, pm, tm, edest, eflip, eA, e
                 continue
             if use_corner:
                 hc = search.heur(kind, nc, margin, dist, inv, cot, sA, tA, sB, tB, cls_id, sym_of, inv_of, symtab,
-                                 scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, act)
+                                 scp, sco, icp, ico, W1, b1, W2, b2, W3, b3, W4, b4, keys, vals, lo, hi, act)
                 if hc > dist[nc]:
                     viol += 1
                 if hc > h:
