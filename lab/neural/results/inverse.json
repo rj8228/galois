@@ -1,0 +1,119 @@
+{
+ "classes": 934778,
+ "positions_checked": 88179840,
+ "perimeter": {
+  "perim5inv": {
+   "k": 5,
+   "entries": 2819,
+   "bytes": 7401,
+   "mean_floor": 5.996925533092371,
+   "exact_fraction": 0.015934118274653256
+  },
+  "perim6inv": {
+   "k": 6,
+   "entries": 15518,
+   "bytes": 36856,
+   "mean_floor": 6.980991414817718,
+   "exact_fraction": 0.07720240816948636
+  },
+  "perim7inv": {
+   "k": 7,
+   "entries": 73210,
+   "bytes": 155572,
+   "mean_floor": 7.903789006648232,
+   "exact_fraction": 0.31281381322533586
+  }
+ },
+ "nets": {
+  "sym512e30inv": {
+   "weight_bytes": 212612,
+   "max_pred_diff": 6.67572021484375e-06,
+   "margins": {
+    "0": {
+     "corrections": 105850,
+     "correction_bytes_ef": 211700,
+     "total_bytes": 424312,
+     "mean_floor": 8.089315879910872,
+     "exact_fraction": 0.44529148612653413,
+     "max_floor_minus_truth": 0
+    },
+    "1": {
+     "corrections": 17365,
+     "correction_bytes_ef": 41243,
+     "total_bytes": 253855,
+     "mean_floor": 7.2016569433557605,
+     "exact_fraction": 0.11234106344488717,
+     "max_floor_minus_truth": 0
+    },
+    "2": {
+     "corrections": 2281,
+     "correction_bytes_ef": 6274,
+     "total_bytes": 218886,
+     "mean_floor": 6.219596735489654,
+     "exact_fraction": 0.01793972409113013,
+     "max_floor_minus_truth": 0
+    }
+   }
+  },
+  "sym512inv": {
+   "weight_bytes": 212612,
+   "max_pred_diff": 6.67572021484375e-06,
+   "margins": {
+    "0": {
+     "corrections": 107752,
+     "correction_bytes_ef": 215504,
+     "total_bytes": 428116,
+     "mean_floor": 8.16778722891763,
+     "exact_fraction": 0.5071431860162141,
+     "max_floor_minus_truth": 0
+    },
+    "1": {
+     "corrections": 9522,
+     "correction_bytes_ef": 23805,
+     "total_bytes": 236417,
+     "mean_floor": 7.282448720705323,
+     "exact_fraction": 0.11466149178769207,
+     "max_floor_minus_truth": 0
+    },
+    "2": {
+     "corrections": 451,
+     "correction_bytes_ef": 1354,
+     "total_bytes": 213966,
+     "mean_floor": 6.292353671768967,
+     "exact_fraction": 0.009904644871208658,
+     "max_floor_minus_truth": 0
+    }
+   }
+  },
+  "sym256inv": {
+   "weight_bytes": 65348,
+   "max_pred_diff": 5.7220458984375e-06,
+   "margins": {
+    "0": {
+     "corrections": 109510,
+     "correction_bytes_ef": 219020,
+     "total_bytes": 284368,
+     "mean_floor": 8.094451362125401,
+     "exact_fraction": 0.4504114772719025,
+     "max_floor_minus_truth": 0
+    },
+    "1": {
+     "corrections": 18064,
+     "correction_bytes_ef": 42902,
+     "total_bytes": 108250,
+     "mean_floor": 7.210679073584166,
+     "exact_fraction": 0.11622771145876427,
+     "max_floor_minus_truth": 0
+    },
+    "2": {
+     "corrections": 2328,
+     "correction_bytes_ef": 6402,
+     "total_bytes": 71750,
+     "mean_floor": 6.229376873444089,
+     "exact_fraction": 0.01869779985992263,
+     "max_floor_minus_truth": 0
+    }
+   }
+  }
+ }
+}
