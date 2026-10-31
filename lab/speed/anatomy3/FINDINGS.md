@@ -8,13 +8,14 @@ Speed lab task T4 (issue #24, part of #20). Question: does the 2×2's picture of
 
 - **The final round is 82–86% of the work** (2×2: 54–75%). Each round costs about 6–7 times the one before, so the rounds that prove nothing shorter exists are only 14–18%.
 - **92.5% of generated positions are cut on arrival** (2×2: 81–83%), on every set and both floor sets. 92% of all children are generated under a tight parent, and there 97–98% of them are cut. On average one child per expansion survives (1.00), out of 13.35 generated.
-- **A perfect compass would cut the total work 5.5–7.2 times** (2×2: 2×). It removes almost all of the final round (206 lookups instead of 74 million at 16 moves on the desktop set), leaving only the proof rounds. The cheap orders recover little of that: ordering by the floor gives 1.02–1.10×, by the mirror floor 1.03–1.15×.
+- **On random states (17–18 moves, desktop set, 8 positions) the find is less dominant:** the final round is 76% of all lookups but only 56% of the median solve. On 5 of the 8 the solution turned up early in the final round (the final round cost 0.2–1.6 times the round before, against about 7 for a full round), which points to many shortest solutions at that depth. The proof rounds still cost what they cost: the cut-on-arrival and tight shares are the same as at 14–16 moves (92.5%, 93%).
+- **A perfect compass would cut the total work 5.5–7.2 times at 14–16 moves, and 4.1 times on random states** (2×2: 2×; per random state anywhere from 1.2× to 11×). It removes almost all of the final round (206 lookups instead of 74 million at 16 moves on the desktop set), leaving only the proof rounds. The cheap orders recover little of that: ordering by the floor gives 1.02–1.10×, by the mirror floor 1.03–1.15×.
 - **Most positions have a single shortest solution:** 84–90% at 12–14 moves, counting U D and D U as one (28–40% if they count as two, the 2×2's counting). Lacking a compass, the search finds that one solution about halfway through the final round (find / full round 44–51%, as if the solution sat at a random place).
 
 **Ranking the levers for the 3×3:**
 
 1. **Gravity (downhill masks) is the best lever for the desktop.** At a tight node, masks on the direct lookups would let through only 8–13% of the children (18–25% with down-only masks), so they skip **67–85% of all lookups** (58–75% down-only) without changing a single expansion. Down-only masks for the desktop tables take 331 MB. With the 73.5 MB floor that is about 405 MB, inside the 500 MB budget that the desktop set currently uses less than a sixth of. The gain is time, not expansions; it still has to be measured in a prototype (mask reads are random accesses into a 331 MB array). On the phone set masks are exact (every lookup is direct), so they would skip 87–89% of lookups. But they cost 109–219 MB, 9–18 times the phone's whole 20 MB budget, so gravity is a desktop lever.
-2. **Compass has the highest ceiling (5.5–7.2×), but nothing cheap reaches it.** With about one shortest solution per position, the compass has to find a needle: it must point to the one move that leads to that solution at almost every node on the path. Only a learned compass could get there, and T2 will tell whether one can on the 2×2. Its overhead is small, because ordering only touches survivors, about one per expansion (7.5% of lookups). It is also the only lever that costs the phone little memory.
+2. **Compass has the highest ceiling (5.5–7.2× at 14–16 moves, 4.1× on random states), but nothing cheap reaches it.** With about one shortest solution per position, the compass has to find a needle: it must point to the one move that leads to that solution at almost every node on the path. Only a learned compass could get there, and T2 will tell whether one can on the 2×2. Its overhead is small, because ordering only touches survivors, about one per expansion (7.5% of lookups). It is also the only lever that costs the phone little memory.
 3. **Mirror is already spent where it pays.** The desktop set reads phase 1 on the inverse. That is 2.2–2.4× fewer nodes than without it at 14–16 moves, and 1.4–1.6× faster (`lab/3x3`). On corner and edge tables the inverse only gives 1.23–1.29× fewer nodes and no time. The phone set can't use it: 2-bit tables can't be read on the inverse, and 4-bit `C8s+E6x8` is 24.3 MB, over budget. As an order, the mirror floor gives at most 1.15×.
 
 Gravity and compass act on different things, so they stack: gravity makes each tight expansion cheaper, a compass removes expansions from the final round.
@@ -23,11 +24,11 @@ Gravity and compass act on different things, so they stack: gravity makes each t
 
 | Share | 2×2 (lab/2x2, 1,000 random positions) | 3×3 phone set (14, 16 moves) | 3×3 desktop set (14, 16 moves) |
 | --- | --: | --: | --: |
-| Final round (find) | 54–75% | 86%, 82% | 86%, 85% |
-| Proof rounds | 25–46% | 14%, 18% | 14%, 15% |
+| Final round (find) | 54–75% | 86%, 82% | 86%, 85% (random states: 76%, median 56%) |
+| Proof rounds | 25–46% | 14%, 18% | 14%, 15% (random states: 24%) |
 | Cut on arrival | 81–83% | 92.5%, 92.5% | 92.5%, 92.5% |
 | Generated under a tight parent | about 75% | 92%, 92% | 92%, 92% |
-| Perfect compass, total lookups | 2.05× fewer (20 KB + mirror) | 7.2×, 5.5× fewer | 6.9×, 6.6× fewer |
+| Perfect compass, total lookups | 2.05× fewer (20 KB + mirror) | 7.2×, 5.5× fewer | 6.9×, 6.6× fewer (random states: 4.1×) |
 | Cheap orders (floor, mirror floor) | 1.00× | 1.10×, – | 1.02–1.15× |
 | Exactly one shortest solution | 33.9% (all positions) | 90% (14 moves; 28% counting U D and D U apart) | 90% (14 moves; 28%) |
 
@@ -54,6 +55,7 @@ One *lookup* is one generated child (one evaluation of the floor set: 9 table re
 | Desktop `C8s+P1x3i`, 14 moves (50) | 13.92 | 616,532 | 527,143 | 89,389 | 86% (84%) | 46,203 | 92.5% | 92% | 97.7% / 33.9% | 72.5 |
 | Phone `C8s@2+E6x8@2`, 16 moves (12) | 15.83 | 2,225,431,730 | 1,822,487,886 | 402,943,843 | 82% (80%) | 166,794,984 | 92.5% | 92% | 96.7% / 42.5% | 215,413.7 |
 | Desktop `C8s+P1x3i`, 16 moves (50) | 15.92 | 87,239,984 | 74,074,407 | 13,165,577 | 85% (85%) | 6,536,069 | 92.5% | 92% | 97.8% / 30.2% | 10,565.7 |
+| Desktop `C8s+P1x3i`, random state (8) | 17.75 | 5,876,551,998 | 4,445,423,540 | 1,431,128,458 | 76% (56%) | 440,199,632 | 92.5% | 93% | 98.0% / 23.2% | 739,605.6 |
 
 ### Per expansion
 
@@ -65,6 +67,7 @@ One *lookup* is one generated child (one evaluation of the floor set: 9 table re
 | Desktop `C8s+P1x3i`, 14 moves (50) | 13.34 | 1.00 | 92% | 92.5% | 527,143, 82,137, 6,671, 550 |
 | Phone `C8s@2+E6x8@2`, 16 moves (12) | 13.34 | 1.00 | 92% | 92.5% | 1,822,487,886, 372,017,021, 28,535,286, 2,204,921 |
 | Desktop `C8s+P1x3i`, 16 moves (50) | 13.35 | 1.00 | 92% | 92.5% | 74,074,407, 12,130,780, 952,618, 75,568 |
+| Desktop `C8s+P1x3i`, random state (8) | 13.35 | 1.00 | 93% | 92.5% | 4,445,423,540, 1,326,065,405, 97,398,663, 7,110,510 |
 
 ### Compass: the final round in a different order
 
@@ -78,6 +81,7 @@ One *lookup* is one generated child (one evaluation of the floor set: 9 table re
 | Desktop `C8s+P1x3i`, 14 moves (50) | 527,143 | 179 | 517,671 | 509,069 | 616,532 | 89,568 (6.88×) | 607,060 (1.02×) | 598,458 (1.03×) |
 | Phone `C8s@2+E6x8@2`, 16 moves (12) | 1,822,487,886 | 206 | – | – | 2,225,431,730 | 402,944,050 (5.52×) | – | – |
 | Desktop `C8s+P1x3i`, 16 moves (50) | 74,074,407 | 206 | 69,013,335 | 62,369,083 | 87,239,984 | 13,165,783 (6.63×) | 82,178,911 (1.06×) | 75,534,660 (1.15×) |
+| Desktop `C8s+P1x3i`, random state (8) | 4,445,423,540 | 233 | – | – | 5,876,551,998 | 1,431,128,691 (4.11×) | – | – |
 
 ### Doors home: shortest solutions per position
 
@@ -121,14 +125,14 @@ The final round again, at every tight node (g + h = bound, one move or more from
 
 **Capped runs:** none.
 
-**Checks:** every solution and every rerun's first solution replayed to solved; 262 lengths compared with `lab/3x3` results, 0 differences.
+**Checks:** every solution and every rerun's first solution replayed to solved; 270 lengths compared with `lab/3x3` results, 0 differences.
 
 <!-- tables:end -->
 
 ## Caveats
 
 - **Phone set at 16 moves: only the first 12 of the 50 scrambles** (about 3.6 minutes per solve on one thread), all 12 finished, with only the compass rerun. The orders by floor and mirror floor and the gravity count were not run there.
-- **Random states: only the first 8 of `lab/3x3`'s 20, desktop set, compass rerun only.** No floor orders, counts or gravity on random states.
+- **Random states: only the first 8 of `lab/3x3`'s 20 (no selection: the first 8 in the file), desktop set, compass rerun only.** They took 0.6 to 33 minutes each on one thread, all finished. No floor orders, counts or gravity on random states; their many-solutions reading is inferred from how early the final round stopped, not counted.
 - **Doors home was counted on the 12- and 14-move sets only.** Those are random-move scrambles that need exactly 12 or 14 moves almost every time. They are not random states, which need 17–18 moves and may have more shortest solutions.
 - **Gravity is counted, not built.** The let-through fractions are exact: the masks' content is computed from the lookups themselves. But no masks were stored and no time was measured. Mask memory assumes one or two 18-bit masks per table entry, without packing.
 - **The perfect-compass bound is for the solution the search found.** Another shortest solution could be reached at the same cost (the bound is the path length times about 13 children), so in practice it is the bound for any order.

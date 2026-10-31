@@ -329,6 +329,58 @@
    "floor_bytes": 73481013
   }
  },
+ "desktop/random-state": {
+  "n": 8,
+  "done": 8,
+  "capped": 0,
+  "checked": 8,
+  "mean_length": 17.75,
+  "mean_h0": 10.5,
+  "mean_lookups": 5876551997.875,
+  "median_lookups": 4052795831.5,
+  "mean_final": 4445423540.125,
+  "mean_proof": 1431128457.75,
+  "final_share": 0.756468000577974,
+  "final_share_median": 0.5588284704408361,
+  "mean_seconds": 739.6055625,
+  "cut_share": 0.9250921813234735,
+  "tight_share_of_generated": 0.9266787085937795,
+  "cut_rate_tight": 0.9799303311564576,
+  "cut_rate_loose": 0.23201456506383142,
+  "tests_share": 8.612618422895231e-08,
+  "cut_share_final": 0.9250906985309129,
+  "mean_expansions": 440199631.5,
+  "children_per_expansion": 13.349743110530069,
+  "survivors_per_expansion": 1.0000001363017952,
+  "tight_expansion_share": 0.9266811298432448,
+  "lookups_per_round": [
+   82.875,
+   1601.625,
+   24253.875,
+   348280.875,
+   4869493.125,
+   67117971,
+   670989593.625,
+   null,
+   null
+  ],
+  "rounds_from_end": [
+   4445423540.125,
+   1326065405.25,
+   97398662.625,
+   7110510
+  ],
+  "compass": {
+   "n": 8,
+   "mean_final": 233.125,
+   "mean_total": 1431128690.875,
+   "base_final": 4445423540.125,
+   "base_total": 5876551997.875,
+   "saving_total": 0.7564679609076027,
+   "speedup_total": 4.106235892931504,
+   "mean_extra": 0
+  }
+ },
  "phone/moves-12": {
   "n": 50,
   "done": 50,
