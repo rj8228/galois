@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { FLOOR_TABLE, NETWORKS, OVERESTIMATES, REFERENCES } from '../../src/paper/data'
+import { FLOOR_TABLE, GODS_NUMBER_BOUNDS, NETWORKS, OVERESTIMATES, REFERENCES } from '../../src/paper/data'
 import { share } from '../../src/paper/figures'
 import { EXAMPLE, FLOOR_WORK, RING_COUNTS, TOTAL_POSITIONS } from '../../src/solver/report'
 
@@ -38,6 +38,20 @@ describe('numbers quoted in the Paper', () => {
     expect(share(RING_COUNTS[9])).toBe('51.4%')
     expect(share(RING_COUNTS[11])).toBe('0.07%')
     expect(share(RING_COUNTS[0])).toBe('under 0.01%')
+  })
+
+  it("follows God's number closing in from both sides", () => {
+    for (let i = 1; i < GODS_NUMBER_BOUNDS.length; i++) {
+      const [a, b] = [GODS_NUMBER_BOUNDS[i - 1], GODS_NUMBER_BOUNDS[i]]
+      expect(b.year).toBeGreaterThanOrEqual(a.year)
+      expect(b.lower).toBeGreaterThanOrEqual(a.lower)
+      if (a.upper !== null && b.upper !== null) expect(b.upper).toBeLessThanOrEqual(a.upper)
+    }
+    const last = GODS_NUMBER_BOUNDS.at(-1)
+    expect([last?.lower, last?.upper]).toEqual([20, 20])
+    expect(GODS_NUMBER_BOUNDS.find((r) => r.upper !== null)?.upper).toBe(52)
+    // The 2010 proof: cosets times their size is every 3×3 position.
+    expect(2_217_093_120n * 19_508_428_800n).toBe(43_252_003_274_489_856_000n)
   })
 
   it('has complete tables and references', () => {

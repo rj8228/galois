@@ -90,6 +90,40 @@ export const FRAMEWORK = {
   workCut: '24%',
 }
 
+/**
+ * God's number for the 3×3 (half-turn metric): the best proven bounds after each result, from
+ * cube20.org. `year` places the result on the time axis (month as a fraction). The first row is the
+ * counting argument, which gave the lower bound of 18 before 1980; no upper bound existed yet.
+ */
+export const GODS_NUMBER_BOUNDS: {
+  date: string
+  year: number
+  lower: number
+  upper: number | null
+  who: string
+}[] = [
+  { date: 'by 1980', year: 1980, lower: 18, upper: null, who: 'Counting move sequences' },
+  { date: 'Jul 1981', year: 1981.5, lower: 18, upper: 52, who: 'Morwen Thistlethwaite' },
+  { date: 'Dec 1990', year: 1990.92, lower: 18, upper: 42, who: 'Hans Kloosterman' },
+  { date: 'May 1992', year: 1992.37, lower: 18, upper: 39, who: 'Michael Reid' },
+  { date: 'May 1992', year: 1992.37, lower: 18, upper: 37, who: 'Dik Winter' },
+  { date: 'Jan 1995', year: 1995.04, lower: 18, upper: 29, who: "Michael Reid, with Kociemba's two-phase algorithm" },
+  { date: 'Jan 1995', year: 1995.04, lower: 20, upper: 29, who: 'Michael Reid: the superflip needs 20' },
+  { date: 'Dec 2005', year: 2005.92, lower: 20, upper: 28, who: 'Silviu Radu' },
+  { date: 'Apr 2006', year: 2006.29, lower: 20, upper: 27, who: 'Silviu Radu' },
+  { date: 'May 2007', year: 2007.37, lower: 20, upper: 26, who: 'Dan Kunkle and Gene Cooperman' },
+  { date: 'Mar 2008', year: 2008.21, lower: 20, upper: 25, who: 'Tomas Rokicki' },
+  { date: 'Apr 2008', year: 2008.29, lower: 20, upper: 23, who: 'Tomas Rokicki and John Welborn' },
+  { date: 'Aug 2008', year: 2008.62, lower: 20, upper: 22, who: 'Tomas Rokicki and John Welborn' },
+  {
+    date: 'Jul 2010',
+    year: 2010.54,
+    lower: 20,
+    upper: 20,
+    who: 'Tomas Rokicki, Herbert Kociemba, Morley Davidson and John Dethridge',
+  },
+]
+
 export type Reference = { key: string; text: string; url?: string }
 
 export const REFERENCES: Reference[] = [

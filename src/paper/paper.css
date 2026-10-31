@@ -375,3 +375,49 @@ article.paper p {
 .dia-ball {
   fill: var(--accent);
 }
+.bound-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.bound-line.ceiling {
+  stroke: var(--ink);
+}
+.bound-line.floor {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.bound-dot {
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+.bound-dot.ceiling {
+  fill: var(--ink);
+}
+.bound-dot.floor {
+  fill: var(--accent);
+}
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chart-legend .key {
+  display: inline-block;
+  width: 18px;
+  height: 0;
+  border-top: 2px solid var(--ink);
+}
+.chart-legend .key.floor {
+  border-top: 3px solid var(--accent);
+}
+.table-twin .wide-twin {
+  max-width: none;
+}

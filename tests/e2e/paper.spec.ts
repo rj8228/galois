@@ -10,7 +10,7 @@ test('the paper reads as one column with its figures and tables, and no cube', a
   await openPaper(page)
   await expect(page.getByRole('heading', { name: 'Abstract' })).toBeVisible()
   await expect(page.locator('.stage')).toBeHidden()
-  await expect(page.locator('.paper-figure')).toHaveCount(6)
+  await expect(page.locator('.paper-figure')).toHaveCount(7)
   await expect(page.locator('.paper-table')).toHaveCount(5)
   await expect(page.locator('.theorem')).toHaveCount(2)
   await expect(page.getByRole('heading', { name: 'References' })).toBeAttached()
@@ -36,6 +36,10 @@ test('a chart column shows its count on hover and on keyboard focus', async ({ p
   await expect(page.locator('.chart-tip')).toContainText('1,887,748 positions')
   await page.getByLabel('11 moves: 2,644 positions, 0.07%').focus()
   await expect(page.locator('.chart-tip')).toContainText('2,644 positions')
+  await page.getByLabel(/^Jul 1981: at most 52 moves/).focus()
+  await expect(page.locator('.chart-tip')).toContainText('52 moves at most')
+  await page.getByLabel(/^Jan 1995: at least 20 moves/).focus()
+  await expect(page.locator('.chart-tip')).toContainText('superflip')
 })
 
 test('the worked example opens in the Solver and reproduces the rounds', async ({ page }) => {
