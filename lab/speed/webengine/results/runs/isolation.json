@@ -1,0 +1,69 @@
+{
+ "kind": "isolation",
+ "when": "2026-10-31T22:59:00.036Z",
+ "server_headers": "none (no COOP/COEP)",
+ "cases": {
+  "first-visit": {
+   "query": "",
+   "navigations": 2,
+   "ready_ms": 276,
+   "isolation": {
+    "isolated": true,
+    "reloaded": true,
+    "sw": "registered",
+    "crossOriginIsolated": true,
+    "sharedArrayBuffer": true,
+    "controlled": true
+   },
+   "mode": "shared",
+   "solve": {
+    "scramble": "F2 L2 F L2 D2 F' D' L F' L' U F",
+    "length": 12,
+    "solution": "F' U' L F L' D F D2 L2 F' L2 F2",
+    "verified": true
+   },
+   "second_visit": {
+    "navigations": 1,
+    "isolation": {
+     "isolated": true,
+     "reloaded": false,
+     "sw": "registered",
+     "crossOriginIsolated": true,
+     "sharedArrayBuffer": true,
+     "controlled": true
+    }
+   }
+  },
+  "no-service-worker": {
+   "query": "?nocoi",
+   "navigations": 1,
+   "ready_ms": 85,
+   "isolation": {
+    "isolated": false,
+    "reloaded": false,
+    "sw": "none",
+    "crossOriginIsolated": false,
+    "sharedArrayBuffer": false,
+    "controlled": false
+   },
+   "mode": "copies",
+   "solve": {
+    "scramble": "F2 L2 F L2 D2 F' D' L F' L' U F",
+    "length": 12,
+    "solution": "F' U' L F L' D F D2 L2 F' L2 F2",
+    "verified": true
+   },
+   "second_visit": {
+    "navigations": 1,
+    "isolation": {
+     "isolated": false,
+     "reloaded": false,
+     "sw": "none",
+     "crossOriginIsolated": false,
+     "sharedArrayBuffer": false,
+     "controlled": false
+    }
+   }
+  }
+ }
+}

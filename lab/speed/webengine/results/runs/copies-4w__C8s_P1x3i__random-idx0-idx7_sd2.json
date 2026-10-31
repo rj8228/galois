@@ -1,0 +1,174 @@
+{
+ "kind": "solve",
+ "engine": "copies",
+ "when": "2026-10-31T22:41:15.285Z",
+ "chromium": "153.0.8010.12",
+ "isolation": {
+  "isolated": true,
+  "reloaded": false,
+  "sw": "registered",
+  "crossOriginIsolated": true,
+  "sharedArrayBuffer": true,
+  "controlled": true
+ },
+ "floor": "C8s+P1x3i",
+ "set": "random-idx0-idx7",
+ "provers": 4,
+ "workers": 4,
+ "sd": 2,
+ "maxnodes": 6000000000,
+ "cap": null,
+ "setup": {
+  "mode": "copies",
+  "total_ms": 1175.0100000000093,
+  "loads": [
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 904.7700000000186,
+    "idb_read_ms": 703.6300000001211,
+    "index_ms": 1.0949999999720603,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 847.4450000000652,
+    "idb_read_ms": 683.559999999823,
+    "index_ms": 1.869999999878928,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 943.160000000149,
+    "idb_read_ms": 756.3300000000745,
+    "index_ms": 1.2450000001117587,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 880.1300000001211,
+    "idb_read_ms": 725.6149999999907,
+    "index_ms": 0.8999999999068677,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   }
+  ],
+  "hardwareConcurrency": 4
+ },
+ "wasm_memory": [
+  92536832,
+  92536832,
+  92536832,
+  92536832
+ ],
+ "chromium_pss": {
+  "before_setup": 204779520,
+  "after_setup": 996753408,
+  "peak": 996753408,
+  "procs_after_setup": [
+   {
+    "pid": 6415,
+    "type": "browser",
+    "pss": 42938368
+   },
+   {
+    "pid": 6417,
+    "type": "zygote",
+    "pss": 11024384
+   },
+   {
+    "pid": 6418,
+    "type": "zygote",
+    "pss": 9080832
+   },
+   {
+    "pid": 6434,
+    "type": "gpu-process",
+    "pss": 28793856
+   },
+   {
+    "pid": 6443,
+    "type": "utility",
+    "pss": 24791040
+   },
+   {
+    "pid": 6446,
+    "type": "renderer",
+    "pss": 22343680
+   },
+   {
+    "pid": 6469,
+    "type": "renderer",
+    "pss": 31578112
+   },
+   {
+    "pid": 6478,
+    "type": "renderer",
+    "pss": 826203136
+   }
+  ]
+ },
+ "solves": [
+  {
+   "index": 0,
+   "scramble": "F U2 R L' U' F B' R' F' L F2 D2 B' L2 F' B2 U2 B R2 F D2",
+   "mode": "copies",
+   "length": 18,
+   "solution": "U F D2 F2 B L' U2 B D' R L F' B' L' D' F' D2 F2",
+   "verified": true,
+   "dnf": false,
+   "h0": 11,
+   "nodes": 2090445680,
+   "perBound": {
+    "11": 129,
+    "12": 2790,
+    "13": 38919,
+    "14": 573930,
+    "15": 8200428,
+    "16": 115393326,
+    "17": 1606006587,
+    "18": 360229571
+   },
+   "found_ms": 103333.42000000016,
+   "drain_ms": 118340.26000000001,
+   "tasks_run": 1400
+  },
+  {
+   "index": 1,
+   "scramble": "B2 U2 L2 F2 R2 U2 F2 U L2 B2 U L2 R' B D R' D U L' U'",
+   "mode": "copies",
+   "length": 17,
+   "solution": "U L' B2 R2 F' B D F B L' B2 R' F R' F L F'",
+   "verified": true,
+   "dnf": false,
+   "h0": 11,
+   "nodes": 335860194,
+   "perBound": {
+    "11": 141,
+    "12": 3936,
+    "13": 65544,
+    "14": 909093,
+    "15": 12136845,
+    "16": 160032804,
+    "17": 162711831
+   },
+   "found_ms": 19356.195000000065,
+   "drain_ms": 21395.149999999907,
+   "tasks_run": 1165
+  }
+ ]
+}

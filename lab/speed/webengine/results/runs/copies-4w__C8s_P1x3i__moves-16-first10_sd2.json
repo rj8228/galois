@@ -1,0 +1,356 @@
+{
+ "kind": "solve",
+ "engine": "copies",
+ "when": "2026-10-31T22:31:56.120Z",
+ "chromium": "153.0.8010.12",
+ "isolation": {
+  "isolated": true,
+  "reloaded": false,
+  "sw": "registered",
+  "crossOriginIsolated": true,
+  "sharedArrayBuffer": true,
+  "controlled": true
+ },
+ "floor": "C8s+P1x3i",
+ "set": "moves-16-first10",
+ "provers": 4,
+ "workers": 4,
+ "sd": 2,
+ "maxnodes": 30000000000,
+ "cap": null,
+ "setup": {
+  "mode": "copies",
+  "total_ms": 1065.1199999999953,
+  "loads": [
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 861.9450000000652,
+    "idb_read_ms": 709.8099999999395,
+    "index_ms": 1.25,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 829.7000000000698,
+    "idb_read_ms": 673.2799999999115,
+    "index_ms": 1.1799999999348074,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 879.4899999999907,
+    "idb_read_ms": 726.1900000000605,
+    "index_ms": 0.4699999999720603,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   },
+   {
+    "id": 2,
+    "ok": true,
+    "lookups": 7,
+    "load_ms": 788.9150000000373,
+    "idb_read_ms": 635.8199999999488,
+    "index_ms": 1.8450000000884756,
+    "floor_bytes": 73481013,
+    "aux_bytes": 3302208,
+    "memory": 88604672
+   }
+  ],
+  "hardwareConcurrency": 4
+ },
+ "wasm_memory": [
+  92536832,
+  92536832,
+  92536832,
+  92536832
+ ],
+ "chromium_pss": {
+  "before_setup": 206203904,
+  "after_setup": 997747712,
+  "peak": 1023575040,
+  "procs_after_setup": [
+   {
+    "pid": 3018,
+    "type": "browser",
+    "pss": 43545600
+   },
+   {
+    "pid": 3026,
+    "type": "zygote",
+    "pss": 11038720
+   },
+   {
+    "pid": 3027,
+    "type": "zygote",
+    "pss": 9138176
+   },
+   {
+    "pid": 3042,
+    "type": "gpu-process",
+    "pss": 28533760
+   },
+   {
+    "pid": 3054,
+    "type": "utility",
+    "pss": 24301568
+   },
+   {
+    "pid": 3056,
+    "type": "renderer",
+    "pss": 22599680
+   },
+   {
+    "pid": 3079,
+    "type": "renderer",
+    "pss": 31681536
+   },
+   {
+    "pid": 3088,
+    "type": "renderer",
+    "pss": 826908672
+   }
+  ]
+ },
+ "solves": [
+  {
+   "index": 0,
+   "scramble": "B L' F2 U' R F D2 B' U2 B U' D' L' U2 R F2",
+   "mode": "copies",
+   "length": 16,
+   "solution": "F2 R' U2 L U D B' U2 B D2 F' R' U F2 L B'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 77685744,
+   "perBound": {
+    "10": 18,
+    "11": 288,
+    "12": 4662,
+    "13": 61992,
+    "14": 814044,
+    "15": 10672674,
+    "16": 66132066
+   },
+   "found_ms": 3893.444999999949,
+   "drain_ms": 4003.3249999999534,
+   "tasks_run": 1081
+  },
+  {
+   "index": 1,
+   "scramble": "D L2 U' R2 D' F B2 R2 F' R' U L D2 R2 F R",
+   "mode": "copies",
+   "length": 16,
+   "solution": "R' F' R2 D2 L' U' R F R2 F' B2 D R2 U L2 D'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 86265642,
+   "perBound": {
+    "10": 57,
+    "11": 744,
+    "12": 8313,
+    "13": 104334,
+    "14": 1276269,
+    "15": 15896847,
+    "16": 68979078
+   },
+   "found_ms": 3783.810000000056,
+   "drain_ms": 3934.0950000000885,
+   "tasks_run": 1090
+  },
+  {
+   "index": 2,
+   "scramble": "L U' L2 U L2 B' U F2 B' L2 F L' F B L' F2",
+   "mode": "copies",
+   "length": 16,
+   "solution": "U L2 F R2 B D B' U' B2 U F D' F' L' U' B",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 18100885,
+   "perBound": {
+    "10": 18,
+    "11": 291,
+    "12": 4308,
+    "13": 61530,
+    "14": 840051,
+    "15": 11219526,
+    "16": 5975161
+   },
+   "found_ms": 834.6949999999488,
+   "drain_ms": 887.5899999999674,
+   "tasks_run": 965
+  },
+  {
+   "index": 3,
+   "scramble": "R' F2 L' F' B' L2 F U' L F D' L' B L' B R2",
+   "mode": "copies",
+   "length": 16,
+   "solution": "R2 B' L B' L D F' L' U F' L2 F B L F2 R",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 87395296,
+   "perBound": {
+    "10": 84,
+    "11": 945,
+    "12": 10272,
+    "13": 112080,
+    "14": 1297323,
+    "15": 15520731,
+    "16": 70453861
+   },
+   "found_ms": 3703.375,
+   "drain_ms": 3889.1199999999953,
+   "tasks_run": 1097
+  },
+  {
+   "index": 4,
+   "scramble": "F L2 F R2 U L2 U R L U' R2 B2 D' L D2 F2",
+   "mode": "copies",
+   "length": 16,
+   "solution": "F2 D2 L' D B2 R2 U R' L' U' L2 U' R2 F' L2 F'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 103858359,
+   "perBound": {
+    "10": 72,
+    "11": 720,
+    "12": 8715,
+    "13": 102978,
+    "14": 1231509,
+    "15": 15179295,
+    "16": 87335070
+   },
+   "found_ms": 4605.364999999991,
+   "drain_ms": 4718.234999999986,
+   "tasks_run": 1115
+  },
+  {
+   "index": 5,
+   "scramble": "U D2 R D L B D' R' L' U' L2 F2 B2 D2 B D'",
+   "mode": "copies",
+   "length": 16,
+   "solution": "D B' D2 F2 B2 L2 U R L D B' L' D' R' U' D2",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 118270163,
+   "perBound": {
+    "10": 72,
+    "11": 774,
+    "12": 7827,
+    "13": 87840,
+    "14": 1082634,
+    "15": 13577211,
+    "16": 103513805
+   },
+   "found_ms": 5799.314999999944,
+   "drain_ms": 5858.354999999981,
+   "tasks_run": 1151
+  },
+  {
+   "index": 6,
+   "scramble": "R' L B U2 L2 U R B' D2 L U2 B' L' B U' F2",
+   "mode": "copies",
+   "length": 16,
+   "solution": "F2 U B' L B U2 L' D2 B R' U' L2 U2 B' R L'",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 86315454,
+   "perBound": {
+    "10": 33,
+    "11": 447,
+    "12": 5481,
+    "13": 70860,
+    "14": 915435,
+    "15": 11774418,
+    "16": 73548780
+   },
+   "found_ms": 4272.734999999986,
+   "drain_ms": 4383.840000000084,
+   "tasks_run": 1070
+  },
+  {
+   "index": 7,
+   "scramble": "U D2 R D' B' L2 B' D' L2 B' U B L' B' D' R",
+   "mode": "copies",
+   "length": 16,
+   "solution": "R' D B L B' U' B L2 D B L2 B D R' U' D2",
+   "verified": true,
+   "dnf": false,
+   "h0": 9,
+   "nodes": 99464669,
+   "perBound": {
+    "9": 18,
+    "10": 126,
+    "11": 1245,
+    "12": 11811,
+    "13": 124941,
+    "14": 1406673,
+    "15": 16630371,
+    "16": 81289484
+   },
+   "found_ms": 4947.275000000023,
+   "drain_ms": 5041.875,
+   "tasks_run": 1128
+  },
+  {
+   "index": 8,
+   "scramble": "U' F2 R2 D F R' U D2 B2 D2 F2 B2 U2 L' F R2",
+   "mode": "copies",
+   "length": 14,
+   "solution": "R2 F' L B2 U2 F2 B2 U' R F' D' R2 F2 U",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 294076,
+   "perBound": {
+    "10": 18,
+    "11": 342,
+    "12": 4590,
+    "13": 59955,
+    "14": 229171
+   },
+   "found_ms": 34.839999999967404,
+   "drain_ms": 35.22999999998137,
+   "tasks_run": 543
+  },
+  {
+   "index": 9,
+   "scramble": "B2 D2 R L' D R' L B2 R2 B' R2 F U R' L2 U'",
+   "mode": "copies",
+   "length": 16,
+   "solution": "U R L2 U' F' R2 B R2 B2 R L' D' R' L D2 B2",
+   "verified": true,
+   "dnf": false,
+   "h0": 10,
+   "nodes": 17075657,
+   "perBound": {
+    "10": 30,
+    "11": 354,
+    "12": 5562,
+    "13": 75405,
+    "14": 993786,
+    "15": 12878088,
+    "16": 3122432
+   },
+   "found_ms": 863.0949999999721,
+   "drain_ms": 1052.8149999999441,
+   "tasks_run": 973
+  }
+ ]
+}

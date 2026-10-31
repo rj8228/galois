@@ -1,0 +1,211 @@
+{
+ "kind": "solve",
+ "engine": "shared",
+ "when": "2026-10-31T22:38:53.658Z",
+ "chromium": "153.0.8010.12",
+ "isolation": {
+  "isolated": true,
+  "reloaded": false,
+  "sw": "registered",
+  "crossOriginIsolated": true,
+  "sharedArrayBuffer": true,
+  "controlled": true
+ },
+ "floor": "C8s+P1x3i",
+ "set": "random-idx0-idx7",
+ "provers": 4,
+ "workers": 4,
+ "sd": 2,
+ "maxnodes": 30000000000,
+ "cap": null,
+ "setup": {
+  "mode": "shared",
+  "total_ms": 485.01499999989755,
+  "load": {
+   "id": 2,
+   "ok": true,
+   "lookups": 7,
+   "load_ms": 350.95999999996275,
+   "idb_read_ms": 206.535000000149,
+   "index_ms": 0.43000000016763806,
+   "ceil_init_ms": 0,
+   "floor_bytes": 73481013,
+   "aux_bytes": 3302208,
+   "stacks": [
+    86010560,
+    88107712,
+    90204864
+   ],
+   "ctl": 3280,
+   "memory": 90243072
+  },
+  "hardwareConcurrency": 4
+ },
+ "wasm_memory": [
+  94175232
+ ],
+ "chromium_pss": {
+  "before_setup": 204711936,
+  "after_setup": 420747264,
+  "peak": 420747264,
+  "procs_after_setup": [
+   {
+    "pid": 5592,
+    "type": "browser",
+    "pss": 43238400
+   },
+   {
+    "pid": 5594,
+    "type": "zygote",
+    "pss": 10904576
+   },
+   {
+    "pid": 5595,
+    "type": "zygote",
+    "pss": 9106432
+   },
+   {
+    "pid": 5609,
+    "type": "gpu-process",
+    "pss": 28700672
+   },
+   {
+    "pid": 5616,
+    "type": "utility",
+    "pss": 24091648
+   },
+   {
+    "pid": 5624,
+    "type": "renderer",
+    "pss": 22423552
+   },
+   {
+    "pid": 5647,
+    "type": "renderer",
+    "pss": 31733760
+   },
+   {
+    "pid": 5656,
+    "type": "renderer",
+    "pss": 250548224
+   }
+  ]
+ },
+ "solves": [
+  {
+   "index": 0,
+   "scramble": "F U2 R L' U' F B' R' F' L F2 D2 B' L2 F' B2 U2 B R2 F D2",
+   "mode": "shared",
+   "h0": 11,
+   "nodes": 1917555995,
+   "perBound": {
+    "11": 129,
+    "12": 2790,
+    "13": 38919,
+    "14": 573930,
+    "15": 8200428,
+    "16": 115393326,
+    "17": 1606006587,
+    "18": 187339886
+   },
+   "round_ms": {
+    "11": 1.1950000000651926,
+    "12": 1.9850000001024455,
+    "13": 9.475000000093132,
+    "14": 33.18500000005588,
+    "15": 370.6049999999814,
+    "16": 5152.625,
+    "17": 74209.7350000001,
+    "18": 8731.409999999916
+   },
+   "tasks_run": 1400,
+   "found_ms": 88514.28499999992,
+   "prover_ms": 88514.40999999992,
+   "drain_ms": 88514.40999999992,
+   "ceiling_end_ms": null,
+   "ceiling": null,
+   "end": "prover",
+   "length": 18,
+   "path": [
+    0,
+    6,
+    10,
+    7,
+    15,
+    14,
+    1,
+    15,
+    11,
+    3,
+    12,
+    8,
+    17,
+    14,
+    11,
+    8,
+    10,
+    7
+   ],
+   "bound_end": 18,
+   "dnf": false,
+   "solution": "U F D2 F2 B L' U2 B D' R L F' B' L' D' F' D2 F2",
+   "verified": true
+  },
+  {
+   "index": 1,
+   "scramble": "B2 U2 L2 F2 R2 U2 F2 U L2 B2 U L2 R' B D R' D U L' U'",
+   "mode": "shared",
+   "h0": 11,
+   "nodes": 314559960,
+   "perBound": {
+    "11": 141,
+    "12": 3936,
+    "13": 65544,
+    "14": 909093,
+    "15": 12136845,
+    "16": 160032804,
+    "17": 141411597
+   },
+   "round_ms": {
+    "11": 0.35499999998137355,
+    "12": 0.6749999998137355,
+    "13": 3.8650000002235174,
+    "14": 43.31999999983236,
+    "15": 546.4050000000279,
+    "16": 7463.659999999916,
+    "17": 6099.090000000084
+   },
+   "tasks_run": 1164,
+   "found_ms": 14157.780000000028,
+   "prover_ms": 14157.830000000075,
+   "drain_ms": 14157.835000000196,
+   "ceiling_end_ms": null,
+   "ceiling": null,
+   "end": "prover",
+   "length": 17,
+   "path": [
+    0,
+    14,
+    16,
+    4,
+    8,
+    15,
+    9,
+    6,
+    15,
+    14,
+    16,
+    5,
+    6,
+    5,
+    6,
+    12,
+    8
+   ],
+   "bound_end": 17,
+   "dnf": false,
+   "solution": "U L' B2 R2 F' B D F B L' B2 R' F R' F L F'",
+   "verified": true
+  }
+ ]
+}
