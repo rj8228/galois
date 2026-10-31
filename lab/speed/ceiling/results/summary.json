@@ -477,26 +477,26 @@
    }
   },
   "random-state": {
-   "positions": 17,
-   "known_D": 16,
+   "positions": 20,
+   "known_D": 18,
    "D": {
     "17": 2,
-    "18": 14
+    "18": 16
    },
    "target_found": 13,
    "target_s_median": 6.0694,
    "target_s_mean_found": 20.2638,
-   "trace_reached_D": 14,
+   "trace_reached_D": 15,
    "trace_s_median": 8.2474,
    "trace_s_max": 249.4084,
-   "trace_before_proof_end": 13,
-   "proof_s_mean": 217.17229712172644,
-   "final_s_mean": 511.7693429137997,
-   "total_s_mean": 728.9416400355261,
+   "trace_before_proof_end": 14,
+   "proof_s_mean": 220.65712667633804,
+   "final_s_mean": 593.4901262989232,
+   "total_s_mean": 814.1472529752613,
    "total_s_max": 1979.1304943026623,
    "target_faster_than_final": 12,
-   "simulated_race_s_mean": 253.4391044112803,
-   "simulated_race_s_max": 727.2386871959113,
+   "simulated_race_s_mean": 314.85002564236487,
+   "simulated_race_s_max": 1339.5034596395317,
    "by_D": {
     "17": {
      "n": 2,
@@ -508,13 +508,13 @@
      "final_mean": 121.90827151844702
     },
     "18": {
-     "n": 14,
-     "trace_reached": 13,
-     "trace_median": 8.2474,
+     "n": 16,
+     "trace_reached": 14,
+     "trace_median": 17.8457,
      "trace_max": 249.4084,
-     "before_proof_end": 12,
-     "proof_mean": 245.00614009303996,
-     "final_mean": 567.4637816845643
+     "before_proof_end": 13,
+     "proof_mean": 245.44734297056382,
+     "final_mean": 652.4378581464828
     }
    },
    "unknown_D": [
@@ -523,9 +523,30 @@
      "proof_s_spent": 3889.7891270952264,
      "best": 19,
      "best_at_s": 0.007
+    },
+    {
+     "index": 18,
+     "proof_s_spent": 3889.7891270952264,
+     "best": 19,
+     "best_at_s": 13.8283
     }
    ],
-   "real": {}
+   "real": {
+    "race2": {
+     "n": 3,
+     "mean_s": 255.92623333333336,
+     "max_s": 296.4988,
+     "median_s": 249.3193,
+     "by_ceiling": 3,
+     "mean_ceiling_nodes": 2476568002.0,
+     "mean_prover_nodes": 2024518395.0,
+     "indices": [
+      0,
+      1,
+      2
+     ]
+    }
+   }
   }
  },
  "prover_nodes_per_second_1t": 7712500.352018585

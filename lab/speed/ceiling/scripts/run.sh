@@ -15,10 +15,11 @@ for s in moves-14 moves-16; do
   run run-$s-1t1 ./race ceil run data/in-$s.txt 1t 1 120
   run run-$s-split2 ./race ceil run data/in-$s.txt split 2 120
   run run-$s-race2 ./race ceil run data/in-$s.txt race 2 120
-  run run-$s-split4 ./race ceil run data/in-$s.txt split 4 120
-  run run-$s-race4 ./race ceil run data/in-$s.txt race 4 120
+  # optional, not run in the time box:
+  # run run-$s-split4 ./race ceil run data/in-$s.txt split 4 120
+  # run run-$s-race4 ./race ceil run data/in-$s.txt race 4 120
 done
-head -n 4 data/in-random-state.txt > data/rs4.txt
-run run-random-state-race2 ./race ceil run data/rs4.txt race 2 900
-run run-random-state-race4 ./race ceil run data/rs4.txt race 4 900
-run run-random-state-split4 ./race ceil run data/rs4.txt split 4 900
+head -n 3 data/in-random-state.txt > data/rs3.txt
+run run-random-state-race2 ./race ceil run data/rs3.txt race 2 600
+# run run-random-state-race4 ./race ceil run data/rs3.txt race 4 600
+# run run-random-state-split4 ./race ceil run data/rs3.txt split 4 600

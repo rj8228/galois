@@ -106,5 +106,23 @@
   "mean_ms": 2697.546,
   "impl": "c-2t-race",
   "notes": "moves-16; 46 of 50 ended by the ceiling"
+ },
+ {
+  "task": "ceiling",
+  "puzzle": "3x3",
+  "method": "IDA* + two-phase ceiling race",
+  "floor": "C8s+P1x3i",
+  "floor_bytes": 73481013,
+  "extra_bytes": 1935360,
+  "positions": 3,
+  "optimal": 3,
+  "lookups_counting": "lab/3x3 nodes (generated children)",
+  "mean_lookups": 2024518395.0,
+  "mean_final_round_lookups": null,
+  "mean_extra_work": 2476568002.0,
+  "extra_work_unit": "ceiling nodes",
+  "mean_ms": 255926.23333333337,
+  "impl": "c-2t-race",
+  "notes": "random-state; 3 of 3 ended by the ceiling"
  }
 ]
