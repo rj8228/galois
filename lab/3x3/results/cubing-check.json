@@ -1,0 +1,11 @@
+{
+ "files": {
+  "bench-moves-12.json": 1400,
+  "bench-moves-14.json": 1200,
+  "bench-moves-16.json": 507,
+  "bench-random-state.json": 18,
+  "superflip.json": 1
+ },
+ "solutions": 3126,
+ "failures": []
+}

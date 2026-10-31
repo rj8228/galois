@@ -1,0 +1,39 @@
+{
+ "A scramble labels": {
+  "too_high_share": 0.6829958412262939,
+  "too_high_count": 2509436,
+  "max_too_high_by": 7,
+  "exact_share": 0.18986380560454635,
+  "mean": 9.807699991290526
+ },
+ "B exact, squared error": {
+  "too_high_share": 0.31402198053432623,
+  "too_high_count": 1153767,
+  "max_too_high_by": 8,
+  "exact_share": 0.5127844187514969,
+  "mean": 8.993765377664555
+ },
+ "C exact, overestimates x30": {
+  "too_high_share": 0.014732891327541534,
+  "too_high_count": 54131,
+  "max_too_high_by": 4,
+  "exact_share": 0.06135633723082283,
+  "mean": 6.941337611862303
+ },
+ "C + correction table": {
+  "too_high_share": 0.0,
+  "too_high_count": 0,
+  "max_too_high_by": 0,
+  "exact_share": 0.07608922855836436,
+  "mean": 6.92406509242929
+ },
+ "memory": {
+  "params": 25729,
+  "param_bytes_fp16": 51458,
+  "exceptions": 54131,
+  "exception_bytes": 216524,
+  "total_bytes": 267982,
+  "full_table_bytes_4bit": 1837080,
+  "symmetry_reduced_table_bytes_4bit": 306529
+ }
+}

@@ -1,0 +1,10 @@
+doors home by distance (median, min, max): {0: (1.0, 1.0, 1.0), 1: (1.0, 1.0, 1.0), 2: (1.0, 1.0, 1.0), 3: (1.0, 1.0, 2.0), 4: (1.0, 1.0, 4.0), 5: (1.0, 1.0, 3.0), 6: (1.0, 1.0, 4.0), 7: (1.0, 1.0, 24.0), 8: (1.0, 1.0, 20.0), 9: (2.0, 1.0, 28.0), 10: (11.0, 1.0, 96.0), 11: (55.0, 16.0, 196.0)}
+positions with exactly one shortest solution: 33.91%
+20 KB + inverse    move order                   lookups    1,787  last round      969 (54.2%)  corr(last round, doors) +0.25
+20 KB + inverse    floor first                  lookups    1,791  last round      973 (54.3%)  corr(last round, doors) +0.25
+20 KB + inverse    network D first              lookups    1,782  last round      964 (54.1%)  corr(last round, doors) +0.26
+20 KB + inverse    truth first (best possible)  lookups      873  last round       55 ( 6.4%)  corr(last round, doors) +0.59
+400 KB + inverse   move order                   lookups      107  last round       82 (76.7%)  corr(last round, doors) +0.32
+400 KB + inverse   floor first                  lookups      113  last round       88 (78.0%)  corr(last round, doors) +0.39
+400 KB + inverse   network D first              lookups      108  last round       83 (77.0%)  corr(last round, doors) +0.35
+400 KB + inverse   truth first (best possible)  lookups       80  last round       55 (69.0%)  corr(last round, doors) +0.59

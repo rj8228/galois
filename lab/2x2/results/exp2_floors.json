@@ -1,0 +1,948 @@
+{
+ "floors": [
+  {
+   "name": "twists only",
+   "entries": 729,
+   "never_too_high": true,
+   "mean": 4.436213991769547,
+   "exact_share": 0.0009855313867659548
+  },
+  {
+   "name": "permutation only",
+   "entries": 5040,
+   "never_too_high": true,
+   "mean": 4.8619047619047615,
+   "exact_share": 0.004244235417074923
+  },
+  {
+   "name": "corners 0",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 1.4761904761904763,
+   "exact_share": 7.620789513793629e-06
+  },
+  {
+   "name": "corners 1",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 1.7142857142857142,
+   "exact_share": 8.437302675985804e-06
+  },
+  {
+   "name": "corners 2",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 2.0476190476190474,
+   "exact_share": 8.709473730049862e-06
+  },
+  {
+   "name": "corners 3",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 1.7142857142857142,
+   "exact_share": 8.437302675985804e-06
+  },
+  {
+   "name": "corners 4",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 1.7142857142857142,
+   "exact_share": 8.437302675985804e-06
+  },
+  {
+   "name": "corners 5",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 2.0476190476190474,
+   "exact_share": 8.709473730049862e-06
+  },
+  {
+   "name": "corners 6",
+   "entries": 21,
+   "never_too_high": true,
+   "mean": 2.0476190476190474,
+   "exact_share": 8.709473730049862e-06
+  },
+  {
+   "name": "corners 01",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 02",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 03",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 04",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 05",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 06",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 12",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 13",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.4153439153439153,
+   "exact_share": 0.0002778866461994034
+  },
+  {
+   "name": "corners 14",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.4153439153439153,
+   "exact_share": 0.0002778866461994034
+  },
+  {
+   "name": "corners 15",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 16",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 23",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 24",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 25",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 26",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 34",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.4153439153439153,
+   "exact_share": 0.0002778866461994034
+  },
+  {
+   "name": "corners 35",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.394179894179894,
+   "exact_share": 0.0002792475014697237
+  },
+  {
+   "name": "corners 36",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 45",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 46",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 56",
+   "entries": 378,
+   "never_too_high": true,
+   "mean": 3.5925925925925926,
+   "exact_share": 0.0002471313170901648
+  },
+  {
+   "name": "corners 012",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 013",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 014",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 015",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 016",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.8996472663139325,
+   "exact_share": 0.003953012389226381
+  },
+  {
+   "name": "corners 023",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 024",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.8996472663139325,
+   "exact_share": 0.003953012389226381
+  },
+  {
+   "name": "corners 025",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 026",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 034",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 035",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.8996472663139325,
+   "exact_share": 0.003953012389226381
+  },
+  {
+   "name": "corners 036",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 045",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 046",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 056",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 123",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.943562610229277,
+   "exact_share": 0.004208308837938468
+  },
+  {
+   "name": "corners 124",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 125",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 5.096119929453263,
+   "exact_share": 0.004061880810852004
+  },
+  {
+   "name": "corners 126",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 134",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.878483245149912,
+   "exact_share": 0.0035077405447775816
+  },
+  {
+   "name": "corners 135",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 136",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 145",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.943562610229277,
+   "exact_share": 0.004208308837938468
+  },
+  {
+   "name": "corners 146",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 156",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 234",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 235",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 236",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 5.096119929453263,
+   "exact_share": 0.004061880810852004
+  },
+  {
+   "name": "corners 245",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 246",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 256",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.943562610229277,
+   "exact_share": 0.004208308837938468
+  },
+  {
+   "name": "corners 345",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.883245149911817,
+   "exact_share": 0.00419034554837024
+  },
+  {
+   "name": "corners 346",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.943562610229277,
+   "exact_share": 0.004208308837938468
+  },
+  {
+   "name": "corners 356",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 4.907583774250441,
+   "exact_share": 0.00405426002133821
+  },
+  {
+   "name": "corners 456",
+   "entries": 5670,
+   "never_too_high": true,
+   "mean": 5.096119929453263,
+   "exact_share": 0.004061880810852004
+  },
+  {
+   "name": "corners 0123",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 0124",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0125",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 0126",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0134",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.25898001175779,
+   "exact_share": 0.04541037951531779
+  },
+  {
+   "name": "corners 0135",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0136",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0145",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 0146",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0156",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0234",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0235",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0236",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 0245",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0246",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0256",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.25898001175779,
+   "exact_share": 0.04541037951531779
+  },
+  {
+   "name": "corners 0345",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0346",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 0356",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 0456",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 1234",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.25898001175779,
+   "exact_share": 0.04541037951531779
+  },
+  {
+   "name": "corners 1235",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 1236",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 1245",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 1246",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 1256",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 1345",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.25898001175779,
+   "exact_share": 0.04541037951531779
+  },
+  {
+   "name": "corners 1346",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.25898001175779,
+   "exact_share": 0.04541037951531779
+  },
+  {
+   "name": "corners 1356",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 1456",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 2345",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.272163433274544,
+   "exact_share": 0.04546944063404969
+  },
+  {
+   "name": "corners 2346",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 2356",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 2456",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 3456",
+   "entries": 68040,
+   "never_too_high": true,
+   "mean": 6.294268077601411,
+   "exact_share": 0.04628840333572844
+  },
+  {
+   "name": "corners 01234",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 01235",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 01236",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 01245",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 01246",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.5796214644980076,
+   "exact_share": 0.3075004899078973
+  },
+  {
+   "name": "corners 01256",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 01345",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 01346",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 01356",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.5796214644980076,
+   "exact_share": 0.3075004899078973
+  },
+  {
+   "name": "corners 01456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 02345",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.5796214644980076,
+   "exact_share": 0.3075004899078973
+  },
+  {
+   "name": "corners 02346",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 02356",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 02456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 03456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 12345",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 12346",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 12356",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 12456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  },
+  {
+   "name": "corners 13456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.582167352537723,
+   "exact_share": 0.30752988438173623
+  },
+  {
+   "name": "corners 23456",
+   "entries": 612360,
+   "never_too_high": true,
+   "mean": 7.587580834803057,
+   "exact_share": 0.3085380059659895
+  }
+ ],
+ "coset_claim_holds": true,
+ "collections": [
+  {
+   "budget_bytes": 2000,
+   "chosen": [
+    "corners 2",
+    "corners 6",
+    "corners 5",
+    "corners 46",
+    "twists only",
+    "corners 45",
+    "corners 12",
+    "corners 23",
+    "corners 36",
+    "corners 15",
+    "corners 13",
+    "corners 56"
+   ],
+   "used_bytes": 1908.0,
+   "seeded_with": null,
+   "mean": 4.842697922790515,
+   "exact_share": 0.00178734731203867,
+   "mean_gap": 3.912878317765149
+  },
+  {
+   "budget_bytes": 20000,
+   "chosen": [
+    "permutation only",
+    "twists only",
+    "corners 456",
+    "corners 236",
+    "corners 125",
+    "corners 013",
+    "corners 024",
+    "corners 035"
+   ],
+   "used_bytes": 19894.5,
+   "seeded_with": "permutation only",
+   "mean": 5.933955788533978,
+   "exact_share": 0.014147451390249744,
+   "mean_gap": 2.8216204520216865
+  },
+  {
+   "budget_bytes": 100000,
+   "chosen": [
+    "corners 2",
+    "corners 6",
+    "corners 5",
+    "corners 46",
+    "twists only",
+    "corners 45",
+    "corners 12",
+    "corners 236",
+    "corners 456",
+    "corners 125",
+    "permutation only",
+    "corners 0346",
+    "corners 0125",
+    "corners 014",
+    "corners 123",
+    "corners 345",
+    "corners 013",
+    "corners 145",
+    "corners 256",
+    "corners 035"
+   ],
+   "used_bytes": 99873.0,
+   "seeded_with": null,
+   "mean": 6.767308990354258,
+   "exact_share": 0.07141577938903042,
+   "mean_gap": 1.9882672502014065
+  },
+  {
+   "budget_bytes": 400000,
+   "chosen": [
+    "corners 03456",
+    "twists only",
+    "corners 125",
+    "corners 0123",
+    "corners 1245",
+    "permutation only",
+    "corners 236",
+    "corners 014",
+    "corners 016",
+    "corners 024",
+    "corners 026",
+    "corners 134",
+    "corners 025"
+   ],
+   "used_bytes": 399784.5,
+   "seeded_with": "corners 03456",
+   "mean": 7.686294826572604,
+   "exact_share": 0.31666666666666665,
+   "mean_gap": 1.06928141398306
+  }
+ ],
+ "truth_mean": 8.755576240555664
+}

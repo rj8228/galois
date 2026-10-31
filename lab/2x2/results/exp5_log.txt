@@ -1,0 +1,38 @@
+training positions within 3 moves: scrambles 27.1% vs uniform 0.0105%
+  D finder: epoch 1/12 (10s)
+  D finder: epoch 2/12 (20s)
+  D finder: epoch 3/12 (30s)
+  D finder: epoch 4/12 (40s)
+  D finder: epoch 5/12 (50s)
+  D finder: epoch 6/12 (60s)
+  D finder: epoch 7/12 (70s)
+  D finder: epoch 8/12 (81s)
+  D finder: epoch 9/12 (91s)
+  D finder: epoch 10/12 (101s)
+  D finder: epoch 11/12 (111s)
+  D finder: epoch 12/12 (121s)
+  E floor: epoch 1/12 (10s)
+  E floor: epoch 2/12 (20s)
+  E floor: epoch 3/12 (30s)
+  E floor: epoch 4/12 (40s)
+  E floor: epoch 5/12 (49s)
+  E floor: epoch 6/12 (59s)
+  E floor: epoch 7/12 (70s)
+  E floor: epoch 8/12 (80s)
+  E floor: epoch 9/12 (90s)
+  E floor: epoch 10/12 (100s)
+  E floor: epoch 11/12 (110s)
+  E floor: epoch 12/12 (120s)
+B (uniform inputs)     0.0   8.7   8.6   8.6   8.6   8.7   8.7   8.7   8.8   8.8   8.8   8.8
+D                      0.0   1.0   2.0   3.1   4.5   6.3   7.3   7.7   7.8   7.8   7.8   7.4
+E                      0.0   1.0   2.0   3.0   4.0   5.1   5.8   6.2   6.3   6.3   6.3   5.9
+D: {'too_high_share': 0.09398093713937335, 'exact_share': 0.24311570535850371, 'mean_abs_error': 1.1886266469955444}
+E + corrections: {'too_high_before': 0.00038512204150064234, 'corrections': 1415, 'bytes': 57118, 'mean_floor': 5.78879254033575, 'exact_share': 0.01727578548566203}
+gravity D: {'no_downhill_share': 0.046215189322185206, 'pure gravity': {'reached_solved': 0.042, 'optimal_share_of_all': np.float64(0.033)}, 'with heat': {'reached_solved': 0.072, 'optimal_share_of_all': np.float64(0.0)}}
+beam B (uniform inputs), width 8: {'found_share': 0.004, 'optimal_share': 0.002, 'mean_excess_when_found': 3.75, 'seconds': 0.5}
+beam B (uniform inputs), width 64: {'found_share': 0.02, 'optimal_share': 0.014, 'mean_excess_when_found': 0.6, 'seconds': 4.2}
+beam D, width 8: {'found_share': 0.195, 'optimal_share': 0.17, 'mean_excess_when_found': 0.40512820512820513, 'seconds': 0.4}
+beam D, width 64: {'found_share': 0.669, 'optimal_share': 0.584, 'mean_excess_when_found': 0.14798206278026907, 'seconds': 2.1}
+IDA* E + corrections: {'optimal_share': np.float64(1.0), 'mean_nodes': 8331.598, 'mean_floor': 5.78879254033575}
+IDA* hybrid: E + corrections, max 20 KB floor: {'optimal_share': np.float64(1.0), 'mean_nodes': 1689.716, 'mean_floor': 6.1577919851068}
+framework: {'positions': 1000, 'ceiling_found_share': 0.669, 'ceiling_optimal_share': 0.584, 'instant_certificate_share': 0.265, 'mean_gap_ceiling_minus_floor': 0.9252615844544095, 'mean_nodes_prover_alone': 161.878, 'mean_nodes_with_ceiling': 122.879, 'all_certificates_match_truth': True}

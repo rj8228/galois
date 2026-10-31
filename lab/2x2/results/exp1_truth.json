@@ -1,0 +1,253 @@
+{
+ "htm": {
+  "counts": [
+   1,
+   9,
+   54,
+   321,
+   1847,
+   9992,
+   50136,
+   227536,
+   870072,
+   1887748,
+   623800,
+   2644
+  ],
+  "gods_number": 11,
+  "seconds": 1.7
+ },
+ "qtm": {
+  "counts": [
+   1,
+   6,
+   27,
+   120,
+   534,
+   2256,
+   8969,
+   33058,
+   114149,
+   360508,
+   930588,
+   1350852,
+   782536,
+   90280,
+   276
+  ],
+  "gods_number": 14,
+  "seconds": 1.0
+ },
+ "entropy": {
+  "shells": [
+   {
+    "d": 0,
+    "count": 1,
+    "share": 2.721710540640582e-07,
+    "bits": 0.0,
+    "growth": null
+   },
+   {
+    "d": 1,
+    "count": 9,
+    "share": 2.4495394865765235e-06,
+    "bits": 3.169925001442312,
+    "growth": 9.0
+   },
+   {
+    "d": 2,
+    "count": 54,
+    "share": 1.4697236919459142e-05,
+    "bits": 5.754887502163468,
+    "growth": 6.0
+   },
+   {
+    "d": 3,
+    "count": 321,
+    "share": 8.736690835456267e-05,
+    "bits": 8.326429487122303,
+    "growth": 5.944444444444445
+   },
+   {
+    "d": 4,
+    "count": 1847,
+    "share": 0.0005026999368563154,
+    "bits": 10.850968150982439,
+    "growth": 5.753894080996885
+   },
+   {
+    "d": 5,
+    "count": 9992,
+    "share": 0.0027195331722080695,
+    "bits": 13.286557761607957,
+    "growth": 5.409853817000541
+   },
+   {
+    "d": 6,
+    "count": 50136,
+    "share": 0.013645567966555621,
+    "bits": 15.613559277788264,
+    "growth": 5.0176140912730185
+   },
+   {
+    "d": 7,
+    "count": 227536,
+    "share": 0.06192871295751954,
+    "bits": 17.79573529628706,
+    "growth": 4.538375618318175
+   },
+   {
+    "d": 8,
+    "count": 870072,
+    "share": 0.23680841335162323,
+    "bits": 19.73077526590961,
+    "growth": 3.823887209057028
+   },
+   {
+    "d": 9,
+    "count": 1887748,
+    "share": 0.5137903629673177,
+    "bits": 20.848234758062375,
+    "growth": 2.1696457304682832
+   },
+   {
+    "d": 10,
+    "count": 623800,
+    "share": 0.1697803035251595,
+    "bits": 19.250724027148877,
+    "growth": 0.33044664859928335
+   },
+   {
+    "d": 11,
+    "count": 2644,
+    "share": 0.0007196202669453698,
+    "bits": 11.368506461507693,
+    "growth": 0.004238537992946457
+   }
+  ],
+  "share_at_9_or_10": 0.6835706664924772,
+  "mean_distance": 8.755576240555664,
+  "total_bits": 21.808983022714216,
+  "counting_floor_gods_number": 9,
+  "scramble_labels": [
+   {
+    "k": 1,
+    "mean_true": 1.0,
+    "label_too_high": 0.0
+   },
+   {
+    "k": 2,
+    "mean_true": 2.0,
+    "label_too_high": 0.0
+   },
+   {
+    "k": 3,
+    "mean_true": 3.0,
+    "label_too_high": 0.0
+   },
+   {
+    "k": 4,
+    "mean_true": 3.9791,
+    "label_too_high": 0.01665
+   },
+   {
+    "k": 5,
+    "mean_true": 4.90615,
+    "label_too_high": 0.073
+   },
+   {
+    "k": 6,
+    "mean_true": 5.79295,
+    "label_too_high": 0.14495
+   },
+   {
+    "k": 7,
+    "mean_true": 6.59685,
+    "label_too_high": 0.2676
+   },
+   {
+    "k": 8,
+    "mean_true": 7.32025,
+    "label_too_high": 0.41795
+   },
+   {
+    "k": 9,
+    "mean_true": 7.90455,
+    "label_too_high": 0.6275
+   },
+   {
+    "k": 10,
+    "mean_true": 8.2352,
+    "label_too_high": 0.9175
+   },
+   {
+    "k": 11,
+    "mean_true": 8.41315,
+    "label_too_high": 0.99955
+   },
+   {
+    "k": 12,
+    "mean_true": 8.52825,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 13,
+    "mean_true": 8.5993,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 14,
+    "mean_true": 8.64475,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 15,
+    "mean_true": 8.69715,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 16,
+    "mean_true": 8.72475,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 17,
+    "mean_true": 8.7201,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 18,
+    "mean_true": 8.727,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 19,
+    "mean_true": 8.75085,
+    "label_too_high": 1.0
+   },
+   {
+    "k": 20,
+    "mean_true": 8.7586,
+    "label_too_high": 1.0
+   }
+  ]
+ },
+ "symmetry": {
+  "inverse_same_distance": true,
+  "inverse_is_involution": true,
+  "rotation": {
+   "U->R->F": {
+    "commutes_with_every_move": true,
+    "bijective": true,
+    "preserves_distance": true
+   },
+   "U->F->R": {
+    "commutes_with_every_move": true,
+    "bijective": true,
+    "preserves_distance": true
+   }
+  },
+  "classes_under_6_symmetries": 613058,
+  "compression": 5.993168672458397
+ }
+}

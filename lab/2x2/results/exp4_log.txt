@@ -1,0 +1,23 @@
+true distance                          no downhill   0.00%  roll ok 100.0% (optimal 100.0%)  heat ok  82.4%
+floor: twists only                     no downhill   0.14%  roll ok   0.0% (optimal   0.0%)  heat ok   0.6%
+floor: permutation only                no downhill   0.02%  roll ok   0.0% (optimal   0.0%)  heat ok   0.3%
+floor: best tables, 2 KB               no downhill  42.04%  roll ok   0.2% (optimal   0.2%)  heat ok   1.0%
+floor: best tables, 20 KB              no downhill  54.40%  roll ok   0.4% (optimal   0.4%)  heat ok   5.2%
+floor: best tables, 100 KB             no downhill  35.81%  roll ok   3.5% (optimal   3.5%)  heat ok  14.6%
+floor: best tables, 400 KB             no downhill  19.26%  roll ok  18.0% (optimal  18.0%)  heat ok  36.5%
+net A raw: scramble labels             no downhill   3.83%  roll ok   3.3% (optimal   2.6%)  heat ok   5.8%
+net B raw: exact, squared error        no downhill   4.71%  roll ok   0.0% (optimal   0.0%)  heat ok   0.0%
+net C raw: exact, overestimates x30    no downhill   2.44%  roll ok   0.4% (optimal   0.4%)  heat ok   0.4%
+net C + correction table               no downhill  70.70%  roll ok   6.5% (optimal   6.5%)  heat ok  21.5%
+IDA* floor: twists only                     optimal 100.0%  gave up   0.0%  mean nodes    214,344  admissible True  (70.7s)
+IDA* floor: permutation only                optimal 100.0%  gave up   0.0%  mean nodes     90,238  admissible True  (28.1s)
+IDA* floor: best tables, 2 KB               optimal 100.0%  gave up   0.0%  mean nodes     18,609  admissible True  (6.5s)
+IDA* floor: best tables, 20 KB              optimal 100.0%  gave up   0.0%  mean nodes      2,319  admissible True  (0.7s)
+IDA* floor: best tables, 100 KB             optimal 100.0%  gave up   0.0%  mean nodes        627  admissible True  (0.2s)
+IDA* floor: best tables, 400 KB             optimal 100.0%  gave up   0.0%  mean nodes        162  admissible True  (0.1s)
+IDA* net A: scramble labels                 optimal  19.7%  gave up   8.7%  mean nodes      5,139  admissible False  (0.6s)
+IDA* net B: exact, squared error            optimal   0.3%  gave up  99.7%  mean nodes      6,766  admissible False  (2.1s)
+IDA* net C: exact, overestimates x30        optimal   8.7%  gave up  91.3%  mean nodes      9,820  admissible False  (1.9s)
+IDA* net C + correction table               optimal 100.0%  gave up   0.0%  mean nodes        372  admissible True  (0.2s)
+IDA* hybrid: net C + table, max 20 KB floor optimal 100.0%  gave up   0.0%  mean nodes        366  admissible True  (0.1s)
+framework: {"positions": 1000, "ceiling_found_share": 0.02, "ceiling_optimal_share": 0.014, "instant_certificate_share": 0.014, "mean_gap_ceiling_minus_floor": NaN, "mean_nodes_prover_alone": 161.878, "mean_nodes_with_ceiling": 161.46, "all_answers_match_truth": true, "seconds": 4.4, "trace": {"true": 10, "ceiling_from_network": null, "floor_at_start": 7, "floor_steps": [7, 8, 9, 10], "nodes": 721}}

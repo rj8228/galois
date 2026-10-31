@@ -1,0 +1,149 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "cores": 4,
+  "threads_used": 4,
+  "ram_gb": 16.9,
+  "os": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+ },
+ "runs": {
+  "C8s+P1x3i": {
+   "summary": {
+    "bytes": 73481013,
+    "aux_bytes": 3302208,
+    "lookups": 7,
+    "load_seconds": 0.277,
+    "scrambles": 1,
+    "solved": 1,
+    "dnf": 0,
+    "all_verified": true,
+    "mean_nodes": 51435021209.0,
+    "max_nodes": 51435021209,
+    "mean_seconds": 1492.2955,
+    "max_seconds": 1492.2955,
+    "nodes_per_second": 34467048.388874725,
+    "mean_length": 20.0,
+    "lengths": {
+     "20": 1
+    },
+    "mean_h0": 10.0
+   },
+   "meta": {
+    "type": "meta",
+    "floor": "C8s+P1x3i",
+    "lookups": 7,
+    "bytes": 73481013,
+    "aux_bytes": 3302208,
+    "load_seconds": 0.277,
+    "threads": 4,
+    "split": 3,
+    "maxnodes": 400000000000
+   },
+   "solves": [
+    {
+     "index": 0,
+     "scramble": "U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2",
+     "length": 20,
+     "solution": "U R U2 R F2 L U2 R F' B' R2 D R' L U2 F2 D2 F R2 D",
+     "verified": true,
+     "dnf": false,
+     "h0": 10,
+     "root_symmetries": 48,
+     "nodes": 51435021209,
+     "seconds": 1492.2955,
+     "nodes_per_bound": {
+      "10": 2,
+      "11": 140,
+      "12": 1106,
+      "13": 13088,
+      "14": 164450,
+      "15": 1955384,
+      "16": 23821319,
+      "17": 296516216,
+      "18": 3738126563,
+      "19": 47247356813,
+      "20": 127066128
+     }
+    }
+   ],
+   "wall_seconds": 1492.6
+  },
+  "C8s@2+E6x8@2": {
+   "summary": {
+    "bytes": 12157884,
+    "aux_bytes": 190944,
+    "lookups": 9,
+    "load_seconds": 0.023,
+    "scrambles": 1,
+    "solved": 0,
+    "dnf": 1,
+    "all_verified": true,
+    "mean_nodes": null,
+    "max_nodes": null,
+    "mean_seconds": null,
+    "max_seconds": null,
+    "nodes_per_second": null,
+    "mean_length": null,
+    "lengths": {},
+    "mean_h0": 8.0
+   },
+   "meta": {
+    "type": "meta",
+    "floor": "C8s@2+E6x8@2",
+    "lookups": 9,
+    "bytes": 12157884,
+    "aux_bytes": 190944,
+    "load_seconds": 0.023,
+    "threads": 4,
+    "split": 3,
+    "maxnodes": 10000000000
+   },
+   "solves": [
+    {
+     "index": 0,
+     "scramble": "U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2",
+     "length": -1,
+     "solution": "",
+     "verified": false,
+     "dnf": true,
+     "h0": 8,
+     "root_symmetries": 48,
+     "nodes": 15361046372,
+     "seconds": 473.2765,
+     "nodes_per_bound": {
+      "8": 2,
+      "9": 56,
+      "10": 374,
+      "11": 2768,
+      "12": 33524,
+      "13": 460190,
+      "14": 6316334,
+      "15": 85597748,
+      "16": 1166808014,
+      "17": 14101827362
+     }
+    }
+   ],
+   "wall_seconds": 473.3,
+   "estimate": {
+    "completed_bounds": [
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "growth_per_bound": 13.631293360661779,
+    "nodes_to_prove_19_impossible": 3189332836048.4883,
+    "final_bound_fraction": 0.00021277899948402457,
+    "nodes_to_finish": 3197904722774.392,
+    "nodes_per_second": 32456811.973550346
+   }
+  }
+ }
+}
