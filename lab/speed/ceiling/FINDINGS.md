@@ -25,7 +25,7 @@ Speed lab task T6 (issue #29, part of #20). Question: if a two-phase solver hunt
 - **Random states (simulated from the duel traces, one prover thread):**
   - The mean over the 18 solved positions falls from 814 s to 315 s (**2.6×**).
   - The worst falls from 33 min to 22 min. That worst case is position 15, where the ceiling did not reach 18 moves within its 250 s cap. Positions 8 and 7 were also capped. For the rest, the solve becomes the proof: 198–336 s.
-  - Times are this machine's: 7.97 M nodes per second, measured with two other cores busy. `lab/3x3` measured 9.1 M, so its 690 s mean is 814 s here.
+  - Times are this machine's: 7.71 M nodes per second, measured with two other cores busy. `lab/3x3` measured 9.1 M, so its 690 s mean is 814 s here.
   - **The two unfinished positions** (14 and 18) got 19-move ceilings after 0.007 s and 13.8 s. If they need 19 moves, the race ends the moment bound 18 is exhausted, about 47 min in `lab/3x3`'s run (65 min at this machine's speed). Without the ceiling, that is where the final round at bound 19 would begin, and it hit the node cap in `lab/3x3`.
   - **The real two-thread race on random states 0–2 confirms the simulation:** 222, 249 and 296 s, against 271, 1,937 and 569 s for the prover alone. All three were ended by the ceiling.
 - **What is left is the proof.** With the race, an optimal 3×3 solve costs about the proof rounds plus a small tail. That is about 15% of today's single-thread work at 16 moves, and 27–40% on random states. The proof rounds are T3's target (downhill masks), and they are now nearly all of the time.
@@ -42,7 +42,7 @@ Speed lab task T6 (issue #29, part of #20). Question: if a two-phase solver hunt
 
 ### Finder duel
 
-For each position: *target D* is the two-phase search told the optimal length (first solution of length ≤ D, all six variants, capped). *Trace* starts at 22 with no target and lowers it after each solution; the time is when it first reached D. Prover times are per round. At 14 and 16 moves they come from our own one-thread runs (`run-*-1t1`). For random states they are `lab/3x3`'s node counts divided by 7.97 M nodes per second. Duel runs used four positions at a time (two for random states), so their times include some memory contention.
+For each position: *target D* is the two-phase search told the optimal length (first solution of length ≤ D, all six variants, capped). *Trace* starts at 22 with no target and lowers it after each solution; the time is when it first reached D. Prover times are per round. At 14 and 16 moves they come from our own one-thread runs (`run-*-1t1`). For random states they are `lab/3x3`'s node counts divided by 7.71 M nodes per second. Duel runs used four positions at a time (two for random states), so their times include some memory contention.
 
 | Set | D | Target D found (cap) | Target D median | Trace reached D (cap) | Trace median, worst | Trace before proof end | Proof mean | Final round mean | Target faster than final round |
 | --- | --- | --: | --: | --: | --: | --: | --: | --: | --: |
@@ -55,7 +55,7 @@ Random state 7 (17 moves) is the clearest miss. Its proof takes 22 s and its fin
 
 ### Simulated race (random states)
 
-The race ends at max(proof, time the trace reaches D) if that comes before the prover would finish alone; otherwise at the prover's total. One prover thread, seconds at 7.97 M nodes per second.
+The race ends at max(proof, time the trace reaches D) if that comes before the prover would finish alone; otherwise at the prover's total. One prover thread, seconds at 7.71 M nodes per second.
 
 | # | D | Proof | Final round | Prover alone | Trace reaches D | Race |
 | --: | --: | --: | --: | --: | --: | --: |

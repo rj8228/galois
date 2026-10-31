@@ -16,7 +16,7 @@ RAW = os.path.join(ROOT, "results", "raw")
 LAB = os.path.join(ROOT, "..", "..", "3x3", "results")
 FLOOR = "C8s+P1x3i"
 MODES = {0: "baseline", 1: "down masks (uint32)", 2: "full masks (down + up, 2 x uint32)", 3: "down masks packed (18 bits)"}
-SETS = {"moves-12": "12 moves", "moves-14": "14 moves", "moves-16": "16 moves", "random-two": "random state (2)"}
+SETS = {"moves-12": "12 moves", "moves-14": "14 moves", "moves-16": "16 moves", "random-two": "random states"}
 
 fails = []
 
@@ -113,6 +113,10 @@ for t in ("corners_sym", "phase1_sym"):
     p = os.path.join(ROOT, "data", "tables", f"{t}.masks.json")
     if os.path.exists(p):
         builds[t] = json.load(open(p))
+# data/ is git-ignored: without a local mask build, keep the build records already in results/gravity.json.
+_prev = os.path.join(ROOT, "results", "gravity.json")
+if not builds and os.path.exists(_prev):
+    builds = json.load(open(_prev)).get("mask_builds", {})
 mc = json.load(open(os.path.join(ROOT, "results", "maskcheck.json")))
 mcw = json.load(open(os.path.join(ROOT, "results", "maskcheck-wrong-frame.json")))
 json.dump({"floor": FLOOR, "rows": rows, "mask_builds": builds, "maskcheck": mc, "maskcheck_wrong_frame": mcw,
@@ -171,6 +175,10 @@ out += ["", f"**Mapping check:** {fmt(mc['positions'])} positions (half uniforml
 fp = os.path.join(ROOT, "FINDINGS.md")
 if os.path.exists(fp):
     s = open(fp).read()
-    s = re.sub(r"(<!-- tables:start -->\n).*?(\n<!-- tables:end -->)", lambda m: m.group(1) + "\n".join(out) + m.group(2), s, flags=re.S)
+    # The block may be empty ("start -->\n<!-- tables:end"), so the text between the markers is optional.
+    s, n = re.subn(r"(<!-- tables:start -->\n)(?:.*?\n)?(<!-- tables:end -->)",
+                   lambda m: m.group(1) + "\n".join(out) + "\n" + m.group(2), s, count=1, flags=re.S)
+    if n != 1:
+        raise SystemExit("FINDINGS.md: tables markers not found")
     open(fp, "w").write(s)
 print("\n".join(out))

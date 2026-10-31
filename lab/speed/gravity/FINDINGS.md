@@ -30,6 +30,40 @@ Speed lab task T3 (issue #23, part of #20). The question: do stored downhill mas
 ## Results
 
 <!-- tables:start -->
+### Time per solve
+
+Desktop set `C8s+P1x3i` (73.5 MB floor). Same binary, masks on or off; one process at a time on an idle 4-core machine. *Lookups*: children generated (lab/3x3's node count; each is read against the floor). *Skipped*: children the masks ruled out before generating them. *Speed-up*: baseline mean ms / this mean ms, and the geometric mean of the per-solve ratios.
+
+| Set (solves), threads | Method | Mask memory | Mean ms | Median ms | Speed-up (mean, per-solve geomean) | Lookups per solve | Skipped | Mask reads per solve |
+| --- | --- | --: | --: | --: | --: | --: | --: | --: |
+| 12 moves (50), 1 | baseline | – | 1.1 | 0.6 | 1.00×, 1.00× | 13,344 | 0% | – |
+| 12 moves (50), 1 | down masks (uint32) | 588 MB | 0.8 | 0.5 | 1.29×, 1.38× | 5,770 | 57% | 1,137 |
+| 12 moves (50), 1 | full masks (down + up, 2 x uint32) | 1,176 MB | 0.8 | 0.5 | 1.36×, 1.43× | 3,778 | 72% | 2,027 |
+| 12 moves (50), 1 | down masks packed (18 bits) | 331 MB | 1.0 | 0.6 | 1.05×, 1.10× | 5,770 | 57% | 1,137 |
+| 14 moves (50), 1 | baseline | – | 49.1 | 42.5 | 1.00×, 1.00× | 616,532 | 0% | – |
+| 14 moves (50), 1 | down masks (uint32) | 588 MB | 33.2 | 30.9 | 1.48×, 1.49× | 150,774 | 76% | 90,669 |
+| 14 moves (50), 1 | full masks (down + up, 2 x uint32) | 1,176 MB | 30.1 | 26.1 | 1.63×, 1.65× | 83,013 | 87% | 156,602 |
+| 14 moves (50), 1 | down masks packed (18 bits) | 331 MB | 34.6 | 30.0 | 1.42×, 1.44× | 150,774 | 76% | 90,669 |
+| 16 moves (50), 1 | baseline | – | 7,231.1 | 7,921.9 | 1.00×, 1.00× | 87,239,984 | 0% | – |
+| 16 moves (50), 1 | down masks (uint32) | 588 MB | 4,781.6 | 5,247.7 | 1.51×, 1.52× | 21,461,967 | 75% | 12,976,071 |
+| 16 moves (50), 1 | full masks (down + up, 2 x uint32) | 1,176 MB | 4,317.0 | 4,680.9 | 1.68×, 1.69× | 11,833,724 | 86% | 22,531,184 |
+| 16 moves (50), 1 | down masks packed (18 bits) | 331 MB | 4,965.4 | 5,175.6 | 1.46×, 1.47× | 21,461,967 | 75% | 12,976,071 |
+| 16 moves (50), 2 | baseline | – | 3,444.6 | 3,693.9 | 1.00×, 1.00× | 87,258,184 | 0% | – |
+| 16 moves (50), 2 | down masks (uint32) | 588 MB | 2,245.5 | 2,391.2 | 1.53×, 1.54× | 21,469,859 | 75% | 12,977,901 |
+| 16 moves (50), 2 | full masks (down + up, 2 x uint32) | 1,176 MB | 2,049.5 | 2,114.1 | 1.68×, 1.68× | 11,841,078 | 86% | 22,534,528 |
+| random states (2), 1 | baseline | – | 89,779.5 | 89,779.5 | 1.00×, 1.00× | 1,112,479,339 | 0% | – |
+| random states (2), 1 | down masks (uint32) | 588 MB | 56,458.6 | 56,458.6 | 1.59×, 1.56× | 265,388,550 | 76% | 167,886,461 |
+
+### Building and checking the masks
+
+| Table | Entries | Build (4 threads) | Write | Down moves per entry | Up moves per entry | uint32 | 18-bit |
+| --- | --: | --: | --: | --: | --: | --: | --: |
+| corners_sym | 6,053,616 | 0.2 s | 0.2 s | 4.58 | 4.52 | 24 MB | 14 MB |
+| phase1_sym | 140,908,410 | 6.1 s | 4.5 s | 3.89 | 3.89 | 564 MB | 317 MB |
+
+**Mapping check:** 2,000,000 positions (half uniformly random, half random walks of 0–14 moves), 4 masked lookups each, 144,000,000 child lookups compared with the mapped masks: 0 wrong indices, 0 wrong down bits, 0 wrong up bits. Conjugating the wrong way round (`GRAV3_WRONG_FRAME=1`) gives 408,052 wrong down bits out of 14,400,000, so the check does catch a backwards map.
+
+**Checks:** every solution replayed to solved; single-thread masked runs gave the baseline's solution, and per round children generated + skipped = the baseline's children generated, on every solve; 152 baseline node counts and 754 lengths equal lab/3x3's, 0 differences. Two-thread runs race in the final round, so only their proof rounds are compared: 50 baseline solves match lab/3x3 round by round, and masked runs' generated + skipped match the baseline's in every proof round. No run capped.
 <!-- tables:end -->
 
 ## How the masks work
