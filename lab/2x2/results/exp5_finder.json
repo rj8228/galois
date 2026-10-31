@@ -1,0 +1,119 @@
+{
+ "training_share_within_3_moves": {
+  "scramble_inputs": 0.2711370762296688,
+  "uniform_inputs": 0.0001047858558146624
+ },
+ "mean_guess_by_true_distance": {
+  "B (uniform inputs)": [
+   0.0,
+   8.65,
+   8.63,
+   8.62,
+   8.64,
+   8.67,
+   8.7,
+   8.72,
+   8.75,
+   8.76,
+   8.77,
+   8.81
+  ],
+  "D": [
+   0.0,
+   1.01,
+   2.02,
+   3.06,
+   4.52,
+   6.35,
+   7.29,
+   7.66,
+   7.8,
+   7.85,
+   7.81,
+   7.44
+  ],
+  "E": [
+   0.0,
+   1.0,
+   1.99,
+   2.98,
+   3.99,
+   5.07,
+   5.83,
+   6.15,
+   6.28,
+   6.33,
+   6.3,
+   5.92
+  ]
+ },
+ "D": {
+  "too_high_share": 0.09398093713937335,
+  "exact_share": 0.24311570535850371,
+  "mean_abs_error": 1.1886266469955444
+ },
+ "E + corrections": {
+  "too_high_before": 0.00038512204150064234,
+  "corrections": 1415,
+  "bytes": 57118,
+  "mean_floor": 5.78879254033575,
+  "exact_share": 0.01727578548566203
+ },
+ "gravity_D": {
+  "no_downhill_share": 0.046215189322185206,
+  "pure gravity": {
+   "reached_solved": 0.042,
+   "optimal_share_of_all": 0.033
+  },
+  "with heat": {
+   "reached_solved": 0.072,
+   "optimal_share_of_all": 0.0
+  }
+ },
+ "finders": {
+  "B (uniform inputs), width 8": {
+   "found_share": 0.004,
+   "optimal_share": 0.002,
+   "mean_excess_when_found": 3.75,
+   "seconds": 0.5
+  },
+  "B (uniform inputs), width 64": {
+   "found_share": 0.02,
+   "optimal_share": 0.014,
+   "mean_excess_when_found": 0.6,
+   "seconds": 4.2
+  },
+  "D, width 8": {
+   "found_share": 0.195,
+   "optimal_share": 0.17,
+   "mean_excess_when_found": 0.40512820512820513,
+   "seconds": 0.4
+  },
+  "D, width 64": {
+   "found_share": 0.669,
+   "optimal_share": 0.584,
+   "mean_excess_when_found": 0.14798206278026907,
+   "seconds": 2.1
+  }
+ },
+ "prover E + corrections": {
+  "optimal_share": 1.0,
+  "mean_nodes": 8331.598,
+  "mean_floor": 5.78879254033575
+ },
+ "prover hybrid: E + corrections, max 20 KB floor": {
+  "optimal_share": 1.0,
+  "mean_nodes": 1689.716,
+  "mean_floor": 6.1577919851068
+ },
+ "framework": {
+  "positions": 1000,
+  "ceiling_found_share": 0.669,
+  "ceiling_optimal_share": 0.584,
+  "instant_certificate_share": 0.265,
+  "mean_gap_ceiling_minus_floor": 0.9252615844544095,
+  "mean_nodes_prover_alone": 161.878,
+  "mean_nodes_with_ceiling": 122.879,
+  "all_certificates_match_truth": true
+ }
+}

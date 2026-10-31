@@ -1,0 +1,39 @@
+{
+ "floor": "data/floor_budget_400000.npy",
+ "positions": 3674160,
+ "every_solution_replays_to_solved": true,
+ "every_length_equals_truth": true,
+ "mismatches": 0,
+ "length_counts": [
+  1,
+  9,
+  54,
+  321,
+  1847,
+  9992,
+  50136,
+  227536,
+  870072,
+  1887748,
+  623800,
+  2644
+ ],
+ "truth_counts": [
+  1,
+  9,
+  54,
+  321,
+  1847,
+  9992,
+  50136,
+  227536,
+  870072,
+  1887748,
+  623800,
+  2644
+ ],
+ "total_nodes": 606705973,
+ "mean_nodes": 165.12780417837,
+ "max_nodes": 15375,
+ "seconds": 96.8
+}

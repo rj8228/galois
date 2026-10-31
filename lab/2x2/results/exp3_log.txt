@@ -1,0 +1,26 @@
+A: trained on scramble length
+  A: epoch 1/6 (11s)
+  A: epoch 2/6 (21s)
+  A: epoch 3/6 (31s)
+  A: epoch 4/6 (41s)
+  A: epoch 5/6 (52s)
+  A: epoch 6/6 (61s)
+B: trained on true distance, plain squared error
+  B: epoch 1/6 (10s)
+  B: epoch 2/6 (21s)
+  B: epoch 3/6 (32s)
+  B: epoch 4/6 (42s)
+  B: epoch 5/6 (52s)
+  B: epoch 6/6 (62s)
+C: trained on true distance, overestimates penalised 30x
+  C: epoch 1/6 (10s)
+  C: epoch 2/6 (20s)
+  C: epoch 3/6 (30s)
+  C: epoch 4/6 (40s)
+  C: epoch 5/6 (50s)
+  C: epoch 6/6 (60s)
+A scramble labels            too high on 68.2996% (2,509,436)  exact  19.0%  mean 9.81
+B exact, squared error       too high on 31.4022% (1,153,767)  exact  51.3%  mean 8.99
+C exact, overestimates x30   too high on  1.4733% (   54,131)  exact   6.1%  mean 6.94
+C + correction table         too high on  0.0000% (        0)  exact   7.6%  mean 6.92
+memory: {'params': 25729, 'param_bytes_fp16': 51458, 'exceptions': 54131, 'exception_bytes': 216524, 'total_bytes': 267982, 'full_table_bytes_4bit': 1837080, 'symmetry_reduced_table_bytes_4bit': 306529}

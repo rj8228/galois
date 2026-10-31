@@ -1,0 +1,131 @@
+{
+ "doors_by_distance": {
+  "0": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 1.0
+  },
+  "1": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 1.0
+  },
+  "2": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 1.0
+  },
+  "3": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 2.0
+  },
+  "4": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 4.0
+  },
+  "5": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 3.0
+  },
+  "6": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 4.0
+  },
+  "7": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 24.0
+  },
+  "8": {
+   "median": 1.0,
+   "min": 1.0,
+   "max": 20.0
+  },
+  "9": {
+   "median": 2.0,
+   "min": 1.0,
+   "max": 28.0
+  },
+  "10": {
+   "median": 11.0,
+   "min": 1.0,
+   "max": 96.0
+  },
+  "11": {
+   "median": 55.0,
+   "min": 16.0,
+   "max": 196.0
+  }
+ },
+ "unique_share": 0.33913329849543844,
+ "compass": [
+  {
+   "floor": "20 KB + inverse",
+   "order": "move order",
+   "mean_lookups": 1787.286,
+   "mean_last_round": 969.48,
+   "last_share": 0.5424313736022103,
+   "corr_log_last_round_vs_log_doors": 0.2534334724195571
+  },
+  {
+   "floor": "20 KB + inverse",
+   "order": "floor first",
+   "mean_lookups": 1791.06,
+   "mean_last_round": 973.254,
+   "last_share": 0.5433955311379853,
+   "corr_log_last_round_vs_log_doors": 0.24879038591139988
+  },
+  {
+   "floor": "20 KB + inverse",
+   "order": "network D first",
+   "mean_lookups": 1781.778,
+   "mean_last_round": 963.972,
+   "last_share": 0.5410168943605769,
+   "corr_log_last_round_vs_log_doors": 0.2577566061708807
+  },
+  {
+   "floor": "20 KB + inverse",
+   "order": "truth first (best possible)",
+   "mean_lookups": 873.294,
+   "mean_last_round": 55.488,
+   "last_share": 0.06353873953101705,
+   "corr_log_last_round_vs_log_doors": 0.5910755955545004
+  },
+  {
+   "floor": "400 KB + inverse",
+   "order": "move order",
+   "mean_lookups": 106.998,
+   "mean_last_round": 82.092,
+   "last_share": 0.7672292940054954,
+   "corr_log_last_round_vs_log_doors": 0.3178876989249769
+  },
+  {
+   "floor": "400 KB + inverse",
+   "order": "floor first",
+   "mean_lookups": 113.154,
+   "mean_last_round": 88.248,
+   "last_share": 0.7798928893366562,
+   "corr_log_last_round_vs_log_doors": 0.3862576166315801
+  },
+  {
+   "floor": "400 KB + inverse",
+   "order": "network D first",
+   "mean_lookups": 108.102,
+   "mean_last_round": 83.196,
+   "last_share": 0.7696064827662763,
+   "corr_log_last_round_vs_log_doors": 0.3519249534167713
+  },
+  {
+   "floor": "400 KB + inverse",
+   "order": "truth first (best possible)",
+   "mean_lookups": 80.394,
+   "mean_last_round": 55.488,
+   "last_share": 0.6902007612508396,
+   "corr_log_last_round_vs_log_doors": 0.5910755955545004
+  }
+ ]
+}
