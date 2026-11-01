@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'preact/hooks'
 import { route } from '../app/router.ts'
 import { SolveTimer } from '../daily/SolveTimer.tsx'
 import { HelpHeading } from '../help/Help.tsx'
+import { LensBar, LensView } from '../lenses/LensBar.tsx'
+import { findLens } from '../lenses/registry.ts'
+import { activeLens } from '../lenses/state.ts'
 import { SolverStage } from '../solver/SolverStage.tsx'
 import { createPlayer, history, locked, newScramble, notice, player, reset, undo } from './state.ts'
 
@@ -27,10 +30,14 @@ export function CubeStage() {
       </section>
     )
   }
+  // On Play, a lens other than the cube replaces the 3D view; the player stays mounted, hidden.
+  const lensOn = route.value === 'play' && findLens(activeLens.value).View !== null
   return (
     <section class="stage" aria-label="Cube">
-      <div ref={host} class="stage-player" />
-      <span class="stage-hint">{ready ? notice.value || 'Drag to rotate the view' : 'Loading cube…'}</span>
+      {route.value === 'play' && <LensBar />}
+      <div ref={host} class="stage-player" hidden={lensOn} />
+      {lensOn && <LensView />}
+      {!lensOn && <span class="stage-hint">{ready ? notice.value || 'Drag to rotate the view' : 'Loading cube…'}</span>}
       <SolveTimer />
       <div class="stage-help">
         <HelpHeading topic="stage" placement="overlay" label="the cube">

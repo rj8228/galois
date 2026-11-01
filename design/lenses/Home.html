@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home lens</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;family=IBM+Plex+Sans:wght@400;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+.chip{font:500 12px/1 'IBM Plex Mono',monospace;color:#a9b3a8;background:transparent;border:1px solid #3d4d45;border-radius:999px;padding:0 13px;height:34px;white-space:nowrap;flex:none}
+.chip.on{background:#f2d16b;color:#1e2a25;border-color:#f2d16b}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:#a9b3a8;font:12px 'IBM Plex Sans',sans-serif;min-height:52px;justify-content:center}
+.tab.on{color:#f2d16b}
+.lp{display:flex;align-items:center;gap:8px;font-size:14px}
+.sw{width:22px;height:4px;border-radius:2px;flex:none}
+.m{font:500 13px/1 'IBM Plex Mono',monospace}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1e2a25; color: #ecebe3; font-family: 'IBM Plex Sans', sans-serif; display: flex; flex-direction: column">
+<div style="padding: 16px 16px 6px; display: flex; flex-direction: column; gap: 2px">
+<div style="font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; color: #a9b3a8">PLAY · LENS</div>
+<h1 style="margin: 0; font: 700 30px/1.15 Kalam, cursive; color: #ecebe3">Home</h1>
+</div>
+<div style="display: flex; gap: 6px; padding: 6px 16px 10px; overflow: hidden">
+<button class="chip" type="button">Progress</button>
+<button class="chip" type="button">Top</button>
+<button class="chip on" type="button" aria-pressed="true">Home</button>
+<button class="chip" type="button">Graph</button>
+<button class="chip" type="button">Far</button>
+</div>
+<div style="margin: 0 16px; display: flex; align-items: center; gap: 8px; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 8px 10px">
+<span style="flex: 1; font-size: 14px">Arrow = from where it sits to where it belongs</span>
+</div>
+<div style="display: flex; justify-content: center; padding: 16px 16px 0">
+<svg width="358" height="266" viewBox="0 0 358 266" role="img" aria-label="Top layer from above: corners swap across both diagonals, and three edges form a loop from right to left to back"><defs><marker id="hc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ff8f7a"/></marker><marker id="hb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6fd3e8"/></marker></defs><g transform="translate(36 0)"><rect x="50" y="33" width="58" height="58" rx="8" fill="#33433b"/><rect x="114" y="33" width="58" height="58" rx="8" fill="#33433b"/><rect x="178" y="33" width="58" height="58" rx="8" fill="#33433b"/><rect x="50" y="97" width="58" height="58" rx="8" fill="#33433b"/><rect x="114" y="97" width="58" height="58" rx="8" fill="#33433b"/><rect x="178" y="97" width="58" height="58" rx="8" fill="#33433b"/><rect x="50" y="161" width="58" height="58" rx="8" fill="#33433b"/><rect x="114" y="161" width="58" height="58" rx="8" fill="#2c4a36" stroke="#8fd49a" stroke-width="2"/><rect x="178" y="161" width="58" height="58" rx="8" fill="#33433b"/><text x="79" y="46" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">UBL</text><text x="143" y="46" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">UB</text><text x="207" y="46" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">URB</text><text x="79" y="110" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">UL</text><text x="207" y="110" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">UR</text><text x="79" y="213" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">ULF</text><text x="143" y="213" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#8fd49a">UF ✓</text><text x="207" y="213" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">UFR</text><text x="143" y="260" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#a9b3a8">FRONT</text><path d="M197.1 180.1 Q143 126 88.9 71.9" fill="none" stroke="#6fd3e8" stroke-width="3.5" stroke-linecap="round" marker-end="url(#hb)" marker-start="url(#hb)"/><path d="M197.1 71.9 Q143 126 88.9 180.1" fill="none" stroke="#6fd3e8" stroke-width="3.5" stroke-linecap="round" marker-end="url(#hb)" marker-start="url(#hb)"/><path d="M193 126 Q143 186 93 126" fill="none" stroke="#ff8f7a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#hc)"/><path d="M88.9 116.1 Q120.9 103.9 133.1 71.9" fill="none" stroke="#ff8f7a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#hc)"/><path d="M152.9 71.9 Q165.1 103.9 197.1 116.1" fill="none" stroke="#ff8f7a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#hc)"/></g></svg>
+</div>
+<div style="margin: 10px 16px 0; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<div class="lp"><span class="sw" style="background: #6fd3e8"></span><span>Corners: two swaps, <span class="m">UFR ↔ UBL</span> and <span class="m">URB ↔ ULF</span></span></div>
+<div class="lp"><span class="sw" style="background: #ff8f7a"></span><span>Edges: one loop, <span class="m">UR → UL → UB</span></span></div>
+<div class="lp"><span class="sw" style="background: #8fd49a"></span><span>Already home: <span class="m">UF</span> and both lower layers</span></div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #a9b3a8">Solving is undoing loops. Short loops, few loops: you are close.</p>
+</div>
+<div style="margin: 10px 16px 0; background: #26342e; border: 1px solid #f2d16b; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; color: #f2d16b">UNDOES ALL OF IT</span><span style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #a9b3a8">7 MOVES</span></div>
+<span style="font: 600 18px/1.2 'IBM Plex Mono', monospace">R U2 R′ U′ R U′ R′</span>
+<button type="button" style="min-height: 44px; border-radius: 10px; border: 0; background: #f2d16b; color: #1e2a25; font: 600 14px/1 'IBM Plex Sans', sans-serif">Play it on the cube</button>
+</div>
+<div style="flex: 1"></div>
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #3d4d45; padding: 4px 0 10px">
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>Learn</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7.5 14h9"/></svg>Labs</button>
+<button class="tab on" type="button" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8l7-4 7 4v8l-7 4-7-4zM5 8l7 4 7-4M12 12v8"/></svg>Play</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4M9 14h2v2H9z"/></svg>Daily</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12M15 15l5 5"/></svg>Decode</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tree lens</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;family=IBM+Plex+Sans:wght@400;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+.chip{font:500 12px/1 'IBM Plex Mono',monospace;color:#a9b3a8;background:transparent;border:1px solid #3d4d45;border-radius:999px;padding:0 13px;height:34px;white-space:nowrap;flex:none}
+.chip.on{background:#f2d16b;color:#1e2a25;border-color:#f2d16b}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:#a9b3a8;font:12px 'IBM Plex Sans',sans-serif;min-height:52px;justify-content:center}
+.tab.on{color:#f2d16b}
+.mv{display:flex;flex-direction:column;align-items:center;gap:4px}
+.mv b{font:600 16px/1 'IBM Plex Mono',monospace;color:#1e2a25;border-radius:7px;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+.mv span{font:500 10px/1 'IBM Plex Mono',monospace;color:#a9b3a8}
+.lbl{font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em}
+.hop{font:500 12px/1 'IBM Plex Mono',monospace;color:#ecebe3;border:1px solid #6fd3e8;border-radius:6px;padding:6px 7px}
+.k{font-size:12px;color:#a9b3a8}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1e2a25; color: #ecebe3; font-family: 'IBM Plex Sans', sans-serif; display: flex; flex-direction: column">
+<div style="padding: 16px 16px 6px; display: flex; flex-direction: column; gap: 2px">
+<div style="font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; color: #a9b3a8">DECODE · NIKLAS</div>
+<h1 style="margin: 0; font: 700 30px/1.15 Kalam, cursive; color: #ecebe3">Tree</h1>
+</div>
+<div style="display: flex; gap: 6px; padding: 6px 16px 10px; overflow: hidden">
+<button class="chip" type="button">Rings</button>
+<button class="chip" type="button">Path</button>
+<button class="chip on" type="button" aria-pressed="true">Tree</button>
+<button class="chip" type="button">Progress</button>
+<button class="chip" type="button">Top</button>
+<button class="chip" type="button">Home</button>
+</div>
+<div style="margin: 0 16px; display: flex; flex-direction: column; gap: 8px; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 12px 10px">
+<div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px">
+<div class="mv"><b style="background: #6fd3e8">R</b><span>X</span></div>
+<div class="mv"><b style="background: #ffc2b6">U′</b><span>A</span></div>
+<div class="mv"><b style="background: #ff8f7a">L′</b><span>B</span></div>
+<div class="mv"><b style="background: #ffc2b6">U</b><span>A′</span></div>
+<div class="mv"><b style="background: #26342e; color: #6fd3e8; border: 2px solid #6fd3e8; box-sizing: border-box">R′</b><span>X′</span></div>
+<div class="mv"><b style="background: #26342e; color: #ffc2b6; border: 2px solid #ffc2b6; box-sizing: border-box">U′</b><span>A</span></div>
+<div class="mv"><b style="background: #26342e; color: #ff8f7a; border: 2px solid #ff8f7a; box-sizing: border-box">L</b><span>B′</span></div>
+<div class="mv"><b style="background: #26342e; color: #ffc2b6; border: 2px solid #ffc2b6; box-sizing: border-box">U</b><span>A′</span></div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 3fr 1fr 3fr; gap: 4px; font: 500 10px/1 'IBM Plex Mono', monospace; color: #a9b3a8; text-align: center">
+<span style="border-top: 2px solid #6fd3e8; padding-top: 5px">X</span>
+<span style="border-top: 2px solid #ff8f7a; padding-top: 5px">Y</span>
+<span style="border-top: 2px dashed #6fd3e8; padding-top: 5px">X undone</span>
+<span style="border-top: 2px dashed #ff8f7a; padding-top: 5px">Y undone</span>
+</div>
+</div>
+<div style="margin: 14px 16px 0; display: flex; flex-direction: column; gap: 8px">
+<div style="border: 2px solid #f2d16b; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span class="lbl" style="color: #f2d16b">COMMUTATOR</span><span style="font: 600 15px/1 'IBM Plex Mono', monospace">[R, [U′: L′]]</span></div>
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px">
+<div style="border: 2px solid #6fd3e8; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 6px">
+<span class="lbl" style="color: #6fd3e8">X</span>
+<span style="font: 600 22px/1 'IBM Plex Mono', monospace">R</span>
+<span class="k">stir one side</span>
+</div>
+<div style="border: 2px solid #ff8f7a; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between"><span class="lbl" style="color: #ff8f7a">Y · CONJUGATE</span><span style="font: 500 12px/1 'IBM Plex Mono', monospace">[U′: L′]</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+<div style="background: #26342e; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 4px"><span class="lbl" style="color: #ffc2b6">A · SET UP</span><span style="font: 600 18px/1 'IBM Plex Mono', monospace">U′</span></div>
+<div style="background: #26342e; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 4px"><span class="lbl" style="color: #ff8f7a">B · DO</span><span style="font: 600 18px/1 'IBM Plex Mono', monospace">L′</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin: 14px 16px 0; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 14px; line-height: 1.45">X and Y share one corner slot, so undoing them leaves only that overlap stirred. Eight moves, three corners touched, nothing else.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center">
+<span class="hop">UFR</span><span class="k">→</span><span class="hop">URB</span><span class="k">→</span><span class="hop">UBL</span><span class="k">→ back</span>
+<span style="flex: 1"></span>
+<span style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #1e2a25; background: #8fd49a; border-radius: 6px; padding: 6px 8px">ORDER 3</span>
+</div>
+<div style="font: 500 12px/1.4 'IBM Plex Mono', monospace; color: #a9b3a8">TAP A BOX · the cube plays just that part</div>
+</div>
+<div style="flex: 1"></div>
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #3d4d45; padding: 4px 0 10px">
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>Learn</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7.5 14h9"/></svg>Labs</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8l7-4 7 4v8l-7 4-7-4zM5 8l7 4 7-4M12 12v8"/></svg>Play</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4M9 14h2v2H9z"/></svg>Daily</button>
+<button class="tab on" type="button" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12M15 15l5 5"/></svg>Decode</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

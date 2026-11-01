@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Path lens</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;family=IBM+Plex+Sans:wght@400;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+.chip{font:500 12px/1 'IBM Plex Mono',monospace;color:#a9b3a8;background:transparent;border:1px solid #3d4d45;border-radius:999px;padding:0 13px;height:34px;white-space:nowrap;flex:none}
+.chip.on{background:#f2d16b;color:#1e2a25;border-color:#f2d16b}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:#a9b3a8;font:12px 'IBM Plex Sans',sans-serif;min-height:52px;justify-content:center}
+.tab.on{color:#f2d16b}
+.hop{font:500 12px/1 'IBM Plex Mono',monospace;color:#ecebe3;border:1px solid #6fd3e8;border-radius:6px;padding:6px 7px}
+.k{font-size:12px;color:#a9b3a8}
+.v{font:700 26px/1 Kalam,cursive;color:#ecebe3}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1e2a25; color: #ecebe3; font-family: 'IBM Plex Sans', sans-serif; display: flex; flex-direction: column">
+<div style="padding: 16px 16px 6px; display: flex; flex-direction: column; gap: 2px">
+<div style="font: 500 11px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; color: #a9b3a8">PLAY · LENS</div>
+<h1 style="margin: 0; font: 700 30px/1.15 Kalam, cursive; color: #ecebe3">Path</h1>
+</div>
+<div style="display: flex; gap: 6px; padding: 6px 16px 10px; overflow: hidden">
+<button class="chip" type="button">Net</button>
+<button class="chip" type="button">Rings</button>
+<button class="chip on" type="button" aria-pressed="true">Path</button>
+<button class="chip" type="button">Tree</button>
+<button class="chip" type="button">Progress</button>
+<button class="chip" type="button">Top</button>
+</div>
+<div style="margin: 0 16px; display: flex; align-items: center; gap: 8px; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 8px 10px">
+<span style="flex: 1; font: 500 17px/1 'IBM Plex Mono', monospace">R U <span style="color: #a9b3a8">↻ repeat</span></span>
+<span style="font: 500 11px/1 'IBM Plex Mono', monospace; color: #1e2a25; background: #6fd3e8; border-radius: 6px; padding: 6px 8px">TRACKING URB</span>
+</div>
+<div style="display: flex; justify-content: center; padding: 8px 16px 0">
+<svg width="358" height="340" viewBox="0 0 358 340" role="img" aria-label="The corner piece that starts at URB visits DBR, DRF, ULF and UBL, then returns to URB"><defs><marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6fd3e8"/></marker></defs><circle cx="179" cy="170" r="118" fill="none" stroke="#3d4d45" stroke-width="1" stroke-dasharray="2 5"/><path d="M201.2 61.2 Q225.7 57.2 240.3 77.4" fill="none" stroke="#6fd3e8" stroke-width="2.6" marker-end="url(#ab)"/><circle cx="234.1" cy="37.1" r="10" fill="#6fd3e8"/><text x="234.1" y="41.1" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1e2a25">1</text><path d="M271.6 108.7 Q291.8 123.3 287.8 147.8" fill="none" stroke="#6fd3e8" stroke-width="2.6" marker-end="url(#ab)"/><circle cx="311.9" cy="114.9" r="10" fill="#6fd3e8"/><text x="311.9" y="118.9" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1e2a25">2</text><path d="M287.8 192.2 Q291.8 216.7 271.6 231.3" fill="none" stroke="#6fd3e8" stroke-width="2.6" marker-end="url(#ab)"/><circle cx="311.9" cy="225.1" r="10" fill="#6fd3e8"/><text x="311.9" y="229.1" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1e2a25">3</text><path d="M240.3 262.6 Q225.7 282.8 201.2 278.8" fill="none" stroke="#6fd3e8" stroke-width="2.6" marker-end="url(#ab)"/><circle cx="234.1" cy="302.9" r="10" fill="#6fd3e8"/><text x="234.1" y="306.9" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1e2a25">4</text><path d="M179 264 Q179 170 179 76" fill="none" stroke="#6fd3e8" stroke-width="2.6" marker-end="url(#ab)"/><circle cx="179" cy="170" r="10" fill="#6fd3e8"/><text x="179" y="174" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1e2a25">5</text><circle cx="179" cy="52" r="20" fill="#26342e" stroke="#f2d16b" stroke-width="2.5"/><text x="179" y="55.4" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ecebe3">URB</text><circle cx="262.4" cy="86.6" r="20" fill="#26342e" stroke="#6fd3e8" stroke-width="2.5"/><text x="262.4" y="90" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ecebe3">DBR</text><circle cx="297" cy="170" r="20" fill="#26342e" stroke="#6fd3e8" stroke-width="2.5"/><text x="297" y="173.4" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ecebe3">DRF</text><circle cx="262.4" cy="253.4" r="20" fill="#26342e" stroke="#6fd3e8" stroke-width="2.5"/><text x="262.4" y="256.8" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ecebe3">ULF</text><circle cx="179" cy="288" r="20" fill="#26342e" stroke="#6fd3e8" stroke-width="2.5"/><text x="179" y="291.4" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ecebe3">UBL</text><circle cx="95.6" cy="253.4" r="20" fill="#1e2a25" stroke="#3d4d45" stroke-width="1.5"/><text x="95.6" y="256.8" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#6f7c73">UFR</text><circle cx="61" cy="170" r="20" fill="#1e2a25" stroke="#3d4d45" stroke-width="1.5"/><text x="61" y="173.4" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#6f7c73">DFL</text><circle cx="95.6" cy="86.6" r="20" fill="#1e2a25" stroke="#3d4d45" stroke-width="1.5"/><text x="95.6" y="90" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#6f7c73">DLB</text><text x="130" y="140" text-anchor="middle" font-family="Kalam" font-size="26" font-weight="700" fill="#f2d16b">5 hops</text><text x="130" y="158" text-anchor="middle" font-family="IBM Plex Sans" font-size="12" fill="#a9b3a8">home, but turned</text></svg>
+</div>
+<div style="margin: 6px 16px 0; background: #26342e; border: 1px solid #3d4d45; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 14px; line-height: 1.45">Follow one piece while the sequence repeats. It visits 5 slots and lands home turned a third. Three laps put it back straight.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center">
+<span class="hop" style="border-color: #f2d16b">URB</span><span class="k">→</span><span class="hop">DBR</span><span class="k">→</span><span class="hop">DRF</span><span class="k">→</span><span class="hop">ULF</span><span class="k">→</span><span class="hop">UBL</span><span class="k">→</span><span class="hop" style="border-color: #f2d16b">URB ↻</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 3px"><span class="v" style="color: #6fd3e8">5</span><span class="k">slots per lap</span></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><span class="v" style="color: #f2d16b">× 3</span><span class="k">laps to untwist</span></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><span class="v">15</span><span class="k">repeats of R U</span></div>
+</div>
+</div>
+<div style="flex: 1"></div>
+<nav aria-label="Sections" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #3d4d45; padding: 4px 0 10px">
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>Learn</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7.5 14h9"/></svg>Labs</button>
+<button class="tab on" type="button" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8l7-4 7 4v8l-7 4-7-4zM5 8l7 4 7-4M12 12v8"/></svg>Play</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4M9 14h2v2H9z"/></svg>Daily</button>
+<button class="tab" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12a6 6 0 1 0 0-12M15 15l5 5"/></svg>Decode</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

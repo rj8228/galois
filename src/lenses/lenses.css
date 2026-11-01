@@ -1,0 +1,48 @@
+/* Lens bar and the lens view area on the Play stage. Each lens keeps its own styles in its own file. */
+.lens-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.lens-bar::-webkit-scrollbar {
+  display: none;
+}
+.lens-chip {
+  flex: none;
+  min-height: 34px;
+  padding: 0 13px;
+  border: var(--border) solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 0.75rem / 1 var(--mono);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.lens-chip-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.lens-view {
+  position: absolute;
+  inset: 50px 0 0;
+  overflow: auto;
+  padding: 0 12px 12px;
+}
+/* With a lens bar, the stage's hint moves below it. */
+.stage:has(.lens-bar) .stage-hint {
+  top: 54px;
+}
+/* A lens needs more room than the 3D cube: the stage grows while one is showing. */
+.stage:has(.lens-view) {
+  height: 64svh;
+  min-height: 420px;
+}
