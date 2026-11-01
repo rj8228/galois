@@ -4,6 +4,7 @@ import { href, routeParam } from '../app/router.ts'
 import { playWithFocus } from '../cube/focus.ts'
 import { sequenceText } from '../cube/SequenceBar.tsx'
 import { algOf, BREAKDOWNS, type Breakdown, breakdownById } from '../decode/breakdowns.ts'
+import { TreeView } from '../decode/TreeView.tsx'
 import { HelpHeading } from '../help/Help.tsx'
 import { lessonById } from '../learn/lessons.tsx'
 
@@ -62,6 +63,7 @@ function BreakdownView({ b }: { b: Breakdown }) {
           .
         </p>
       </div>
+      {b.tree && <TreeView b={b} />}
       <AnalysisPanel />
     </div>
   )

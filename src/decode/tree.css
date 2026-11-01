@@ -1,0 +1,181 @@
+/* Decode's Tree: the algorithm's moves by part, then its structure as nested, playable boxes.
+   X and Y take the timeline's colours (accent and good); undone parts are outlined, not filled. */
+.tree h3 {
+  margin: 0;
+}
+.tree-row {
+  display: grid;
+  gap: 4px 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tree-tile {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+.tree-tile-move {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 44px;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  border: 2px solid var(--tone);
+  background: var(--tone);
+  color: var(--bg);
+  font: 600 0.95rem / 1 var(--mono);
+}
+.tree-undone .tree-tile-move {
+  background: transparent;
+  color: var(--ink);
+}
+.tree-tile-part {
+  font: 0.72rem / 1 var(--mono);
+  color: var(--muted);
+}
+.tree-half-x,
+.tree-half-a {
+  --tone: var(--accent);
+}
+.tree-half-y,
+.tree-half-b {
+  --tone: var(--good);
+}
+.tree-half-top {
+  --tone: var(--muted);
+}
+.tree-seg {
+  border-top: 3px solid var(--tone);
+  padding-top: 4px;
+  text-align: center;
+  font: 0.72rem / 1.2 var(--mono);
+  color: var(--muted);
+}
+.tree-seg.tree-undone {
+  border-top-style: dashed;
+}
+.tree-box {
+  border-radius: var(--radius);
+  border: 2px solid var(--line);
+  min-width: 0;
+}
+.tree-node {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+}
+.tree-top {
+  border-color: var(--ink);
+}
+.tree-x {
+  border-color: var(--accent);
+}
+.tree-y {
+  border-color: var(--good);
+}
+.tree-a,
+.tree-b {
+  border-color: var(--line);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.tree-head,
+.tree-leaf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 8px;
+  min-height: 44px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.tree-leaf {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+}
+.tree-leaf.tree-x {
+  border-color: var(--accent);
+}
+.tree-leaf.tree-y {
+  border-color: var(--good);
+}
+.tree-head:hover,
+.tree-leaf:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.tree-head:focus-visible,
+.tree-leaf:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.tree-label {
+  font: 500 0.72rem / 1.2 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tree-text {
+  font: 600 1rem / 1.2 var(--mono);
+  overflow-wrap: anywhere;
+}
+.tree-moves {
+  font: 600 1.4rem / 1.1 var(--mono);
+}
+.tree-kids {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+.tree-cycle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tree-cycle li {
+  display: flex;
+  align-items: center;
+}
+.tree-cycle li:not(:last-child)::after {
+  content: "→";
+  margin-left: 4px;
+  color: var(--muted);
+}
+.tree-chip {
+  font: 500 0.85rem / 1 var(--mono);
+  padding: 7px 8px;
+  border: 1.5px solid var(--good);
+  border-radius: var(--radius);
+}
+/* The order tag, as the lenses draw it. */
+.tree .lens-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  background: var(--good);
+  color: var(--bg);
+}
+.tree .lens-foot {
+  margin: 0;
+  font: 0.78rem / 1.4 var(--mono);
+  color: var(--muted);
+}

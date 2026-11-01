@@ -1,0 +1,39 @@
+/* Net lens: the cube unfolded flat. Sticker colours are the cube's own, the same in every look. */
+.net {
+  max-width: 420px;
+}
+.net-sticker {
+  stroke: color-mix(in srgb, var(--bg) 40%, transparent);
+  stroke-width: 0.5;
+}
+.face-U {
+  fill: #f5f5f0;
+}
+.face-L {
+  fill: #f08a24;
+}
+.face-F {
+  fill: #3fa34d;
+}
+.face-R {
+  fill: #e04a3a;
+}
+.face-B {
+  fill: #3b6fd6;
+}
+.face-D {
+  fill: #ffd43b;
+}
+.net-letter {
+  font: 600 11px var(--mono);
+  fill: #1e2a25;
+  opacity: 0.6;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.net-outline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
