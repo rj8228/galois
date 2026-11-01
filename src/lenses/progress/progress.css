@@ -52,7 +52,7 @@
   color: var(--accent);
 }
 .pg-count-done {
-  color: var(--good);
+  color: var(--good-text);
 }
 .pg-dots {
   display: flex;
@@ -118,8 +118,8 @@
   white-space: nowrap;
 }
 .pg-step-done {
-  border-color: var(--good);
-  color: var(--good);
+  border-color: var(--good-text);
+  color: var(--good-text);
 }
 .pg-step-next {
   background: var(--accent);

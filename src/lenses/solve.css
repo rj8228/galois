@@ -1,5 +1,7 @@
 /* Shared by the Solve lenses (Progress, Top, Home). Each lens has its own file for the rest. */
 .solve-lens {
+  /* --good, nudged toward the ink so small text keeps 4.5:1 in every look (Bauhaus's green alone is 4.4). */
+  --good-text: color-mix(in srgb, var(--good) 80%, var(--ink));
   display: grid;
   gap: 12px;
   max-width: 560px;

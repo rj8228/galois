@@ -1,0 +1,115 @@
+.far-widget {
+  --good-text: color-mix(in srgb, var(--good) 80%, var(--ink));
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.far-svg {
+  display: block;
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  margin: 0 auto;
+}
+.far-ring {
+  stroke: var(--line);
+}
+.far-ring-early {
+  stroke: var(--good);
+}
+.far-ring-edge {
+  stroke: var(--accent);
+}
+.far-centre {
+  fill: var(--accent);
+}
+.far-label,
+.far-label-edge,
+.far-label-muted {
+  font-family: var(--mono);
+}
+.far-label {
+  fill: var(--good-text);
+}
+.far-label-edge {
+  fill: var(--accent);
+}
+.far-label-muted {
+  fill: var(--muted);
+}
+.far-card {
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: grid;
+  gap: 10px;
+}
+.far-text,
+.far-note {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.far-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.far-note a {
+  color: var(--accent);
+}
+.far-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 500 0.8125rem / 1.2 var(--mono);
+}
+.far-table th,
+.far-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: baseline;
+}
+.far-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-right: 10px;
+}
+.far-table td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.far-table tr:last-child th,
+.far-table tr:last-child td {
+  border-bottom: 0;
+}
+.far-table .far-edge {
+  color: var(--accent);
+}
+.far-est {
+  color: var(--muted);
+  font-size: 0.6875rem;
+}
+.far-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  border: var(--border) solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font: 600 0.875rem / 1.2 var(--body);
+  text-decoration: none;
+  cursor: pointer;
+}
+.far-btn-link {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.far-est-block {
+  display: block;
+  margin-top: 3px;
+}

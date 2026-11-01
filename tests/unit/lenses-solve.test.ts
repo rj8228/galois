@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
+import { formatCount, RINGS, TOTAL } from '../../src/learn/far/far.ts'
+import { CAP, explore, loopOrder, productOrder } from '../../src/learn/graph/graph.ts'
 import { homeOf, loopText } from '../../src/lenses/home/home.ts'
 import { progressOf } from '../../src/lenses/progress/progress.ts'
 import { TOP_CASES, topCase, topView, twists } from '../../src/lenses/top/top.ts'
-import { applyMoves, invertMoves, MOVE_NAMES, parseMoves, SOLVED } from '../../src/solver3/cube3.ts'
+import { applyMoves, invertMoves, keyOf, MOVE_NAMES, parseMoves, SOLVED } from '../../src/solver3/cube3.ts'
 
 const at = (text: string) => applyMoves(SOLVED, parseMoves(text) ?? [])
 /** The case an algorithm solves: the position its inverse makes. */
@@ -111,5 +113,83 @@ describe('Home', () => {
   it('says when the lower layers are not solved', () => {
     expect(homeOf(at('R')).lowerSolved).toBe(false)
     expect(homeOf(SOLVED).arrows).toEqual([])
+  })
+})
+
+describe('Graph', () => {
+  it('R2 and U2 give exactly 12 positions on one loop, furthest 6 away', () => {
+    const g = explore(['R2', 'U2'])
+    expect(g.nodes).toHaveLength(12)
+    expect(g.furthest).toBe(6)
+    expect(g.capped).toBe(false)
+    expect(g.loop).toBe(true)
+    expect(loopOrder(g)).toHaveLength(12)
+    expect(productOrder(['R2', 'U2'])).toBe(6)
+  })
+
+  it('every node path really reaches a position at that distance', () => {
+    const g = explore(['R2', 'U2', 'F2'])
+    const keys = new Set(g.nodes.map((n) => keyOf(applyMoves(SOLVED, n.path))))
+    expect(keys.size).toBe(g.nodes.length)
+    for (const n of g.nodes) expect(n.path).toHaveLength(n.dist)
+  })
+
+  it('the cap holds for a big group', () => {
+    const g = explore(['R', 'U'])
+    expect(g.capped).toBe(true)
+    expect(g.nodes).toHaveLength(CAP)
+    expect(g.loop).toBe(false)
+    expect(productOrder(['R', 'U'])).toBe(105)
+  })
+
+  it('a single quarter turn is a loop of 4', () => {
+    const g = explore(['R'])
+    expect(g.nodes).toHaveLength(4)
+    expect(g.loop).toBe(true)
+  })
+})
+
+describe('Far', () => {
+  it('has 21 rings, 0–15 exact and 16–20 estimated, starting 1, 18, 243, 3,240, 43,239, 574,908', () => {
+    expect(RINGS).toHaveLength(21)
+    expect(RINGS.filter((r) => r.exact).map((r) => r.distance)).toEqual([...Array(16).keys()])
+    expect(RINGS.slice(0, 6).map((r) => Number(r.count))).toEqual([1, 18, 243, 3240, 43239, 574908])
+  })
+
+  it('the exact rings and the estimates add up to every position', () => {
+    const exact = RINGS.filter((r) => r.exact).reduce((s, r) => s + r.count, 0n)
+    const estimated = RINGS.filter((r) => !r.exact).reduce((s, r) => s + r.count, 0n)
+    expect(exact < TOTAL).toBe(true)
+    // The estimates are given to two figures, so they cover what the exact rings leave to within 2%.
+    const rest = TOTAL - exact
+    const diff = rest > estimated ? rest - estimated : estimated - rest
+    expect(diff * 50n < rest).toBe(true)
+    expect(TOTAL).toBe(43252003274489856000n)
+  })
+
+  it('the first four rings match a breadth-first search', () => {
+    const seen = new Set([keyOf(SOLVED)])
+    let frontier = [SOLVED]
+    for (let d = 1; d <= 4; d++) {
+      const next = []
+      for (const c of frontier)
+        for (const m of MOVE_NAMES) {
+          const n = applyMoves(c, [m])
+          const k = keyOf(n)
+          if (!seen.has(k)) {
+            seen.add(k)
+            next.push(n)
+          }
+        }
+      expect(BigInt(next.length)).toBe(RINGS[d].count)
+      frontier = next
+    }
+  })
+
+  it('labels estimates as estimates', () => {
+    expect(formatCount(RINGS[5])).toBe('574,908')
+    expect(formatCount(RINGS[16])).toBe('≈ 1.1 × 10¹⁸')
+    expect(formatCount(RINGS[18])).toBe('≈ 2.9 × 10¹⁹')
+    expect(formatCount(RINGS[20])).toBe('≈ 490 million')
   })
 })

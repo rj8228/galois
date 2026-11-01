@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { describe, expect, it } from 'vitest'
 import { CUBE_LENS, findLens, LENSES } from '../../src/lenses/registry.ts'
 

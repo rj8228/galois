@@ -13,7 +13,7 @@
   font-family: var(--mono);
 }
 .hm-label-home {
-  fill: var(--good);
+  fill: var(--good-text);
 }
 .hm-line {
   display: flex;
