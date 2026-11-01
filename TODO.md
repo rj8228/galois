@@ -2,7 +2,7 @@
 
 The finish line for Galois, gathered from the build plan, the focus plan, the discovery doc and `learnings/`. Galois is one of three focus projects (with Prayog and the DSA gym), so v1.0 is scoped to be finished, not to cover every idea. Anything not needed for v1.0 is in **Parked** at the bottom.
 
-**Now:** v0.6.2 live (Phases 0–4 and 6, lessons 1–12, Labs, Decode). **Next (decided Oct 8):** A1 (focus mode from any position), then Phase 8 after a design discussion, then the wrap-up. The rest of Phase 7 is parked.
+**Now:** v0.6.2 live: Phases 0–4 and 6, lessons 1–12, Labs, Decode, the 2×2 Solver and the Paper. **Next (decided Nov 1):** the 3×3 Solver in the app, on the speed lab's web engine, which proves any scramble optimal in a browser. Then the bots, the God's number chapter and the wrap-up. A1 is still open. The rest of Phase 7 is parked.
 
 **Done means** a stranger can use it, and you can defend every design choice for 45 minutes.
 
@@ -50,13 +50,42 @@ Phase 8 and the solver-bot section of the discovery doc are combined here, so on
 
 - [x] 2×2 solver you can watch (Solver section): pick any position, floors from smaller puzzles (weak, medium, strong), IDA* that proves the answer round by round, rings of all 3,674,160 positions, solution played on a 2×2. Unit tests check every floor on every position and the solutions against cubing.js
 - [x] Paper section: the framework (ceiling, floor, prover) written up like a research paper on the 2×2, with the lab's results, two short proofs, figures with hover readouts, and a worked example that opens in the Solver. Loads only when opened
+- [x] Paper, Figure 7: God's number for the 3×3, closed in from both sides (#19)
+- [x] 3×3 engine (`src/solver3`): six coordinate floors, IDA* prover, cubing.js ceiling, a web worker (#15). Proves scrambles up to about 12 moves in under a second; no UI yet
+- [x] 3×3 floor lab (`lab/3x3`, #18): a 12 MB phone set and a 77 MB desktop set. A random state is proven in 11.5 min on one thread
+- [x] Speed lab, rounds 1–3 (`lab/speed`, #30, #34, #39): a native solver and a browser engine, both verified against `lab/3x3`
+  - the ceiling race: a two-phase solver finds the solution while the prover only proves
+  - downhill masks: every round 1.46× faster, in 331 MB
+  - the combined solver on 4 threads: random states in a mean of 177 s and a median of 72 s; the two `lab/3x3` never finished are proven to need 19
+  - the web engine: one shared table copy, a ceiling worker, one stop flag, isolation from a service worker
+- [ ] **Next: the 3×3 Solver in the app** (the finale, GN-1), on the web engine:
+  - [ ] Bring `lab/speed/webengine` into `src/solver3/`:
+    - the wasm core, the shared pool and the ceiling worker, with T7's help rule (help once ceiling ≤ bound + 1)
+    - IndexedDB tables, built on first use with progress (about 25 s, once)
+    - a fallback to per-worker copies without isolation
+  - [ ] Cross-origin isolation from the app's own service worker (vite-plugin-pwa `injectManifest`, COOP and COEP added to every response, as T8 describes); check every cross-origin load
+  - [ ] UI: paste, type or generate a scramble, then "Prove optimal"
+    - each round shown as it is proven, and the best solution so far
+    - the certificate when the two meet, and the solution played on a 3×3
+  - [ ] Phones: the phone tables and a time budget; when the proof doesn't finish, show "needs at least N moves; best found M"
+  - [ ] Tests:
+    - the engine against `lab/3x3`'s lengths and node counts on short scrambles
+    - an e2e solve on phone, tablet and laptop
+    - Lighthouse at 90+, with the engine loaded only when the Solver opens
 - [ ] Bot interface: cube state in, move list out
 - [ ] Layer-by-layer bot (rule-based)
-- [ ] Kociemba two-phase bot (wrap the cubing.js solver)
-- [ ] IDA* bot with a pattern database, with a search you can watch (the finale, GN-1)
+- [ ] Kociemba two-phase bot (the race's two-phase solver is already in wasm, or wrap the cubing.js solver)
+- [ ] IDA* bot with a pattern database, with a search you can watch (the finale, GN-1): the 3×3 Solver above
 - [ ] God's number chapter: cosets, subgroup chains, Thistlethwaite, Kociemba
+- [ ] Paper: a speed-lab section (proof against find, the ceiling race, the masks, the shared engine)
 - [ ] Bot comparison on a seeded scramble set: move count, time, gap to 20
 - [ ] Exit: any scramble solves in the browser, and the search view runs smoothly on a phone
+
+Optional, as cloud tasks if the credit allows:
+
+- [ ] Masks in wasm: 331 MB in shared memory, about 1.5× more speed in the browser
+- [ ] A stronger floor: research, and the only route to proofs in seconds
+- [ ] Numbers from a real laptop and phone, and from Firefox and Safari
 
 ## 5. Wrap-up: definition of done
 

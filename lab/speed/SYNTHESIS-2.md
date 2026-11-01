@@ -1,5 +1,7 @@
 # Speed lab, round 2: what we found
 
+**Round 3 is in [SYNTHESIS-3.md](SYNTHESIS-3.md).**
+
 Three tasks on the 3×3, stitched together: the ceiling race (T6, `ceiling/`), downhill masks (T3, `gravity/`) and browser speed (T5, `browser/`). Each folder's FINDINGS.md has the full tables and checks. Every task was rerun in part in the main session before it was merged; see "Checked before merging" below. Round 1 is in [SYNTHESIS.md](SYNTHESIS.md).
 
 ## In one paragraph
@@ -34,6 +36,21 @@ From T6's per-position traces, on T6's machine (7.71 M nodes/s per thread), with
 | **Race, two threads** (T6) | 315 s | 240 s | 1,340 s |
 | **Race + masks, two threads** | **220 s** | **165 s** | 917 s |
 | Proof rounds only, one thread with masks (the most a race can save) | 151 s | 156 s | 230 s |
+
+Projected further, after the merge, from the same traces. These figures assume:
+- split efficiency 0.85
+- the ceiling thread joins the final round when it misses
+- laptop cores 1.75× this machine's
+- masks give the same 1.46× in wasm (not measured)
+
+| Projected setup | Mean | Median | Worst |
+|---|--:|--:|--:|
+| Native, 4 threads: 3 provers + ceiling, masks | 96 s | 65 s | 285 s |
+| Native, fast 8-core laptop | 33 s | 18 s | 127 s |
+| Laptop browser, 8 workers, masks | 59 s | 33 s | 232 s |
+| Laptop browser, 8 workers, no masks | 76 s | 43 s | 259 s |
+
+Round 3 (T7, T8) measures the first and builds toward the third.
 
 - **The race has a tail.** When the ceiling misses the optimum (3 of 18 random states within 250 s), the race is just one prover thread, slower than the split.
   - Position 15 is the worst case above.

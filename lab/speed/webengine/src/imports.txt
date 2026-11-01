@@ -1,0 +1,3 @@
+js_die
+js_log
+js_now
