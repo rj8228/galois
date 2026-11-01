@@ -1,0 +1,84 @@
+/* Path lens: one piece's lap round its loop, with real buttons over each piece to follow another. */
+.path-switch {
+  display: flex;
+  gap: 6px;
+}
+.path-switch .lens-chip {
+  min-height: 44px;
+}
+.path-figure {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.path-pick {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.path-pick:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.path-node circle {
+  stroke-width: 2.6;
+}
+.path-node text {
+  font-size: 10px;
+}
+.path-badge {
+  fill: var(--bg);
+  stroke: var(--good);
+  stroke-width: 1.5;
+}
+.path-badge-text {
+  font: 600 10px var(--mono);
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.path-hops {
+  font: var(--display-style) var(--display-weight) calc(22px * var(--display-scale)) var(--display);
+  fill: var(--accent);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.path-home {
+  font: 11px var(--body);
+  fill: var(--muted);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.path-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.path-chip {
+  font: 500 0.85rem / 1 var(--mono);
+  padding: 7px 8px;
+  border: 1.5px solid var(--good);
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+.path-step {
+  display: flex;
+  align-items: center;
+}
+.path-step:not(:last-child)::after {
+  content: "→";
+  margin-left: 4px;
+  color: var(--muted);
+}
+.path-chip-home {
+  border-color: var(--accent);
+}

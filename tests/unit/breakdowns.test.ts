@@ -1,6 +1,7 @@
 import { cube3x3x3 } from 'cubing/puzzles'
 import { describe, expect, it } from 'vitest'
 import { algOf, BREAKDOWNS, breakdownById } from '../../src/decode/breakdowns'
+import { expand, tokens } from '../../src/decode/tree'
 import { analyse } from '../../src/engine/analysis'
 import { shapeOf, shapeText } from '../../src/engine/structure'
 
@@ -58,5 +59,35 @@ describe('algorithm breakdowns', () => {
     expect(f.corners.cycles.map((c) => c.positions.length)).toEqual([2])
     expect(f.edges.cycles.map((c) => c.positions.length)).toEqual([2])
     expect([f.corners.parity, f.edges.parity]).toEqual(['odd', 'odd'])
+  })
+})
+
+describe('algorithm trees', () => {
+  const withTrees = BREAKDOWNS.filter((b) => b.tree)
+
+  it('are given for the commutators and conjugates, Niklas included', () => {
+    expect(withTrees.map((b) => b.id)).toEqual(['corner-twister', 'niklas'])
+  })
+
+  it.each(withTrees.map((b) => [b.id, b] as const))('%s: the tree expands back to the exact moves', (_, b) => {
+    if (!b.tree) throw new Error(b.id)
+    expect(expand(b.tree)).toEqual(algOf(b).split(' '))
+    expect(shapeText(b.tree)).toBe(shapeText(shapeOf(algOf(b).split(' '))))
+  })
+
+  it('labels each move of Niklas by its part', () => {
+    const tree = breakdownById('niklas')?.tree
+    if (!tree) throw new Error('niklas')
+    const label = (t: { part: string; undone: boolean }) => (t.undone ? `${t.part}′` : t.part)
+    expect(tokens(tree).map((t) => `${t.move}:${label(t)}`)).toEqual([
+      'R:X',
+      "U':A",
+      "L':B",
+      'U:A′',
+      "R':X′",
+      "U':A",
+      'L:B′',
+      'U:A′',
+    ])
   })
 })

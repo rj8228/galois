@@ -1,3 +1,5 @@
+import type { Shape } from '../engine/structure.ts'
+
 /**
  * How a part of an algorithm is drawn: the two halves of a commutator and their inverses, a setup and
  * its undo, or a plain run of moves.
@@ -16,6 +18,11 @@ export type Breakdown = {
   story: string[]
   /** Lessons that explain it, by id. */
   lessons: string[]
+  /**
+   * Its commutator / conjugate structure, for the Tree. Only for algorithms that are one; the tests check
+   * each tree expands back to exactly the algorithm's moves.
+   */
+  tree?: Shape
 }
 
 export const algOf = (b: Breakdown) => b.parts.map((p) => p.moves).join(' ')
@@ -37,6 +44,7 @@ export const BREAKDOWNS: Breakdown[] = [
       'Beginners repeat it until the top corner is right, turn the top, and repeat again. The bottom repairs itself by the end because the twists add up to zero.',
     ],
     lessons: ['commutators', 'twists'],
+    tree: { kind: 'commutator', x: { kind: 'moves', moves: ["R'"] }, y: { kind: 'moves', moves: ["D'"] } },
   },
   {
     id: 'niklas',
@@ -54,6 +62,11 @@ export const BREAKDOWNS: Breakdown[] = [
       'One shared spot, so the result is a 3-cycle: UFR, URB and UBL go round, and everything else is untouched. Exactly the trick from lessons 5 and 6.',
     ],
     lessons: ['commutators', 'conjugates'],
+    tree: {
+      kind: 'commutator',
+      x: { kind: 'moves', moves: ['R'] },
+      y: { kind: 'conjugate', a: { kind: 'moves', moves: ["U'"] }, b: { kind: 'moves', moves: ["L'"] } },
+    },
   },
   {
     id: 'sune',
