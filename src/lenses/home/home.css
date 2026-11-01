@@ -1,0 +1,52 @@
+.hm-cell {
+  fill: var(--line);
+  fill-opacity: 0.45;
+}
+.hm-cell-home {
+  fill: var(--good);
+  fill-opacity: 0.18;
+  stroke: var(--good);
+  stroke-width: 2;
+}
+.hm-label {
+  fill: var(--muted);
+  font-family: var(--mono);
+}
+.hm-label-home {
+  fill: var(--good);
+}
+.hm-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.hm-swatch {
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  flex: none;
+}
+.hm-swatch-corner {
+  background: var(--accent);
+}
+.hm-swatch-edge {
+  background: var(--danger);
+}
+.hm-swatch-home {
+  background: var(--good);
+}
+.hm-sol-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.hm-accent {
+  color: var(--accent);
+}
+.hm-moves {
+  font: 600 1.125rem / 1.3 var(--mono);
+  overflow-wrap: anywhere;
+}

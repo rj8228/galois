@@ -1,0 +1,97 @@
+/* Shared by the Solve lenses (Progress, Top, Home). Each lens has its own file for the rest. */
+.solve-lens {
+  display: grid;
+  gap: 12px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 4px 0 64px;
+  min-width: 0;
+}
+.solve-card {
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.solve-card-accent {
+  border-color: var(--accent);
+}
+.solve-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.solve-muted {
+  color: var(--muted);
+}
+.solve-note {
+  margin: 12px auto;
+  max-width: 560px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.solve-eyebrow {
+  font: 500 0.6875rem / 1.2 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.solve-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  border: var(--border) solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font: 600 0.875rem / 1.2 var(--body);
+  cursor: pointer;
+}
+.solve-btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.solve-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.solve-mono {
+  font-family: var(--mono);
+}
+/* The top layer drawn from above (Top and Home). */
+.solve-drawing {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+.solve-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-size: 0.875rem;
+}
+.solve-banner > span:first-child {
+  flex: 1;
+}
+.solve-tag {
+  font: 500 0.6875rem / 1 var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
