@@ -22,9 +22,10 @@ run m16-split-masks ./comb comb run data/in-moves-16.txt split 4 1 0 120
 run m16-race ./comb comb run data/in-moves-16.txt race 4 0 0 120
 run m16-race-masks ./comb comb run data/in-moves-16.txt race 4 1 0 120
 run m16-race-masks-help env COMB_HELP_RULE=bound ./comb comb run data/in-moves-16.txt race 4 1 1 120
-# 5 random states: (b) and (c)
-run rs5-split-masks ./comb comb run data/rs5.txt split 4 1 0 1800
-run rs5-race ./comb comb run data/rs5.txt race 4 0 0 1800
+# 3 random states (0, 3, 4; cut from 5 to fit the time box): (b) and (c)
+sed -n '1p;4p;5p' data/in-random-state.txt > data/rs3.txt
+run rs3-split-masks ./comb comb run data/rs3.txt split 4 1 0 1800
+run rs3-race ./comb comb run data/rs3.txt race 4 0 0 1800
 # one thread, lab/3x3's dfs, for this machine's nodes per second
 head -n 5 data/in-moves-16.txt | cut -d' ' -f2- > data/m16-5.scr
 run m16-5-1t env OMP_NUM_THREADS=1 ./comb gsolve C8s+P1x3i data/m16-5.scr 100000000000 0

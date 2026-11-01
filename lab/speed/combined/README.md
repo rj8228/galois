@@ -21,7 +21,7 @@ cd lab/speed/combined
 make
 CUBE3_TABLES=data/tables ./comb build corners_sym phase1_sym   # 8 s, into data/tables (gitignored)
 CUBE3_TABLES=data/tables ./comb masks corners_sym phase1_sym   # 20 s, 1.2 GB of uint32 masks (packing reads the down masks)
-scripts/run.sh                                                 # about 2 hours on 4 cores
+scripts/run.sh                                                 # about 2 hours on 4 cores (inputs from scripts/inputs.py)
 python3 scripts/analyse.py
 ```
 
@@ -31,7 +31,9 @@ python3 scripts/analyse.py
 - **`split k`:** k prover threads (the main thread plus k − 1 pool threads). No ceiling.
 - **`race k`:** k − 1 prover threads and T6's ceiling thread (trace from target 22, lowered after each solution), with T6's shared ceiling and stop rule unchanged: at every round start the prover publishes its bound and stops if the ceiling is ≤ it, and a ceiling solution ≤ the published bound raises the stop flag. The certificate: proven floor = ceiling.
 - **`masks 1`:** every subtree runs T3's `gdfs` with the 18-bit packed down masks (mode 3), 331 MB.
-- **`help 1`:** once the ceiling has not improved for max(`COMB_HELP_MIN`, `COMB_HELP_FRAC` × elapsed) seconds (defaults 5 and 0.25, the brief's; the main runs use 60 and 0.25, see FINDINGS; checked every 20,000 ceiling nodes), the ceiling thread stops searching and joins the pool: it takes subtrees from the prover's current round and every later one. It stops on the same flag as the provers.
+- **`help 1`:** the ceiling thread stops searching and joins the pool once it is stuck. From then on it takes subtrees from the prover's current round and every later one, and it stops on the same flag as the provers. Two rules decide when it is stuck (checked every 20,000 ceiling nodes):
+  - `COMB_HELP_RULE=bound` (used for (e)): ceiling ≤ the prover's bound + 1.
+  - Otherwise the brief's time rule: no improvement for max(`COMB_HELP_MIN`, `COMB_HELP_FRAC` × elapsed) seconds, defaults 5 and 0.25. See FINDINGS for why it fails.
 - Every solve is capped at `cap_s` by a watchdog thread. Every solution is replayed (abort if it doesn't solve), a certificate whose length differs from the proven floor aborts, and so does a length that differs from lab/3x3's.
 - Output: one JSON line per solve with `ended` (`certificate`, `prover_find`, `helper_find` or `timeout`), `nodes_per_bound` as `[generated, skipped]`, `round_secs`, `helper_nodes_per_bound` as `[nodes, subtrees]`, `helped_at` (seconds, −1 if never) and the ceiling's trace `[seconds, length, nodes]`.
 

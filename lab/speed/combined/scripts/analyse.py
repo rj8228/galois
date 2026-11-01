@@ -26,7 +26,8 @@ def load(name):
     p = raw / f"{name}.jsonl"
     if not p.exists():
         return None
-    return sorted((json.loads(l) for l in open(p) if l.strip()), key=lambda r: r["index"])
+    rows = (json.loads(l) for l in open(p) if l.strip())
+    return sorted((r for r in rows if r.get("type") != "meta"), key=lambda r: r["index"])
 
 
 def bench(s):
@@ -109,8 +110,18 @@ rs_e = (load("rs5-race-masks-help-bound") or []) + (load("rs15-race-masks-help-b
 rs_e = sorted(rs_e, key=lambda r: r["index"]) or None
 rs5_t5 = load("rs5-race-masks-help-5s25")
 rs8_t60 = load("rs8-race-masks-help-60s25")
-rs5_b = load("rs5-split-masks")
-rs5_c = load("rs5-race")
+RS3 = [0, 3, 4]  # data/rs3.txt holds random states 0, 3 and 4
+
+
+def load_rs3(name):
+    rows = load(name)
+    for r in rows or []:
+        r["index"] = RS3[r["index"]]
+    return rows
+
+
+rs5_b = load_rs3("rs3-split-masks")
+rs5_c = load_rs3("rs3-race")
 no_help = lambda r, b: str(b) not in r["helper_nodes_per_bound"]
 R = {
     "split_4t": rate(load("m16-split")),  # 4 provers, dfs (16-move set: (a) was not run on random states)
@@ -165,7 +176,7 @@ def est(i):
     D = b["length"] if b["length"] > 0 else 19
     proof = {b_: v for b_, v in nb.items() if b_ < D}
     final = nb.get(D) if b["length"] > 0 else None
-    tD = t6[i]["trace_reach_D_s"]
+    tD = next((t for t, L, _ in t6[i]["trace"] if L <= D), None)  # T6's trace, on T6's machine
     tD = tD * CF if tD is not None else None
     e = {}
     for impl, key in [("c-4t-split", "split_4t"), ("c-4t-split-masks", "split_masks_4t")]:
