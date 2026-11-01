@@ -1,0 +1,128 @@
+.pg-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pg-score {
+  display: grid;
+  gap: 4px;
+}
+.pg-k {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.pg-big {
+  font: var(--display-style) var(--display-weight) calc(3.2rem * var(--display-scale)) / 1 var(--display);
+  color: var(--good);
+  font-variant-numeric: tabular-nums;
+}
+.pg-of {
+  font-size: 0.55em;
+  color: var(--muted);
+}
+.pg-bar {
+  flex: 0 1 120px;
+  height: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  background: var(--line);
+  overflow: hidden;
+}
+.pg-fill {
+  height: 100%;
+  background: var(--good);
+}
+.pg-layers {
+  gap: 14px;
+}
+.pg-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 10px;
+}
+.pg-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.pg-count {
+  font: 500 0.8125rem / 1 var(--mono);
+  text-align: right;
+  color: var(--accent);
+}
+.pg-count-done {
+  color: var(--good-text);
+}
+.pg-dots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.pg-piece {
+  display: inline-block;
+  box-sizing: border-box;
+  flex: none;
+}
+.pg-corner {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+.pg-edge {
+  width: 20px;
+  height: 12px;
+  border-radius: 6px;
+}
+.pg-home {
+  background: var(--good);
+}
+.pg-turned {
+  border: 2px solid var(--accent);
+}
+.pg-away {
+  border: 2px solid var(--muted);
+}
+.pg-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.pg-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pg-key {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.pg-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.pg-step {
+  font: 500 0.6875rem / 1 var(--mono);
+  padding: 7px 8px;
+  border-radius: 6px;
+  border: var(--border) solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pg-step-done {
+  border-color: var(--good-text);
+  color: var(--good-text);
+}
+.pg-step-next {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}

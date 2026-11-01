@@ -3,6 +3,8 @@ import { invertMove } from '../cube/notation.ts'
 import { playFast, playSequence, reset, scramble } from '../cube/state.ts'
 import type { Analysis } from '../engine/analysis.ts'
 import type { OrbitName } from '../engine/pieces.ts'
+import { FarWidget } from './far/FarWidget.tsx'
+import { GraphWidget } from './graph/GraphWidget.tsx'
 import { TeX } from './TeX.tsx'
 import type { Lesson, StepContext } from './types.ts'
 
@@ -865,10 +867,16 @@ export const LESSONS: Lesson[] = [
         load: 'R2 U2',
         analysis: true,
         body: (
-          <p>
-            Allow only R2 and U2 and the subgroup is tiny: just 12 positions. R2 U2 has order 6, so repeating it visits
-            6 of them. Play it a few times, then try R2 U2 R2.
-          </p>
+          <>
+            <p>
+              Allow only R2 and U2 and the subgroup is tiny: just 12 positions. R2 U2 has order 6, so repeating it
+              visits 6 of them. Play it a few times, then try R2 U2 R2.
+            </p>
+            <p>
+              Below, every position R2 and U2 can reach, as a graph. Tap one to see how to get there, or add a move.
+            </p>
+            <GraphWidget />
+          </>
         ),
         formal: (
           <p>
@@ -1145,6 +1153,7 @@ export const LESSONS: Lesson[] = [
               the positions into cosets and solved all of them, using about 35 CPU-years of computer time donated by
               Google.
             </p>
+            <FarWidget />
           </>
         ),
         formal: (

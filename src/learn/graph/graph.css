@@ -1,0 +1,135 @@
+.graph-widget {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.graph-gens,
+.graph-pick,
+.graph-rings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.graph-k {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.graph-gen,
+.graph-pick-btn,
+.graph-ring-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: var(--border) solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 0.8125rem / 1 var(--mono);
+  cursor: pointer;
+}
+.graph-gen:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.graph-add {
+  color: var(--muted);
+  padding: 0 12px;
+}
+.graph-pick-btn {
+  padding: 0 10px;
+  font-weight: 500;
+}
+.graph-ring-btn {
+  font-weight: 500;
+  padding: 0 12px;
+}
+.graph-ring-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.graph-swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+.graph-stage {
+  position: relative;
+  width: 100%;
+  max-width: 358px;
+  margin: 0 auto;
+}
+.graph-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.graph-big {
+  fill: var(--ink);
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+}
+/* A real button over each drawn node: 44 px to tap, invisible until focused. */
+.graph-node {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.graph-node:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -6px;
+}
+.graph-card {
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: grid;
+  gap: 10px;
+}
+.graph-tapped {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+.graph-eyebrow {
+  font: 500 0.6875rem / 1.2 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.graph-path {
+  font: 600 0.9375rem / 1.3 var(--mono);
+  overflow-wrap: anywhere;
+}
+.graph-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.graph-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.graph-stats > div {
+  display: grid;
+  gap: 3px;
+  align-content: start;
+}
+.graph-v {
+  font: var(--display-style) var(--display-weight) calc(1.625rem * var(--display-scale)) / 1 var(--display);
+  font-variant-numeric: tabular-nums;
+}
