@@ -1,5 +1,7 @@
 # Speed lab, round 2: what we found
 
+**Round 3 is in [SYNTHESIS-3.md](SYNTHESIS-3.md).**
+
 Three tasks on the 3×3, stitched together: the ceiling race (T6, `ceiling/`), downhill masks (T3, `gravity/`) and browser speed (T5, `browser/`). Each folder's FINDINGS.md has the full tables and checks. Every task was rerun in part in the main session before it was merged; see "Checked before merging" below. Round 1 is in [SYNTHESIS.md](SYNTHESIS.md).
 
 ## In one paragraph

@@ -11,7 +11,11 @@ This lab asks one question: **how can the same guarantee be reached with less wo
 - Downhill masks make every round 1.46× faster in 331 MB.
 - The solver runs in a browser at 0.55× native speed per core.
 
-**Round 3** puts them together:
+**Round 3 results:** [SYNTHESIS-3.md](SYNTHESIS-3.md).
+- Native, 4 threads: all 20 random states in a mean of 177 s and a median of 72 s. The two states `lab/3x3` never finished are now proven to need 19 moves.
+- The browser engine shares one copy of the tables, runs the race as a worker, and stops every worker within 2 ms.
+
+**Round 3** put them together:
 - T7: one native solver with the race and the masks, measured on all 20 random states.
 - T8: the browser engine the app will use, with one shared copy of the tables, a ceiling worker and one stop flag for all workers.
 
@@ -47,8 +51,8 @@ Each task runs in its own cloud session, on its own branch, in its own folder.
 | T6 Ceiling race: the prover only proves | [T6-ceiling-race.md](T6-ceiling-race.md) | `speed-ceiling` | `lab/speed/ceiling/` | Done (round 2, #32) |
 | T3 Gravity on the 3×3: downhill masks | [T3-gravity.md](T3-gravity.md) | `speed-gravity` | `lab/speed/gravity/` | Done (round 2, #33) |
 | T5 Browser speed | [T5-browser-speed.md](T5-browser-speed.md) | `speed-browser` | `lab/speed/browser/` | Done (round 2, #31) |
-| T7 Combined native solver: race + masks | [T7-combined.md](T7-combined.md) | `speed-combined` | `lab/speed/combined/` | Round 3 |
-| T8 Web engine: shared memory, ceiling worker | [T8-web-engine.md](T8-web-engine.md) | `speed-webengine` | `lab/speed/webengine/` | Round 3 |
+| T7 Combined native solver: race + masks | [T7-combined.md](T7-combined.md) | `speed-combined` | `lab/speed/combined/` | Done (round 3, #38) |
+| T8 Web engine: shared memory, ceiling worker | [T8-web-engine.md](T8-web-engine.md) | `speed-webengine` | `lab/speed/webengine/` | Done (round 3, #37) |
 
 Cloud credit is limited, so each task is boxed to **about 2 hours of session time**. The main session reviews each pull request, reruns part of it, and stitches the results. Best twin, round 1's other lead, was folded into T6 as a short check and not reached; the desktop floor gives a position and all its symmetric twins the same value, so only the inverse searches a different tree. GitHub issues: tracker #20; tasks #21–#25, #29, and round 3: #35 (T7) and #36 (T8).
 
