@@ -33,11 +33,13 @@
   font-size: 10px;
 }
 .path-badge {
-  fill: var(--good);
+  fill: var(--bg);
+  stroke: var(--good);
+  stroke-width: 1.5;
 }
 .path-badge-text {
   font: 600 10px var(--mono);
-  fill: var(--bg);
+  fill: var(--ink);
   text-anchor: middle;
   dominant-baseline: central;
 }

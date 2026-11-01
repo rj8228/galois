@@ -88,6 +88,9 @@ export function TreeView({ b }: { b: Breakdown }) {
   const tree = b.tree
   if (!tree) return null
   const row = tokens(tree)
+  // Tiles are outlined through a whole undone part (X′ or Y′), even where a move inside it is a plain A.
+  const parts = segments(tree)
+  const outlined = parts.flatMap((p) => Array.from({ length: p.length }, () => p.undone))
   const kp = kpuzzle.value
   const analysis = kp ? analyse(kp, algOf(b)) : null
   const corners = analysis?.orbits.find((o) => o.orbit === 'CORNERS')
@@ -110,12 +113,15 @@ export function TreeView({ b }: { b: Breakdown }) {
         aria-label={`The moves, by part: ${row.map((t) => `${pretty(t.move)} ${t.part}${t.undone ? ' undone' : ''}`).join(', ')}`}
       >
         {row.map((t, i) => (
-          <li key={`${i}${t.move}`} class={`tree-tile tree-half-${t.half ?? 'top'}${t.undone ? ' tree-undone' : ''}`}>
+          <li
+            key={`${i}${t.move}`}
+            class={`tree-tile tree-half-${t.half ?? 'top'}${(outlined[i] ?? t.undone) ? ' tree-undone' : ''}`}
+          >
             <span class="tree-tile-move">{pretty(t.move)}</span>
             <span class="tree-tile-part">{t.undone ? `${t.part}′` : t.part}</span>
           </li>
         ))}
-        {segments(tree).map((s) => (
+        {parts.map((s) => (
           <li
             key={s.label}
             aria-hidden="true"

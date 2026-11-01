@@ -26,9 +26,10 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 4px 8px;
+  border: 1.5px solid var(--good);
   border-radius: var(--radius);
-  background: var(--good);
-  color: var(--bg);
+  background: color-mix(in srgb, var(--good) 16%, transparent);
+  color: var(--ink);
 }
 .lens-note {
   margin: 24px 0;

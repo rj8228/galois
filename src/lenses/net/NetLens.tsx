@@ -76,16 +76,18 @@ export function NetLens() {
             rx={4}
           />
         ))}
-        {NET_FACES.map((face) => (
-          <text
-            key={face}
-            class="net-letter"
-            x={PAD + (FACE_AT[face][0] * 3 + 1.5) * PITCH}
-            y={PAD + (FACE_AT[face][1] * 3 + 1.5) * PITCH}
-          >
-            {face}
-          </text>
-        ))}
+        {NET_FACES.map((face) => {
+          const x = PAD + (FACE_AT[face][0] * 3 + 1.5) * PITCH
+          const y = PAD + (FACE_AT[face][1] * 3 + 1.5) * PITCH
+          return (
+            <g key={face}>
+              <circle class="net-letter-disc" cx={x} cy={y} r={7.5} />
+              <text class="net-letter" x={x} y={y}>
+                {face}
+              </text>
+            </g>
+          )
+        })}
         {outlines(cells, changed).map((b) => (
           <rect
             key={`${b.x},${b.y},${b.w},${b.h}`}
